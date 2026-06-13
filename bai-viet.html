@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Viết | Nghề Trading</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .blog-container{
+            max-width:1200px;
+            margin:120px auto 80px;
+            padding:0 20px;
+        }
+
+        .blog-header{
+            text-align:center;
+            margin-bottom:50px;
+        }
+
+        .blog-header h1{
+            font-size:42px;
+            margin-bottom:10px;
+        }
+
+        .blog-header p{
+            color:#888;
+        }
+
+        .articles-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+            gap:24px;
+        }
+
+        .article-card{
+            border:1px solid #eee;
+            border-radius:12px;
+            padding:24px;
+            transition:0.3s;
+            background:white;
+        }
+
+        .article-card:hover{
+            transform:translateY(-4px);
+        }
+
+        .article-category{
+            font-size:12px;
+            color:#999;
+            margin-bottom:10px;
+        }
+
+        .article-title{
+            font-size:22px;
+            font-weight:700;
+            margin-bottom:10px;
+        }
+
+        .article-date{
+            color:#999;
+            font-size:13px;
+            margin-bottom:15px;
+        }
+
+        .article-excerpt{
+            line-height:1.6;
+            margin-bottom:20px;
+        }
+
+        .article-link{
+            text-decoration:none;
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html">Trang Chủ</a>
+</nav>
+
+<div class="blog-container">
+
+    <div class="blog-header">
+        <h1>Bài Viết</h1>
+        <p>Những bài học về Trading, Tâm lý và Quản trị rủi ro</p>
+    </div>
+
+    <div id="articles" class="articles-grid">
+        Đang tải bài viết...
+    </div>
+
+</div>
+
+<script src="js/blog.js"></script>
+
+</body>
+</html>
