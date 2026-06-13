@@ -1,60 +1,17 @@
-async function loadArticles() {
+[
+  {
+    "title": "Trading là trò chơi xác suất",
+    "date": "13/06/2026",
+    "category": "Tâm Lý",
+    "excerpt": "Tại sao trader chuyên nghiệp không suy nghĩ theo từng lệnh giao dịch riêng lẻ.",
+    "url": "posts/trading-la-tro-choi-xac-suat.html"
+  },
 
-    const container = document.getElementById("articles");
-
-    try {
-
-        const response = await fetch("data/articles.json");
-
-        const articles = await response.json();
-
-        container.innerHTML = "";
-
-        articles.forEach(article => {
-
-            const card = document.createElement("div");
-
-            card.className = "article-card";
-
-            card.innerHTML = `
-                <div class="article-category">
-                    ${article.category}
-                </div>
-
-                <div class="article-title">
-                    ${article.title}
-                </div>
-
-                <div class="article-date">
-                    ${article.date}
-                </div>
-
-                <div class="article-excerpt">
-                    ${article.excerpt}
-                </div>
-
-                <a
-                    class="article-link"
-                    href="${article.url}">
-                    Đọc tiếp →
-                </a>
-            `;
-
-            container.appendChild(card);
-
-        });
-
-    }
-    catch(error){
-
-        container.innerHTML = `
-            <p>Không thể tải danh sách bài viết.</p>
-        `;
-
-        console.error(error);
-
-    }
-
-}
-
-loadArticles();
+  {
+    "title": "Quản trị rủi ro quan trọng hơn lợi nhuận",
+    "date": "12/06/2026",
+    "category": "Risk Management",
+    "excerpt": "Lợi nhuận là hệ quả của việc quản trị rủi ro tốt.",
+    "url": "posts/quan-tri-rui-ro.html"
+  }
+]
