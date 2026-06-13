@@ -1,6 +1,6 @@
 async function loadArticles() {
 
-    const container = document.getElementById("blog-articles-grid");
+    const container = document.getElementById("articles");
 
     if (!container) return;
 
