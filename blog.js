@@ -1,6 +1,8 @@
 async function loadArticles() {
 
-    const container = document.getElementById("articles");
+    const container = document.getElementById("blog-articles-grid");
+
+    if (!container) return;
 
     try {
 
@@ -12,40 +14,43 @@ async function loadArticles() {
 
         articles.forEach(article => {
 
-            const card = document.createElement("div");
+            const card = document.createElement("article");
 
             card.className = "article-card";
 
             card.innerHTML = `
-                <div class="article-category">
-                    ${article.category}
-                </div>
+                <div class="article-meta">
 
-                <div class="article-title">
-                    ${article.title}
-                </div>
+                    <span class="tag">
+                        ${article.category}
+                    </span>
 
-                <div class="article-date">
-                    ${article.date}
-                </div>
+                    <h4>
+                        ${article.title}
+                    </h4>
 
-                <div class="article-excerpt">
-                    ${article.excerpt}
-                </div>
+                    <p>
+                        ${article.excerpt}
+                    </p>
 
-                <a
-                    class="article-link"
-                    href="${article.url}">
-                    Đọc tiếp →
-                </a>
+                    <time>
+                        ${article.date}
+                    </time>
+
+                    <br><br>
+
+                    <a href="${article.url}" class="link-arrow">
+                        Đọc tiếp →
+                    </a>
+
+                </div>
             `;
 
             container.appendChild(card);
 
         });
 
-    }
-    catch(error){
+    } catch(error) {
 
         container.innerHTML = `
             <p>Không thể tải danh sách bài viết.</p>
