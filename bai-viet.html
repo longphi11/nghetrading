@@ -218,4 +218,160 @@
             <li><a href="bai-viet.html">Bài viết</a></li>
             <li><a href="nhat-ky.html">Nhật ký giao dịch</a></li>
             <li><a href="he-thong.html">Hệ thống</a></li>
-            <li><a href="he-thong.html#hanh-
+            <li><a href="he-thong.html#hanh-trinh">Hành trình</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>KẾT NỐI</h4>
+          <ul>
+            <li><a href="#">YouTube</a></li>
+            <li><a href="#">Telegram</a></li>
+            <li><a href="#">Email</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>THEO DÕI</h4>
+          <div class="social-icons">
+            <a href="#" aria-label="YouTube" class="social-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 0-3.77-2.7C13.69 3.72 12 3.72 12 3.72s-1.69 0-3.82.27a4.83 4.83 0 0 0-3.77 2.7A27.14 27.14 0 0 0 4 12a27.14 27.14 0 0 0 .41 5.31 4.83 4.83 0 0 0 3.77 2.7C10.31 20.28 12 20.28 12 20.28s1.69 0 3.82-.27a4.83 4.83 0 0 0 3.77-2.7A27.14 27.14 0 0 0 20 12a27.14 27.14 0 0 0-.41-5.31ZM10 15V9l5 3Z"/></svg>
+            </a>
+            <a href="#" aria-label="Telegram" class="social-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8-1.7 8.02c-.12.56-.46.7-.93.43l-2.57-1.89-1.24 1.19c-.14.14-.25.25-.51.25l.18-2.61 4.7-4.25c.2-.18-.04-.28-.32-.1L7.38 15.3l-2.52-.79c-.55-.17-.56-.55.12-.81l9.85-3.8c.45-.17.85.11.81.1z"/></svg>
+            </a>
+            <a href="#" aria-label="Email" class="social-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 NGHỀ TRADING. ALL RIGHTS RESERVED.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+
+  <script>
+    const GH_USER = 'longphi11'; 
+    const GH_REPO = 'nghetrading';
+    const FOLDER_PATH = 'posts';
+    
+    const POSTS_PER_PAGE = 20; /* Định mức hiển thị đúng 20 bài viết mỗi trang */
+    let currentPage = 1;
+    let allPosts = [];
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const grid = document.getElementById('blog-articles-grid');
+      if (!grid) return;
+
+      try {
+        const response = await fetch(`https://api.github.com/repos/${GH_USER}/${GH_REPO}/contents/${FOLDER_PATH}`);
+        if (!response.ok) throw new Error('Không thể kết nối GitHub API');
+        const files = await response.json();
+
+        const htmlFiles = files.filter(file => file.name.endsWith('.html') && file.name !== 'post-sample.html');
+
+        if (htmlFiles.length === 0) {
+          grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #888; padding: 40px 0;">Chưa có bài viết nào trong thư mục posts.</div>';
+          return;
+        }
+
+        for (const file of htmlFiles) {
+          try {
+            const fileRes = await fetch(file.download_url);
+            const htmlText = await fileRes.text();
+
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlText, 'text/html');
+
+            const title = doc.querySelector('.post-title')?.innerText || doc.querySelector('title')?.innerText || file.name;
+            const meta = doc.querySelector('.post-meta')?.innerText || "Bài viết mới";
+            const firstP = doc.querySelector('.post-content p')?.innerText || doc.querySelector('p')?.innerText || "";
+            const excerpt = firstP.length > 120 ? firstP.substring(0, 120) + "..." : firstP;
+
+            const rawImgSrc = doc.querySelector('.post-content img')?.getAttribute('src') || doc.querySelector('img')?.getAttribute('src');
+            let correctThumb = "https://placehold.co/600x400?text=NgheTrading"; 
+
+            if (rawImgSrc) {
+              if (rawImgSrc.startsWith('http') || rawImgSrc.startsWith('/')) {
+                correctThumb = rawImgSrc;
+              } else {
+                let cleanSrc = rawImgSrc.replace('../', '');
+                if (cleanSrc.startsWith('posts/')) {
+                  correctThumb = cleanSrc;
+                } else {
+                  correctThumb = `posts/${cleanSrc}`;
+                }
+              }
+            }
+
+            allPosts.push({
+              title: title,
+              meta: meta,
+              thumb: correctThumb,
+              excerpt: excerpt,
+              link: `posts/${file.name}`
+            });
+          } catch (e) {
+            console.error("Lỗi đọc file: " + file.name, e);
+          }
+        }
+
+        allPosts.reverse();
+        renderPage(currentPage);
+
+      } catch (error) {
+        console.error(error);
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #d93025; padding: 40px 0;">Có lỗi tự động đồng bộ bài viết từ GitHub. Vui lòng tải lại trang.</div>';
+      }
+    });
+
+    function renderPage(page) {
+      const grid = document.getElementById('blog-articles-grid');
+      const startIndex = (page - 1) * POSTS_PER_PAGE;
+      const endIndex = startIndex + POSTS_PER_PAGE;
+      const paginatedPosts = allPosts.slice(startIndex, endIndex);
+
+      let htmlContent = paginatedPosts.map(post => `
+        <article class="blog-card">
+          <div class="blog-thumb">
+            <a href="${post.link}">
+              <img src="${post.thumb}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400?text=Nghề+Trading'"/>
+            </a>
+          </div>
+          <div class="meta">${post.meta}</div>
+          <h2><a href="${post.link}">${post.title}</a></h2>
+          <p>${post.excerpt}</p>
+          <a href="${post.link}" class="read-more">Đọc tiếp →</a>
+        </article>
+      `).join('');
+
+      const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+      if (totalPages > 1) {
+        let paginationHtml = `<div class="pagination" style="grid-column: 1/-1; text-align: center; margin-top: 50px; display: flex; justify-content: center; gap: 10px;">`;
+        paginationHtml += `<button onclick="changePage(${page - 1})" ${page === 1 ? 'disabled' : ''}>← Trước</button>`;
+        
+        for (let i = 1; i <= totalPages; i++) {
+          paginationHtml += `<button onclick="changePage(${i})" style="border-color: ${i === page ? '#111' : '#eee'}; background: ${i === page ? '#111' : '#fff'}; color: ${i === page ? '#fff' : '#111'}; font-weight: ${i === page ? '700' : '400'};">${i}</button>`;
+        }
+        
+        paginationHtml += `<button onclick="changePage(${page + 1})" ${page === totalPages ? 'disabled' : ''}>Sau →</button>`;
+        paginationHtml += `</div>`;
+        
+        htmlContent += paginationHtml;
+      }
+
+      grid.innerHTML = htmlContent;
+      window.scrollTo({ top: document.querySelector('.page-header').offsetTop, behavior: 'smooth' });
+    }
+
+    function changePage(page) {
+      const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+      if (page < 1 || page > totalPages) return;
+      currentPage = page;
+      renderPage(currentPage);
+    }
+  </script>
+</body>
+</html>
