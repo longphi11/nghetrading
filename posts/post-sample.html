@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sức Mạnh Của Việc Không Làm Gì Trong Trading – Nghề Trading</title>
+  <meta name="description" content="Học cách kiềm chế, kiên nhẫn chờ đợi thiết lập lệnh chất lượng cao thay vì liên tục giao dịch theo cảm xúc." />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  
+  <link rel="stylesheet" href="../style.css" />
+
+  <style>
+    /* CSS CHO TRANG NỘI DUNG CHI TIẾT */
+    .post-wrapper {
+      padding: 70px 0;
+      background: #fafafa;
+    }
+    .post-container {
+      max-width: 740px; /* Độ rộng tối ưu cho việc đọc chữ dài trên máy tính */
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 40px 50px;
+      border: 1px solid #eee;
+      border-radius: 4px;
+    }
+    @media (max-width: 768px) {
+      .post-container {
+        padding: 25px 20px;
+      }
+    }
+    
+    /* Font & Size tiêu đề */
+    .post-header {
+      margin-bottom: 30px;
+      border-bottom: 1px solid #f0f0f0;
+      padding-bottom: 20px;
+    }
+    .post-meta {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-bottom: 10px;
+    }
+    .post-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      line-height: 1.3;
+      color: #111;
+      margin: 0 0 15px 0;
+    }
+
+    /* Định dạng bài viết: Font chữ, Kích thước giống nhatkyforex */
+    .post-content {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      color: #333;
+    }
+    .post-content p {
+      margin-bottom: 25px;
+    }
+    .post-content h2, .post-content h3 {
+      font-family: 'Playfair Display', serif;
+      color: #111;
+      margin: 35px 0 15px 0;
+      line-height: 1.4;
+    }
+    .post-content h2 { font-size: 24px; }
+    .post-content h3 { font-size: 20px; }
+
+    /* Chèn hình ảnh trong bài viết */
+    .post-content img {
+      width: 100%;
+      height: auto;
+      margin: 20px 0;
+      border-radius: 4px;
+      display: block;
+    }
+    .image-caption {
+      text-align: center;
+      font-size: 13px;
+      color: #777;
+      font-style: italic;
+      margin-top: -10px;
+      margin-bottom: 25px;
+    }
+
+    /* Widget chia sẻ mạng xã hội */
+    .share-buttons {
+      display: flex;
+      gap: 10px;
+      margin: 40px 0;
+      padding: 20px 0;
+      border-top: 1px solid #f0f0f0;
+      border-bottom: 1px solid #f0f0f0;
+      align-items: center;
+    }
+    .share-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #555;
+      margin-right: 10px;
+    }
+    .share-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #f5f5f5;
+      color: #444;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .share-btn:hover {
+      background: #111;
+      color: #fff;
+    }
+
+    /* Khối bài viết liên quan */
+    .related-posts {
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 2px solid #111;
+    }
+    .related-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 550px) {
+      .related-grid { grid-template-columns: 1fr; }
+    }
+    .related-card {
+      text-decoration: none;
+      color: #111;
+    }
+    .related-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .related-card h4 {
+      font-size: 14px;
+      line-height: 1.4;
+      margin: 0;
+      font-weight: 500;
+    }
+    .related-card:hover h4 {
+      text-decoration: underline;
+    }
+
+    /* Khu vực liên kết comment & vote */
+    .comments-section {
+      margin-top: 50px;
+      padding-top: 30px;
+      border-top: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">NGHỀ TRADING</a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Trang Chủ</a></li>
+        <li><a href="../bai-viet.html" class="active">Bài Viết</a></li>
+        <li><a href="../nhat-ky.html">Nhật Ký Giao Dịch</a></li>
+        <li><a href="../he-thong.html">Hệ Thống</a></li>
+        <li><a href="../he-thong.html#gioi-thieu">Giới Thiệu</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="post-wrapper">
+    <article class="post-container">
+      
+      <header class="post-header">
+        <div class="post-meta">14 Tháng 6, 2026 • Tâm Lý Giao Dịch</div>
+        <h1 class="post-title">Sức Mạnh Của Việc Không Làm Gì Trong Trading</h1>
+      </header>
+
+      <div class="post-content">
+        <p>Trong trading, một trong những thử thách khó khăn nhất đối với mọi nhà giao dịch không phải là tìm kiếm một hệ thống hoàn hảo, mà là việc <strong>học cách ngồi yên không làm gì</strong> khi thị trường không xuất hiện cơ hội rõ ràng.</p>
+        
+        <img src="images/suc-manh-cua-viec-khong-lam-gi.jpg" alt="Thị trường Forex tài chính" />
+        <div class="image-caption">Đôi khi vị thế tốt nhất trên thị trường chính là đứng ngoài quan sát.</div>
+
+        <h2>Tư duy xác suất của Mark Douglas</h2>
+        <p>Như triết lý cốt lõi trong cuốn sách <em>"Trading in the Zone"</em>, mỗi lệnh giao dịch đơn lẻ đều có kết quả hoàn toàn ngẫu nhiên. Việc bạn liên tục bấm chuột vào lệnh chỉ vì cảm giác "sợ bỏ lỡ cơ hội" (FOMO) thực chất là bạn đang tự hủy hoại tài khoản của mình bằng các chuỗi xác suất xấu.</p>
+
+        <h3>Khi đứng ngoài cũng là một chiến lược thành công</h3>
+        <p>Bảo vệ vốn là ưu tiên số một. Việc không thực hiện bất kỳ giao dịch nào trong những ngày thị trường biến động hỗn loạn chính là một hành động quản trị rủi ro xuất sắc tối thượng.</p>
+      </div>
+
+      <div class="share-buttons">
+        <span class="share-label">CHIA SẺ:</span>
+        <a href="#" class="share-btn" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(window.location.href), '_blank'); return false;" title="Chia sẻ lên Facebook">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.8z"/></svg>
+        </a>
+        <a href="#" class="share-btn" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(window.location.href), '_blank'); return false;" title="Chia sẻ lên Twitter">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+        </a>
+      </div>
+
+      <div class="related-posts">
+        <h3 class="related-title">Bài viết liên quan</h3>
+        <div class="related-grid">
+          
+          <a href="warren-buffett.html" class="related-card">
+            <img src="images/warren-buffett.jpg" alt="Warren Buffett" onerror="this.src='https://placehold.co/300x150?text=Trading'" />
+            <h4>Becoming Warren Buffett (2017) - Bài học từ huyền thoại đầu tư</h4>
+          </a>
+
+          <a href="tam-ly-giao-dich.html" class="related-card">
+            <img src="images/tam-ly.jpg" alt="Tâm lý giao dịch" onerror="this.src='https://placehold.co/300x150?text=Psychology'" />
+            <h4>Làm thế nào để chấp nhận rủi ro hoàn toàn như một Pro Trader?</h4>
+          </a>
+
+        </div>
+      </div>
+
+      <div class="comments-section">
+        <h3 class="related-title" style="margin-bottom: 25px;">Thảo luận & Đánh giá</h3>
+        
+        <div id="disqus_thread"></div>
+      </div>
+
+    </article>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2026 NGHỀ TRADING. ALL RIGHTS RESERVED.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    var disqus_config = function () {
+        this.page.url = window.location.href;  
+        this.page.identifier = window.location.pathname; 
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');
+        // Thay thế 'nghetrading' bên dưới bằng tên shortname Disqus của bạn khi bạn đăng ký tài khoản Disqus miễn phí
+        s.src = 'https://nghetrading.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
+  <script src="../main.js"></script>
+</body>
+</html>
