@@ -10,9 +10,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
+    /* Custom override for blog layout columns */
+    @media (min-width: 901px) {
+      .content-grid {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 40px;
+        margin-top: 10px;
+      }
+      #blog-articles-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 cột trên desktop */
+        gap: 30px;
+      }
+    }
+
     /* ĐIỀU CHỈNH ĐẨY DÒNG SLOGAN XUỐNG KHOẢNG GIỮA VÙNG TRỐNG PHÍA DƯỚI */
     .page-header {
-      padding: 120px 0 75px 0 !important; /* Tăng padding-bottom lên 75px để tạo khoảng trống lớn đẩy slogan xuống thấp hẳn */
+      padding: 95px 0 75px 0 !important;
       text-align: center;
     }
     .page-header p {
@@ -23,31 +38,41 @@
       color: var(--muted, #666);
     }
 
-    /* BỐ CỤC CHIA 2 CỘT */
-    @media (min-width: 901px) {
-      .content-grid {
-        display: grid;
-        grid-template-columns: 1fr 300px;
-        gap: 40px;
-        margin-top: 10px;
-      }
-      .articles-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-      }
-    }
-    
+    /* ĐỊNH DẠNG HÌNH ẢNH THUMBNAIL CHO BÀI VIẾT */
     .blog-card {
+      padding: 0 0 24px 0 !important; /* Bỏ padding trên để ảnh tràn viền */
+      overflow: hidden;
       background: #fff;
       border: 1px solid #eee;
-      padding: 24px;
       border-radius: 4px;
       transition: all 0.3s ease;
     }
     .blog-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 12px 24px rgba(0,0,0,0.05);
+    }
+    .blog-thumb {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .blog-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .blog-card:hover .blog-thumb img {
+      transform: scale(1.05);
+    }
+    /* Đệm lại lề chữ cho bài viết */
+    .blog-card .meta,
+    .blog-card h2,
+    .blog-card p,
+    .blog-card .read-more {
+      padding-left: 24px;
+      padding-right: 24px;
     }
     .blog-card .meta {
       font-size: 11px;
@@ -123,16 +148,132 @@
       <div class="content-grid">
         
         <main class="content-main">
-          <div class="articles-grid" id="articles">
-            
-            <article class="blog-card">
-              <div class="meta">15 Tháng 5, 2026 • Tâm Lý</div>
-              <h2><a href="duong-dan-bai-viet-cu-1.html">Tiêu đề bài viết cũ số 1 của bạn</a></h2>
-              <p>Nội dung mô tả tóm tắt hoặc đoạn trích ngắn của bài viết cũ số 1...</p>
-              <a href="duong-dan-bai-viet-cu-1.html" class="read-more">Đọc tiếp →</a>
-            </article>
+          <div class="articles-grid" id="blog-articles-grid">
+            <div style="grid-column: 1/-1; text-align: center; color: #888; padding: 40px 0;">Đang tải bài viết...</div>
+          </div>
+        </main>
 
-            <article class="blog-card">
-              <div class="meta">10 Tháng 5, 2026 • Quản Trị Rủi Ro</div>
-              <h2><a href="duong-dan-bai-viet-cu-2.html">Tiêu đề bài viết cũ số 2 của bạn</a></h2>
-              <p>Nội dung
+        <aside class="sidebar">
+          <div class="signup-box">
+            <h3>VỀ TÁC GIẢ</h3>
+            <p style="font-size: 13px; line-height: 1.6; margin-bottom: 0; color: #666;">
+              Chào bạn, tôi là một cá nhân theo đuổi con đường trading chuyên nghiệp. 
+              Trang blog này ghi lại những bài học đúc kết từ thực tế chiến đấu trên thị trường, với kim chỉ nam là tư duy xác suất và kỷ luật tự thân của Mark Douglas.
+            </p>
+          </div>
+
+          <div class="signup-box">
+            <h3>ĐĂNG KÝ NHẬN BÀI VIẾT</h3>
+            <p>Nhận những bài viết mới nhất về tư duy, tâm lý và hành trình giao dịch.</p>
+            <input type="email" placeholder="Nhập email của bạn..." />
+            <button class="btn-dark">ĐĂNG KÝ</button>
+          </div>
+
+          <div class="sidebar-quote">
+            <span class="quote-mark-dark">"</span>
+            <p>Khi bạn hoàn toàn chấp nhận thực tế của rủi ro, bạn sẽ không còn cảm thấy khó chịu trước bất kỳ kết quả nào của thị trường.</p>
+            <cite>— Mark Douglas</cite>
+          </div>
+        </aside>
+
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">NGHỀ TRADING</div>
+          <p>Trading là quá trình xây dựng lợi thế, quản trị rủi ro và duy trì kỷ luật trong hàng nghìn giao dịch.</p>
+        </div>
+        <div class="footer-col">
+          <h4>KHÁM PHÁ</h4>
+          <ul>
+            <li><a href="bai-viet.html">Bài viết</a></li>
+            <li><a href="nhat-ky.html">Nhật ký giao dịch</a></li>
+            <li><a href="he-thong.html">Hệ thống</a></li>
+            <li><a href="he-thong.html#hanh-trinh">Hành trình</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>KẾT NỐI</h4>
+          <ul>
+            <li><a href="#">YouTube</a></li>
+            <li><a href="#">Telegram</a></li>
+            <li><a href="#">Email</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>THEO DÕI</h4>
+          <div class="social-icons">
+            <a href="#" aria-label="YouTube" class="social-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 0-3.77-2.7C13.69 3.72 12 3.72 12 3.72s-1.69 0-3.82.27a4.83 4.83 0 0 0-3.77 2.7A27.14 27.14 0 0 0 4 12a27.14 27.14 0 0 0 .41 5.31 4.83 4.83 0 0 0 3.77 2.7C10.31 20.28 12 20.28 12 20.28s1.69 0 3.82-.27a4.83 4.83 0 0 0 3.77-2.7A27.14 27.14 0 0 0 20 12a27.14 27.14 0 0 0-.41-5.31ZM10 15V9l5 3Z"/></svg>
+            </a>
+            <a href="#" aria-label="Telegram" class="social-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8-1.7 8.02c-.12.56-.46.7-.93.43l-2.57-1.89-1.24 1.19c-.14.14-.25.25-.51.25l.18-2.61 4.7-4.25c.2-.18-.04-.28-.32-.1L7.38 15.3l-2.52-.79c-.55-.17-.56-.55.12-.81l9.85-3.8c.45-.17.85.11.81.1z"/></svg>
+            </a>
+            <a href="#" aria-label="Email" class="social-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 NGHỀ TRADING. ALL RIGHTS RESERVED.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+
+  <script>
+    // NƠI THÊM BÀI VIẾT MỚI: Từ nay bạn chỉ cần khai báo bài viết vào đây
+    const blogPosts = [
+      {
+        title: "Sự nhàm chán là điều cần thiết trong giao dịch ngoại hối",
+        date: "15 Tháng 5, 2026",
+        category: "Tâm Lý",
+        excerpt: "Khi bạn hoàn toàn chấp nhận thực tế của rủi ro, bạn sẽ không còn cảm thấy khó chịu trước bất kỳ kết quả nào của thị trường...",
+        link: "posts/su-nham-chan.html",     /* Đường dẫn đến bài viết chi tiết */
+        thumb: "posts/images/su-nham-chan.jpg" /* Đường dẫn đến file ảnh đại diện */
+      },
+      {
+        title: "Becoming Warren Buffett (2017) - Bài học từ huyền thoại",
+        date: "10 Tháng 5, 2026",
+        category: "Phương Pháp",
+        excerpt: "Tóm tắt tư duy đầu tư giá trị và cách kiểm soát cảm xúc cá nhân thông qua bộ phim tài liệu nổi tiếng về Warren Buffett...",
+        link: "posts/warren-buffett.html",
+        thumb: "posts/images/warren-buffett.jpg"
+      }
+      // Khi có bài viết mới, bạn chỉ cần copy cụm { ... } ở trên thả xuống đây là xong!
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.getElementById('blog-articles-grid');
+      if (!grid) return;
+
+      if (blogPosts.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #888; padding: 40px 0;">Chưa có bài viết nào.</div>';
+        return;
+      }
+
+      // Render tự động ra HTML có ảnh đại diện
+      grid.innerHTML = blogPosts.map(post => `
+        <article class="blog-card">
+          <div class="blog-thumb">
+            <a href="${post.link}">
+              <img src="${post.thumb}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400?text=No+Image'"/>
+            </a>
+          </div>
+          <div class="meta">${post.date} • ${post.category}</div>
+          <h2><a href="${post.link}">${post.title}</a></h2>
+          <p>${post.excerpt}</p>
+          <a href="${post.link}" class="read-more">Đọc tiếp →</a>
+        </article>
+      `).join('');
+    });
+  </script>
+</body>
+</html>
