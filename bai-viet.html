@@ -10,32 +10,44 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <style>
+    /* 1. MỞ RỘNG KHUNG NỘI DUNG, THU NHỎ LỀ TRẮNG 2 BÊN 50% */
+    .container {
+      max-width: 1320px !important; /* Tăng độ rộng tổng thể để đẩy nội dung tràn rộng ra hai bên */
+      width: 95%;
+      margin: 0 auto;
+    }
+
     @media (min-width: 901px) {
       .content-grid {
         display: grid;
-        grid-template-columns: 1fr 300px;
-        gap: 40px;
+        grid-template-columns: 1fr 320px; /* Tối ưu lại tỉ lệ cột nội dung và sidebar */
+        gap: 50px;
         margin-top: 10px;
       }
       #blog-articles-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
+        gap: 35px;
       }
     }
 
+    /* ĐỊNH DẠNG KHU VỰC HEADER VÀ CÂU SLOGAN THEO YÊU CẦU */
     .page-header {
-      padding: 95px 0 75px 0 !important;
+      padding: 110px 0 65px 0 !important;
       text-align: center;
     }
+    
+    /* 2. CHỈNH CHỮ SLOGAN: IN ĐẬM, MÀU ĐEN, TO THÊM 2 SIZE (18px -> 22px) */
     .page-header p {
-      font-size: 18px; 
-      line-height: 1.6;
-      max-width: 800px;
+      font-size: 22px !important; 
+      font-weight: 700 !important;
+      color: #111111 !important;
+      line-height: 1.5;
+      max-width: 950px;
       margin: 0 auto;
-      color: var(--muted, #666);
     }
 
+    /* GIỮ NGUYÊN GIAO DIỆN KHỐI BÀI VIẾT */
     .blog-card {
       padding: 0 0 24px 0 !important;
       overflow: hidden;
@@ -50,7 +62,7 @@
     }
     .blog-thumb {
       width: 100%;
-      height: 200px;
+      height: 220px;
       overflow: hidden;
       margin-bottom: 20px;
       background: #f5f5f5;
@@ -77,7 +89,7 @@
     }
     .blog-card h2 {
       font-family: 'Playfair Display', serif;
-      font-size: 20px;
+      font-size: 22px;
       margin: 0 0 12px 0;
       line-height: 1.4;
     }
@@ -87,7 +99,7 @@
     }
     .blog-card p {
       color: #555;
-      font-size: 14px;
+      font-size: 14.5px;
       line-height: 1.6;
       margin-bottom: 20px;
     }
@@ -233,7 +245,6 @@
         if (!response.ok) throw new Error('Không thể kết nối GitHub API');
         const files = await response.json();
 
-        // Lọc lấy các file html trong thư mục posts
         const htmlFiles = files.filter(file => file.name.endsWith('.html'));
 
         if (htmlFiles.length === 0) {
@@ -251,13 +262,11 @@
             const parser = new DOMParser();
             const doc = parser.parseFromString(htmlText, 'text/html');
 
-            // Đọc tiêu đề, meta và tóm tắt nội dung bài viết
             const title = doc.querySelector('.post-title')?.innerText || doc.querySelector('title')?.innerText || file.name;
             const meta = doc.querySelector('.post-meta')?.innerText || "Bài viết mới";
             const firstP = doc.querySelector('.post-content p')?.innerText || doc.querySelector('p')?.innerText || "";
             const excerpt = firstP.length > 120 ? firstP.substring(0, 120) + "..." : firstP;
 
-            // Xử lý thông minh đường dẫn ảnh Thumbnail
             const rawImgSrc = doc.querySelector('.post-content img')?.getAttribute('src') || doc.querySelector('img')?.getAttribute('src');
             let correctThumb = "https://placehold.co/600x400?text=NgheTrading"; 
 
@@ -286,10 +295,8 @@
           }
         }
 
-        // Đảo thứ tự để file mới push lên GitHub xếp lên trên cùng
         allPosts.reverse();
 
-        // Đổ dữ liệu thành giao diện ô lưới bài viết có ảnh thumbnail
         grid.innerHTML = allPosts.map(post => `
           <article class="blog-card">
             <div class="blog-thumb">
