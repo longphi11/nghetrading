@@ -31,13 +31,13 @@
       }
     }
 
-    /* ĐỊNH DẠNG KHU VỰC HEADER VÀ CÂU SLOGAN THEO YÊU CẦU */
+    /* ĐỊNH DẠNG KHU VỰC HEADER VÀ CÂU SLOGAN */
     .page-header {
       padding: 110px 0 65px 0 !important;
       text-align: center;
     }
     
-    /* 2. CHỈNH CHỮ SLOGAN: IN ĐẬM, MÀU ĐEN, TO THÊM 2 SIZE (18px -> 22px) */
+    /* 2. CHỈNH CHỮ SLOGAN: IN ĐẬM, MÀU ĐEN, TO THÊM 2 SIZE */
     .page-header p {
       font-size: 22px !important; 
       font-weight: 700 !important;
@@ -111,7 +111,7 @@
       border-bottom: 1px solid #111;
     }
 
-    /* CSS ĐỊNH DẠNG CỤM NÚT PHÂN TRANG TỐI GIẢN */
+    /* CSS ĐỊNH DẠNG CỤM NÚT PHÂN TRANG */
     .pagination button {
       padding: 8px 16px;
       border: 1px solid #eee;
@@ -174,9 +174,7 @@
       <div class="content-grid">
         
         <main class="content-main">
-          <div class="articles-grid" id="blog-articles-grid">
-            <div style="grid-column: 1/-1; text-align: center; color: #888; padding: 40px 0;">Đang tự động quét và đồng bộ bài viết mới từ thư mục posts...</div>
-          </div>
+          <div class="articles-grid" id="blog-articles-grid"></div>
         </main>
 
         <aside class="sidebar">
@@ -253,82 +251,43 @@
   <script src="main.js"></script>
 
   <script>
-    const GH_USER = 'longphi11'; 
-    const GH_REPO = 'nghetrading';
-    const FOLDER_PATH = 'posts';
-    
-    const POSTS_PER_PAGE = 20; /* Định mức hiển thị đúng 20 bài viết mỗi trang */
-    let currentPage = 1;
-    let allPosts = [];
-
-    document.addEventListener('DOMContentLoaded', async () => {
-      const grid = document.getElementById('blog-articles-grid');
-      if (!grid) return;
-
-      try {
-        const response = await fetch(`https://api.github.com/repos/${GH_USER}/${GH_REPO}/contents/${FOLDER_PATH}`);
-        if (!response.ok) throw new Error('Không thể kết nối GitHub API');
-        const files = await response.json();
-
-        const htmlFiles = files.filter(file => file.name.endsWith('.html') && file.name !== 'post-sample.html');
-
-        if (htmlFiles.length === 0) {
-          grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #888; padding: 40px 0;">Chưa có bài viết nào trong thư mục posts.</div>';
-          return;
-        }
-
-        for (const file of htmlFiles) {
-          try {
-            const fileRes = await fetch(file.download_url);
-            const htmlText = await fileRes.text();
-
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(htmlText, 'text/html');
-
-            const title = doc.querySelector('.post-title')?.innerText || doc.querySelector('title')?.innerText || file.name;
-            const meta = doc.querySelector('.post-meta')?.innerText || "Bài viết mới";
-            const firstP = doc.querySelector('.post-content p')?.innerText || doc.querySelector('p')?.innerText || "";
-            const excerpt = firstP.length > 120 ? firstP.substring(0, 120) + "..." : firstP;
-
-            const rawImgSrc = doc.querySelector('.post-content img')?.getAttribute('src') || doc.querySelector('img')?.getAttribute('src');
-            let correctThumb = "https://placehold.co/600x400?text=NgheTrading"; 
-
-            if (rawImgSrc) {
-              if (rawImgSrc.startsWith('http') || rawImgSrc.startsWith('/')) {
-                correctThumb = rawImgSrc;
-              } else {
-                let cleanSrc = rawImgSrc.replace('../', '');
-                if (cleanSrc.startsWith('posts/')) {
-                  correctThumb = cleanSrc;
-                } else {
-                  correctThumb = `posts/${cleanSrc}`;
-                }
-              }
-            }
-
-            allPosts.push({
-              title: title,
-              meta: meta,
-              thumb: correctThumb,
-              excerpt: excerpt,
-              link: `posts/${file.name}`
-            });
-          } catch (e) {
-            console.error("Lỗi đọc file: " + file.name, e);
-          }
-        }
-
-        allPosts.reverse();
-        renderPage(currentPage);
-
-      } catch (error) {
-        console.error(error);
-        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #d93025; padding: 40px 0;">Có lỗi tự động đồng bộ bài viết từ GitHub. Vui lòng tải lại trang.</div>';
+    // 📝 TỪ NAY BẠN CỨ THÊM BÀI VIẾT MỚI VÀO ĐẦU MẢNG NÀY LÀ XONG, KHÔNG LO BỊ LỖI KẸT TRANG
+    const allPosts = [
+      {
+        title: "Sức Mạnh Của Việc Không Làm Gì Trong Trading",
+        date: "14 Tháng 6, 2026",
+        category: "Tâm Lý Giao Dịch",
+        excerpt: "Trong trading, một trong những thử thách khó khăn nhất đối với mọi nhà giao dịch không phải là tìm kiếm một hệ thống hoàn hảo, mà là việc học cách ngồi yên không làm gì...",
+        link: "posts/suc-manh-cua-viec-khong-lam-gi.html",
+        thumb: "posts/images/suc-manh-cua-viec-khong-lam-gi.jpg"
+      },
+      {
+        title: "Trading là trò chơi xác suất",
+        date: "10 Tháng 6, 2026",
+        category: "Tư Duy",
+        excerpt: "Để chiến thắng trên thị trường, bạn buộc phải loại bỏ tư duy đúng sai và thay thế bằng tư duy xác suất thuần túy...",
+        link: "posts/trading-la-tro-choi-xac-suat.html",
+        thumb: "posts/images/trading-la-tro-choi-xac-suat.jpg"
       }
+      // Bài viết mới viết sau này bạn cứ copy cấu trúc thả vào đầu danh sách này nhé!
+    ];
+
+    const POSTS_PER_PAGE = 20; /* Định mức hiển thị 20 bài viết mỗi trang */
+    let currentPage = 1;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderPage(currentPage);
     });
 
     function renderPage(page) {
       const grid = document.getElementById('blog-articles-grid');
+      if (!grid) return;
+
+      if (allPosts.length === 0) {
+        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #888; padding: 40px 0;">Chưa có bài viết nào.</div>';
+        return;
+      }
+
       const startIndex = (page - 1) * POSTS_PER_PAGE;
       const endIndex = startIndex + POSTS_PER_PAGE;
       const paginatedPosts = allPosts.slice(startIndex, endIndex);
@@ -340,7 +299,7 @@
               <img src="${post.thumb}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400?text=Nghề+Trading'"/>
             </a>
           </div>
-          <div class="meta">${post.meta}</div>
+          <div class="meta">${post.date} • ${post.category}</div>
           <h2><a href="${post.link}">${post.title}</a></h2>
           <p>${post.excerpt}</p>
           <a href="${post.link}" class="read-more">Đọc tiếp →</a>
