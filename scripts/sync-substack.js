@@ -62,9 +62,28 @@ function extractExcerpt(html, maxLen = 200) {
   return text.length > maxLen ? text.slice(0, maxLen).trim() + "..." : text;
 }
 
+async function fetchFeed() {
+  // Thử gọi thẳng trước
+  try {
+    return await parser.parseURL(FEED_URL);
+  } catch (err) {
+    console.log(`Gọi thẳng thất bại (${err.message}), thử qua proxy...`);
+  }
+  // Nếu bị chặn (403...), đi vòng qua proxy trung gian để lấy XML rồi tự parse
+  const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(FEED_URL)}`;
+  const res = await fetch(proxyUrl, {
+    headers: { "User-Agent": "Mozilla/5.0 (compatible; NgheTradingBot/1.0)" },
+  });
+  if (!res.ok) {
+    throw new Error(`Proxy cũng thất bại: status ${res.status}`);
+  }
+  const xml = await res.text();
+  return await parser.parseString(xml);
+}
+
 async function main() {
   console.log(`Đang lấy feed: ${FEED_URL}`);
-  const feed = await parser.parseURL(FEED_URL);
+  const feed = await fetchFeed();
 
   // Đọc danh sách bài viết đã có
   let existingPosts = [];
