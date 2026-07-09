@@ -14,6 +14,11 @@ const DATA_FILE = path.join(ROOT, "data", "posts.json");
 const TEMPLATE_FILE = path.join(ROOT, "templates", "post-template.html");
 
 const parser = new Parser({
+  headers: {
+    "User-Agent":
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+    Accept: "application/rss+xml, application/xml, text/xml, */*",
+  },
   customFields: {
     item: [["content:encoded", "contentEncoded"]],
   },
