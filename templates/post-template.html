@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{TITLE}} – Nghề Trading</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .post-header { padding: 130px 0 40px 0; max-width: 780px; margin: 0 auto; }
+    .post-header .meta { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+    .post-header h1 { font-family: 'Playfair Display', serif; font-size: 38px; line-height: 1.3; color: #111; margin-bottom: 10px; }
+    .post-body { max-width: 780px; margin: 0 auto; padding: 0 24px 80px; font-size: 17px; line-height: 1.8; color: #222; }
+    .post-body img { width: 100%; height: auto; border-radius: 4px; margin: 24px 0; }
+    .post-body p { margin-bottom: 22px; }
+    .post-body h2, .post-body h3 { font-family: 'Playfair Display', serif; margin: 36px 0 16px; color: #111; }
+    .post-body a { color: #111; text-decoration: underline; }
+    .post-body blockquote { border-left: 3px solid #111; padding-left: 20px; margin: 24px 0; font-style: italic; color: #444; }
+    .back-link { display: inline-block; margin: 0 auto 20px; max-width: 780px; }
+    .back-link-wrap { max-width: 780px; margin: 130px auto 0; padding: 0 24px; }
+    .back-link a { font-size: 13px; color: #888; text-decoration: none; }
+    .back-link a:hover { color: #111; }
+    .post-source-note { max-width: 780px; margin: 0 auto 60px; padding: 0 24px; font-size: 13px; color: #999; }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-inner">
+      <a href="../index.html" class="logo">NGHỀ TRADING</a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Trang Chủ</a></li>
+        <li><a href="../bai-viet.html" class="active">Bài Viết</a></li>
+        <li><a href="../nhat-ky.html">Nhật Ký Giao Dịch</a></li>
+        <li><a href="../he-thong.html">Hệ Thống</a></li>
+        <li><a href="../gioi-thieu.html">Giới Thiệu</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="../index.html">Trang Chủ</a></li>
+        <li><a href="../bai-viet.html">Bài Viết</a></li>
+        <li><a href="../nhat-ky.html">Nhật Ký Giao Dịch</a></li>
+        <li><a href="../he-thong.html">Hệ Thống</a></li>
+        <li><a href="../gioi-thieu.html">Giới Thiệu</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="back-link-wrap">
+    <a href="../bai-viet.html">← Quay lại Bài Viết</a>
+  </div>
+
+  <header class="post-header">
+    <div class="meta">{{DATE}} • {{CATEGORY}}</div>
+    <h1>{{TITLE}}</h1>
+  </header>
+
+  <article class="post-body">
+    {{CONTENT}}
+  </article>
+
+  <p class="post-source-note">Bài viết gốc được đăng trên <a href="{{SUBSTACK_LINK}}" target="_blank" rel="noopener noreferrer">Substack – Neo In The Zone</a>.</p>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">NGHỀ TRADING</div>
+          <p>Trading là quá trình xây dựng lợi thế, quản trị rủi ro và duy trì kỷ luật trong hàng nghìn giao dịch.</p>
+        </div>
+        <div class="footer-col">
+          <h4>KHÁM PHÁ</h4>
+          <ul>
+            <li><a href="../bai-viet.html">Bài viết</a></li>
+            <li><a href="../nhat-ky.html">Nhật ký giao dịch</a></li>
+            <li><a href="../he-thong.html">Hệ thống</a></li>
+            <li><a href="../gioi-thieu.html">Giới thiệu</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 NGHỀ TRADING. ALL RIGHTS RESERVED.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+</body>
+</html>
