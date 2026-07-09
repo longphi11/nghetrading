@@ -252,24 +252,26 @@
 
   <script>
     // 📝 TỪ NAY BẠN CỨ THÊM BÀI VIẾT MỚI VÀO ĐẦU MẢNG NÀY LÀ XONG, KHÔNG LO BỊ LỖI KẸT TRANG
+    // ⚠️ THAY "link" BẰNG URL BÀI VIẾT THẬT TRÊN SUBSTACK CỦA BẠN (dạng: https://neointhezone.substack.com/p/slug-bai-viet)
+    // "thumb" nên là ảnh cover bạn đã upload cho bài đó trên Substack (bấm chuột phải vào ảnh cover trên Substack > Copy image address)
     const allPosts = [
       {
-        title: "Sức Mạnh Của Việc Không Làm Gì Trong Trading",
-        date: "14 Tháng 6, 2026",
+        title: "Trading thành thạo là như thế nào",
+        date: "09 Tháng 7, 2026",
         category: "Tâm Lý Giao Dịch",
-        excerpt: "Trong trading, một trong những thử thách khó khăn nhất đối với mọi nhà giao dịch không phải là tìm kiếm một hệ thống hoàn hảo, mà là việc học cách ngồi yên không làm gì...",
-        link: "posts/suc-manh-cua-viec-khong-lam-gi.html",
-        thumb: "posts/images/suc-manh-cua-viec-khong-lam-gi.jpg"
+        excerpt: "Trước hết, chúng ta nên phân biệt có sự khác nhau giữa thói quen và thành thạo, mặc dù thoạt nhìn chúng có vẻ khá giống nhau. Khi thiếu tỉnh thức, chúng ta có thói quen suy nghĩ rập khuôn, hành động máy móc, trong khi thành thạo đòi hỏi sự chú tâm...",
+        link: "https://neointhezone.substack.com/p/trading-thanh-thao-la-nhu-the-nao",
+        thumb: "https://substackcdn.com/image/fetch/$s_!oxL7!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2de0c427-8a2d-433d-988b-9f74c321effd_936x552.jpeg"
       },
       {
-        title: "Trading là trò chơi xác suất",
-        date: "10 Tháng 6, 2026",
+        title: "5 giai đoạn để trở thành trader có lợi nhuận ổn định",
+        date: "09 Tháng 7, 2026",
         category: "Tư Duy",
-        excerpt: "Để chiến thắng trên thị trường, bạn buộc phải loại bỏ tư duy đúng sai và thay thế bằng tư duy xác suất thuần túy...",
-        link: "posts/trading-la-tro-choi-xac-suat.html",
-        thumb: "posts/images/trading-la-tro-choi-xac-suat.jpg"
+        excerpt: "Con đường trở thành một trader chuyên nghiệp thường được mô tả qua 5 giai đoạn phát triển chính, tập trung vào sự tiến hóa về kỹ năng, tâm lý và quản lý vốn. Dưới đây là các giai đoạn cốt lõi...",
+        link: "https://neointhezone.substack.com/p/5-giai-oan-e-tro-thanh-trader-co",
+        thumb: "https://substackcdn.com/image/fetch/$s_!YgFu!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1b063c5f-8175-49ed-abe3-4ecafb0c4495_1359x781.jpeg"
       }
-      // Bài viết mới viết sau này bạn cứ copy cấu trúc thả vào đầu danh sách này nhé!
+      // Bài viết mới viết sau này bạn cứ copy cấu trúc thả vào đầu danh sách này, nhớ đổi "link" thành URL Substack thật!
     ];
 
     const POSTS_PER_PAGE = 20; /* Định mức hiển thị 20 bài viết mỗi trang */
@@ -295,14 +297,14 @@
       let htmlContent = paginatedPosts.map(post => `
         <article class="blog-card">
           <div class="blog-thumb">
-            <a href="${post.link}">
+            <a href="${post.link}" target="_blank" rel="noopener noreferrer">
               <img src="${post.thumb}" alt="${post.title}" onerror="this.src='https://placehold.co/600x400?text=Nghề+Trading'"/>
             </a>
           </div>
           <div class="meta">${post.date} • ${post.category}</div>
-          <h2><a href="${post.link}">${post.title}</a></h2>
+          <h2><a href="${post.link}" target="_blank" rel="noopener noreferrer">${post.title}</a></h2>
           <p>${post.excerpt}</p>
-          <a href="${post.link}" class="read-more">Đọc tiếp →</a>
+          <a href="${post.link}" target="_blank" rel="noopener noreferrer" class="read-more">Đọc trên Substack ↗</a>
         </article>
       `).join('');
 
