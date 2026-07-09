@@ -1,0 +1,40 @@
+name: Đồng bộ bài viết từ Substack
+
+on:
+  schedule:
+    # Chạy mỗi 6 tiếng (giờ UTC). Có thể đổi tần suất tại đây.
+    - cron: "0 */6 * * *"
+  workflow_dispatch: {} # cho phép bấm "Run workflow" thủ công trên GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Cài đặt rss-parser
+        run: npm install rss-parser
+
+      - name: Chạy script đồng bộ Substack
+        run: node scripts/sync-substack.js
+
+      - name: Commit & push nếu có bài mới
+        run: |
+          if [ "$(cat .sync-result)" = "changed" ]; then
+            git config user.name "substack-sync-bot"
+            git config user.email "actions@github.com"
+            git add posts/ data/posts.json
+            git commit -m "🤖 Tự động đồng bộ bài viết mới từ Substack"
+            git push
+          else
+            echo "Không có bài viết mới, bỏ qua commit."
+          fi
