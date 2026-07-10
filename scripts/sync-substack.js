@@ -80,16 +80,35 @@ async function fetchFeed() {
   } catch (err) {
     console.log(`Gọi thẳng thất bại (${err.message}), thử qua proxy...`);
   }
-  // Nếu bị chặn (403...), đi vòng qua proxy trung gian để lấy XML rồi tự parse
-  const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(FEED_URL)}`;
-  const res = await fetch(proxyUrl, {
-    headers: { "User-Agent": "Mozilla/5.0 (compatible; NgheTradingBot/1.0)" },
-  });
-  if (!res.ok) {
-    throw new Error(`Proxy cũng thất bại: status ${res.status}`);
+
+  // Danh sách proxy dự phòng — thử lần lượt cho tới khi có cái chạy được
+  const proxies = [
+    (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+    (url) => `https://corsproxy.io/?url=${encodeURIComponent(url)}`,
+    (url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+  ];
+
+  let lastError;
+  for (const buildProxyUrl of proxies) {
+    const proxyUrl = buildProxyUrl(FEED_URL);
+    try {
+      console.log(`Đang thử proxy: ${proxyUrl}`);
+      const res = await fetch(proxyUrl, {
+        headers: { "User-Agent": "Mozilla/5.0 (compatible; NgheTradingBot/1.0)" },
+      });
+      if (!res.ok) throw new Error(`status ${res.status}`);
+      const xml = await res.text();
+      if (!xml || !xml.includes("<rss") && !xml.includes("<feed")) {
+        throw new Error("phản hồi không phải XML hợp lệ");
+      }
+      return await parser.parseString(xml);
+    } catch (err) {
+      console.log(`Proxy này thất bại: ${err.message}`);
+      lastError = err;
+    }
   }
-  const xml = await res.text();
-  return await parser.parseString(xml);
+
+  throw new Error(`Tất cả các cách lấy feed đều thất bại. Lỗi cuối cùng: ${lastError && lastError.message}`);
 }
 
 async function main() {
