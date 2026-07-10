@@ -12,6 +12,17 @@ const ROOT = path.join(__dirname, "..");
 const POSTS_DIR = path.join(ROOT, "posts");
 const DATA_FILE = path.join(ROOT, "data", "posts.json");
 const TEMPLATE_FILE = path.join(ROOT, "templates", "post-template.html");
+const OVERRIDES_FILE = path.join(ROOT, "data", "category-overrides.json");
+
+// Đọc bảng phân loại thủ công (nếu có). Dạng: { "slug-bai-viet": "Tâm Lý" }
+function loadCategoryOverrides() {
+  if (!fs.existsSync(OVERRIDES_FILE)) return {};
+  try {
+    return JSON.parse(fs.readFileSync(OVERRIDES_FILE, "utf-8"));
+  } catch {
+    return {};
+  }
+}
 
 const parser = new Parser({
   headers: {
@@ -84,6 +95,7 @@ async function fetchFeed() {
 async function main() {
   console.log(`Đang lấy feed: ${FEED_URL}`);
   const feed = await fetchFeed();
+  const overrides = loadCategoryOverrides();
 
   // Đọc danh sách bài viết đã có
   let existingPosts = [];
@@ -104,7 +116,7 @@ async function main() {
     const contentHtml = item.contentEncoded || item.content || item.contentSnippet || "";
     const thumb = extractFirstImage(contentHtml) || "";
     const excerpt = extractExcerpt(contentHtml);
-    const category = (item.categories && item.categories[0]) || "Bài Viết";
+    const category = overrides[slug] || (item.categories && item.categories[0]) || "Chưa Phân Loại";
     const dateVN = formatDateVN(item.pubDate || item.isoDate);
 
     // Tạo trang bài viết từ template
@@ -131,6 +143,11 @@ async function main() {
     existingSlugs.add(slug);
     addedCount++;
   }
+
+  // Áp lại bảng phân loại thủ công cho cả những bài đã có sẵn (phòng khi bạn vừa sửa category-overrides.json)
+  existingPosts.forEach((p) => {
+    if (overrides[p.slug]) p.category = overrides[p.slug];
+  });
 
   // Sắp xếp mới nhất lên đầu, lưu lại
   existingPosts.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
