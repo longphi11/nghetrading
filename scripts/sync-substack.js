@@ -12,17 +12,6 @@ const ROOT = path.join(__dirname, "..");
 const POSTS_DIR = path.join(ROOT, "posts");
 const DATA_FILE = path.join(ROOT, "data", "posts.json");
 const TEMPLATE_FILE = path.join(ROOT, "templates", "post-template.html");
-const OVERRIDES_FILE = path.join(ROOT, "data", "category-overrides.json");
-
-// Đọc bảng phân loại thủ công (nếu có). Dạng: { "slug-bai-viet": "Tâm Lý" }
-function loadCategoryOverrides() {
-  if (!fs.existsSync(OVERRIDES_FILE)) return {};
-  try {
-    return JSON.parse(fs.readFileSync(OVERRIDES_FILE, "utf-8"));
-  } catch {
-    return {};
-  }
-}
 
 const parser = new Parser({
   headers: {
@@ -80,41 +69,21 @@ async function fetchFeed() {
   } catch (err) {
     console.log(`Gọi thẳng thất bại (${err.message}), thử qua proxy...`);
   }
-
-  // Danh sách proxy dự phòng — thử lần lượt cho tới khi có cái chạy được
-  const proxies = [
-    (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-    (url) => `https://corsproxy.io/?url=${encodeURIComponent(url)}`,
-    (url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
-  ];
-
-  let lastError;
-  for (const buildProxyUrl of proxies) {
-    const proxyUrl = buildProxyUrl(FEED_URL);
-    try {
-      console.log(`Đang thử proxy: ${proxyUrl}`);
-      const res = await fetch(proxyUrl, {
-        headers: { "User-Agent": "Mozilla/5.0 (compatible; NgheTradingBot/1.0)" },
-      });
-      if (!res.ok) throw new Error(`status ${res.status}`);
-      const xml = await res.text();
-      if (!xml || !xml.includes("<rss") && !xml.includes("<feed")) {
-        throw new Error("phản hồi không phải XML hợp lệ");
-      }
-      return await parser.parseString(xml);
-    } catch (err) {
-      console.log(`Proxy này thất bại: ${err.message}`);
-      lastError = err;
-    }
+  // Nếu bị chặn (403...), đi vòng qua proxy trung gian để lấy XML rồi tự parse
+  const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(FEED_URL)}`;
+  const res = await fetch(proxyUrl, {
+    headers: { "User-Agent": "Mozilla/5.0 (compatible; NgheTradingBot/1.0)" },
+  });
+  if (!res.ok) {
+    throw new Error(`Proxy cũng thất bại: status ${res.status}`);
   }
-
-  throw new Error(`Tất cả các cách lấy feed đều thất bại. Lỗi cuối cùng: ${lastError && lastError.message}`);
+  const xml = await res.text();
+  return await parser.parseString(xml);
 }
 
 async function main() {
   console.log(`Đang lấy feed: ${FEED_URL}`);
   const feed = await fetchFeed();
-  const overrides = loadCategoryOverrides();
 
   // Đọc danh sách bài viết đã có
   let existingPosts = [];
@@ -135,7 +104,7 @@ async function main() {
     const contentHtml = item.contentEncoded || item.content || item.contentSnippet || "";
     const thumb = extractFirstImage(contentHtml) || "";
     const excerpt = extractExcerpt(contentHtml);
-    const category = overrides[slug] || (item.categories && item.categories[0]) || "Chưa Phân Loại";
+    const category = (item.categories && item.categories[0]) || "Bài Viết";
     const dateVN = formatDateVN(item.pubDate || item.isoDate);
 
     // Tạo trang bài viết từ template
@@ -162,11 +131,6 @@ async function main() {
     existingSlugs.add(slug);
     addedCount++;
   }
-
-  // Áp lại bảng phân loại thủ công cho cả những bài đã có sẵn (phòng khi bạn vừa sửa category-overrides.json)
-  existingPosts.forEach((p) => {
-    if (overrides[p.slug]) p.category = overrides[p.slug];
-  });
 
   // Sắp xếp mới nhất lên đầu, lưu lại
   existingPosts.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
