@@ -1,0 +1,67 @@
+name: "📊 Bài Nhật Ký Mới"
+description: "Đăng 1 bài phân tích Bitcoin/Vàng (từ TradingView) lên trang Nhật Ký Giao Dịch"
+title: "[Nhật Ký] "
+labels: ["nhat-ky-moi"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Điền form này sau khi bạn đã đăng bài trên TradingView và lấy mã Embed
+        (Share → Embed). Sau khi bấm "Submit new issue", 1 con robot sẽ tự động
+        chèn bài này vào trang Nhật Ký Giao Dịch trong khoảng 1 phút.
+
+  - type: dropdown
+    id: chu-de
+    attributes:
+      label: Chủ đề
+      options:
+        - Bitcoin
+        - Vàng
+    validations:
+      required: true
+
+  - type: input
+    id: tieu-de
+    attributes:
+      label: Tiêu đề bài viết
+      placeholder: "VD: BTC phá vùng kháng cự 65.000 — chờ retest trước khi vào lệnh"
+    validations:
+      required: true
+
+  - type: input
+    id: ngay-dang
+    attributes:
+      label: "Ngày đăng (định dạng YYYY-MM-DD)"
+      placeholder: "2026-07-15"
+    validations:
+      required: true
+
+  - type: input
+    id: anh-bia
+    attributes:
+      label: "Link ảnh bìa (upload lên imgur.com rồi dán link vào đây)"
+      placeholder: "https://i.imgur.com/xxxxxxx.png"
+    validations:
+      required: true
+
+  - type: textarea
+    id: tom-tat
+    attributes:
+      label: "Tóm tắt ngắn (1-2 câu, hiện ở box ngoài trang danh sách)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: embed
+    attributes:
+      label: "Mã Embed từ TradingView (dán nguyên đoạn code từ Share → Embed)"
+      placeholder: '<div class="tradingview-widget-container">...<script ...></script></div>'
+    validations:
+      required: true
+
+  - type: textarea
+    id: ghi-chu
+    attributes:
+      label: "Ghi chú thêm bằng tiếng Việt (không bắt buộc — mỗi đoạn cách nhau 1 dòng trống)"
+    validations:
+      required: false
