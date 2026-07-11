@@ -69,7 +69,7 @@ if (signupBtn && emailInput) {
 
 // ⚙️ Điền shortname Disqus của bạn vào đây sau khi đăng ký xong (xem hướng dẫn Claude gửi kèm).
 // Để trống ("") thì phần bình luận sẽ không hiển thị.
-const DISQUS_SHORTNAME = "nghetrading";
+const DISQUS_SHORTNAME = "";
 
 (async function initPostPageExtras() {
   const postBody = document.querySelector('.post-body');
@@ -132,11 +132,20 @@ const DISQUS_SHORTNAME = "nghetrading";
 
   // ----- 2. BÀI VIẾT LIÊN QUAN (cùng chủ đề) -----
   try {
-    const res = await fetch('../data/posts.json', { cache: 'no-store' });
+    const res = await fetch('/data/posts.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error(`Không tải được posts.json: status ${res.status}`);
     const allPosts = await res.json();
+
+    // Ưu tiên lấy category của chính bài đang xem từ dữ liệu JSON (chính xác hơn đọc chữ trên trang,
+    // vì trang tĩnh có thể chưa cập nhật category mới nhất nếu bạn vừa đổi trong category-overrides.json)
+    const currentPostData = allPosts.find(p => p.slug === slug);
+    const effectiveCategory = (currentPostData && currentPostData.category) || category;
+
     const related = allPosts
-      .filter(p => p.category === category && p.slug !== slug)
+      .filter(p => p.category === effectiveCategory && p.slug !== slug)
       .slice(0, 3);
+
+    console.log(`[Bài liên quan] slug hiện tại: "${slug}", chủ đề: "${effectiveCategory}", tìm thấy ${related.length} bài liên quan.`);
 
     if (related.length > 0) {
       const relatedSection = document.createElement('section');
@@ -145,7 +154,7 @@ const DISQUS_SHORTNAME = "nghetrading";
         <h3>Bài viết liên quan</h3>
         <div class="related-grid">
           ${related.map(p => `
-            <a class="related-card" href="../${p.link}">
+            <a class="related-card" href="/${p.link}">
               <div class="related-thumb">
                 <img src="${p.thumb}" alt="${p.title}" onerror="this.src='https://placehold.co/500x320?text=Nghề+Trading'"/>
               </div>
@@ -179,5 +188,39 @@ const DISQUS_SHORTNAME = "nghetrading";
     script.src = `https://${DISQUS_SHORTNAME}.disqus.com/embed.js`;
     script.setAttribute('data-timestamp', +new Date());
     document.body.appendChild(script);
+  }
+})();
+
+// ===========================
+//  TRANG CHỦ: BÀI VIẾT MỚI NHẤT
+//  Tự động lấy 3 bài mới nhất từ data/posts.json — chạy trên MỌI trang có
+//  khung #latest-articles-grid (hiện tại là index.html), các trang khác bỏ qua.
+// ===========================
+(async function initLatestArticles() {
+  const grid = document.getElementById('latest-articles-grid');
+  if (!grid) return; // không phải trang chủ, bỏ qua
+
+  try {
+    const res = await fetch('/data/posts.json', { cache: 'no-store' });
+    if (!res.ok) throw new Error(`status ${res.status}`);
+    const allPosts = await res.json();
+
+    // data/posts.json đã được robot sắp xếp bài mới nhất lên đầu sẵn
+    const latest = allPosts.slice(0, 3);
+    if (latest.length === 0) return;
+
+    grid.innerHTML = latest.map(p => `
+      <a class="article-card" href="${p.link}">
+        <div class="article-img" style="background-image:url('${p.thumb}'); background-size:cover; background-position:center; background-color:#1a1a1a;"></div>
+        <div class="article-meta">
+          <span class="tag">${(p.category || '').toUpperCase()}</span>
+          <h4>${p.title}</h4>
+          <p>${p.excerpt}</p>
+          <time>${p.date}</time>
+        </div>
+      </a>
+    `).join('');
+  } catch (err) {
+    console.error('Không tải được bài viết mới nhất cho trang chủ:', err);
   }
 })();
