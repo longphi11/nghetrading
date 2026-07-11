@@ -1,6 +1,6 @@
 name: "📊 Bài Nhật Ký Mới"
 description: "Đăng 1 bài phân tích Bitcoin/Vàng (từ TradingView) lên trang Nhật Ký Giao Dịch"
-title: "[Nhật Ký] "
+title: " "
 labels: ["nhat-ky-moi"]
 body:
   - type: markdown
@@ -51,9 +51,4 @@ body:
     validations:
       required: true
 
-  - type: textarea
-    id: ghi-chu
-    attributes:
-      label: "Ghi chú thêm bằng tiếng Việt (không bắt buộc — mỗi đoạn cách nhau 1 dòng trống)"
-    validations:
-      required: false
+
