@@ -172,6 +172,7 @@ const DISQUS_SHORTNAME = "nghetrading";
       this.page.url = pageUrl;
       this.page.identifier = slug;
       this.page.title = pageTitle;
+      this.language = "vi"; // Thử hiển thị giao diện Disqus bằng tiếng Việt (nếu Disqus hỗ trợ đủ)
     };
 
     const script = document.createElement('script');
