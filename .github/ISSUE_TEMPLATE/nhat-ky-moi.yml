@@ -52,14 +52,6 @@ body:
       required: true
 
   - type: textarea
-    id: embed
-    attributes:
-      label: "Mã Embed từ TradingView (dán nguyên đoạn code từ Share → Embed)"
-      placeholder: '<div class="tradingview-widget-container">...<script ...></script></div>'
-    validations:
-      required: true
-
-  - type: textarea
     id: ghi-chu
     attributes:
       label: "Ghi chú thêm bằng tiếng Việt (không bắt buộc — mỗi đoạn cách nhau 1 dòng trống)"
