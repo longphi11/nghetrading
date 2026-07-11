@@ -131,6 +131,44 @@
       cursor: not-allowed;
       border-color: #eee;
     }
+
+    /* DANH SÁCH CHỦ ĐỀ Ở SIDEBAR */
+    .category-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .category-list button {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 10px 4px;
+      border: none;
+      border-bottom: 1px solid #f0f0f0;
+      background: none;
+      color: #444;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 13.5px;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+    .category-list button:last-child { border-bottom: none; }
+    .category-list button:hover {
+      color: #111;
+      padding-left: 8px;
+    }
+    .category-list button.active {
+      color: #111;
+      font-weight: 700;
+    }
+    .category-list .count {
+      font-size: 11px;
+      color: #aaa;
+      font-weight: 400;
+    }
+    .category-list button.active .count { color: #111; }
   </style>
 </head>
 <body>
@@ -178,6 +216,11 @@
         </main>
 
         <aside class="sidebar">
+          <div class="signup-box" id="category-sidebar-box">
+            <h3>CHỦ ĐỀ</h3>
+            <div class="category-list" id="category-filter"></div>
+          </div>
+
           <div class="signup-box">
             <h3>VỀ TÁC GIẢ</h3>
             <p style="font-size: 13px; line-height: 1.6; margin-bottom: 0; color: #666;">
@@ -255,12 +298,12 @@
     // File này được robot (GitHub Actions) tự cập nhật mỗi khi bạn đăng bài mới trên Substack.
     // Bạn KHÔNG cần sửa gì ở đây nữa.
     let allPosts = [];
+    let activeCategory = 'Tất cả';
 
     const POSTS_PER_PAGE = 20; /* Định mức hiển thị 20 bài viết mỗi trang */
     let currentPage = 1;
 
     document.addEventListener('DOMContentLoaded', async () => {
-      const grid = document.getElementById('blog-articles-grid');
       try {
         const res = await fetch('data/posts.json', { cache: 'no-store' });
         allPosts = await res.json();
@@ -268,21 +311,56 @@
         console.error('Không tải được data/posts.json:', err);
         allPosts = [];
       }
+      renderCategoryFilter();
       renderPage(currentPage);
     });
+
+    function renderCategoryFilter() {
+      const filterBar = document.getElementById('category-filter');
+      if (!filterBar) return;
+
+      const categories = ['Tất cả', ...new Set(allPosts.map(p => p.category).filter(Boolean))];
+
+      filterBar.innerHTML = categories.map(cat => {
+        const count = cat === 'Tất cả' ? allPosts.length : allPosts.filter(p => p.category === cat).length;
+        return `
+          <button class="${cat === activeCategory ? 'active' : ''}" onclick="setCategory('${cat.replace(/'/g, "\\'")}')">
+            <span>${cat}</span>
+            <span class="count">${count}</span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function setCategory(cat) {
+      activeCategory = cat;
+      currentPage = 1;
+      renderCategoryFilter();
+      renderPage(currentPage);
+    }
+
+    function getFilteredPosts() {
+      if (activeCategory === 'Tất cả') return allPosts;
+      return allPosts.filter(p => p.category === activeCategory);
+    }
 
     function renderPage(page) {
       const grid = document.getElementById('blog-articles-grid');
       if (!grid) return;
 
-      if (allPosts.length === 0) {
-        grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #888; padding: 40px 0;">Chưa có bài viết nào.</div>';
+      const filteredPosts = getFilteredPosts();
+
+      if (filteredPosts.length === 0) {
+        const msg = allPosts.length === 0
+          ? 'Chưa có bài viết nào.'
+          : `Chưa có bài viết nào trong mục "${activeCategory}".`;
+        grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: #888; padding: 40px 0;">${msg}</div>`;
         return;
       }
 
       const startIndex = (page - 1) * POSTS_PER_PAGE;
       const endIndex = startIndex + POSTS_PER_PAGE;
-      const paginatedPosts = allPosts.slice(startIndex, endIndex);
+      const paginatedPosts = filteredPosts.slice(startIndex, endIndex);
 
       let htmlContent = paginatedPosts.map(post => `
         <article class="blog-card">
@@ -298,7 +376,7 @@
         </article>
       `).join('');
 
-      const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+      const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
       if (totalPages > 1) {
         let paginationHtml = `<div class="pagination" style="grid-column: 1/-1; text-align: center; margin-top: 50px; display: flex; justify-content: center; gap: 10px;">`;
         paginationHtml += `<button onclick="changePage(${page - 1})" ${page === 1 ? 'disabled' : ''}>← Trước</button>`;
@@ -318,7 +396,7 @@
     }
 
     function changePage(page) {
-      const totalPages = Math.ceil(allPosts.length / POSTS_PER_PAGE);
+      const totalPages = Math.ceil(getFilteredPosts().length / POSTS_PER_PAGE);
       if (page < 1 || page > totalPages) return;
       currentPage = page;
       renderPage(currentPage);
