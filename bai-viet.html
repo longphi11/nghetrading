@@ -378,21 +378,42 @@
 
       const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
       if (totalPages > 1) {
-        let paginationHtml = `<div class="pagination" style="grid-column: 1/-1; text-align: center; margin-top: 50px; display: flex; justify-content: center; gap: 10px;">`;
+        let paginationHtml = `<div class="pagination" style="grid-column: 1/-1; text-align: center; margin-top: 50px; display: flex; flex-direction: column; align-items: center; gap: 12px;">`;
+        paginationHtml += `<div style="font-size: 12px; color: #999;">Trang ${page} / ${totalPages} • ${filteredPosts.length} bài viết</div>`;
+        paginationHtml += `<div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">`;
         paginationHtml += `<button onclick="changePage(${page - 1})" ${page === 1 ? 'disabled' : ''}>← Trước</button>`;
-        
-        for (let i = 1; i <= totalPages; i++) {
-          paginationHtml += `<button onclick="changePage(${i})" style="border-color: ${i === page ? '#111' : '#eee'}; background: ${i === page ? '#111' : '#fff'}; color: ${i === page ? '#fff' : '#111'}; font-weight: ${i === page ? '700' : '400'};">${i}</button>`;
-        }
-        
+
+        getPageNumbers(page, totalPages).forEach(item => {
+          if (item === '...') {
+            paginationHtml += `<span style="padding: 8px 4px; color: #ccc;">…</span>`;
+          } else {
+            paginationHtml += `<button onclick="changePage(${item})" style="border-color: ${item === page ? '#111' : '#eee'}; background: ${item === page ? '#111' : '#fff'}; color: ${item === page ? '#fff' : '#111'}; font-weight: ${item === page ? '700' : '400'};">${item}</button>`;
+          }
+        });
+
         paginationHtml += `<button onclick="changePage(${page + 1})" ${page === totalPages ? 'disabled' : ''}>Sau →</button>`;
-        paginationHtml += `</div>`;
-        
+        paginationHtml += `</div></div>`;
+
         htmlContent += paginationHtml;
       }
 
       grid.innerHTML = htmlContent;
       window.scrollTo({ top: document.querySelector('.page-header').offsetTop, behavior: 'smooth' });
+    }
+
+    // Rút gọn danh sách số trang kiểu: 1 ... 4 5 [6] 7 8 ... 20 (tránh hiện cả trăm nút khi có nhiều trang)
+    function getPageNumbers(current, total) {
+      const delta = 2; // số trang hiện 2 bên trang hiện tại
+      const range = [];
+      for (let i = Math.max(2, current - delta); i <= Math.min(total - 1, current + delta); i++) {
+        range.push(i);
+      }
+      const result = [1];
+      if (range[0] > 2) result.push('...');
+      result.push(...range);
+      if (range[range.length - 1] < total - 1) result.push('...');
+      if (total > 1) result.push(total);
+      return [...new Set(result)];
     }
 
     function changePage(page) {
