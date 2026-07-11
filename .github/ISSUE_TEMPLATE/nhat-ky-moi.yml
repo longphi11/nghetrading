@@ -1,6 +1,6 @@
 name: "📊 Bài Nhật Ký Mới"
 description: "Đăng 1 bài phân tích Bitcoin/Vàng (từ TradingView) lên trang Nhật Ký Giao Dịch"
-title: " "
+title: "[Tiêu đề] "
 labels: ["nhat-ky-moi"]
 body:
   - type: markdown
