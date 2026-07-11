@@ -426,6 +426,16 @@ img { display: block; max-width: 100%; }
 }
 .btn-dark:hover { opacity: .8; }
 
+/* Nút "THAM GIA NGAY" của box Telegram (dùng thẻ <a>, không phải <button>) */
+.telegram-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
 .sidebar-quote {
   background: #f9f9f9;
   border-left: 2px solid var(--text);
