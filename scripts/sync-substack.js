@@ -12,6 +12,17 @@ const ROOT = path.join(__dirname, "..");
 const POSTS_DIR = path.join(ROOT, "posts");
 const DATA_FILE = path.join(ROOT, "data", "posts.json");
 const TEMPLATE_FILE = path.join(ROOT, "templates", "post-template.html");
+const OVERRIDES_FILE = path.join(ROOT, "data", "category-overrides.json");
+
+// Đọc bảng phân loại thủ công (nếu có). Dạng: { "slug-bai-viet": "Tâm Lý" }
+function loadCategoryOverrides() {
+  if (!fs.existsSync(OVERRIDES_FILE)) return {};
+  try {
+    return JSON.parse(fs.readFileSync(OVERRIDES_FILE, "utf-8"));
+  } catch {
+    return {};
+  }
+}
 
 const parser = new Parser({
   headers: {
@@ -62,28 +73,74 @@ function extractExcerpt(html, maxLen = 200) {
   return text.length > maxLen ? text.slice(0, maxLen).trim() + "..." : text;
 }
 
+async function fetchViaRss2Json() {
+  const url = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(FEED_URL)}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`status ${res.status}`);
+  const data = await res.json();
+  if (data.status !== "ok") throw new Error(data.message || "rss2json báo lỗi");
+  return {
+    items: data.items.map((item) => ({
+      title: item.title,
+      link: item.link,
+      pubDate: item.pubDate,
+      isoDate: item.pubDate,
+      categories: item.categories,
+      contentEncoded: item.content || item.description || "",
+      content: item.content || item.description || "",
+    })),
+  };
+}
+
 async function fetchFeed() {
-  // Thử gọi thẳng trước
+  // 1. Thử gọi thẳng trước
   try {
     return await parser.parseURL(FEED_URL);
   } catch (err) {
-    console.log(`Gọi thẳng thất bại (${err.message}), thử qua proxy...`);
+    console.log(`Gọi thẳng thất bại (${err.message}), thử qua rss2json...`);
   }
-  // Nếu bị chặn (403...), đi vòng qua proxy trung gian để lấy XML rồi tự parse
-  const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(FEED_URL)}`;
-  const res = await fetch(proxyUrl, {
-    headers: { "User-Agent": "Mozilla/5.0 (compatible; NgheTradingBot/1.0)" },
-  });
-  if (!res.ok) {
-    throw new Error(`Proxy cũng thất bại: status ${res.status}`);
+
+  // 2. Thử dịch vụ chuyên đọc RSS (thường vượt chặn tốt hơn proxy CORS thông thường)
+  try {
+    return await fetchViaRss2Json();
+  } catch (err) {
+    console.log(`rss2json thất bại (${err.message}), thử qua proxy CORS...`);
   }
-  const xml = await res.text();
-  return await parser.parseString(xml);
+
+  // 3. Danh sách proxy CORS dự phòng — thử lần lượt cho tới khi có cái chạy được
+  const proxies = [
+    (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+    (url) => `https://corsproxy.io/?url=${encodeURIComponent(url)}`,
+    (url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+  ];
+
+  let lastError;
+  for (const buildProxyUrl of proxies) {
+    const proxyUrl = buildProxyUrl(FEED_URL);
+    try {
+      console.log(`Đang thử proxy: ${proxyUrl}`);
+      const res = await fetch(proxyUrl, {
+        headers: { "User-Agent": "Mozilla/5.0 (compatible; NgheTradingBot/1.0)" },
+      });
+      if (!res.ok) throw new Error(`status ${res.status}`);
+      const xml = await res.text();
+      if (!xml || !xml.includes("<rss") && !xml.includes("<feed")) {
+        throw new Error("phản hồi không phải XML hợp lệ");
+      }
+      return await parser.parseString(xml);
+    } catch (err) {
+      console.log(`Proxy này thất bại: ${err.message}`);
+      lastError = err;
+    }
+  }
+
+  throw new Error(`Tất cả các cách lấy feed đều thất bại. Lỗi cuối cùng: ${lastError && lastError.message}`);
 }
 
 async function main() {
   console.log(`Đang lấy feed: ${FEED_URL}`);
   const feed = await fetchFeed();
+  const overrides = loadCategoryOverrides();
 
   // Đọc danh sách bài viết đã có
   let existingPosts = [];
@@ -104,7 +161,7 @@ async function main() {
     const contentHtml = item.contentEncoded || item.content || item.contentSnippet || "";
     const thumb = extractFirstImage(contentHtml) || "";
     const excerpt = extractExcerpt(contentHtml);
-    const category = (item.categories && item.categories[0]) || "Bài Viết";
+    const category = overrides[slug] || (item.categories && item.categories[0]) || "Chưa Phân Loại";
     const dateVN = formatDateVN(item.pubDate || item.isoDate);
 
     // Tạo trang bài viết từ template
@@ -131,6 +188,11 @@ async function main() {
     existingSlugs.add(slug);
     addedCount++;
   }
+
+  // Áp lại bảng phân loại thủ công cho cả những bài đã có sẵn (phòng khi bạn vừa sửa category-overrides.json)
+  existingPosts.forEach((p) => {
+    if (overrides[p.slug]) p.category = overrides[p.slug];
+  });
 
   // Sắp xếp mới nhất lên đầu, lưu lại
   existingPosts.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
