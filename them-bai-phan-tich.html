@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thêm Bài Phân Tích – Công cụ nội bộ</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/nhat-ky.css">
+<style>
+  .tool-wrap{ max-width:720px; margin:0 auto; padding:64px 24px 100px; font-family:var(--nk-font-body); }
+  .tool-wrap h1{ font-family:var(--nk-font-display); font-size:28px; margin-bottom:8px; }
+  .tool-wrap .hint{ color:var(--nk-ink-soft); font-size:14px; margin-bottom:36px; line-height:1.6; }
+  .field{ margin-bottom:20px; }
+  .field label{ display:block; font-family:var(--nk-font-mono); font-size:12px; letter-spacing:.05em; color:var(--nk-ink-soft); margin-bottom:6px; }
+  .field input, .field select, .field textarea{
+    width:100%; border:1px solid var(--nk-line); padding:10px 12px; font-family:var(--nk-font-body); font-size:15px; background:#fff;
+  }
+  .field textarea{ min-height:160px; resize:vertical; }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  button.generate{
+    font-family:var(--nk-font-mono); font-size:13px; letter-spacing:.05em; background:var(--nk-ink); color:#fff;
+    border:none; padding:12px 24px; cursor:pointer; margin-top:8px;
+  }
+  #output{ margin-top:32px; }
+  #output pre{ background:#0f0f0f; color:#eee; padding:20px; font-size:12.5px; overflow-x:auto; white-space:pre-wrap; }
+  .copy-btn{ margin-top:10px; font-family:var(--nk-font-mono); font-size:12px; background:none; border:1px solid var(--nk-ink); padding:8px 16px; cursor:pointer; }
+</style>
+</head>
+<body>
+<div class="tool-wrap">
+  <h1>Thêm Bài Phân Tích (từ TradingView)</h1>
+  <p class="hint">
+    Trang này KHÔNG public trên menu. Quy trình mỗi khi bạn đăng 1 Ý tưởng mới trên TradingView:<br>
+    1) Mở bài Ý tưởng trên TradingView → bấm nút <strong>Share (Chia sẻ) → Embed</strong> → copy đoạn mã được cung cấp.<br>
+    2) Dán đoạn mã đó + điền các thông tin bên dưới → bấm "Tạo mã JSON".<br>
+    3) Dán kết quả vào đầu mảng trong file <code>data/journal.json</code> → <code>git push</code>. Bài sẽ hiển thị đúng nguyên bản (chart + nội dung) ngay trên trang web của bạn, không chuyển hướng sang TradingView.
+  </p>
+
+  <div class="field">
+    <label>Tiêu đề bài viết</label>
+    <input id="f_title" placeholder="VD: BTC phá vùng kháng cự 65.000...">
+  </div>
+
+  <div class="row2">
+    <div class="field">
+      <label>Chủ đề</label>
+      <select id="f_tag">
+        <option value="bitcoin">Bitcoin (BTC/USD)</option>
+        <option value="vang">Vàng (XAU/USD)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Ngày đăng</label>
+      <input id="f_date" type="date">
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Số thứ tự nhật ký (entry_no)</label>
+    <input id="f_entry" type="number" placeholder="VD: 22 (bài trước là 21 thì bài này là 22)">
+  </div>
+
+  <div class="field">
+    <label>Link ảnh chart (upload ảnh chụp chart lên Imgur/Cloudinary rồi dán link tại đây)</label>
+    <input id="f_image" placeholder="https://...">
+  </div>
+
+  <div class="field">
+    <label>Tóm tắt ngắn (hiển thị ở ô box ngoài trang danh sách)</label>
+    <textarea id="f_excerpt" style="min-height:80px" placeholder="1-2 câu tóm tắt kèo phân tích"></textarea>
+  </div>
+
+  <div class="field">
+    <label>Mã Embed từ TradingView (Share → Embed trên bài Ý tưởng gốc)</label>
+    <textarea id="f_embed" placeholder='Dán nguyên đoạn mã TradingView đưa ra, dạng: <div class="tradingview-widget-container">...<script ...></script></div>'></textarea>
+  </div>
+
+  <div class="field">
+    <label>Ghi chú thêm bằng tiếng Việt (không bắt buộc — hiện phía dưới khung embed)</label>
+    <textarea id="f_content" style="min-height:100px" placeholder="Có thể để trống nếu không cần viết thêm gì ngoài nội dung đã có trên TradingView"></textarea>
+  </div>
+
+  <button class="generate" onclick="generateJSON()">Tạo mã JSON</button>
+
+  <div id="output" hidden>
+    <pre id="jsonResult"></pre>
+    <button class="copy-btn" onclick="copyResult()">Copy vào clipboard</button>
+  </div>
+</div>
+
+<script>
+function slugify(str, tag) {
+  const base = str.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd').replace(/[^a-z0-9\s-]/g, '')
+    .trim().replace(/\s+/g, '-').slice(0, 40);
+  return `${tag === 'bitcoin' ? 'btc' : 'xau'}-${base}`;
+}
+
+function generateJSON() {
+  const title = document.getElementById('f_title').value.trim();
+  const tag = document.getElementById('f_tag').value;
+  const date = document.getElementById('f_date').value;
+  const entry = document.getElementById('f_entry').value.trim();
+  const image = document.getElementById('f_image').value.trim();
+  const excerpt = document.getElementById('f_excerpt').value.trim();
+  const embedSnippet = document.getElementById('f_embed').value.trim();
+  const contentRaw = document.getElementById('f_content').value.trim();
+
+  const paragraphs = contentRaw.split(/\n\s*\n/).filter(Boolean)
+    .map(p => `<p>${p.replace(/\n/g, ' ').trim()}</p>`).join('');
+
+  const entryObj = {
+    id: slugify(title || 'bai-viet', tag) + '-' + (date || ''),
+    entry_no: entry ? Number(entry) : 0,
+    title: title,
+    tag: tag,
+    ticker: tag === 'bitcoin' ? 'BTC/USD' : 'XAU/USD',
+    date: date,
+    cover_image: image,
+    excerpt: excerpt,
+    embed_snippet: embedSnippet,
+    note_html: paragraphs
+  };
+
+  document.getElementById('jsonResult').textContent = JSON.stringify(entryObj, null, 2) + ',';
+  document.getElementById('output').hidden = false;
+}
+
+function copyResult() {
+  const text = document.getElementById('jsonResult').textContent;
+  navigator.clipboard.writeText(text);
+}
+</script>
+</body>
+</html>
