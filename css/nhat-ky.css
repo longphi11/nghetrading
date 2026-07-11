@@ -1,352 +1,194 @@
-/* ==========================================================================
-   NHẬT KÝ GIAO DỊCH — stylesheet riêng cho trang nhat-ky.html / phan-tich.html
-   Concept: đen trắng, tối giản, cảm hứng "sổ nhật ký giao dịch" (trading ledger).
-   Ghép chung với css/style.css hiện có của site — các biến màu bên dưới có thể
-   thay bằng biến gốc của bạn nếu style.css đã khai báo (vd: --color-bg, --color-ink).
-   ========================================================================== */
+/* ===========================================================
+   NHẬT KÝ GIAO DỊCH — style riêng cho nhat-ky.html & phan-tich.html
+   Kế thừa biến/màu/font gốc từ style.css (--black, --border, --muted,
+   --font-display, --font-body...). Không sửa gì trong style.css,
+   chỉ thêm phần riêng cho 2 trang này.
+   =========================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
-
-:root{
-  --nk-bg:        #ffffff;
-  --nk-ink:       #111111;
-  --nk-ink-soft:  #5a5a5a;
-  --nk-line:      #e2e2e2;
-  --nk-line-strong:#111111;
-  --nk-card-bg:   #fafafa;
-  --nk-font-display: 'Fraunces', Georgia, serif;
-  --nk-font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --nk-font-mono: 'IBM Plex Mono', 'SFMono-Regular', monospace;
+/* Mở rộng khung nội dung — giống hệt override trong bai-viet.html */
+.container {
+  max-width: 1320px !important;
+  width: 95%;
+  margin: 0 auto;
 }
 
-/* ---------- Layout helpers ---------- */
-.container{ max-width: 1140px; margin: 0 auto; padding: 0 24px; }
-
-/* ---------- Page hero ---------- */
-.page-hero{
-  border-bottom: 1px solid var(--nk-line);
-  padding: 72px 0 48px;
-  background: var(--nk-bg);
-}
-.page-hero .eyebrow{
-  font-family: var(--nk-font-mono);
-  font-size: 12px;
-  letter-spacing: .18em;
-  color: var(--nk-ink-soft);
-  display: inline-block;
-  margin-bottom: 18px;
-}
-.page-hero .eyebrow::before{ content:"— "; color:var(--nk-ink); }
-.page-hero h1{
-  font-family: var(--nk-font-display);
-  font-weight: 600;
-  font-size: clamp(32px, 4vw, 48px);
-  line-height: 1.15;
-  color: var(--nk-ink);
-  max-width: 780px;
-  margin: 0 0 18px;
-}
-.page-hero p{
-  font-family: var(--nk-font-body);
-  font-size: 17px;
-  line-height: 1.6;
-  color: var(--nk-ink-soft);
-  max-width: 640px;
-  margin: 0;
+@media (min-width: 901px) {
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 50px;
+    margin-top: 10px;
+  }
+  #journal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 35px;
+  }
 }
 
-/* ---------- Section / layout with sidebar ---------- */
-.journal-section{ padding: 56px 0 96px; }
-.layout-with-sidebar{
-  display: grid;
-  grid-template-columns: 1fr 260px;
-  gap: 56px;
-  align-items: start;
+.page-header { padding: 110px 0 65px 0 !important; text-align: center; }
+.page-header p {
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  color: #111111 !important;
+  line-height: 1.5;
+  max-width: 950px;
+  margin: 0 auto;
 }
 
-/* ---------- Toolbar (active filter label + count) ---------- */
-.journal-toolbar{
-  display:flex;
-  align-items:baseline;
-  justify-content:space-between;
-  border-bottom: 2px solid var(--nk-line-strong);
-  padding-bottom: 14px;
-  margin-bottom: 32px;
-}
-.journal-toolbar #activeFilterLabel{
-  font-family: var(--nk-font-display);
-  font-weight: 600;
-  font-size: 22px;
-  color: var(--nk-ink);
-}
-.journal-toolbar .result-count{
-  font-family: var(--nk-font-mono);
-  font-size: 12px;
-  color: var(--nk-ink-soft);
-  letter-spacing: .04em;
-}
-
-/* ---------- Grid of ledger cards ---------- */
-.journal-grid{
-  display:grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 28px 32px;
-}
-@media (max-width: 720px){
-  .journal-grid{ grid-template-columns: 1fr; }
-}
-
-.post-card{
-  border-top: 1px solid var(--nk-line-strong);
-  padding-top: 18px;
-}
-.post-card-link{
-  display:block;
-  text-decoration:none;
-  color: inherit;
-}
-.post-card-image{
-  width:100%;
-  aspect-ratio: 16/10;
-  overflow:hidden;
-  background: var(--nk-card-bg);
-  margin-bottom: 16px;
-  filter: grayscale(100%) contrast(1.05);
-}
-.post-card-image img{
-  width:100%; height:100%; object-fit: cover;
-  display:block;
-  transition: transform .5s ease;
-}
-.post-card-link:hover .post-card-image img{ transform: scale(1.04); }
-
-.post-card-meta{
-  display:flex;
-  align-items:center;
-  gap: 10px;
-  margin-bottom: 10px;
-  font-family: var(--nk-font-mono);
-  font-size: 11px;
-  letter-spacing: .05em;
-}
-.entry-no{ color: var(--nk-ink-soft); }
-.entry-no::before{ content:"№ "; }
-
-.post-tag{
-  font-family: var(--nk-font-mono);
-  font-size: 11px;
-  letter-spacing: .06em;
-  padding: 3px 9px;
-  border: 1px solid var(--nk-ink);
-  border-radius: 100px;
-}
-.post-tag.tag-bitcoin{ background: var(--nk-ink); color: #fff; }
-.post-tag.tag-vang{ background: transparent; color: var(--nk-ink); }
-
-.post-date{ color: var(--nk-ink-soft); margin-left:auto; }
-
-.post-title{
-  font-family: var(--nk-font-display);
-  font-size: 21px;
-  font-weight: 600;
-  line-height:1.32;
-  color: var(--nk-ink);
-  margin: 0 0 10px;
-}
-.post-excerpt{
-  font-family: var(--nk-font-body);
-  font-size: 14.5px;
-  line-height:1.6;
-  color: var(--nk-ink-soft);
-  margin: 0 0 14px;
-}
-.read-more{
-  font-family: var(--nk-font-mono);
-  font-size: 12px;
-  letter-spacing:.03em;
-  color: var(--nk-ink);
-  border-bottom: 1px solid var(--nk-ink);
-  padding-bottom: 2px;
-}
-
-.journal-empty{
-  grid-column: 1 / -1;
-  padding: 60px 0;
-  text-align:center;
-  font-family: var(--nk-font-body);
-  color: var(--nk-ink-soft);
-}
-
-/* ---------- Pagination ---------- */
-.pagination{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap: 6px;
-  margin-top: 56px;
-  font-family: var(--nk-font-mono);
-  font-size: 13px;
-}
-.pagination button{
-  min-width: 34px;
-  height: 34px;
-  border: 1px solid var(--nk-line);
+/* ===== Box bài viết (journal-card) — bản sao .blog-card của trang Bài Viết ===== */
+.journal-card {
+  padding: 0 0 24px 0 !important;
+  overflow: hidden;
   background: #fff;
-  color: var(--nk-ink);
-  cursor:pointer;
-  transition: all .15s ease;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
-.pagination button:hover:not(:disabled){ border-color: var(--nk-ink); }
-.pagination button.active{
-  background: var(--nk-ink);
-  color: #fff;
-  border-color: var(--nk-ink);
+.journal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.05);
 }
-.pagination button:disabled{ opacity:.3; cursor:default; }
-.pagination .dots{ padding: 0 4px; color: var(--nk-ink-soft); }
-
-/* ---------- Sidebar / tag filter ---------- */
-.journal-sidebar h3{
-  font-family: var(--nk-font-mono);
-  font-size: 12px;
-  letter-spacing: .14em;
-  color: var(--nk-ink-soft);
-  border-bottom: 2px solid var(--nk-line-strong);
-  padding-bottom: 12px;
-  margin: 0 0 16px;
-}
-.tag-list{ list-style:none; margin:0; padding:0; }
-.tag-list li{ border-bottom: 1px solid var(--nk-line); }
-.tag-btn{
-  width:100%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  background:none;
-  border:none;
-  font-family: var(--nk-font-body);
-  font-size: 15px;
-  color: var(--nk-ink-soft);
-  padding: 13px 2px;
-  cursor:pointer;
-  text-align:left;
-}
-.tag-btn:hover{ color: var(--nk-ink); }
-.tag-btn.active{ color: var(--nk-ink); font-weight:600; }
-.tag-btn.active::before{ content:"▸ "; }
-.tag-count{
-  font-family: var(--nk-font-mono);
-  font-size: 11px;
-  color: var(--nk-ink-soft);
-}
-
-.sidebar-note{
-  margin-top: 28px;
-  padding-top: 20px;
-  border-top: 1px solid var(--nk-line);
-  font-family: var(--nk-font-body);
-  font-size: 13px;
-  line-height:1.6;
-  color: var(--nk-ink-soft);
-}
-
-/* ==========================================================================
-   Trang chi tiết bài phân tích — phan-tich.html
-   ========================================================================== */
-.post-detail{ padding: 64px 0 100px; }
-.post-detail .back-link{
-  display:inline-block;
-  font-family: var(--nk-font-mono);
-  font-size: 12px;
-  letter-spacing:.04em;
-  color: var(--nk-ink-soft);
-  text-decoration:none;
-  margin-bottom: 28px;
-}
-.post-detail .back-link:hover{ color: var(--nk-ink); }
-
-.post-detail-header{
-  border-bottom: 1px solid var(--nk-line);
-  padding-bottom: 32px;
-  margin-bottom: 32px;
-}
-.post-detail-meta{
-  display:flex;
-  align-items:center;
-  gap: 12px;
-  font-family: var(--nk-font-mono);
-  font-size: 12px;
-  color: var(--nk-ink-soft);
-  margin-bottom: 18px;
-}
-.post-detail-title{
-  font-family: var(--nk-font-display);
-  font-size: clamp(28px, 3.6vw, 42px);
-  font-weight: 600;
-  line-height:1.2;
-  color: var(--nk-ink);
-  margin:0;
-}
-.post-detail-image{
-  width:100%;
-  aspect-ratio: 16/8;
-  overflow:hidden;
-  margin-bottom: 36px;
-  filter: grayscale(100%) contrast(1.05);
-}
-.post-detail-image img{ width:100%; height:100%; object-fit:cover; display:block; }
-
-/* Khung chứa mã Embed lấy từ TradingView (Share -> Embed của bài Ý tưởng) */
-.tv-embed-wrap{
+.journal-thumb {
   width: 100%;
-  min-height: 400px;
-  margin-bottom: 36px;
-  border: 1px solid var(--nk-line);
+  height: 220px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background: #f5f5f5;
+}
+.journal-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.journal-card:hover .journal-thumb img { transform: scale(1.05); }
+.journal-card .meta, .journal-card h2, .journal-card p, .journal-card .read-more {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.journal-card .meta {
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+.journal-card h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  margin: 0 0 12px 0;
+  line-height: 1.4;
+}
+.journal-card h2 a { color: #111; text-decoration: none; }
+.journal-card p {
+  color: #555;
+  font-size: 14.5px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.journal-card .read-more {
+  font-size: 13px;
+  font-weight: 500;
+  color: #111;
+  text-decoration: none;
+  border-bottom: 1px solid #111;
+}
+.journal-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #888;
+  padding: 40px 0;
 }
 
-.post-detail-body{
-  font-family: var(--nk-font-body);
-  font-size: 17px;
+/* ===== Phân trang — bản sao style trang Bài Viết ===== */
+.pagination button {
+  padding: 8px 16px;
+  border: 1px solid #eee;
+  background: #fff;
+  color: #111;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+.pagination button:hover:not(:disabled) { background: #f5f5f5; border-color: #111; }
+.pagination button:disabled { color: #ccc; cursor: not-allowed; border-color: #eee; }
+.pagination button.active { border-color: #111; background: #111; color: #fff; font-weight: 700; }
+
+/* ===== Danh sách CHỦ ĐỀ (lọc theo Bitcoin/Vàng) — bản sao .category-list ===== */
+.category-list { display: flex; flex-direction: column; gap: 2px; }
+.category-list button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 4px;
+  border: none;
+  border-bottom: 1px solid #f0f0f0;
+  background: none;
+  color: #444;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 13.5px;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+.category-list button:last-child { border-bottom: none; }
+.category-list button:hover { color: #111; padding-left: 8px; }
+.category-list button.active { color: #111; font-weight: 700; }
+.category-list .count { font-size: 11px; color: #aaa; font-weight: 400; }
+.category-list button.active .count { color: #111; }
+
+/* ===========================================================
+   Trang chi tiết — phan-tich.html
+   =========================================================== */
+.pt-header-section {
+  padding: 140px 0 30px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 40px;
+}
+.pt-back {
+  font-size: 12px;
+  color: var(--muted);
+  display: inline-block;
+  margin-bottom: 20px;
+}
+.pt-back:hover { color: var(--text); }
+.pt-meta {
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+}
+.pt-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.6vw, 42px);
+  line-height: 1.25;
+  color: var(--text);
+  max-width: 820px;
+}
+
+.pt-embed-wrap {
+  width: 100%;
+  min-height: 420px;
+  margin: 0 auto 40px;
+  max-width: 900px;
+  border: 1px solid var(--border);
+}
+.pt-body {
+  max-width: 780px;
+  margin: 0 auto 10px;
+  padding: 0 24px;
+  font-size: 16px;
   line-height: 1.8;
   color: #222;
-  max-width: 720px;
 }
-.post-detail-body p{ margin: 0 0 20px; }
-.post-detail-body ul{ margin: 0 0 20px; padding-left: 22px; }
-.post-detail-body li{ margin-bottom: 8px; }
-.post-detail-body strong{ color: var(--nk-ink); }
+.pt-body p { margin-bottom: 18px; }
+.pt-body ul { margin: 0 0 18px 22px; }
+.pt-body li { margin-bottom: 8px; }
+.pt-body strong { color: var(--text); }
 
-.post-detail-source{
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px solid var(--nk-line);
-  font-family: var(--nk-font-mono);
-  font-size: 12px;
-  color: var(--nk-ink-soft);
-}
-
-.related-posts{
-  margin-top: 72px;
-  padding-top: 32px;
-  border-top: 2px solid var(--nk-line-strong);
-}
-.related-posts h3{
-  font-family: var(--nk-font-mono);
-  font-size: 12px;
-  letter-spacing:.14em;
-  color: var(--nk-ink-soft);
-  margin: 0 0 24px;
-}
-.related-grid{
-  display:grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-@media (max-width: 800px){
-  .related-grid{ grid-template-columns: 1fr; }
-  .layout-with-sidebar{ grid-template-columns: 1fr; }
-  .journal-sidebar{ order:-1; }
-  .tag-list{ display:flex; flex-wrap:wrap; gap: 8px; }
-  .tag-list li{ border:none; }
-  .tag-btn{ border:1px solid var(--nk-line); padding:8px 14px; width:auto; }
+@media (max-width: 640px) {
+  .pt-header-section { padding: 100px 0 24px; }
 }
