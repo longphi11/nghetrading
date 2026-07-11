@@ -1,0 +1,100 @@
+name: Đồng bộ bài Nhật Ký Giao Dịch từ Issue
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  sync-journal:
+    if: contains(github.event.issue.labels.*.name, 'nhat-ky-moi')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Chạy script chèn bài vào journal.json
+        id: sync
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: node scripts/sync-journal.js
+        continue-on-error: true
+
+      # ----- TRƯỜNG HỢP THÀNH CÔNG -----
+      - name: Đọc kết quả
+        if: steps.sync.outcome == 'success'
+        id: result
+        run: |
+          echo "status=$(cat .sync-journal-result 2>/dev/null || echo unknown)" >> "$GITHUB_OUTPUT"
+          if [ -f .sync-journal-title ]; then
+            echo "title=$(cat .sync-journal-title)" >> "$GITHUB_OUTPUT"
+          fi
+          rm -f .sync-journal-result .sync-journal-title
+
+      - name: Commit & push
+        if: steps.sync.outcome == 'success' && steps.result.outputs.status == 'changed'
+        run: |
+          git config user.name "nghetrading-bot"
+          git config user.email "actions@github.com"
+          git add data/journal.json
+          git commit -m "Tự động thêm bài nhật ký: ${{ steps.result.outputs.title }} (#${{ github.event.issue.number }})"
+          git push
+
+      - name: Bình luận thành công & đóng issue
+        if: steps.sync.outcome == 'success' && steps.result.outputs.status == 'changed'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: "✅ Đã đăng bài thành công lên Nhật Ký Giao Dịch. Vercel sẽ deploy lại trong khoảng 30 giây, sau đó bài sẽ xuất hiện trên nhat-ky.html."
+            });
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: "closed"
+            });
+
+      - name: Bình luận nếu bài đã tồn tại (trùng)
+        if: steps.sync.outcome == 'success' && steps.result.outputs.status == 'unchanged'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: "⚠️ Bài này (cùng chủ đề + tiêu đề + ngày đăng) hình như đã có trong journal.json rồi nên mình không thêm trùng. Nếu đây thực sự là bài mới, hãy đổi nhẹ tiêu đề hoặc ngày rồi mở issue khác."
+            });
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: "closed"
+            });
+
+      # ----- TRƯỜNG HỢP LỖI (thiếu ô bắt buộc / sai định dạng ngày) -----
+      - name: Bình luận báo lỗi (không đóng issue)
+        if: steps.sync.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: "❌ Chưa đăng được — có ô bắt buộc bị thiếu hoặc Ngày đăng sai định dạng (cần đúng YYYY-MM-DD, ví dụ 2026-07-15).\n\nHãy sửa lại nội dung issue này (Edit) rồi mở 1 issue MỚI (issue cũ không tự chạy lại), hoặc báo cho admin kiểm tra log trong tab Actions."
+            });
