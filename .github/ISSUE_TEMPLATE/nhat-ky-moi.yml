@@ -1,14 +1,16 @@
 name: "📊 Bài Nhật Ký Mới"
 description: "Đăng 1 bài phân tích Bitcoin/Vàng (từ TradingView) lên trang Nhật Ký Giao Dịch"
-title: "[Tiêu đề] "
+title: "[Nhật Ký] "
 labels: ["nhat-ky-moi"]
 body:
   - type: markdown
     attributes:
       value: |
-        Điền form này sau khi bạn đã đăng bài trên TradingView và lấy mã Embed
-        (Share → Embed). Sau khi bấm "Submit new issue", 1 con robot sẽ tự động
-        chèn bài này vào trang Nhật Ký Giao Dịch trong khoảng 1 phút.
+        Điền form này sau khi bạn đã đăng bài trên TradingView. TradingView không
+        cho nhúng sống 1 bài Ý tưởng cụ thể, nên: chụp nhanh chart bằng icon 📷
+        (hoặc Alt+S) trên TradingView, upload lên imgur.com, rồi dán link ảnh + tự
+        gõ lại nội dung phân tích vào form dưới đây. Sau khi Submit, 1 con robot sẽ
+        tự động chèn bài này vào trang Nhật Ký Giao Dịch trong khoảng 1 phút.
 
   - type: dropdown
     id: chu-de
@@ -51,3 +53,17 @@ body:
     validations:
       required: true
 
+  - type: textarea
+    id: noi-dung
+    attributes:
+      label: "Nội dung phân tích đầy đủ (mỗi đoạn cách nhau 1 dòng trống)"
+    validations:
+      required: true
+
+  - type: input
+    id: link-goc
+    attributes:
+      label: "Link bài gốc trên TradingView (không bắt buộc)"
+      placeholder: "https://vn.tradingview.com/chart/XAUUSD/xxxxxxxx/"
+    validations:
+      required: false
