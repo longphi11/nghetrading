@@ -39,26 +39,8 @@ const observer = new IntersectionObserver((entries) => {
 
 fadeEls.forEach(el => observer.observe(el));
 
-// Email signup
-const signupBtn = document.querySelector('.btn-dark');
-const emailInput = document.querySelector('.signup-box input');
-if (signupBtn && emailInput) {
-  signupBtn.addEventListener('click', () => {
-    const email = emailInput.value.trim();
-    if (!email || !email.includes('@')) {
-      emailInput.style.borderColor = '#d93025';
-      emailInput.focus();
-      return;
-    }
-    emailInput.style.borderColor = '#22a047';
-    signupBtn.textContent = '✓ ĐÃ ĐĂNG KÝ';
-    signupBtn.disabled = true;
-    signupBtn.style.background = '#22a047';
-  });
-  emailInput.addEventListener('input', () => {
-    emailInput.style.borderColor = '';
-  });
-}
+// (Đã bỏ đoạn xử lý form đăng ký giả — ô "ĐĂNG KÝ NHẬN BÀI VIẾT" giờ dùng iframe
+// đăng ký thật của Substack, Substack tự xử lý toàn bộ phần lưu email và gửi mail.)
 
 // ===========================
 //  TIỆN ÍCH TRANG BÀI VIẾT
@@ -69,7 +51,7 @@ if (signupBtn && emailInput) {
 
 // ⚙️ Điền shortname Disqus của bạn vào đây sau khi đăng ký xong (xem hướng dẫn Claude gửi kèm).
 // Để trống ("") thì phần bình luận sẽ không hiển thị.
-const DISQUS_SHORTNAME = "nghetrading";
+const DISQUS_SHORTNAME = "";
 
 (async function initPostPageExtras() {
   const postBody = document.querySelector('.post-body');
