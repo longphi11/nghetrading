@@ -69,7 +69,7 @@ if (signupBtn && emailInput) {
 
 // ⚙️ Điền shortname Disqus của bạn vào đây sau khi đăng ký xong (xem hướng dẫn Claude gửi kèm).
 // Để trống ("") thì phần bình luận sẽ không hiển thị.
-const DISQUS_SHORTNAME = "";
+const DISQUS_SHORTNAME = "nghetrading";
 
 (async function initPostPageExtras() {
   const postBody = document.querySelector('.post-body');
