@@ -1,52 +1,5 @@
 [
-  {
-    "id": "btc-2026-11-11-test",
-    "entry_no": 22,
-    "title": "test",
-    "tag": "bitcoin",
-    "ticker": "BTC/USD",
-    "date": "2026-11-11",
-    "cover_image": "https://github.com/user-attachments/assets/b2b9bbc7-b997-4393-83ea-236407cb0367",
-    "excerpt": "<img width=\"582\" height=\"275\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/b2b9bbc7-b997-4393-83ea-236407cb0367\" />\n\ntest",
-    "content_html": "<p>test</p>",
-    "source_link": ""
-  },
-  {
-    "id": "btc-2026-07-10-breakout-65k",
-    "entry_no": 21,
-    "title": "BTC phá vùng kháng cự 65.000 — chờ retest trước khi vào lệnh",
-    "tag": "bitcoin",
-    "ticker": "BTC/USD",
-    "date": "2026-07-10",
-    "cover_image": "https://images.unsplash.com/photo-1621761191319-c6fb62004040?q=80&w=1200&auto=format&fit=crop",
-    "excerpt": "Giá phá vỡ vùng kháng cự 65.000 với volume tốt, nhưng chưa xác nhận retest. Kế hoạch: chờ giá quay lại test vùng breakout trước khi cân nhắc entry.",
-    "embed_snippet": "<!-- DÁN MÃ EMBED TỪ TRADINGVIEW VÀO ĐÂY (Share -> Embed trên bài Ý tưởng gốc) -->\n<!-- Ví dụ dạng: <div class=\"tradingview-widget-container\">...<script ...></script></div> -->\n<p style=\"font-family:var(--nk-font-mono);font-size:12px;color:var(--nk-ink-soft);border:1px dashed var(--nk-line);padding:16px;\">[Demo] Vị trí này sẽ hiển thị mã Embed TradingView của bài \"BTC phá vùng kháng cự 65.000 — chờ retest trước khi vào lệnh\" khi bạn dán vào.</p>",
-    "note_html": "<p>Bitcoin đã phá vỡ vùng kháng cự quan trọng quanh mốc 65.000 sau nhiều phiên tích lũy. Volume đi kèm cú breakout khá tốt, cho thấy lực mua đang chiếm ưu thế trong ngắn hạn.</p><p>Tuy nhiên, tôi chưa vội vào lệnh ở đây. Theo nguyên tắc quản trị rủi ro cá nhân, tôi ưu tiên chờ một nhịp retest về vùng breakout (quanh 64.200 - 64.800) để xác nhận vùng này chuyển vai trò từ kháng cự sang hỗ trợ trước khi cân nhắc entry Long.</p><p><strong>Kế hoạch giao dịch:</strong></p><ul><li>Vùng quan sát: 64.200 - 64.800</li><li>Điều kiện vào lệnh: xuất hiện nến xác nhận giữ vùng hỗ trợ trên khung H4</li><li>Stop loss: dưới đáy retest gần nhất</li><li>Mục tiêu: vùng kháng cự tiếp theo quanh 68.500</li></ul><p>Đây là một kèo theo xu hướng, không phải bắt đáy hay đoán đỉnh. Nếu giá không retest mà tiếp tục chạy thẳng, tôi chấp nhận đứng ngoài — thị trường không thiếu cơ hội.</p>"
-  },
-  {
-    "id": "xau-2026-07-08-vung-can-bang",
-    "entry_no": 20,
-    "title": "Vàng đi ngang tích lũy trong vùng cân bằng — chưa có tín hiệu rõ ràng",
-    "tag": "vang",
-    "ticker": "XAU/USD",
-    "date": "2026-07-08",
-    "cover_image": "https://images.unsplash.com/photo-1610375461369-d613b564f4c4?q=80&w=1200&auto=format&fit=crop",
-    "excerpt": "Giá vàng dao động trong biên độ hẹp nhiều phiên liên tiếp. Đây là giai đoạn quan sát, không phải giai đoạn hành động.",
-    "embed_snippet": "<!-- DÁN MÃ EMBED TỪ TRADINGVIEW VÀO ĐÂY (Share -> Embed trên bài Ý tưởng gốc) -->\n<!-- Ví dụ dạng: <div class=\"tradingview-widget-container\">...<script ...></script></div> -->\n<p style=\"font-family:var(--nk-font-mono);font-size:12px;color:var(--nk-ink-soft);border:1px dashed var(--nk-line);padding:16px;\">[Demo] Vị trí này sẽ hiển thị mã Embed TradingView của bài \"Vàng đi ngang tích lũy trong vùng cân bằng — chưa có tín hiệu rõ ràng\" khi bạn dán vào.</p>",
-    "note_html": "<p>Sau nhịp điều chỉnh từ vùng đỉnh, vàng hiện đang tích lũy đi ngang trong một biên độ khá hẹp. Cấu trúc giá chưa cho thấy phe mua hay phe bán chiếm ưu thế rõ ràng.</p><p>Với cấu trúc như hiện tại, tôi chọn đứng ngoài quan sát thay vì cố gắng đoán hướng đi tiếp theo. Giao dịch trong vùng sideway không rõ biên thường mang lại tỷ lệ R:R kém.</p><p><strong>Kịch bản theo dõi:</strong></p><ul><li>Nếu giá phá vỡ lên trên biên trên kèm volume: cân nhắc Long theo breakout</li><li>Nếu giá phá vỡ xuống dưới biên dưới: cân nhắc Short theo breakout</li><li>Nếu tiếp tục đi ngang: tiếp tục đứng ngoài</li></ul><p>Kỷ luật lớn nhất trong giai đoạn này là không giao dịch chỉ vì cảm thấy 'cần làm gì đó'.</p>"
-  },
-  {
-    "id": "btc-2026-07-05-elliott-wave-4",
-    "entry_no": 19,
-    "title": "Đếm sóng Elliott: BTC đang ở cuối sóng điều chỉnh (4)",
-    "tag": "bitcoin",
-    "ticker": "BTC/USD",
-    "date": "2026-07-05",
-    "cover_image": "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=1200&auto=format&fit=crop",
-    "excerpt": "Theo cấu trúc sóng Elliott trên khung ngày, nhịp giảm hiện tại nhiều khả năng là sóng điều chỉnh (4) trước khi bước vào sóng đẩy (5).",
-    "embed_snippet": "<!-- DÁN MÃ EMBED TỪ TRADINGVIEW VÀO ĐÂY (Share -> Embed trên bài Ý tưởng gốc) -->\n<!-- Ví dụ dạng: <div class=\"tradingview-widget-container\">...<script ...></script></div> -->\n<p style=\"font-family:var(--nk-font-mono);font-size:12px;color:var(--nk-ink-soft);border:1px dashed var(--nk-line);padding:16px;\">[Demo] Vị trí này sẽ hiển thị mã Embed TradingView của bài \"Đếm sóng Elliott: BTC đang ở cuối sóng điều chỉnh (4)\" khi bạn dán vào.</p>",
-    "note_html": "<p>Trên khung thời gian ngày, cấu trúc tăng giá của BTC từ đầu năm đang cho thấy hình thái 5 sóng đẩy khá rõ ràng. Nhịp giảm hiện tại, theo quan điểm cá nhân, nhiều khả năng là sóng điều chỉnh (4) dạng zigzag.</p><p>Đây là một nhận định mang tính xác suất, không phải dự đoán chắc chắn. Tôi luôn chuẩn bị kịch bản thay thế (alternate count) song song để tránh việc bám chặt vào một câu chuyện duy nhất.</p><p><strong>Vùng quan trọng cần theo dõi:</strong></p><ul><li>Vùng hỗ trợ Fibonacci 0.382 - 0.5 của sóng (3)</li><li>Nếu giá thủng sâu qua đáy sóng (1), toàn bộ đếm sóng cần được xem xét lại</li></ul><p>Tôi sẽ không vào lệnh chỉ dựa trên đếm sóng đơn thuần, mà cần thêm xác nhận từ hành động giá tại vùng hỗ trợ.</p>"
-  },
+
   {
     "id": "xau-2026-07-01-fomc-phan-ung",
     "entry_no": 18,
