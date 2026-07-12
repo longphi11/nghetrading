@@ -1,53 +1,6 @@
 [
 
-  {
-    "id": "xau-2026-07-01-fomc-phan-ung",
-    "entry_no": 18,
-    "title": "Vàng phản ứng thế nào sau phát biểu FOMC?",
-    "tag": "vang",
-    "ticker": "XAU/USD",
-    "date": "2026-07-01",
-    "cover_image": "https://images.unsplash.com/photo-1610375461246-83df859d849d?q=80&w=1200&auto=format&fit=crop",
-    "excerpt": "Ghi lại phản ứng của giá vàng quanh thời điểm công bố lãi suất, và bài học về việc không giao dịch trong vùng nhiễu tin tức.",
-    "embed_snippet": "<!-- DÁN MÃ EMBED TỪ TRADINGVIEW VÀO ĐÂY (Share -> Embed trên bài Ý tưởng gốc) -->\n<!-- Ví dụ dạng: <div class=\"tradingview-widget-container\">...<script ...></script></div> -->\n<p style=\"font-family:var(--nk-font-mono);font-size:12px;color:var(--nk-ink-soft);border:1px dashed var(--nk-line);padding:16px;\">[Demo] Vị trí này sẽ hiển thị mã Embed TradingView của bài \"Vàng phản ứng thế nào sau phát biểu FOMC?\" khi bạn dán vào.</p>",
-    "note_html": "<p>Đây là một bài ghi chép mang tính học tập nhiều hơn là một kèo giao dịch. Trong khung giờ công bố lãi suất, giá vàng biến động rất nhanh theo cả hai chiều trong vài phút đầu — điển hình của 'nhiễu tin tức' (news noise).</p><p>Bài học tôi tự rút ra cho bản thân: không cố gắng giao dịch trong 15-30 phút đầu sau tin quan trọng. Spread giãn rộng, thanh khoản không ổn định, và stop loss dễ bị quét bởi biến động giả.</p><p>Tôi chọn đứng ngoài hoàn toàn trong khung giờ tin, và chỉ quay lại đánh giá thị trường sau khi biến động ổn định trở lại.</p>"
-  },
-  {
-    "id": "btc-2026-06-28-quan-tri-von",
-    "entry_no": 17,
-    "title": "Ghi chú quản trị vốn: vì sao tôi cắt lệnh sớm ở kèo BTC tuần này",
-    "tag": "bitcoin",
-    "ticker": "BTC/USD",
-    "date": "2026-06-28",
-    "cover_image": "https://images.unsplash.com/photo-1642104704074-907c0698cbd9?q=80&w=1200&auto=format&fit=crop",
-    "excerpt": "Một lệnh Long BTC bị đóng sớm không phải vì chạm stop loss, mà vì điều kiện thị trường thay đổi so với kịch bản ban đầu.",
-    "embed_snippet": "<!-- DÁN MÃ EMBED TỪ TRADINGVIEW VÀO ĐÂY (Share -> Embed trên bài Ý tưởng gốc) -->\n<!-- Ví dụ dạng: <div class=\"tradingview-widget-container\">...<script ...></script></div> -->\n<p style=\"font-family:var(--nk-font-mono);font-size:12px;color:var(--nk-ink-soft);border:1px dashed var(--nk-line);padding:16px;\">[Demo] Vị trí này sẽ hiển thị mã Embed TradingView của bài \"Ghi chú quản trị vốn: vì sao tôi cắt lệnh sớm ở kèo BTC tuần này\" khi bạn dán vào.</p>",
-    "note_html": "<p>Tuần này tôi vào một lệnh Long BTC theo đúng kế hoạch, nhưng quyết định đóng lệnh sớm hơn dự kiến dù chưa chạm stop loss.</p><p>Lý do: cấu trúc giá không diễn biến đúng như kịch bản ban đầu. Khi 'lý do vào lệnh' không còn đúng nữa, việc giữ lệnh chỉ vì chưa lỗ là một sai lầm tâm lý phổ biến mà tôi từng mắc phải nhiều lần trước đây.</p><p>Đây là bài học về kỷ luật thoát lệnh chủ động, thay vì để thị trường quyết định thay mình thông qua stop loss.</p>"
-  },
-  {
-    "id": "xau-2026-06-24-mo-hinh-vai-dau-vai",
-    "entry_no": 16,
-    "title": "Vàng hình thành mô hình Vai - Đầu - Vai trên khung H4",
-    "tag": "vang",
-    "ticker": "XAU/USD",
-    "date": "2026-06-24",
-    "cover_image": "https://images.unsplash.com/photo-1610375229886-32f4fc3d7d97?q=80&w=1200&auto=format&fit=crop",
-    "excerpt": "Mô hình đảo chiều Vai - Đầu - Vai đang thành hình rõ nét trên khung H4, đường viền cổ (neckline) là vùng cần theo dõi sát.",
-    "embed_snippet": "<!-- DÁN MÃ EMBED TỪ TRADINGVIEW VÀO ĐÂY (Share -> Embed trên bài Ý tưởng gốc) -->\n<!-- Ví dụ dạng: <div class=\"tradingview-widget-container\">...<script ...></script></div> -->\n<p style=\"font-family:var(--nk-font-mono);font-size:12px;color:var(--nk-ink-soft);border:1px dashed var(--nk-line);padding:16px;\">[Demo] Vị trí này sẽ hiển thị mã Embed TradingView của bài \"Vàng hình thành mô hình Vai - Đầu - Vai trên khung H4\" khi bạn dán vào.</p>",
-    "note_html": "<p>Trên khung H4, giá vàng đang hình thành khá rõ mô hình Vai - Đầu - Vai (Head and Shoulders) sau một nhịp tăng kéo dài. Đường viền cổ (neckline) nằm quanh vùng hỗ trợ đã được test nhiều lần trước đó.</p><p><strong>Kế hoạch giao dịch:</strong></p><ul><li>Chờ giá phá vỡ và đóng nến dưới neckline</li><li>Entry Short khi có nhịp hồi test lại neckline (pullback)</li><li>Stop loss trên vai phải (right shoulder)</li><li>Mục tiêu đo bằng chiều cao mô hình chiếu xuống từ điểm phá vỡ</li></ul><p>Mô hình chỉ có giá trị khi được xác nhận bằng breakout thực sự — tôi không vào lệnh khi mô hình mới chỉ đang hình thành.</p>"
-  },
-  {
-    "id": "btc-2026-06-20-tam-ly-fomo",
-    "entry_no": 15,
-    "title": "Nhật ký tâm lý: đối diện với FOMO khi BTC tăng mạnh",
-    "tag": "bitcoin",
-    "ticker": "BTC/USD",
-    "date": "2026-06-20",
-    "cover_image": "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?q=80&w=1200&auto=format&fit=crop",
-    "excerpt": "Một bài ghi chép về tâm lý cá nhân khi đứng ngoài nhìn BTC tăng mạnh mà không có vị thế nào trong tay.",
-    "embed_snippet": "<!-- DÁN MÃ EMBED TỪ TRADINGVIEW VÀO ĐÂY (Share -> Embed trên bài Ý tưởng gốc) -->\n<!-- Ví dụ dạng: <div class=\"tradingview-widget-container\">...<script ...></script></div> -->\n<p style=\"font-family:var(--nk-font-mono);font-size:12px;color:var(--nk-ink-soft);border:1px dashed var(--nk-line);padding:16px;\">[Demo] Vị trí này sẽ hiển thị mã Embed TradingView của bài \"Nhật ký tâm lý: đối diện với FOMO khi BTC tăng mạnh\" khi bạn dán vào.</p>",
-    "note_html": "<p>BTC tăng gần 8% trong phiên hôm nay và tôi không có vị thế nào cả. Cảm giác FOMO (Fear Of Missing Out) xuất hiện rất rõ — cảm giác muốn nhảy vào lệnh Long ngay lập tức chỉ vì 'sợ bỏ lỡ'.</p><p>Tôi chọn viết lại cảm giác này thay vì hành động theo nó. Theo triết lý xác suất mà tôi theo đuổi, mỗi lệnh giao dịch chỉ nên được vào khi có lợi thế (edge) rõ ràng theo hệ thống, không phải vì cảm xúc tại thời điểm đó.</p><p>Không vào lệnh cũng là một quyết định giao dịch — và đôi khi đó là quyết định đúng đắn nhất.</p>"
-  },
+
   {
     "id": "xau-2026-06-15-tuong-quan-dxy",
     "entry_no": 14,
