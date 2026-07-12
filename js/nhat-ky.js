@@ -167,11 +167,20 @@ function initPostDetail() {
     <h1 class="pt-title">${post.title}</h1>
   `;
 
-  embedContainer.innerHTML = `<div class="pt-embed-wrap" id="tvEmbedWrap"></div>`;
-  injectEmbedHtml(document.getElementById('tvEmbedWrap'), post.embed_snippet || '');
+  // Form hiện tại dùng ảnh chụp chart (upload imgur) thay cho mã nhúng TradingView sống,
+  // nên hiển thị ảnh bìa lớn ở vị trí khung nhúng cũ — dùng đúng class .pt-hero-image có sẵn trong nhat-ky.css
+  if (embedContainer) {
+    embedContainer.innerHTML = post.cover_image
+      ? `<div class="pt-hero-image"><img src="${post.cover_image}" alt="${post.title}" onerror="this.src='https://placehold.co/1000x600?text=Nghề+Trading'"/></div>`
+      : '';
+  }
 
-  if (post.note_html) {
-    bodyContainer.innerHTML = `<div class="pt-body">${post.note_html}</div>`;
+  if (bodyContainer) {
+    let bodyHtml = post.content_html || '';
+    if (post.source_link) {
+      bodyHtml += `<p class="pt-source-link"><a href="${post.source_link}" target="_blank" rel="noopener noreferrer">Xem bài phân tích gốc trên TradingView →</a></p>`;
+    }
+    bodyContainer.innerHTML = bodyHtml ? `<div class="pt-body">${bodyHtml}</div>` : '';
   }
 
   shareContainer.innerHTML = buildShareHtml(post);
@@ -236,30 +245,4 @@ function renderRelated(current) {
       <div class="related-title">${p.title}</div>
     </a>
   `).join('');
-}
-
-// Chèn mã Embed TradingView và đảm bảo thẻ <script> bên trong được thực thi
-// (gán qua innerHTML thì trình duyệt KHÔNG tự chạy script, phải tạo lại thủ công)
-function injectEmbedHtml(container, html) {
-  if (!container || !html) return;
-  const temp = document.createElement('div');
-  temp.innerHTML = html;
-
-  Array.from(temp.childNodes).forEach(node => {
-    if (node.nodeType === 1 && node.tagName === 'SCRIPT') {
-      const script = document.createElement('script');
-      Array.from(node.attributes).forEach(attr => script.setAttribute(attr.name, attr.value));
-      script.text = node.textContent;
-      container.appendChild(script);
-    } else {
-      container.appendChild(node.cloneNode(true));
-    }
-  });
-
-  container.querySelectorAll('script').forEach(oldScript => {
-    const newScript = document.createElement('script');
-    Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
-    newScript.text = oldScript.textContent;
-    oldScript.replaceWith(newScript);
-  });
 }
