@@ -17,8 +17,8 @@ const LABELS = {
   date: "Ngày đăng (định dạng YYYY-MM-DD)",
   cover: "Link ảnh bìa (upload lên imgur.com rồi dán link vào đây)",
   excerpt: "Tóm tắt ngắn (1-2 câu, hiện ở box ngoài trang danh sách)",
-  embed: "Mã Embed từ TradingView (dán nguyên đoạn code từ Share → Embed)",
-  note: "Ghi chú thêm bằng tiếng Việt (không bắt buộc — mỗi đoạn cách nhau 1 dòng trống)",
+  content: "Nội dung phân tích đầy đủ (mỗi đoạn cách nhau 1 dòng trống)",
+  sourceLink: "Link bài gốc trên TradingView (không bắt buộc)",
 };
 
 function slugify(str) {
@@ -62,7 +62,8 @@ function toParagraphs(text) {
 
 function validate(fields) {
   const missing = [];
-  ["tag", "title", "date", "cover", "excerpt", "embed"].forEach((key) => {
+  // "sourceLink" không bắt buộc (validations.required: false trong yml) nên không kiểm tra ở đây
+  ["tag", "title", "date", "cover", "excerpt", "content"].forEach((key) => {
     if (!fields[LABELS[key]]) missing.push(LABELS[key]);
   });
   if (fields[LABELS.date] && !/^\d{4}-\d{2}-\d{2}$/.test(fields[LABELS.date])) {
@@ -88,8 +89,8 @@ function main() {
   const date = fields[LABELS.date];
   const cover_image = fields[LABELS.cover];
   const excerpt = fields[LABELS.excerpt];
-  const embed_snippet = fields[LABELS.embed];
-  const note_html = toParagraphs(fields[LABELS.note]);
+  const content_html = toParagraphs(fields[LABELS.content]);
+  const source_link = fields[LABELS.sourceLink] || "";
 
   let posts = [];
   if (fs.existsSync(DATA_FILE)) {
@@ -116,8 +117,8 @@ function main() {
     date,
     cover_image,
     excerpt,
-    embed_snippet,
-    note_html,
+    content_html,
+    source_link,
   };
 
   posts.unshift(entry);
