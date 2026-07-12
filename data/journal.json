@@ -1,5 +1,17 @@
 [
   {
+    "id": "btc-2026-11-11-test",
+    "entry_no": 22,
+    "title": "test",
+    "tag": "bitcoin",
+    "ticker": "BTC/USD",
+    "date": "2026-11-11",
+    "cover_image": "https://github.com/user-attachments/assets/b2b9bbc7-b997-4393-83ea-236407cb0367",
+    "excerpt": "<img width=\"582\" height=\"275\" alt=\"Image\" src=\"https://github.com/user-attachments/assets/b2b9bbc7-b997-4393-83ea-236407cb0367\" />\n\ntest",
+    "content_html": "<p>test</p>",
+    "source_link": ""
+  },
+  {
     "id": "btc-2026-07-10-breakout-65k",
     "entry_no": 21,
     "title": "BTC phá vùng kháng cự 65.000 — chờ retest trước khi vào lệnh",
