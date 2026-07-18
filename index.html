@@ -40,7 +40,26 @@
       </ul>
     </div>
   </nav>
-
+ <!-- 🤖 Ticker giá thị trường quốc tế (TradingView, miễn phí, chính chủ) -->
+  <div class="tradingview-widget-container">
+    <div class="tradingview-widget-container__widget"></div>
+    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+    {
+      "symbols": [
+        { "proName": "OANDA:XAUUSD", "title": "Vàng (XAU/USD)" },
+        { "proName": "TVC:USOIL", "title": "Dầu WTI" },
+        { "proName": "BINANCE:BTCUSDT", "title": "BTC/USDT" },
+        { "proName": "HOSE:VNINDEX", "title": "VN-Index" },
+        { "proName": "SP:SPX", "title": "S&P 500" }
+      ],
+      "showSymbolLogo": true,
+      "isTransparent": true,
+      "displayMode": "adaptive",
+      "colorTheme": "light",
+      "locale": "vi_VN"
+    }
+    </script>
+  </div>
   <!-- HERO -->
   <section class="hero">
     <div class="hero-content">
@@ -201,23 +220,20 @@
             <p>Bạn tham gia thị trường để KIẾM TIỀN, không phải để CHỨNG MINH mình THÔNG MINH.</p>
             <cite>— Trader Vô Danh</cite>
           </div>
-
-        <!-- 🤖 Giá vàng & Bitcoin real-time, tự cập nhật mỗi 60s (xem main.js) -->
+<!-- 🤖 Giá vàng PNJ & tỷ giá USD/VND (VCB), qua /api/market-vn (xem main.js) -->
           <div class="sidebar-stats" id="market-price-widget">
-            <h3>GIÁ THỊ TRƯỜNG</h3>
+            <h3>GIÁ TRONG NƯỚC</h3>
             <div class="stat-row">
-              <span>Vàng (XAU/USD)</span>
-              <strong id="price-gold">--</strong>
+              <span>Vàng PNJ 24K bán ra</span>
+              <strong><span id="price-gold-vnd">--</span><span class="price-arrow" id="price-gold-vnd-arrow"></span></strong>
             </div>
             <div class="stat-row">
-              <span>Bitcoin (BTC/USD)</span>
-              <strong id="price-btc">--</strong>
+              <span>USD/VND (VCB bán ra)</span>
+              <strong><span id="price-usd-vnd">--</span><span class="price-arrow" id="price-usd-vnd-arrow"></span></strong>
             </div>
-            <p id="price-updated" style="font-size:11px; color:#aaa; margin-top:10px;">Đang tải giá...</p>
+            <p id="price-vn-updated" style="font-size:11px; color:#aaa; margin-top:10px;">Đang tải giá...</p>
           </div>
         </aside>
-        </aside>
-
       </div>
     </div>
   </section>
