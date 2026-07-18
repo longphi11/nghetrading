@@ -487,7 +487,9 @@ img { display: block; max-width: 100%; }
 .stat-row strong { font-weight: 600; }
 .green { color: var(--green); }
 .red { color: var(--red); }
-
+.tradingview-widget-container {
+  margin-top: var(--nav-h);
+}
 /* ===== FOOTER ===== */
 .footer {
   background: var(--black);
