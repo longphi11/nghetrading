@@ -207,58 +207,59 @@ const DISQUS_SHORTNAME = "nghetrading";
   }
 })();
 // ===========================
-//  TRANG CHỦ: GIÁ VÀNG & BITCOIN TRỰC TIẾP
-//  Lấy giá real-time từ gold-api.com (miễn phí, không cần key, có CORS).
-//  Chỉ chạy trên trang có khung #market-price-widget (hiện tại là index.html).
+//  TRANG CHỦ: GIÁ VÀNG PNJ & TỶ GIÁ USD/VND (VCB)
+//  Lấy qua serverless function /api/market-vn (nguồn: VNAppMob API)
+//  Chỉ chạy trên trang có khung #market-price-widget.
 // ===========================
-(function initMarketPrices() {
+(function initVNMarketPrices() {
   const widget = document.getElementById('market-price-widget');
-  if (!widget) return; // không phải trang chủ, bỏ qua
+  if (!widget) return;
 
-  const goldEl = document.getElementById('price-gold');
-  const btcEl = document.getElementById('price-btc');
-  const updatedEl = document.getElementById('price-updated');
+  const goldEl = document.getElementById('price-gold-vnd');
+  const goldArrowEl = document.getElementById('price-gold-vnd-arrow');
+  const usdEl = document.getElementById('price-usd-vnd');
+  const usdArrowEl = document.getElementById('price-usd-vnd-arrow');
+  const updatedEl = document.getElementById('price-vn-updated');
   const lastPrices = {};
 
-  async function fetchPrice(symbol) {
-    const res = await fetch(`https://api.gold-api.com/price/${symbol}`);
-    if (!res.ok) throw new Error(`status ${res.status}`);
-    return res.json();
-  }
-
-  function formatUSD(value, decimals) {
-    return '$' + value.toLocaleString('en-US', {
-      minimumFractionDigits: decimals,
-      maximumFractionDigits: decimals
-    });
-  }
-
-  function applyTrend(el, symbol, price) {
-    const prev = lastPrices[symbol];
-    el.classList.remove('green', 'red');
+  function setArrow(el, key, price) {
+    const prev = lastPrices[key];
+    el.classList.remove('up', 'down');
+    el.textContent = '';
     if (prev !== undefined && price !== prev) {
-      el.classList.add(price > prev ? 'green' : 'red');
+      el.textContent = price > prev ? '▲' : '▼';
+      el.classList.add(price > prev ? 'up' : 'down');
     }
-    lastPrices[symbol] = price;
+    lastPrices[key] = price;
   }
 
-  async function updatePrices() {
+  function formatVND(value) {
+    return Math.round(value).toLocaleString('vi-VN') + ' đ';
+  }
+
+  async function updateVNPrices() {
     try {
-      const [gold, btc] = await Promise.all([fetchPrice('XAU'), fetchPrice('BTC')]);
+      const res = await fetch('/api/market-vn');
+      if (!res.ok) throw new Error('status ' + res.status);
+      const data = await res.json();
 
-      goldEl.textContent = formatUSD(gold.price, 2) + '/oz';
-      applyTrend(goldEl, 'XAU', gold.price);
-
-      btcEl.textContent = formatUSD(btc.price, 0);
-      applyTrend(btcEl, 'BTC', btc.price);
-
+      if (data.goldPNJ) {
+        const sell = data.goldPNJ.sell_hcm ?? data.goldPNJ.sell;
+        goldEl.textContent = formatVND(sell);
+        setArrow(goldArrowEl, 'gold', sell);
+      }
+      if (data.usdVCB) {
+        const sell = data.usdVCB.sell;
+        usdEl.textContent = formatVND(sell);
+        setArrow(usdArrowEl, 'usd', sell);
+      }
       updatedEl.textContent = `Cập nhật: ${new Date().toLocaleTimeString('vi-VN')}`;
     } catch (err) {
-      updatedEl.textContent = 'Không tải được giá, thử lại sau.';
-      console.error('Không tải được giá vàng/BTC:', err);
+      updatedEl.textContent = 'Không tải được dữ liệu, thử lại sau.';
+      console.error('Lỗi tải giá trong nước:', err);
     }
   }
 
-  updatePrices();
-  setInterval(updatePrices, 60000); // gold-api.com khuyến nghị cache 30s, 60s để an toàn
+  updateVNPrices();
+  setInterval(updateVNPrices, 300000); // 5 phút/lần — vàng/tỷ giá ngân hàng không đổi liên tục như quốc tế
 })();
