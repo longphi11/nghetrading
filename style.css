@@ -463,7 +463,17 @@ img { display: block; max-width: 100%; }
   font-style: normal;
   font-weight: 500;
 }
-
+.market-price-card {
+  border: 1px solid var(--border);
+  padding: 24px;
+}
+.market-price-card h3 {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  margin-bottom: 16px;
+  color: var(--text);
+}
 .sidebar-stats {
   border: 1px solid var(--border);
   padding: 24px;
