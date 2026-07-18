@@ -198,29 +198,24 @@
 
           <div class="sidebar-quote">
             <span class="quote-mark-dark">"</span>
-            <p>Thị trường không quan tâm bạn đúng hay sai. Thị trường chỉ trả tiền cho những ai quản lý rủi ro tốt.</p>
-            <cite>— Mark Douglas</cite>
+            <p>Bạn tham gia thị trường để KIẾM TIỀN, không phải để CHỨNG MINH mình THÔNG MINH.</p>
+            <cite>— Trader Vô Danh</cite>
           </div>
 
-          <div class="sidebar-stats">
-            <h3>THỐNG KÊ</h3>
+        <!-- 🤖 Giá vàng & Bitcoin real-time, tự cập nhật mỗi 60s (xem main.js) -->
+          <div class="sidebar-stats" id="market-price-widget">
+            <h3>GIÁ THỊ TRƯỜNG</h3>
             <div class="stat-row">
-              <span>Tổng giao dịch</span>
-              <strong>237</strong>
+              <span>Vàng (XAU/USD)</span>
+              <strong id="price-gold">--</strong>
             </div>
             <div class="stat-row">
-              <span>Win rate</span>
-              <strong class="green">62%</strong>
+              <span>Bitcoin (BTC/USD)</span>
+              <strong id="price-btc">--</strong>
             </div>
-            <div class="stat-row">
-              <span>Avg R/R</span>
-              <strong>1:2.4</strong>
-            </div>
-            <div class="stat-row">
-              <span>Total R tháng này</span>
-              <strong class="green">+8.7R</strong>
-            </div>
+            <p id="price-updated" style="font-size:11px; color:#aaa; margin-top:10px;">Đang tải giá...</p>
           </div>
+        </aside>
         </aside>
 
       </div>
