@@ -486,6 +486,7 @@ img { display: block; max-width: 100%; }
 .stat-row span { color: var(--muted); }
 .stat-row strong { font-weight: 600; }
 .green { color: var(--green); }
+.red { color: var(--red); }
 
 /* ===== FOOTER ===== */
 .footer {
