@@ -40,15 +40,16 @@
       </ul>
     </div>
   </nav>
- <!-- 🤖 Ticker giá thị trường quốc tế (TradingView, miễn phí, chính chủ) -->
+ <!-- 🤖 Ticker giá thị trường (TradingView, miễn phí, tự cập nhật) -->
   <div class="tradingview-widget-container">
     <div class="tradingview-widget-container__widget"></div>
     <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
     {
       "symbols": [
+        { "proName": "COINBASE:BTCUSD", "title": "Bitcoin (BTC/USD)" },
         { "proName": "OANDA:XAUUSD", "title": "Vàng (XAU/USD)" },
+        { "proName": "OANDA:XAGUSD", "title": "Bạc (XAG/USD)" },
         { "proName": "TVC:USOIL", "title": "Dầu WTI" },
-        { "proName": "BINANCE:BTCUSDT", "title": "BTC/USDT" },
         { "proName": "HOSE:VNINDEX", "title": "VN-Index" },
         { "proName": "SP:SPX", "title": "S&P 500" }
       ],
@@ -220,19 +221,7 @@
             <p>Bạn tham gia thị trường để KIẾM TIỀN, không phải để CHỨNG MINH mình THÔNG MINH.</p>
             <cite>— Trader Vô Danh</cite>
           </div>
-<!-- 🤖 Giá vàng PNJ & tỷ giá USD/VND (VCB), qua /api/market-vn (xem main.js) -->
-          <div class="sidebar-stats" id="market-price-widget">
-            <h3>GIÁ TRONG NƯỚC</h3>
-            <div class="stat-row">
-              <span>Vàng PNJ 24K bán ra</span>
-              <strong><span id="price-gold-vnd">--</span><span class="price-arrow" id="price-gold-vnd-arrow"></span></strong>
-            </div>
-            <div class="stat-row">
-              <span>USD/VND (VCB bán ra)</span>
-              <strong><span id="price-usd-vnd">--</span><span class="price-arrow" id="price-usd-vnd-arrow"></span></strong>
-            </div>
-            <p id="price-vn-updated" style="font-size:11px; color:#aaa; margin-top:10px;">Đang tải giá...</p>
-          </div>
+
         </aside>
       </div>
     </div>
