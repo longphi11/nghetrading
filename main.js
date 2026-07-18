@@ -206,3 +206,59 @@ const DISQUS_SHORTNAME = "nghetrading";
     console.error('Không tải được bài viết mới nhất cho trang chủ:', err);
   }
 })();
+// ===========================
+//  TRANG CHỦ: GIÁ VÀNG & BITCOIN TRỰC TIẾP
+//  Lấy giá real-time từ gold-api.com (miễn phí, không cần key, có CORS).
+//  Chỉ chạy trên trang có khung #market-price-widget (hiện tại là index.html).
+// ===========================
+(function initMarketPrices() {
+  const widget = document.getElementById('market-price-widget');
+  if (!widget) return; // không phải trang chủ, bỏ qua
+
+  const goldEl = document.getElementById('price-gold');
+  const btcEl = document.getElementById('price-btc');
+  const updatedEl = document.getElementById('price-updated');
+  const lastPrices = {};
+
+  async function fetchPrice(symbol) {
+    const res = await fetch(`https://api.gold-api.com/price/${symbol}`);
+    if (!res.ok) throw new Error(`status ${res.status}`);
+    return res.json();
+  }
+
+  function formatUSD(value, decimals) {
+    return '$' + value.toLocaleString('en-US', {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals
+    });
+  }
+
+  function applyTrend(el, symbol, price) {
+    const prev = lastPrices[symbol];
+    el.classList.remove('green', 'red');
+    if (prev !== undefined && price !== prev) {
+      el.classList.add(price > prev ? 'green' : 'red');
+    }
+    lastPrices[symbol] = price;
+  }
+
+  async function updatePrices() {
+    try {
+      const [gold, btc] = await Promise.all([fetchPrice('XAU'), fetchPrice('BTC')]);
+
+      goldEl.textContent = formatUSD(gold.price, 2) + '/oz';
+      applyTrend(goldEl, 'XAU', gold.price);
+
+      btcEl.textContent = formatUSD(btc.price, 0);
+      applyTrend(btcEl, 'BTC', btc.price);
+
+      updatedEl.textContent = `Cập nhật: ${new Date().toLocaleTimeString('vi-VN')}`;
+    } catch (err) {
+      updatedEl.textContent = 'Không tải được giá, thử lại sau.';
+      console.error('Không tải được giá vàng/BTC:', err);
+    }
+  }
+
+  updatePrices();
+  setInterval(updatePrices, 60000); // gold-api.com khuyến nghị cache 30s, 60s để an toàn
+})();
