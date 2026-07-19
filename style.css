@@ -571,6 +571,8 @@ img { display: block; max-width: 100%; }
   .market-price-card { display: none; }
    .hero-quote { display: none; }
   .sidebar-quote { display: none; }
+     #author-box { display: none; }
+  #email-signup-box { display: none; }
    #latest-articles-section { display: none; }
   .hamburger { display: flex; margin-left: auto; }
   .pillar-grid { flex-direction: column; }
