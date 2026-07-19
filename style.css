@@ -574,6 +574,26 @@ img { display: block; max-width: 100%; }
   .articles-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .hero-text h1 { font-size: 28px; }
+   /* 🤖 Tối ưu thêm cho điện thoại */
+  .container,
+  .nav-inner,
+  .hero-content { padding-left: 16px; padding-right: 16px; }
+
+  .hero-content { padding-top: 48px; padding-bottom: 56px; gap: 24px; }
+  .hero-text p { font-size: 14px; max-width: 100%; }
+
+  .pillar { padding: 24px 16px; gap: 14px; }
+
+  .content-section { padding: 40px 0 48px; }
+  .content-grid { gap: 32px; }
+
+  .sidebar-stats,
+  .market-price-card,
+  .signup-box { padding: 18px; }
+
+  .journal-table { min-width: 480px; }
+
+  .footer { padding: 40px 0 24px; }
 }
 
 /* scroll animation */
