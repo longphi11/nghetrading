@@ -23,7 +23,7 @@
 }
 
 html { scroll-behavior: smooth; }
-
+html, body { overflow-x: hidden; }
 body {
   font-family: var(--font-body);
   color: var(--text);
@@ -283,6 +283,7 @@ img { display: block; max-width: 100%; }
   gap: 48px;
   align-items: start;
 }
+.content-main { min-width: 0; }
 .section-header {
   display: flex;
   align-items: center;
