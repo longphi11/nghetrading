@@ -544,6 +544,15 @@ img { display: block; max-width: 100%; }
   letter-spacing: .08em;
   margin-bottom: 12px;
 }
+.qr-code {
+  display: block;
+  width: 180px;
+  height: 180px;
+  margin: 12px 0;
+  border: 1px solid var(--border);
+  padding: 8px;
+  background: #fff;
+}
 .payment-info-box ul {
   list-style: none;
   margin: 8px 0 0;
