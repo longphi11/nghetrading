@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đặt Lịch Cafe Tư Vấn 1-1 – Nghề Trading</title>
+  <meta name="description" content="Đặt lịch cafe trao đổi trực tiếp về chiến lược trading cùng Nghề Trading." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="navbar scrolled" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">NGHỀ TRADING</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Trang Chủ</a></li>
+        <li><a href="bai-viet.html">Bài Viết</a></li>
+        <li><a href="nhat-ky.html">Nhật Ký Giao Dịch</a></li>
+        <li><a href="he-thong.html">Hệ Thống</a></li>
+        <li><a href="gioi-thieu.html">Giới Thiệu</a></li>
+        <li><a href="tu-van.html" class="active">Cafe Tư Vấn</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="index.html">Trang Chủ</a></li>
+        <li><a href="bai-viet.html">Bài Viết</a></li>
+        <li><a href="nhat-ky.html">Nhật Ký Giao Dịch</a></li>
+        <li><a href="he-thong.html">Hệ Thống</a></li>
+        <li><a href="gioi-thieu.html">Giới Thiệu</a></li>
+        <li><a href="tu-van.html">Cafe Tư Vấn</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="container">
+      <p>Một buổi cafe 1-1, trao đổi thẳng thắn về chiến lược, tâm lý và những khó khăn cụ thể bạn đang gặp trên hành trình trading của mình.</p>
+    </div>
+  </header>
+
+  <section class="content-section">
+    <div class="container" style="max-width: 640px;">
+
+      <div class="section-header">
+        <h2>ĐĂNG KÝ CAFE TƯ VẤN 1-1</h2>
+      </div>
+
+      <form id="booking-form" action="https://formspree.io/f/xxxxxxxx" method="POST" class="booking-form">
+        <div class="form-row">
+          <label for="name">Họ và tên</label>
+          <input type="text" id="name" name="Họ và tên" required />
+        </div>
+        <div class="form-row">
+          <label for="phone">Số điện thoại</label>
+          <input type="tel" id="phone" name="Số điện thoại" required />
+        </div>
+        <div class="form-row">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="Email" required />
+        </div>
+        <div class="form-row">
+          <label for="city">Thành phố muốn hẹn</label>
+          <input type="text" id="city" name="Thành phố" placeholder="VD: Hà Nội, TP.HCM..." required />
+        </div>
+        <div class="form-row">
+          <label for="note">Bạn muốn trao đổi điều gì?</label>
+          <textarea id="note" name="Nội dung mong muốn trao đổi" rows="4" placeholder="VD: quản lý vốn, tâm lý giao dịch, xây dựng hệ thống..."></textarea>
+        </div>
+        <input type="hidden" name="_subject" value="Đăng ký cafe tư vấn 1-1 mới" />
+        <button type="submit" class="btn-primary">GỬI THÔNG TIN ĐĂNG KÝ</button>
+      </form>
+
+      <div class="payment-info-box">
+        <h3>THÔNG TIN CHUYỂN KHOẢN</h3>
+        <p>Phí tư vấn: <strong>[điền số tiền bạn muốn]</strong></p>
+        <ul>
+          <li>Chủ tài khoản: <strong>[Tên bạn]</strong></li>
+          <li>Số tài khoản: <strong>[Số tài khoản]</strong></li>
+          <li>Ngân hàng: <strong>[Tên ngân hàng]</strong></li>
+          <li>Nội dung CK: <strong>ghi đúng số điện thoại bạn vừa điền ở form trên</strong></li>
+        </ul>
+        <p style="font-size: 13px; color: var(--muted); margin-top: 12px;">
+          Sau khi nhận được chuyển khoản, tôi sẽ chủ động liên hệ qua số điện thoại/email bạn cung cấp trong vòng 24-48h để sắp xếp lịch hẹn cụ thể.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2026 NGHỀ TRADING. ALL RIGHTS RESERVED.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
