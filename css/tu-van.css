@@ -379,4 +379,6 @@
   .tv-pain-grid { grid-template-columns: 1fr; }
   .tv-reasons-grid { grid-template-columns: 1fr; }
   .tv-closing { padding: 60px 20px; }
+   .tv-process { flex-direction: column; align-items: stretch; gap: 32px; }
+  .tv-process-line { display: none; }
 }
