@@ -206,4 +206,41 @@ const DISQUS_SHORTNAME = "nghetrading";
     console.error('Không tải được bài viết mới nhất cho trang chủ:', err);
   }
 })();
+// ===========================
+//  BANNER NỔI "MỜI TÔI 1 CỐC CAFE"
+//  Chỉ hiện trên trang bài viết chi tiết (posts/*.html), trang danh sách
+//  bài viết (bai-viet.html) và trang Hệ Thống (he-thong.html).
+//  Hiện sau khi cuộn quá 400px, ở lại luôn đó cho tới khi bị đóng.
+// ===========================
+(function initFloatingCafeCTA() {
+  const isPostPage = !!document.querySelector('.post-body');
+  const isArticleListPage = location.pathname.endsWith('bai-viet.html');
+  const isSystemPage = location.pathname.endsWith('he-thong.html');
+  if (!isPostPage && !isArticleListPage && !isSystemPage) return;
 
+  if (sessionStorage.getItem('cafeCtaDismissed') === '1') return;
+
+  const widget = document.createElement('div');
+  widget.className = 'floating-cafe-cta';
+  widget.innerHTML = `
+    <button class="cafe-close" aria-label="Đóng">✕</button>
+    <span class="cafe-icon">☕</span>
+    <p>Mời tôi 1 cốc cafe, cùng trao đổi chiến lược trading 1-1</p>
+    <a href="tu-van.html" class="btn-primary">MỜI CAFE NGAY</a>
+  `;
+  document.body.appendChild(widget);
+
+  widget.querySelector('.cafe-close').addEventListener('click', () => {
+    widget.classList.remove('visible');
+    sessionStorage.setItem('cafeCtaDismissed', '1');
+  });
+
+  let shown = false;
+  window.addEventListener('scroll', () => {
+    if (shown) return;
+    if (window.scrollY > 400) {
+      widget.classList.add('visible');
+      shown = true;
+    }
+  });
+})();
