@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Đặt Lịch Cafe Tư Vấn 1-1 – Nghề Trading</title>
-  <meta name="description" content="Đặt lịch cafe trao đổi trực tiếp về chiến lược trading cùng Nghề Trading." />
+  <title>Cafe Tư Vấn Trading 1-1 – Nghề Trading</title>
+  <meta name="description" content="Một buổi cafe 1-1, trao đổi thẳng thắn về chiến lược, tâm lý và những khó khăn cụ thể trên hành trình trading của bạn." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/tu-van.css" />
 </head>
 <body>
 
@@ -20,9 +21,8 @@
         <li><a href="bai-viet.html">Tư Duy Gốc</a></li>
         <li><a href="nhat-ky.html">Nhật Ký Giao Dịch</a></li>
         <li><a href="he-thong.html">Hệ Thống</a></li>
-           <li><a href="tu-van.html" class="active">Mời Tôi 1 Cốc Cafe</a></li>
+        <li><a href="tu-van.html" class="active">Mời Tôi 1 Cốc Cafe</a></li>
         <li><a href="gioi-thieu.html">Giới Thiệu</a></li>
-     
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
@@ -34,72 +34,170 @@
         <li><a href="bai-viet.html">Tư Duy Gốc</a></li>
         <li><a href="nhat-ky.html">Nhật Ký Giao Dịch</a></li>
         <li><a href="he-thong.html">Hệ Thống</a></li>
-            <li><a href="tu-van.html">Mời Tôi 1 Cốc Cafe</a></li>
+        <li><a href="tu-van.html">Mời Tôi 1 Cốc Cafe</a></li>
         <li><a href="gioi-thieu.html">Giới Thiệu</a></li>
-    
       </ul>
     </div>
   </nav>
 
-  <header class="page-header">
-    <div class="container">
-      <p>Một buổi cafe 1-1, trao đổi thẳng thắn về chiến lược, tâm lý và những khó khăn cụ thể bạn đang gặp trên hành trình trading của mình.</p>
-    </div>
-  </header>
+  <main class="tv">
 
-  <section class="content-section">
-    <div class="container" style="max-width: 640px;">
-
-      <div class="section-header">
-        <h2>ĐĂNG KÝ CAFE TƯ VẤN 1-1</h2>
+    <!-- ===== HERO ===== -->
+    <section class="tv-hero">
+      <div class="tv-hero-bg" aria-hidden="true"></div>
+      <div class="tv-container tv-hero-inner">
+        <div class="tv-hero-text">
+          <span class="tv-eyebrow">CAFE TƯ VẤN TRADING 1-1</span>
+          <h1>Hãy coi trading là một<br /><em>nghề nghiệp nghiêm túc</em><br />đừng coi nó như trò may rủi.</h1>
+          <p>Một buổi cafe, ngồi lại cùng nhau, nhìn thẳng vào những gì đang cản bạn kiếm tiền ổn định từ thị trường — không giáo trình chung chung, không hội thảo đông người.</p>
+          <a href="#dang-ky" class="tv-btn tv-btn-primary">ĐẶT LỊCH CAFE NGAY →</a>
+        </div>
+        <div class="tv-hero-card">
+          <svg class="tv-mark" width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <path d="M6 14c8 6 20 6 28 0" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+            <path d="M9 20l6-9 5 6 5-11 6 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <div class="tv-hero-card-big">1-1</div>
+          <p>Chỉ bạn và tôi.<br />Không đám đông, không đại trà.</p>
+        </div>
       </div>
+    </section>
 
-      <form id="booking-form" action="https://formspree.io/f/xdaqwdvz" method="POST" class="booking-form">
-        <div class="form-row">
-          <label for="name">Họ và tên</label>
-          <input type="text" id="name" name="Họ và tên" required />
-        </div>
-        <div class="form-row">
-          <label for="phone">Số điện thoại</label>
-          <input type="tel" id="phone" name="Số điện thoại" required />
-        </div>
-        <div class="form-row">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="Email" required />
-        </div>
-        <div class="form-row">
-          <label for="city">Thành phố muốn hẹn</label>
-          <input type="text" id="city" name="Thành phố" placeholder="VD: Hà Nội, TP.HCM..." required />
-        </div>
-        <div class="form-row">
-          <label for="note">Bạn muốn trao đổi điều gì?</label>
-          <textarea id="note" name="Nội dung mong muốn trao đổi" rows="4" placeholder="VD: quản lý vốn, tâm lý giao dịch, xây dựng hệ thống..."></textarea>
-        </div>
-        <input type="hidden" name="_subject" value="Đăng ký cafe tư vấn 1-1 mới" />
-        <button type="submit" class="btn-primary">GỬI THÔNG TIN ĐĂNG KÝ</button>
-      </form>
+    <!-- ===== NỖI ĐAU + LÝ DO ===== -->
+    <section class="tv-section">
+      <div class="tv-container">
+        <span class="tv-eyebrow tv-eyebrow-dark">BẠN CÓ ĐANG GẶP PHẢI?</span>
+        <h2 class="tv-h2">6 lý do khiến phần lớn trader<br />chưa kiếm được tiền ổn định</h2>
 
-      <div class="payment-info-box">
-        <h3>THÔNG TIN CHUYỂN KHOẢN</h3>
-        <p>Phí tư vấn: <strong>10 USDT</strong></p>
-        <ul>
-          <li>Địa chỉ ví: <strong>0x40b2E60ad1E5657278c8dC6c533d2Bd1470017b9</strong></li>
-          <li>Mạng lưới: <strong>BEP20</strong></li>
+        <div class="tv-pain-grid">
+          <div class="tv-pain-card">
+            <span class="tv-num">1</span>
+            <p>Tư duy cờ bạc — vào lệnh vì cảm giác "chắc ăn", không phải vì lợi thế thống kê.</p>
+          </div>
+          <div class="tv-pain-card">
+            <span class="tv-num">2</span>
+            <p>Không quản lý được vốn — vào lệnh với khối lượng tuỳ hứng, không tính risk trước.</p>
+          </div>
+          <div class="tv-pain-card">
+            <span class="tv-num">3</span>
+            <p>Không quản lý được tâm lý giao dịch — dễ FOMO, dễ gồng lỗ, dễ chốt lời non.</p>
+          </div>
+          <div class="tv-pain-card">
+            <span class="tv-num">4</span>
+            <p>Không có hệ thống giao dịch rõ ràng — mỗi lệnh vào theo một "cảm nhận" khác nhau.</p>
+          </div>
+          <div class="tv-pain-card">
+            <span class="tv-num">5</span>
+            <p>Không ghi và đánh giá lại lệnh — thua ở đâu cũng không biết, thắng cũng không hiểu vì sao.</p>
+          </div>
+          <div class="tv-pain-card">
+            <span class="tv-num">6</span>
+            <p>Mất phương hướng sau chuỗi lệnh thua — hoặc bỏ cuộc, hoặc gồng gánh trả thù thị trường.</p>
+          </div>
+        </div>
+
+        <div class="tv-reasons">
+          <h3 class="tv-h3">Sau buổi tư vấn, bạn sẽ có được</h3>
+          <div class="tv-reasons-grid">
+            <div class="tv-reason-card">
+              <span class="tv-reason-icon">◆</span>
+              <h4>Nhìn đúng gốc rễ</h4>
+              <p>Không phải lý thuyết chung chung, mà đúng vấn đề đang cản trở riêng bạn.</p>
+            </div>
+            <div class="tv-reason-card">
+              <span class="tv-reason-icon">◆</span>
+              <h4>Lộ trình riêng cho bạn</h4>
+              <p>Phù hợp với vốn, thời gian và tính cách giao dịch của chính bạn — không rập khuôn.</p>
+            </div>
+            <div class="tv-reason-card">
+              <span class="tv-reason-icon">◆</span>
+              <h4>Có người đồng hành</h4>
+              <p>Không tự mò mẫm một mình — có người cùng nhìn lại và chịu trách nhiệm với bạn.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tv-cta-mid">
+          <p>Nếu bạn thấy mình trong ít nhất 2 điều ở trên —</p>
+          <a href="#dang-ky" class="tv-btn tv-btn-primary">ĐĂNG KÝ BUỔI CAFE CỦA BẠN ↓</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TÁC GIẢ ===== -->
+    <section class="tv-author">
+      <div class="tv-container tv-author-inner">
+        <div class="tv-author-side">
+          <span class="tv-eyebrow">NGƯỜI ĐỒNG HÀNH CÙNG BẠN</span>
+          <h2 class="tv-h2" style="color:#fff;">Neo — Nghề Trading</h2>
+        </div>
+        <ul class="tv-author-list">
+          <li>Theo đuổi trading như một nghề nghiệp nghiêm túc, không phải một canh bạc đổi đời.</li>
+          <li>Đã tự trải qua đủ giai đoạn: cháy tài khoản vì tư duy cờ bạc, rồi xây lại từ quản trị vốn và tâm lý.</li>
+          <li>Xây dựng Nghề Trading để ghi lại đúng những gì thật sự hiệu quả — không phải để bán giấc mơ làm giàu nhanh.</li>
+          <li>Tin rằng phần lớn trader thua lỗ không phải vì thiếu chỉ báo, mà vì thiếu người chỉ ra đúng điểm mù của chính họ.</li>
         </ul>
-         <p style="font-size: 13px; color: var(--muted); margin-top: 12px;">
-          ⚠️ Vui lòng kiểm tra đúng mạng lưới trước khi chuyển — gửi sai mạng có thể mất tiền vĩnh viễn.
-        </p>
-        <p style="font-size: 13px; color: var(--muted); margin-top: 8px;">
-         Sau khi chuyển khoản, vui lòng chụp lại màn hình giao dịch và gửi trực tiếp qua Telegram cá nhân
-          <a href="https://t.me/longphibtc" target="_blank" rel="noopener noreferrer">@longphibtc</a>
-          kèm số điện thoại bạn đã đăng ký để tôi xác nhận nhanh nhất. Tôi sẽ chủ động liên hệ lại trong vòng 24-48h.
-        </p>
-       <p style="font-size: 15px; font-weight: 800; margin-top: 20px; margin-bottom: 5px;">Quét mã QR để chuyển USDT:</p>
-        <img src="https://i.ibb.co/s7LB8Gm/photo-2026-07-24-11-57-28.jpg" alt="QR ví USDT nhận thanh toán" class="qr-code" />
       </div>
+    </section>
 
-    </div>
-  </section>
+    <!-- ===== ĐĂNG KÝ ===== -->
+    <section class="tv-section" id="dang-ky">
+      <div class="tv-container">
+        <span class="tv-eyebrow tv-eyebrow-dark">BƯỚC CUỐI CÙNG</span>
+        <h2 class="tv-h2">Đăng ký buổi cafe tư vấn 1-1</h2>
+
+        <div class="tv-register-grid">
+          <form id="booking-form" action="https://formspree.io/f/xdaqwdvz" method="POST" class="tv-form">
+            <div class="tv-form-row">
+              <label for="name">Họ và tên</label>
+              <input type="text" id="name" name="Họ và tên" required />
+            </div>
+            <div class="tv-form-row">
+              <label for="phone">Số điện thoại</label>
+              <input type="tel" id="phone" name="Số điện thoại" required />
+            </div>
+            <div class="tv-form-row">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="Email" required />
+            </div>
+            <div class="tv-form-row">
+              <label for="note">Bạn muốn trao đổi điều gì?</label>
+              <textarea id="note" name="Nội dung mong muốn trao đổi" rows="3" placeholder="VD: quản lý vốn, tâm lý giao dịch, xây dựng hệ thống..."></textarea>
+            </div>
+            <input type="hidden" name="_subject" value="Đăng ký cafe tư vấn 1-1 mới" />
+            <button type="submit" class="tv-btn tv-btn-primary tv-btn-block">GỬI THÔNG TIN ĐĂNG KÝ</button>
+          </form>
+
+          <div class="tv-payment">
+            <h3>THÔNG TIN THANH TOÁN (USDT)</h3>
+            <p class="tv-payment-fee">10 <span>USDT</span></p>
+            <ul>
+              <li><span>Địa chỉ ví</span><strong>0x40b2...017b9</strong></li>
+              <li><span>Mạng lưới</span><strong>BEP20</strong></li>
+            </ul>
+            <p class="tv-payment-warn">⚠️ Kiểm tra đúng mạng lưới trước khi chuyển — gửi sai mạng có thể mất tiền vĩnh viễn.</p>
+            <img src="https://i.ibb.co/s7LB8Gm/photo-2026-07-24-11-57-28.jpg" alt="QR ví USDT nhận thanh toán" class="tv-qr" />
+            <p class="tv-payment-note">
+              Sau khi chuyển khoản, chụp lại màn hình giao dịch và gửi qua Telegram
+              <a href="https://t.me/longphibtc" target="_blank" rel="noopener noreferrer">@longphibtc</a>
+              kèm số điện thoại đã đăng ký. Tôi sẽ chủ động liên hệ lại trong vòng 24-48h.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BANNER KẾT ===== -->
+    <section class="tv-closing">
+      <svg class="tv-mark tv-mark-big" width="56" height="56" viewBox="0 0 40 40" fill="none">
+        <path d="M6 14c8 6 20 6 28 0" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M9 20l6-9 5 6 5-11 6 12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+      <h2>Hẹn gặp bạn tại buổi tư vấn<br />sẽ thay đổi góc nhìn của bạn về trading.</h2>
+      <a href="#dang-ky" class="tv-btn tv-btn-gold">ĐĂNG KÝ NGAY →</a>
+    </section>
+
+  </main>
 
   <footer class="footer">
     <div class="container">
