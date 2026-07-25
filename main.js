@@ -216,6 +216,7 @@ const DISQUS_SHORTNAME = "nghetrading";
   const isPostPage = !!document.querySelector('.post-body');
   const isArticleListPage = location.pathname.endsWith('bai-viet.html');
   const isSystemPage = location.pathname.endsWith('he-thong.html');
+   const isSystemPage = location.pathname.endsWith('nhat-ky.html');
   if (!isPostPage && !isArticleListPage && !isSystemPage) return;
 
   if (sessionStorage.getItem('cafeCtaDismissed') === '1') return;
