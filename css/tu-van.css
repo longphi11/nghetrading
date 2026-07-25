@@ -324,7 +324,48 @@
   line-height: 1.4;
   margin-bottom: 32px;
 }
-
+/* ---- QUY TRÌNH SAU CHUYỂN KHOẢN ---- */
+.tv-process {
+  display: flex;
+  align-items: flex-start;
+}
+.tv-process-step {
+  flex: 1;
+  text-align: center;
+  padding: 0 16px;
+}
+.tv-process-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--tv-espresso);
+  color: var(--tv-gold);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+.tv-process-step h4 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--tv-espresso);
+  margin-bottom: 8px;
+}
+.tv-process-step p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--tv-espresso-soft);
+}
+.tv-process-line {
+  flex: 0 0 auto;
+  width: 60px;
+  height: 1px;
+  background: rgba(43,27,18,.2);
+  margin-top: 24px;
+}
 /* ---- RESPONSIVE ---- */
 @media (max-width: 900px) {
   .tv-hero-inner { grid-template-columns: 1fr; }
