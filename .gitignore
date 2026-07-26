@@ -1,0 +1,4 @@
+node_modules/
+.sync-result
+.journal-sync-result
+.DS_Store

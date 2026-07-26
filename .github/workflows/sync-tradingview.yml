@@ -1,0 +1,42 @@
+name: Đồng bộ bài viết từ TradingView
+
+on:
+  schedule:
+    # Tự động quét & đồng bộ bài mới từ TradingView mỗi 5 phút
+    - cron: "*/5 * * * *"
+  workflow_dispatch: {} # Cho phép bấm "Run workflow" thủ công trên GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Cài đặt rss-parser
+        run: npm install rss-parser
+
+      - name: Chạy script đồng bộ TradingView
+        run: node scripts/sync-tradingview.js
+        env:
+          TRADINGVIEW_USERNAME: "longphibtc"
+
+      - name: Commit & push nếu có bài mới
+        run: |
+          if [ "$(cat .journal-sync-result)" = "changed" ]; then
+            git config user.name "tradingview-sync-bot"
+            git config user.email "actions@github.com"
+            git add data/journal.json
+            git commit -m "🤖 Tự động đồng bộ bài nhật ký phân tích mới từ TradingView"
+            git push
+          else
+            echo "Không có bài phân tích mới, bỏ qua commit."
+          fi
