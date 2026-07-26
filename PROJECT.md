@@ -1,66 +1,51 @@
-# NGHỀ TRADING
+# PROJECT
 
-## Mục tiêu
+Tên:
 
-Xây dựng website Nghề Trading trở thành nơi lưu trữ:
+Nghề Trading
 
-- Bài viết
-- Nhật ký giao dịch
-- Hệ thống giao dịch
-- Góc nhìn về Trading
+Domain:
 
-Website được xây dựng theo hướng đơn giản, dễ quản lý và có thể mở rộng trong tương lai.
+nghetrading.com
 
----
+## Định vị
 
-# Cấu trúc Project
+Website chia sẻ kiến thức giao dịch.
 
-/
-│
-├── css/
-├── js/
-├── data/
-├── images/
-├── posts/
-│
-├── index.html
-├── bai-viet.html
-├── gioi-thieu.html
-├── nhat-ky.html
-├── he-thong.html
+Không bán tín hiệu.
 
----
+Không hứa hẹn làm giàu.
 
-# Quy tắc
+Không quảng cáo quá mức.
 
-- Không sửa trực tiếp trên main nếu đang phát triển tính năng lớn.
-- Mỗi Sprint chỉ thực hiện một mục tiêu.
-- Sau mỗi Sprint phải kiểm tra website trên Vercel.
+## Đối tượng
 
----
+Trader mới.
 
-# Roadmap
+Trader đã giao dịch nhiều năm.
 
-Sprint 1
+Người muốn học tư duy.
 
-- Chuẩn hóa Project
+## Phong cách
 
-Sprint 2
+Đơn giản.
 
-- Thiết kế lại Nhật ký giao dịch
+Đáng tin.
 
-Sprint 3
+Tinh tế.
 
-- Journal JSON
+Giống Apple.
 
-Sprint 4
+Giống Stripe.
 
-- Articles JSON
+Giống Linear.
 
-Sprint 5
+## Tone
 
-- TradingView Integration
+Điềm tĩnh.
 
-Sprint 6
+Chuyên nghiệp.
 
-- Google Sheets CMS
+Ít màu sắc.
+
+Không khoa trương.
