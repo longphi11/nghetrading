@@ -66,10 +66,11 @@ Không thêm animation nặng.
 
 Đảm bảo Console sạch lỗi.
 
-## Quy trình làm việc & Git
+## Quy trình làm việc & Git (Local-First)
 
 - Kiểm tra kĩ Responsive trên Mobile, Tablet, Desktop trước khi bàn giao.
-- Tự động commit với thông điệp rõ ràng và push lên GitHub sau mỗi công việc hoàn thành.
+- Sau khi hoàn thành code local: Mời người dùng kiểm tra bản Local (trên Live Server/Trình duyệt).
+- CHỈ thực hiện commit và push lên GitHub sau khi người dùng đã xem và duyệt bản Local thành công.
 - Chuẩn hóa cấu trúc dữ liệu bài viết (JSON / Templates) để dễ mở rộng.
 - Chủ động cập nhật file .md quy tắc khi có chỉ thị hoặc phản hồi mới từ người dùng.
 
