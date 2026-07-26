@@ -28,6 +28,8 @@ Nếu có nhiều cách giải quyết:
 
 ## Quy tắc
 
+- Trả lời cực kỳ ngắn gọn, súc tích, đi thẳng vào kết quả, không giải thích dài dòng.
+
 Không dùng Bootstrap.
 
 Không dùng Tailwind.

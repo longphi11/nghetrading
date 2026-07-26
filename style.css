@@ -284,6 +284,44 @@ img { display: block; max-width: 100%; }
 }
 .link-arrow:hover { opacity: .6; }
 
+/* ===== PAGE HEADER BANNER (TƯ DUY GỐC) ===== */
+.page-header {
+  padding: 48px 0 28px;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 36px;
+}
+.page-header-title {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1.35;
+  color: var(--black);
+  max-width: 100%;
+  margin: 0;
+  letter-spacing: -0.3px;
+}
+@media (max-width: 768px) {
+  .page-header { padding: 28px 0 20px; margin-bottom: 24px; }
+  .page-header-title { font-size: 22px; line-height: 1.35; }
+}
+.nhatky-header-title {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1.4;
+  color: var(--black);
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+@media (max-width: 768px) {
+  .nhatky-header-title { font-size: 18px; line-height: 1.4; }
+}
+
 /* ===== CONTENT SECTION ===== */
 .content-section { padding: 56px 0 72px; }
 .content-grid {
