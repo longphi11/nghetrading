@@ -29,6 +29,14 @@ function extractFirstImage(html) {
   return match ? match[1] : null;
 }
 
+function extractCoverImage(item) {
+  if (item.thumbnail && typeof item.thumbnail === "string" && item.thumbnail.startsWith("http")) return item.thumbnail;
+  if (item.enclosure && item.enclosure.link && item.enclosure.link.startsWith("http")) return item.enclosure.link;
+  const imgFromContent = extractFirstImage(item.content || item.description || "");
+  if (imgFromContent) return imgFromContent;
+  return "https://placehold.co/1000x600?text=Ngh%E1%BB%81+Trading";
+}
+
 function toParagraphs(text) {
   if (!text) return "";
   const cleaned = text.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
@@ -77,7 +85,7 @@ async function main() {
     const dateStr = pubDate.toISOString().split("T")[0];
 
     const contentText = item.content || item.description || "";
-    const cover_image = extractFirstImage(contentText) || "https://placehold.co/1000x600?text=Ngh%E1%BB%81+Trading";
+    const cover_image = extractCoverImage(item);
 
     const titleLower = title.toLowerCase();
     const isBtc = titleLower.includes("btc") || titleLower.includes("bitcoin");
