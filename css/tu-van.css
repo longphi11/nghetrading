@@ -4,7 +4,7 @@
    =========================== */
 
 .tv {
-  --tv-cream: #fbf6ef;
+  --tv-cream: #ffffff;
   --tv-espresso: #2b1b12;
   --tv-espresso-soft: #4a3423;
   --tv-gold: #c9932e;
@@ -160,10 +160,17 @@
   font-size: 14px;
   margin-bottom: 14px;
 }
-.tv-pain-card p {
-  font-size: 13.5px;
-  line-height: 1.6;
-  color: var(--tv-espresso-soft);
+.tv-pain-card {
+  background: #fff;
+  border: 1px solid rgba(43,27,18,.06);
+  border-radius: 6px;
+  padding: 24px 22px;
+  box-shadow: 0 6px 18px rgba(43,27,18,.07);
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.tv-pain-card:hover {
+  box-shadow: 0 10px 26px rgba(43,27,18,.12);
+  transform: translateY(-2px);
 }
 
 /* ---- 3 LÝ DO ---- */
@@ -237,6 +244,12 @@
   gap: 32px;
   align-items: start;
 }
+.tv-form {
+  background: #fff;
+  border-radius: 6px;
+  padding: 28px;
+  box-shadow: 0 6px 18px rgba(43,27,18,.07);
+}
 .tv-form-row { margin-bottom: 18px; }
 .tv-form-row label {
   display: block;
@@ -260,9 +273,12 @@
 .tv-form-row textarea:focus { outline: none; border-color: var(--tv-gold); }
 
 .tv-payment {
-  background: var(--tv-gold-soft);
+  background: #fff;
   border-radius: 6px;
   padding: 28px;
+  border-top: 3px solid var(--tv-gold);
+  box-shadow: 0 10px 28px rgba(43,27,18,.1);
+}
 }
 .tv-payment h3 {
   font-family: var(--font-display);
