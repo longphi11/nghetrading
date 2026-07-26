@@ -44,11 +44,11 @@ Tận dụng class cũ.
 
 Responsive cho:
 
-Desktop
+Desktop (1200px+)
 
-Tablet
+Tablet (768px)
 
-Mobile
+Mobile (375px)
 
 ## Khi viết HTML
 
@@ -56,13 +56,22 @@ Semantic HTML.
 
 Accessibility.
 
-SEO.
+SEO & Open Graph Meta Tags.
 
 ## Khi sửa JS
 
 Không làm chậm website.
 
 Không thêm animation nặng.
+
+Đảm bảo Console sạch lỗi.
+
+## Quy trình làm việc & Git
+
+- Kiểm tra kĩ Responsive trên Mobile, Tablet, Desktop trước khi bàn giao.
+- Tự động commit với thông điệp rõ ràng và push lên GitHub sau mỗi công việc hoàn thành.
+- Chuẩn hóa cấu trúc dữ liệu bài viết (JSON / Templates) để dễ mở rộng.
+- Chủ động cập nhật file .md quy tắc khi có chỉ thị hoặc phản hồi mới từ người dùng.
 
 ## Trước khi kết thúc
 
