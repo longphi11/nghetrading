@@ -137,6 +137,30 @@ async function fetchFeed() {
   throw new Error(`Tất cả các cách lấy feed đều thất bại. Lỗi cuối cùng: ${lastError && lastError.message}`);
 }
 
+// Tự động phân loại bài viết Substack theo từ khóa thông minh
+function autoDetectCategory(title, content, categories) {
+  const catText = (categories || []).join(' ').toLowerCase();
+  if (catText.includes('tâm lý') || catText.includes('kỷ luật')) return 'Tâm lý & Kỷ luật';
+  if (catText.includes('rủi ro') || catText.includes('quản lý vốn')) return 'Quản trị rủi ro';
+  if (catText.includes('kỹ thuật') || catText.includes('phương pháp')) return 'Phương pháp & Kỹ thuật';
+  if (catText.includes('xác suất')) return 'Tư duy xác suất';
+
+  const text = `${title} ${content.slice(0, 500)}`.toLowerCase();
+  if (/rủi ro|quản lý vốn|cháy tài khoản|cắt lỗ|bảo vệ tài khoản|vốn/i.test(text)) {
+    return 'Quản trị rủi ro';
+  }
+  if (/tâm lý|cảm xúc|kỷ luật|cái tôi|nỗi sợ|con quỷ|quyết định|cờ bạc|hiểu bản thân|hoang đường/i.test(text)) {
+    return 'Tâm lý & Kỷ luật';
+  }
+  if (/điểm vào lệnh|kỹ thuật|kế hoạch|lính bắn tỉa|cặp tiền|hết ngày/i.test(text)) {
+    return 'Phương pháp & Kỹ thuật';
+  }
+  if (/xác suất|poker|may mắn/i.test(text)) {
+    return 'Tư duy xác suất';
+  }
+  return 'Nghề trading';
+}
+
 async function main() {
   console.log(`Đang lấy feed: ${FEED_URL}`);
   const feed = await fetchFeed();
@@ -161,7 +185,7 @@ async function main() {
     const contentHtml = item.contentEncoded || item.content || item.contentSnippet || "";
     const thumb = extractFirstImage(contentHtml) || "";
     const excerpt = extractExcerpt(contentHtml);
-    const category = overrides[slug] || (item.categories && item.categories[0]) || "Chưa Phân Loại";
+    const category = overrides[slug] || autoDetectCategory(item.title, contentHtml, item.categories);
     const dateVN = formatDateVN(item.pubDate || item.isoDate);
 
     // Tạo trang bài viết từ template
@@ -199,12 +223,76 @@ async function main() {
   fs.mkdirSync(path.dirname(DATA_FILE), { recursive: true });
   fs.writeFileSync(DATA_FILE, JSON.stringify(existingPosts, null, 2), "utf-8");
 
+  // Tự động tạo liên kết nội bộ chéo cho bài viết mới và bài cũ
+  applyAutoInternalLinks();
+
   console.log(`Hoàn tất. ${addedCount} bài viết mới được thêm.`);
   // Ghi cờ để workflow biết có thay đổi hay không
   fs.writeFileSync(
     path.join(ROOT, ".sync-result"),
     addedCount > 0 ? "changed" : "unchanged"
   );
+}
+
+// Tự động tạo liên kết nội bộ chéo cho toàn bộ bài viết
+function applyAutoInternalLinks() {
+  const linkRules = [
+    { kw: 'quản trị rủi ro', target: 'quan-tri-rui-ro.html' },
+    { kw: 'quản lý vốn', target: 'chia-se-meo-quan-ly-von-trong-giao-dich.html' },
+    { kw: 'tâm lý giao dịch', target: 'cam-xuc-la-thu-vat-di.html' },
+    { kw: 'tâm lý', target: 'cam-xuc-la-thu-vat-di.html' },
+    { kw: 'nỗi sợ hãi', target: 'vuot-qua-noi-so-hai-trong-giao-dich-ngoai-hoi.html' },
+    { kw: 'nỗi sợ', target: 'vuot-qua-noi-so-hai-trong-giao-dich-ngoai-hoi.html' },
+    { kw: 'kỷ luật', target: 'ren-luyen-ky-luat-trong-trading-nhu-nao.html' },
+    { kw: 'xác suất', target: 'trading-la-tro-choi-xac-suat.html' },
+    { kw: 'lính bắn tỉa', target: 'hay-giao-dich-nhu-mot-linh-ban-tia.html' },
+    { kw: 'điểm vào lệnh', target: '4-goi-y-de-co-diem-vao-lenh-tot-nhat.html' },
+    { kw: 'poker', target: 'poker-day-ban-dieu-gi-ve-trading.html' },
+    { kw: 'kế hoạch giao dịch', target: 'toi-len-ke-hoach-giao-dich-nhu-the-nao.html' },
+    { kw: 'hiểu bản thân', target: 'hieu-ban-than.html' },
+    { kw: 'cái tôi', target: 'hay-chia-tay-cai-toi-cua-ban-trong-forex.html' },
+    { kw: 'bảo vệ tài khoản', target: 'tai-sao-ban-can-bao-ve-tai-khoan-cua-minh-va-bang-cach-nao.html' },
+    { kw: '5 giai đoạn', target: '5-giai-doan-de-tro-thanh-trader-co-loi-nhuan-on-dinh.html' },
+    { kw: 'trader chuyên nghiệp', target: 'dac-diem-cua-mot-trader-chuyen-nghiep.html' },
+    { kw: 'thời gian', target: 'thoi-gian-dieu-thuong-bi-coi-nhe-trong-trading.html' },
+    { kw: 'trader thành công', target: 'vai-thoi-quen-it-biet-cua-cac-trader-thanh-cong.html' }
+  ];
+
+  const files = fs.readdirSync(POSTS_DIR);
+  files.forEach(file => {
+    if (file.endsWith('.html') && file !== 'test.html' && file !== 'test2.html' && file !== 'post-sample.html') {
+      const filePath = path.join(POSTS_DIR, file);
+      let content = fs.readFileSync(filePath, 'utf8');
+
+      let linksInFile = 0;
+      const usedTargets = new Set([file]);
+
+      content = content.replace(/<p>(.*?)<\/p>/gs, (match, pText) => {
+        if (linksInFile >= 3 || pText.includes('<a ') || pText.includes('<img')) {
+          return match;
+        }
+
+        let newPText = pText;
+        for (const rule of linkRules) {
+          if (usedTargets.has(rule.target)) continue;
+          if (linksInFile >= 3) break;
+
+          const kwIndex = newPText.toLowerCase().indexOf(rule.kw.toLowerCase());
+          if (kwIndex !== -1) {
+            const actualKw = newPText.substr(kwIndex, rule.kw.length);
+            const linkHtml = `<a href="${rule.target}" class="internal-link">${actualKw}</a>`;
+            newPText = newPText.substring(0, kwIndex) + linkHtml + newPText.substring(kwIndex + rule.kw.length);
+            usedTargets.add(rule.target);
+            linksInFile++;
+            break;
+          }
+        }
+        return `<p>${newPText}</p>`;
+      });
+
+      fs.writeFileSync(filePath, content, 'utf8');
+    }
+  });
 }
 
 main().catch((err) => {

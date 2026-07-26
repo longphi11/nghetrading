@@ -112,22 +112,25 @@ const DISQUS_SHORTNAME = "nghetrading";
     });
   }
 
-  // ----- 2. BÀI VIẾT LIÊN QUAN (cùng chủ đề) -----
+  // ----- 2. BÀI VIẾT LIÊN QUAN (Tối ưu giữ chân độc giả) -----
   try {
-    const res = await fetch('/data/posts.json', { cache: 'no-store' });
+    const dataPath = window.location.pathname.includes('/posts/') ? '../data/posts.json' : 'data/posts.json';
+    const res = await fetch(dataPath, { cache: 'no-store' });
     if (!res.ok) throw new Error(`Không tải được posts.json: status ${res.status}`);
     const allPosts = await res.json();
 
-    // Ưu tiên lấy category của chính bài đang xem từ dữ liệu JSON (chính xác hơn đọc chữ trên trang,
-    // vì trang tĩnh có thể chưa cập nhật category mới nhất nếu bạn vừa đổi trong category-overrides.json)
     const currentPostData = allPosts.find(p => p.slug === slug);
     const effectiveCategory = (currentPostData && currentPostData.category) || category;
 
-    const related = allPosts
-      .filter(p => p.category === effectiveCategory && p.slug !== slug)
-      .slice(0, 3);
+    // Lấy bài cùng chủ đề trước
+    let related = allPosts.filter(p => p.category === effectiveCategory && p.slug !== slug);
 
-    console.log(`[Bài liên quan] slug hiện tại: "${slug}", chủ đề: "${effectiveCategory}", tìm thấy ${related.length} bài liên quan.`);
+    // Nếu chưa đủ 3 bài cùng chủ đề, điền bổ sung các bài mới nhất khác để LUÔN ĐỦ 3 BÀI
+    if (related.length < 3) {
+      const otherPosts = allPosts.filter(p => p.slug !== slug && !related.some(r => r.slug === p.slug));
+      related = [...related, ...otherPosts];
+    }
+    related = related.slice(0, 3);
 
     if (related.length > 0) {
       const relatedSection = document.createElement('section');
@@ -135,15 +138,21 @@ const DISQUS_SHORTNAME = "nghetrading";
       relatedSection.innerHTML = `
         <h3>Bài viết liên quan</h3>
         <div class="related-grid">
-          ${related.map(p => `
-            <a class="related-card" href="/${p.link}">
-              <div class="related-thumb">
-                <img src="${p.thumb}" alt="${p.title}" onerror="this.src='https://placehold.co/500x320?text=Nghề+Trading'"/>
-              </div>
-              <div class="related-meta">${p.date}</div>
-              <div class="related-title">${p.title}</div>
-            </a>
-          `).join('')}
+          ${related.map(p => {
+            const relHref = p.link.startsWith('posts/') ? `../${p.link}` : `../posts/${p.slug}.html`;
+            return `
+              <a class="related-card" href="${relHref}">
+                <div class="related-thumb">
+                  <img src="${p.thumb}" alt="${p.title}" loading="lazy" onerror="this.src='https://placehold.co/500x320?text=Nghề+Trading'"/>
+                </div>
+                <div class="related-meta">
+                  <span style="background:#111; color:#fff; padding:2px 6px; border-radius:2px; font-size:10px; font-weight:600; margin-right:6px;">${p.category || 'Nghề trading'}</span>
+                  <span>${p.date}</span>
+                </div>
+                <div class="related-title">${p.title}</div>
+              </a>
+            `;
+          }).join('')}
         </div>
       `;
       insertAfter(relatedSection);

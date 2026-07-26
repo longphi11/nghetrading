@@ -939,6 +939,26 @@ img { display: block; max-width: 100%; }
   font-size: 15.5px;
   line-height: 1.4;
   color: var(--text);
+  transition: color .2s;
+}
+.related-card:hover .related-title {
+  color: #111;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ===== INTERNAL LINKS (LIÊN KẾT NỘI BỘ BÀI VIẾT) ===== */
+a.internal-link {
+  color: var(--black);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--gold);
+  transition: color .2s, text-decoration-color .2s;
+}
+a.internal-link:hover {
+  color: var(--gold);
+  text-decoration-color: var(--black);
 }
 
 .post-comments {
