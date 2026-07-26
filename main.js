@@ -250,3 +250,26 @@ const DISQUS_SHORTNAME = "nghetrading";
     }
   });
 })();
+
+// ===========================
+//  CẬP NHẬT GIÁ VÀNG VRTL BẢO TÍN MINH CHÂU
+// ===========================
+(function initBtmcGoldPrice() {
+  const priceElem = document.getElementById('btmc-vrtl-price');
+  if (!priceElem) return;
+
+  fetch('https://api.vnappmob.com/api/v2/gold/btmc')
+    .then(res => res.json())
+    .then(data => {
+      if (data && data.results && Array.isArray(data.results)) {
+        const vrtl = data.results.find(item => item.name && (item.name.includes('VRTL') || item.name.includes('Vàng Rồng Thăng Long')));
+        if (vrtl && vrtl.sell) {
+          priceElem.textContent = `${vrtl.sell} triệu/lượng`;
+        }
+      }
+    })
+    .catch(() => {
+      // Giữ mức giá hiển thị chuẩn nếu không có kết nối API bên thứ ba
+    });
+})();
+
