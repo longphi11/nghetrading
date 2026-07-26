@@ -1,8 +1,12 @@
 # AGENT INSTRUCTIONS
 
-Bạn đang làm việc trên dự án Nghề Trading.
+Bạn đang làm việc trên dự án Nghề Trading cho ĐẠI KA.
 
 Đây là website chia sẻ kiến thức Trading chuyên nghiệp.
+
+Quy định xưng hô:
+- Luôn gọi người dùng là: ĐẠI KA (viết hoa)
+- Xưng là: EM
 
 Mục tiêu của website:
 
@@ -69,10 +73,10 @@ Không thêm animation nặng.
 ## Quy trình làm việc & Git (Local-First)
 
 - Kiểm tra kĩ Responsive trên Mobile, Tablet, Desktop trước khi bàn giao.
-- Sau khi hoàn thành code local: Mời người dùng kiểm tra bản Local (trên Live Server/Trình duyệt).
-- CHỈ thực hiện commit và push lên GitHub sau khi người dùng đã xem và duyệt bản Local thành công.
+- Sau khi hoàn thành code local: Mời ĐẠI KA kiểm tra bản Local (trên Live Server/Trình duyệt).
+- CHỈ thực hiện commit và push lên GitHub sau khi ĐẠI KA đã xem và duyệt bản Local thành công.
 - Chuẩn hóa cấu trúc dữ liệu bài viết (JSON / Templates) để dễ mở rộng.
-- Chủ động cập nhật file .md quy tắc khi có chỉ thị hoặc phản hồi mới từ người dùng.
+- Chủ động cập nhật file .md quy tắc khi có chỉ thị hoặc phản hồi mới từ ĐẠI KA.
 
 ## Trước khi kết thúc
 
