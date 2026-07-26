@@ -224,10 +224,15 @@ const DISQUS_SHORTNAME = "nghetrading";
   const widget = document.createElement('div');
   widget.className = 'floating-cafe-cta';
   widget.innerHTML = `
+    <a href="tu-van.html" class="cafe-body-link">
+      <span class="cafe-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
+      </span>
+      <p class="cafe-desc">Nếu bạn vẫn đang<br>loay hoay với trading,<br><strong>TÔI CÓ THỂ<br>GIÚP BẠN</strong></p>
+      <span class="cafe-mobile-text">Mời cafe & Trò chuyện</span>
+      <span class="btn-primary cafe-btn">MỜI CAFE &amp;<br>TRÒ CHUYỆN</span>
+    </a>
     <button class="cafe-close" aria-label="Đóng">✕</button>
-    <span class="cafe-icon">☕</span>
-    <p>Mời tôi 1 cốc cafe, cùng trao đổi chiến lược trading 1-1</p>
-    <a href="tu-van.html" class="btn-primary">MỜI CAFE NGAY</a>
   `;
   document.body.appendChild(widget);
 
