@@ -8,7 +8,7 @@ const path = require("path");
 const ROOT = path.join(__dirname, "..");
 const DATA_FILE = path.join(ROOT, "data", "journal.json");
 const TRADINGVIEW_USERNAME = process.env.TRADINGVIEW_USERNAME || "longphibtc";
-const FEED_URL = process.env.TRADINGVIEW_FEED_URL || `https://vn.tradingview.com/feed/?author=${TRADINGVIEW_USERNAME}`;
+const FEED_URL = process.env.TRADINGVIEW_FEED_URL || `https://vn.tradingview.com/feed/?username=${TRADINGVIEW_USERNAME}`;
 
 function slugify(str) {
   return str
