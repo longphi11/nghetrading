@@ -189,7 +189,22 @@ function initPostDetail() {
   shareContainer.innerHTML = buildShareHtml(post);
   bindShareCopyButton();
 
-  renderRelated(post);
+  // Nhúng bình luận Disqus
+  if (document.getElementById('disqus_thread')) {
+    window.disqus_config = function () {
+      this.page.url = window.location.href;
+      this.page.identifier = post.id;
+      this.page.title = post.title;
+      this.language = "vi";
+    };
+    if (!document.getElementById('disqus-embed-script')) {
+      const script = document.createElement('script');
+      script.id = 'disqus-embed-script';
+      script.src = `https://nghetrading.disqus.com/embed.js`;
+      script.setAttribute('data-timestamp', +new Date());
+      document.body.appendChild(script);
+    }
+  }
 }
 
 function buildShareHtml(post) {
@@ -229,36 +244,4 @@ function bindShareCopyButton() {
       console.error('Không copy được link:', err);
     }
   });
-}
-
-function renderRelated(current) {
-  let related = allJournalPosts.filter(p => p.tag === current.tag && p.id !== current.id);
-  if (related.length < 3) {
-    const other = allJournalPosts.filter(p => p.id !== current.id && !related.some(r => r.id === p.id));
-    related = [...related, ...other];
-  }
-  related = related.slice(0, 3);
-
-  if (related.length === 0) return;
-
-  const sec = document.getElementById('relatedSection');
-  if (sec) sec.hidden = false;
-  const grid = document.getElementById('relatedGrid');
-  if (grid) {
-    grid.innerHTML = related.map(p => {
-      const tagText = TAG_LABEL[p.tag] || p.tag || 'Phân tích';
-      return `
-        <a class="related-card" href="phan-tich.html?id=${encodeURIComponent(p.id)}">
-          <div class="related-thumb">
-            <img src="${p.cover_image}" alt="${p.title}" loading="lazy" onerror="this.src='https://placehold.co/500x320?text=Nghề+Trading'"/>
-          </div>
-          <div class="related-meta">
-            <span style="background:#111; color:#fff; padding:2px 6px; border-radius:2px; font-size:10px; font-weight:600; margin-right:6px;">${tagText}</span>
-            <span>${formatDate(p.date)}</span>
-          </div>
-          <div class="related-title">${p.title}</div>
-        </a>
-      `;
-    }).join('');
-  }
 }

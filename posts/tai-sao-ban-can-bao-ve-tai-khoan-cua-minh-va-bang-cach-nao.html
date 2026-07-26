@@ -37,7 +37,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../style.css" />
   <style>
-    .post-header { padding: 130px 0 40px 0; max-width: 780px; margin: 0 auto; }
+    .post-header { padding: 130px 24px 20px; max-width: 780px; margin: 0 auto; box-sizing: border-box; }
     .post-header .meta { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
     .post-header h1 { font-family: 'Playfair Display', serif; font-size: 38px; line-height: 1.3; color: #111; margin-bottom: 10px; }
     .post-body { max-width: 780px; margin: 0 auto; padding: 0 24px 80px; font-size: 17px; line-height: 1.8; color: #222; }
@@ -85,9 +85,10 @@
       <a href="../index.html" class="logo">NGHỀ TRADING</a>
       <ul class="nav-links">
         <li><a href="../index.html">Trang Chủ</a></li>
-        <li><a href="../bai-viet.html" class="active">Bài Viết</a></li>
+        <li><a href="../bai-viet.html" class="active">Tư Duy Gốc</a></li>
         <li><a href="../nhat-ky.html">Nhật Ký Giao Dịch</a></li>
         <li><a href="../he-thong.html">Hệ Thống</a></li>
+        <li><a href="../tu-van.html">Mời Tôi 1 Cốc Cafe</a></li>
         <li><a href="../gioi-thieu.html">Giới Thiệu</a></li>
       </ul>
       <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -97,16 +98,17 @@
     <div class="mobile-menu" id="mobileMenu">
       <ul>
         <li><a href="../index.html">Trang Chủ</a></li>
-        <li><a href="../bai-viet.html">Bài Viết</a></li>
+        <li><a href="../bai-viet.html">Tư Duy Gốc</a></li>
         <li><a href="../nhat-ky.html">Nhật Ký Giao Dịch</a></li>
         <li><a href="../he-thong.html">Hệ Thống</a></li>
+        <li><a href="../tu-van.html">Mời Tôi 1 Cốc Cafe</a></li>
         <li><a href="../gioi-thieu.html">Giới Thiệu</a></li>
       </ul>
     </div>
   </nav>
 
   <div class="back-link-wrap">
-    <a href="../bai-viet.html">← Quay lại Bài Viết</a>
+    <a href="../bai-viet.html">← Quay lại Tư Duy Gốc</a>
   </div>
 
   <header class="post-header">
@@ -187,11 +189,35 @@
         <div class="footer-col">
           <h4>KHÁM PHÁ</h4>
           <ul>
-            <li><a href="../bai-viet.html">Bài viết</a></li>
-            <li><a href="../nhat-ky.html">Nhật ký giao dịch</a></li>
-            <li><a href="../he-thong.html">Hệ thống</a></li>
-            <li><a href="../gioi-thieu.html">Giới thiệu</a></li>
+            <li><a href="../index.html">Trang Chủ</a></li>
+            <li><a href="../bai-viet.html">Tư Duy Gốc</a></li>
+            <li><a href="../nhat-ky.html">Nhật Ký Giao Dịch</a></li>
+            <li><a href="../he-thong.html">Hệ Thống</a></li>
+            <li><a href="../tu-van.html">Mời Tôi 1 Cốc Cafe</a></li>
+            <li><a href="../gioi-thieu.html">Giới Thiệu</a></li>
           </ul>
+        </div>
+        <div class="footer-col">
+          <h4>KẾT NỐI</h4>
+          <ul>
+            <li><a href="#">YouTube</a></li>
+            <li><a href="https://t.me/nghetradinghn">Telegram</a></li>
+            <li><a href="mailto:longphi11@gmail.com">Email</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>THEO DÕI</h4>
+          <div class="social-icons">
+            <a href="#" aria-label="YouTube" class="social-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 0-3.77-2.7C13.69 3.72 12 3.72 12 3.72s-1.69 0-3.82.27a4.83 4.83 0 0 0-3.77 2.7A27.14 27.14 0 0 0 4 12a27.14 27.14 0 0 0 .41 5.31 4.83 4.83 0 0 0 3.77 2.7C10.31 20.28 12 20.28 12 20.28s1.69 0 3.82-.27a4.83 4.83 0 0 0 3.77-2.7A27.14 27.14 0 0 0 20 12a27.14 27.14 0 0 0-.41-5.31ZM10 15V9l5 3Z"/></svg>
+            </a>
+            <a href="https://t.me/nghetradinghn" aria-label="Telegram" class="social-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8-1.7 8.02c-.12.56-.46.7-.93.43l-2.57-1.89-1.24 1.19c-.14.14-.25.25-.51.25l.18-2.61 4.7-4.25c.2-.18-.04-.28-.32-.1L7.38 15.3l-2.52-.79c-.55-.17-.56-.55.12-.81l9.85-3.8c.45-.17.85.11.81.1z"/></svg>
+            </a>
+            <a href="mailto:longphi11@gmail.com" aria-label="Email" class="social-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
+            </a>
+          </div>
         </div>
       </div>
       <div class="footer-bottom">

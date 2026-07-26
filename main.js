@@ -112,6 +112,22 @@ const DISQUS_SHORTNAME = "nghetrading";
     });
   }
 
+  // ----- BANNER MỜI CAFE & TRÒ CHUYỆN (CHỈ HIỂN THỊ TRÊN MOBILE TRONG BÀI VIẾT TƯ DUY GỐC) -----
+  const coffeeBanner = document.createElement('section');
+  coffeeBanner.className = 'post-coffee-banner mobile-only-coffee';
+  coffeeBanner.style.cssText = 'max-width: 780px; margin: 30px auto 40px; padding: 24px 28px; background: #FAF8F5; border: 1px solid #EAE5D9; border-left: 3px solid #C7A15A; border-radius: 4px;';
+  const tuVanUrl = window.location.pathname.includes('/posts/') ? '../tu-van.html' : 'tu-van.html';
+  coffeeBanner.innerHTML = `
+    <h3 style="font-family: var(--font-heading, serif); font-size: 15px; font-weight: 700; color: #111; margin-bottom: 8px; letter-spacing: 0.5px; text-transform: uppercase;">☕ MỜI CAFE & TRÒ CHUYỆN</h3>
+    <p style="font-size: 14px; line-height: 1.6; color: #555; margin-bottom: 16px;">
+      Một buổi cafe trao đổi trực tiếp về chiến lược, quản trị rủi ro và tháo gỡ khó khăn trong trading.
+    </p>
+    <a href="${tuVanUrl}" class="btn-dark" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 12px; font-weight: 600; text-decoration: none; padding: 10px 20px; background: #111; color: #fff; border-radius: 2px;">
+      <span>ĐĂNG KÝ CAFE VỚI TÔI →</span>
+    </a>
+  `;
+  insertAfter(coffeeBanner);
+
   // ----- 2. BÀI VIẾT LIÊN QUAN (Tối ưu giữ chân độc giả) -----
   try {
     const dataPath = window.location.pathname.includes('/posts/') ? '../data/posts.json' : 'data/posts.json';
@@ -165,7 +181,7 @@ const DISQUS_SHORTNAME = "nghetrading";
   if (DISQUS_SHORTNAME) {
     const commentSection = document.createElement('section');
     commentSection.className = 'post-comments';
-    commentSection.innerHTML = `<h3>Bình luận</h3><div id="disqus_thread"></div>`;
+    commentSection.innerHTML = `<h3>Bình luận</h3><p style="font-size: 14px; color: #666; margin-bottom: 20px;">Hãy cho tôi biết bạn nghĩ gì về bài viết?</p><div id="disqus_thread"></div>`;
     insertAfter(commentSection);
 
     window.disqus_config = function () {
@@ -232,8 +248,9 @@ const DISQUS_SHORTNAME = "nghetrading";
 
   const widget = document.createElement('div');
   widget.className = 'floating-cafe-cta';
+  const tuVanLink = window.location.pathname.includes('/posts/') ? '../tu-van.html' : 'tu-van.html';
   widget.innerHTML = `
-    <a href="tu-van.html" class="cafe-body-link">
+    <a href="${tuVanLink}" class="cafe-body-link">
       <span class="cafe-icon">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 0 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>
       </span>
