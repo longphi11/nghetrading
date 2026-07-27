@@ -697,6 +697,51 @@ img { display: block; max-width: 100%; }
 }
 .floating-cafe-cta .cafe-close:hover { color: #fff; }
 
+/* FLOATING TELEGRAM BTN (DESKTOP ONLY) */
+.telegram-float-btn {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  width: 50px;
+  height: 50px;
+  background: #2AABEE;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 90;
+  box-shadow: 0 4px 12px rgba(42,171,238,0.4);
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+.telegram-float-btn.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.telegram-float-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 6px 16px rgba(42,171,238,0.5);
+  color: #fff;
+}
+.telegram-float-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  margin-right: 2px;
+  margin-top: 2px;
+}
+@media (max-width: 768px) {
+  .telegram-float-btn {
+    display: none !important;
+  }
+}
+
 /* TỐI ƯU NÚT TRÒN THU GỌN CHO MOBILE & TABLET (<= 768px) */
 @media (max-width: 768px) {
   .floating-cafe-cta {

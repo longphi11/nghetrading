@@ -316,6 +316,37 @@ const DISQUS_SHORTNAME = "nghetrading";
 })();
 
 // ===========================
+//  FLOATING CHAT CTA (DESKTOP ONLY)
+// ===========================
+(() => {
+  // Chỉ hiển thị trên Desktop (màn hình > 768px)
+  if (window.innerWidth <= 768) return;
+
+  const widget = document.createElement('a');
+  widget.href = 'https://t.me/longphibtc';
+  widget.target = '_blank';
+  widget.rel = 'noopener noreferrer';
+  widget.className = 'telegram-float-btn';
+  widget.setAttribute('aria-label', 'Chat Telegram');
+  widget.innerHTML = `
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="22" y1="2" x2="11" y2="13"></line>
+      <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+    </svg>
+  `;
+  document.body.appendChild(widget);
+
+  let shown = false;
+  window.addEventListener('scroll', () => {
+    if (shown) return;
+    if (window.scrollY > 400) {
+      widget.classList.add('visible');
+      shown = true;
+    }
+  });
+})();
+
+// ===========================
 //  CẬP NHẬT GIÁ VÀNG VRTL BẢO TÍN MINH CHÂU
 // ===========================
 (function initBtmcGoldPrice() {
