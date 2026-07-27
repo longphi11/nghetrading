@@ -12,25 +12,25 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hệ Thống — Nghề Trading</title>
+  <title>Hệ Thống Giao Dịch — Nghề Trading</title>
   <link rel="canonical" href="https://nghetrading.com/he-thong.html" />
 
   <!-- Open Graph / Facebook / Zalo / Telegram -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://nghetrading.com/he-thong.html" />
   <meta property="og:site_name" content="Nghề Trading" />
-  <meta property="og:title" content="Hệ Thống — Nghề Trading" />
-  <meta property="og:description" content="Hệ thống giao dịch dựa trên ba trụ cột: Tâm lý, Kỹ thuật, Quản lý vốn — cảm hứng từ Trading for a Living của Alexander Elder." />
+  <meta property="og:title" content="Hệ Thống Giao Dịch — Nghề Trading" />
+  <meta property="og:description" content="Xây dựng hệ thống giao dịch cá nhân hóa dựa trên 3 trụ cột: Tâm lý, Kỹ thuật và Quản lý vốn. Tìm kiếm người đồng hành dẫn dắt đúng hướng." />
   <meta property="og:locale" content="vi_VN" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Hệ Thống — Nghề Trading" />
-  <meta name="twitter:description" content="Hệ thống giao dịch dựa trên ba trụ cột: Tâm lý, Kỹ thuật, Quản lý vốn — cảm hứng từ Trading for a Living của Alexander Elder." />
+  <meta name="twitter:title" content="Hệ Thống Giao Dịch — Nghề Trading" />
+  <meta name="twitter:description" content="Xây dựng hệ thống giao dịch cá nhân hóa dựa trên 3 trụ cột: Tâm lý, Kỹ thuật và Quản lý vốn. Tìm kiếm người đồng hành dẫn dắt đúng hướng." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 
   <!-- Schema.org Structured Data -->
@@ -40,101 +40,261 @@
     "@type": "WebPage",
     "name": "Hệ Thống Giao Dịch — Nghề Trading",
     "url": "https://nghetrading.com/he-thong.html",
-    "description": "Hệ thống giao dịch dựa trên ba trụ cột: Tâm lý, Kỹ thuật, Quản lý vốn."
+    "description": "Xây dựng hệ thống giao dịch dựa trên ba trụ cột: Tâm lý, Kỹ thuật, Quản lý vốn."
   }
   </script>
 
-  <!--
-    Styles riêng cho nội dung trang Hệ Thống — tất cả class đều tiền tố "ht-" để không đụng
-    các class chung trong style.css (.hero, .pillar, .footer...). Toàn bộ font, màu đen/trắng
-    và khoảng cách container dùng LẠI biến gốc trong :root của style.css (--black, --white,
-    --border, --muted, --font-display, --font-body, --nav-h) — chỉ thêm 1 biến mới --ht-gold
-    làm màu nhấn riêng cho trang này.
-  -->
   <style>
-:root{
-  --ht-surface:#f7f5f0;
-  --ht-line:#e6e2d8;
-  --ht-text:#1c1a17;
-  --ht-muted-dark:#6b6459;
-  --ht-gold:#c9a227;
-  --ht-gold-text:#9c7a1a;
-}
-    /* Navbar dùng position:fixed nên trang phải chừa đúng --nav-h phía trên,
-       giống cách .hero gốc đang làm (padding-top: var(--nav-h)) */
-    .ht-page{background:#fff;color:var(--ht-text);font-family:var(--font-body);line-height:1.55;padding-top:var(--nav-h);}
-    .ht-page a{color:inherit;text-decoration:none;}
-    .ht-wrap{max-width:1100px;margin:0 auto;padding:0 24px;}
-    .ht-serif{font-family:var(--font-display);}
-
-    .ht-hero{padding:72px 0 56px;text-align:center;}
-    .ht-eyebrow{font-size:12px;letter-spacing:0.22em;color:var(--ht-gold-text);margin-bottom:26px;text-transform:uppercase;}
-    .ht-hero h1{
-      font-family:var(--font-display);font-weight:700;
-      font-size:clamp(32px,5.4vw,56px);
-      letter-spacing:-0.01em;line-height:1.18;
-      max-width:780px;margin:0 auto;
+    :root {
+      --ht-bg: #f8fafc;
+      --ht-card-bg: #ffffff;
+      --ht-line: #e2e8f0;
+      --ht-text: #0f172a;
+      --ht-muted: #475569;
+      --ht-accent: #059669; /* Emerald Green - High CTA & Trust */
+      --ht-accent-hover: #047857;
+      --ht-accent-light: #ecfdf5;
+      --ht-dark: #0d0d0d;
     }
-    .ht-hero h1 em{font-style:italic;color:var(--ht-gold-text);font-weight:400;}
-    .ht-hero-sub{margin:26px auto 0;max-width:600px;font-size:16.5px;color:var(--ht-muted-dark);}
-    .ht-hero-attrib{margin-top:16px;font-size:13px;color:#6f695d;font-style:italic;}
 
-    .ht-col-illustration{margin-top:70px;}
-    .ht-col-illustration svg{width:100%;height:auto;max-width:780px;margin:0 auto;display:block;}
-
-    .ht-section{padding:96px 0;border-top:1px solid var(--ht-line);}
-    .ht-sec-head{max-width:660px;margin:0 auto 56px;text-align:center;}
-    .ht-sec-eyebrow{font-size:12px;letter-spacing:0.2em;color:var(--ht-gold-text);margin-bottom:16px;text-transform:uppercase;}
-    .ht-section h2{font-family:var(--font-display);font-weight:700;font-size:clamp(26px,3.6vw,38px);letter-spacing:-0.01em;line-height:1.24;}
-    .ht-sec-body{margin-top:16px;color:var(--ht-muted-dark);font-size:15.5px;}
-
-    .ht-framework-note{
-      max-width:700px;margin:0 auto 60px;padding:22px 28px;border:1px solid var(--ht-line);background:var(--ht-surface);
-      font-size:14px;color:var(--ht-muted-dark);text-align:center;
+    .ht-page {
+      background: var(--ht-bg);
+      color: var(--ht-text);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      padding-top: var(--nav-h);
     }
-    .ht-framework-note b{color:var(--ht-gold-text);font-weight:600;}
+    .ht-page a { color: inherit; text-decoration: none; }
+    .ht-wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .ht-serif { font-family: var(--font-display); }
 
-    .ht-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;}
-    @media(max-width:860px){.ht-pillars{grid-template-columns:1fr;max-width:420px;margin:0 auto;}}
-    .ht-pillar{text-align:center;padding:0 8px;}
-    .ht-pillar-col{margin-bottom:26px;}
-    .ht-pillar-en{font-size:11px;letter-spacing:0.16em;color:#6f695d;text-transform:uppercase;margin-top:14px;}
-    .ht-pillar h3{font-family:var(--font-display);font-size:21px;font-weight:700;margin:6px 0 14px;}
-    .ht-pillar p{font-size:14px;color:var(--ht-muted-dark);text-align:left;}
-    .ht-pillar ul{margin-top:14px;text-align:left;padding-left:0;list-style:none;}
-    .ht-pillar li{font-size:13px;color:var(--ht-muted-dark);padding-left:16px;position:relative;margin-bottom:8px;}
-    .ht-pillar li::before{content:"—";position:absolute;left:0;color:var(--ht-gold-text);}
+    /* SECTION HEADER COMMON */
+    .ht-sec-head { max-width: 860px; margin: 0 auto 48px; text-align: center; }
+    .ht-sec-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--ht-accent);
+      background: var(--ht-accent-light);
+      padding: 6px 16px;
+      border-radius: 99px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      border: 1px solid rgba(5, 150, 105, 0.2);
+    }
+    .ht-sec-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(22px, 3.2vw, 36px);
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      color: var(--ht-text);
+    }
+    .ht-sec-title-single {
+      word-break: normal;
+    }
+    @media (min-width: 860px) {
+      .ht-sec-title-single { white-space: nowrap; }
+    }
+    .ht-sec-sub { margin-top: 16px; color: var(--ht-muted); font-size: 16px; line-height: 1.6; }
 
-    .ht-rules{margin-top:64px;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ht-line);border:1px solid var(--ht-line);max-width:780px;margin-left:auto;margin-right:auto;}
-  .ht-rule-card{background:#fff;padding:28px 30px;}
-    .ht-rule-tag{font-size:11px;letter-spacing:0.14em;color:var(--ht-gold-text);text-transform:uppercase;margin-bottom:10px;}
-    .ht-rule-title{font-family:var(--font-display);font-size:18px;margin-bottom:8px;}
-    .ht-rule-body{font-size:13.5px;color:var(--ht-muted-dark);}
-    @media(max-width:700px){.ht-rules{grid-template-columns:1fr;}}
+    /* HERO SECTION - nghi ngờ & đồng cảm */
+    .ht-hero { padding: 80px 0 64px; text-align: center; background: #ffffff; border-bottom: 1px solid var(--ht-line); }
+    .ht-hero h1 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(32px, 5.2vw, 54px);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      max-width: 860px;
+      margin: 0 auto;
+      color: var(--ht-text);
+    }
+    .ht-hero h1 span.highlight {
+      color: var(--ht-accent);
+      position: relative;
+      display: inline-block;
+    }
+    .ht-hero-sub {
+      margin: 28px auto 0;
+      max-width: 720px;
+      font-size: 18px;
+      color: var(--ht-muted);
+      line-height: 1.65;
+    }
+    .ht-hero-empathy {
+      margin: 32px auto 0;
+      max-width: 780px;
+      background: #f1f5f9;
+      border-left: 4px solid var(--ht-accent);
+      padding: 20px 24px;
+      border-radius: 0 8px 8px 0;
+      text-align: left;
+      font-size: 15px;
+      color: #334155;
+    }
 
-    .ht-mentor{background:var(--ht-surface);text-align:center;}
-    .ht-mentor h2{max-width:640px;margin:0 auto;}
-    .ht-mentor .ht-keyword{color:var(--ht-gold-text);font-style:italic;}
-    .ht-mentor-body{margin:24px auto 0;max-width:620px;color:var(--ht-muted-dark);font-size:16px;}
-    .ht-mentor-body + .ht-mentor-body{margin-top:14px;}
-    .ht-mentor-points{margin:44px auto 0;max-width:780px;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;text-align:left;}
-    @media(max-width:760px){.ht-mentor-points{grid-template-columns:1fr;}}
-    .ht-mentor-point .ht-mp-label{font-size:11px;letter-spacing:0.14em;color:var(--ht-gold-text);text-transform:uppercase;margin-bottom:10px;}
-    .ht-mentor-point p{font-size:14px;color:var(--ht-muted-dark);}
-    .ht-mentor-cta{margin-top:44px;display:inline-block;font-size:14px;background:var(--ht-gold-text);color:#0b0b0c;padding:15px 32px;font-weight:600;border-radius:2px;transition:opacity .15s;}
-    .ht-mentor-cta:hover{opacity:.85;}
+    .ht-col-illustration { margin-top: 56px; }
+    .ht-col-illustration svg { width: 100%; height: auto; max-width: 820px; margin: 0 auto; display: block; }
 
-    .ht-contact{text-align:center;}
-    .ht-contact-list{max-width:460px;margin:0 auto;display:flex;flex-direction:column;}
-    .ht-contact-row{display:flex;justify-content:space-between;padding:22px 0;border-bottom:1px solid var(--ht-line);}
-    .ht-contact-row:first-child{border-top:1px solid var(--ht-line);}
-    .ht-contact-label{font-size:11px;letter-spacing:0.14em;color:var(--ht-gold-text);text-transform:uppercase;padding-top:3px;}
-    .ht-contact-value{font-family:var(--font-display);font-size:17px;text-align:right;}
+    /* SECTION GENERAL */
+    .ht-section { padding: 96px 0; border-top: 1px solid var(--ht-line); }
+
+    /* 3 PILLARS SECTION */
+    .ht-pillars-sec { background: var(--ht-bg); }
+    .ht-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    @media (max-width: 900px) { .ht-pillars { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; } }
+    .ht-pillar-card {
+      background: #ffffff;
+      border: 1px solid var(--ht-line);
+      border-radius: 12px;
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02);
+    }
+    .ht-pillar-num {
+      display: inline-block;
+      width: 44px;
+      height: 44px;
+      line-height: 44px;
+      background: var(--ht-accent-light);
+      color: var(--ht-accent);
+      font-weight: 700;
+      font-size: 16px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+    .ht-pillar-card h3 { font-family: var(--font-display); font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+    .ht-pillar-card p { font-size: 14.5px; color: var(--ht-muted); text-align: left; margin-bottom: 18px; }
+    .ht-pillar-card ul { text-align: left; padding: 0; list-style: none; }
+    .ht-pillar-card li { font-size: 13.5px; color: #334155; padding-left: 18px; position: relative; margin-bottom: 8px; }
+    .ht-pillar-card li::before { content: "•"; position: absolute; left: 0; color: var(--ht-accent); font-weight: bold; }
+
+    /* RULES GRID */
+    .ht-rules {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 700px) { .ht-rules { grid-template-columns: 1fr; } }
+    .ht-rule-box {
+      background: #ffffff;
+      border: 1px solid var(--ht-line);
+      border-left: 4px solid var(--ht-accent);
+      border-radius: 8px;
+      padding: 24px 28px;
+    }
+    .ht-rule-tag { font-size: 12px; font-weight: 700; color: var(--ht-accent); text-transform: uppercase; letter-spacing: 0.1em; }
+    .ht-rule-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; margin: 6px 0; }
+    .ht-rule-body { font-size: 14px; color: var(--ht-muted); }
+
+    /* UNDERSTAND YOURSELF SECTION */
+    .ht-self { background: #ffffff; }
+    .ht-self-content {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #f8fafc;
+      border: 1px solid var(--ht-line);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+    }
+    .ht-self-content h3 { font-family: var(--font-display); font-size: 26px; font-weight: 700; margin-bottom: 16px; color: var(--ht-text); }
+    .ht-self-content p { font-size: 16px; color: var(--ht-muted); line-height: 1.7; margin-bottom: 20px; }
+
+    /* ROADMAP SECTION (5 GIAI ĐOẠN) */
+    .ht-roadmap { background: #ffffff; }
+    .ht-roadmap-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+      margin-top: 40px;
+    }
+    @media (max-width: 1024px) { .ht-roadmap-steps { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 768px) { .ht-roadmap-steps { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .ht-roadmap-steps { grid-template-columns: 1fr; } }
+
+    .ht-step-item {
+      background: var(--ht-bg);
+      border: 1px solid var(--ht-line);
+      border-radius: 12px;
+      padding: 24px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s;
+    }
+    .ht-step-item:hover { transform: translateY(-3px); }
+    .ht-step-active {
+      border-color: var(--ht-accent);
+      background: var(--ht-accent-light);
+    }
+    .ht-step-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ht-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+    .ht-step-item h3 { font-family: var(--font-display); font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--ht-text); line-height: 1.35; }
+    .ht-step-item p { font-size: 13px; color: var(--ht-muted); line-height: 1.55; }
+
+    /* MENTOR / COMPANION SECTION */
+    .ht-mentor { background: #0f172a; color: #ffffff; text-align: center; padding: 100px 0; }
+    .ht-mentor .ht-sec-badge { background: rgba(16, 185, 129, 0.15); color: #34d399; border-color: rgba(52, 211, 153, 0.3); }
+    .ht-mentor .ht-sec-title { color: #ffffff; }
+    .ht-mentor-sub { max-width: 700px; margin: 20px auto 0; font-size: 17px; color: #94a3b8; line-height: 1.65; }
+    
+    .ht-mentor-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 56px;
+      text-align: left;
+    }
+    @media (max-width: 840px) { .ht-mentor-grid { grid-template-columns: 1fr; } }
+    .ht-mg-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 32px 24px;
+    }
+    .ht-mg-icon { font-size: 24px; margin-bottom: 16px; display: inline-block; }
+    .ht-mg-card h4 { font-family: var(--font-display); font-size: 20px; color: #ffffff; margin-bottom: 10px; }
+    .ht-mg-card p { font-size: 14.5px; color: #cbd5e1; line-height: 1.6; }
+
+    /* CTA CONVERSION SECTION */
+    .ht-cta-sec { background: var(--ht-accent-light); border-top: 1px solid rgba(5, 150, 105, 0.2); padding: 96px 0; text-align: center; }
+    .ht-cta-box { max-width: 760px; margin: 0 auto; }
+    .ht-cta-title { font-family: var(--font-display); font-size: clamp(28px, 4vw, 42px); font-weight: 700; color: #064e3b; line-height: 1.25; margin-bottom: 18px; }
+    .ht-cta-desc { font-size: 17px; color: #047857; margin-bottom: 36px; line-height: 1.6; }
+    .ht-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--ht-accent);
+      color: #ffffff;
+      font-size: 16.5px;
+      font-weight: 700;
+      padding: 18px 40px;
+      border-radius: 8px;
+      box-shadow: 0 10px 20px -5px rgba(5, 150, 105, 0.4);
+      transition: all 0.2s;
+    }
+    .ht-btn-primary:hover {
+      background: var(--ht-accent-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 24px -5px rgba(5, 150, 105, 0.5);
+      color: #ffffff;
+    }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR (giống hệt các trang khác) -->
+  <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
       <a href="/" class="logo">NGHỀ TRADING</a>
@@ -143,7 +303,7 @@
         <li><a href="bai-viet.html">Tư Duy Gốc</a></li>
         <li><a href="nhat-ky.html">Nhật Ký Giao Dịch</a></li>
         <li><a href="he-thong.html" class="active">Hệ Thống</a></li>
-           <li><a href="tu-van.html">Mời Tôi 1 Cốc Cafe</a></li>
+        <li><a href="tu-van.html">Mời Tôi 1 Cốc Cafe</a></li>
         <li><a href="gioi-thieu.html">Giới Thiệu</a></li>
       </ul>
       <button class="search-btn" aria-label="Tìm kiếm">
@@ -158,7 +318,7 @@
         <li><a href="index.html">Trang Chủ</a></li>
         <li><a href="bai-viet.html">Tư Duy Gốc</a></li>
         <li><a href="nhat-ky.html">Nhật Ký Giao Dịch</a></li>
-           <li><a href="tu-van.html">Mời Tôi 1 Cốc Cafe</a></li>
+        <li><a href="tu-van.html">Mời Tôi 1 Cốc Cafe</a></li>
         <li><a href="gioi-thieu.html">Giới Thiệu</a></li>
       </ul>
     </div>
@@ -166,216 +326,231 @@
 
   <main class="ht-page">
 
-    <!-- HERO -->
+    <!-- HERO SECTION: ĐỒNG CẢM & NGHI NGỜ -->
     <header class="ht-hero">
-      <div class="container">
-        <div class="ht-eyebrow">Hệ thống giao dịch</div>
-        <h1>Một trader không giàu vì <em>may mắn</em>.<br>Họ giàu vì có một <em>hệ thống</em>.</h1>
-        <p class="ht-hero-sub">Ba trụ cột nâng đỡ một trader vững vàng: Tâm lý, Kỹ thuật và Quản lý vốn. Thiếu một, cả công trình lung lay — dù hai trụ còn lại có chắc đến đâu.</p>
-        <p class="ht-hero-attrib">Lấy cảm hứng từ khung tư duy "Ba chữ M" — Mind, Method, Money — trong <em>Trading for a Living</em> của Alexander Elder</p>
+      <div class="ht-wrap">
+        <div class="ht-sec-badge">Tư Duy Nghề Nghiệp</div>
+        <h1>Trading Không Phải Cơ Hội Đổi Đời Cấp Tốc.<br>Đây Là Một <span class="highlight">NGHỀ NGHIỆP</span> Nghiêm Túc.</h1>
+        <p class="ht-hero-sub">Hầu hết mọi người bước vào thị trường với tư tưởng của một con bạc — mong làm giàu nhanh. Họ liên tục cháy tài khoản, hoang mang và loay hoay trong vòng lặp vô tận vì thiếu một hệ thống thực sự.</p>
+
+        <div class="ht-hero-empathy">
+          <strong>💡 Sự thật mất lòng:</strong> Nếu bạn vẫn đang tìm kiếm "chén thánh", nhảy từ chỉ báo này sang phương pháp khác, trading bằng cảm xúc và hy vọng lệnh tiếp theo sẽ giúp bạn x tài khoản... thì bạn đang tự đẩy mình vào 95% người thất bại trên thị trường.
+        </div>
 
         <div class="ht-col-illustration">
-          <svg viewBox="0 0 820 320" xmlns="http://www.w3.org/2000/svg">
-            <rect x="90" y="40" width="640" height="14" fill="#c9a227"/>
-            <polygon points="70,40 820,40 780,10 110,10" fill="none" stroke="#c9a227" stroke-width="1.4"/>
-            <text x="410" y="30" text-anchor="middle" font-family="Playfair Display, serif" font-size="15" fill="#f0ede6" letter-spacing="2">ĐỀU ĐẶN</text>
+          <svg viewBox="0 0 820 300" xmlns="http://www.w3.org/2000/svg">
+            <rect x="90" y="40" width="640" height="14" fill="#059669" rx="3"/>
+            <polygon points="70,40 820,40 780,10 110,10" fill="none" stroke="#059669" stroke-width="1.5"/>
+            <text x="410" y="30" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="13" fill="#059669" letter-spacing="2">HỆ THỐNG GIAO DỊCH BỀN VỮNG</text>
 
             <g>
-              <rect x="150" y="54" width="70" height="200" fill="none" stroke="#9c9488" stroke-width="1.2"/>
-              <line x1="150" y1="70" x2="220" y2="70" stroke="#9c9488" stroke-width="1"/>
-              <line x1="150" y1="238" x2="220" y2="238" stroke="#9c9488" stroke-width="1"/>
-              <line x1="163" y1="70" x2="163" y2="238" stroke="#3a352d" stroke-width="1"/>
-              <line x1="177" y1="70" x2="177" y2="238" stroke="#3a352d" stroke-width="1"/>
-              <line x1="191" y1="70" x2="191" y2="238" stroke="#3a352d" stroke-width="1"/>
-              <line x1="205" y1="70" x2="205" y2="238" stroke="#3a352d" stroke-width="1"/>
-              <rect x="140" y="254" width="90" height="16" fill="#151412" stroke="#9c9488" stroke-width="1.2"/>
+              <rect x="150" y="54" width="70" height="190" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" rx="4"/>
+              <line x1="150" y1="70" x2="220" y2="70" stroke="#e2e8f0" stroke-width="1"/>
+              <line x1="150" y1="228" x2="220" y2="228" stroke="#e2e8f0" stroke-width="1"/>
+              <line x1="170" y1="70" x2="170" y2="228" stroke="#94a3b8" stroke-width="1"/>
+              <line x1="185" y1="70" x2="185" y2="228" stroke="#94a3b8" stroke-width="1"/>
+              <line x1="200" y1="70" x2="200" y2="228" stroke="#94a3b8" stroke-width="1"/>
+              <rect x="140" y="244" width="90" height="16" fill="#0f172a" stroke="#cbd5e1" stroke-width="1" rx="2"/>
             </g>
             <g>
-              <rect x="375" y="54" width="70" height="200" fill="none" stroke="#c9a227" stroke-width="1.6"/>
-              <line x1="375" y1="70" x2="445" y2="70" stroke="#c9a227" stroke-width="1.2"/>
-              <line x1="375" y1="238" x2="445" y2="238" stroke="#c9a227" stroke-width="1.2"/>
-              <line x1="388" y1="70" x2="388" y2="238" stroke="#8a6f1c" stroke-width="1"/>
-              <line x1="402" y1="70" x2="402" y2="238" stroke="#8a6f1c" stroke-width="1"/>
-              <line x1="416" y1="70" x2="416" y2="238" stroke="#8a6f1c" stroke-width="1"/>
-              <line x1="430" y1="70" x2="430" y2="238" stroke="#8a6f1c" stroke-width="1"/>
-              <rect x="365" y="254" width="90" height="16" fill="#151412" stroke="#c9a227" stroke-width="1.4"/>
+              <rect x="375" y="54" width="70" height="190" fill="#ffffff" stroke="#059669" stroke-width="2" rx="4"/>
+              <line x1="375" y1="70" x2="445" y2="70" stroke="#a7f3d0" stroke-width="1.5"/>
+              <line x1="375" y1="228" x2="445" y2="228" stroke="#a7f3d0" stroke-width="1.5"/>
+              <line x1="395" y1="70" x2="395" y2="228" stroke="#059669" stroke-width="1"/>
+              <line x1="410" y1="70" x2="410" y2="228" stroke="#059669" stroke-width="1"/>
+              <line x1="425" y1="70" x2="425" y2="228" stroke="#059669" stroke-width="1"/>
+              <rect x="365" y="244" width="90" height="16" fill="#059669" stroke="#059669" stroke-width="1" rx="2"/>
             </g>
             <g>
-              <rect x="600" y="54" width="70" height="200" fill="none" stroke="#9c9488" stroke-width="1.2"/>
-              <line x1="600" y1="70" x2="670" y2="70" stroke="#9c9488" stroke-width="1"/>
-              <line x1="600" y1="238" x2="670" y2="238" stroke="#9c9488" stroke-width="1"/>
-              <line x1="613" y1="70" x2="613" y2="238" stroke="#3a352d" stroke-width="1"/>
-              <line x1="627" y1="70" x2="627" y2="238" stroke="#3a352d" stroke-width="1"/>
-              <line x1="641" y1="70" x2="641" y2="238" stroke="#3a352d" stroke-width="1"/>
-              <line x1="655" y1="70" x2="655" y2="238" stroke="#3a352d" stroke-width="1"/>
-              <rect x="590" y="254" width="90" height="16" fill="#151412" stroke="#9c9488" stroke-width="1.2"/>
+              <rect x="600" y="54" width="70" height="190" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" rx="4"/>
+              <line x1="600" y1="70" x2="670" y2="70" stroke="#e2e8f0" stroke-width="1"/>
+              <line x1="600" y1="228" x2="670" y2="228" stroke="#e2e8f0" stroke-width="1"/>
+              <line x1="620" y1="70" x2="620" y2="228" stroke="#94a3b8" stroke-width="1"/>
+              <line x1="635" y1="70" x2="635" y2="228" stroke="#94a3b8" stroke-width="1"/>
+              <line x1="650" y1="70" x2="650" y2="228" stroke="#94a3b8" stroke-width="1"/>
+              <rect x="590" y="244" width="90" height="16" fill="#0f172a" stroke="#cbd5e1" stroke-width="1" rx="2"/>
             </g>
 
-            <line x1="60" y1="290" x2="760" y2="290" stroke="#2c2822" stroke-width="1.4"/>
+            <line x1="60" y1="275" x2="760" y2="275" stroke="#cbd5e1" stroke-width="1.5"/>
 
-            <text x="185" y="304" text-anchor="middle" font-family="Inter" font-size="12" fill="#9c9488" letter-spacing="1">TÂM LÝ · MIND</text>
-            <text x="410" y="304" text-anchor="middle" font-family="Inter" font-size="12" fill="#c9a227" letter-spacing="1">KỸ THUẬT · METHOD</text>
-            <text x="635" y="304" text-anchor="middle" font-family="Inter" font-size="12" fill="#9c9488" letter-spacing="1">QUẢN LÝ VỐN · MONEY</text>
+            <text x="185" y="292" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="12" fill="#475569" letter-spacing="1">1. TÂM LÝ (MIND)</text>
+            <text x="410" y="292" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="12" fill="#059669" letter-spacing="1">2. KỸ THUẬT (METHOD)</text>
+            <text x="635" y="292" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600" font-size="12" fill="#475569" letter-spacing="1">3. VỐN (MONEY)</text>
           </svg>
         </div>
       </div>
     </header>
 
-    <!-- BA TRỤ CỘT -->
-    <section class="ht-section" id="truat">
-      <div class="container">
+    <!-- SECTION 3: 3 TRỤ CỘT HỆ THỐNG -->
+    <section class="ht-section ht-pillars-sec">
+      <div class="ht-wrap">
         <div class="ht-sec-head">
-          <div class="ht-sec-eyebrow">Nền tảng</div>
-          <h2>Ba chữ M — nền móng của mọi trader sống được bằng nghề</h2>
-          <p class="ht-sec-body">Elder quan sát hàng ngàn trader và nhận ra: người thắng dài hạn không phải người thông minh nhất, mà là người kiểm soát tốt cả ba yếu tố cùng lúc.</p>
-        </div>
-
-        <div class="ht-framework-note">
-          Trong <b>Trading for a Living</b>, Alexander Elder chỉ ra rằng phần lớn trader thất bại vì chỉ tập trung vào một chữ M — thường là Method (tìm "hệ thống thắng") — mà bỏ quên Mind và Money. Một phương pháp tốt trong tay một người thiếu kỷ luật, hoặc không quản trị rủi ro, vẫn sẽ cháy tài khoản.
+          <div class="ht-sec-badge">Kiến Trúc Cốt Lõi</div>
+          <h2 class="ht-sec-title ht-sec-title-single">3 Trụ Cột Nâng Đỡ Một Trader Chuyên Nghiệp</h2>
+          <p class="ht-sec-sub">Một công trình vững chắc cần 3 trụ cột đồng đều. Thiếu 1 trong 3, toàn bộ sự nghiệp trading của bạn sẽ sụp đổ khi gặp biến động lớn.</p>
         </div>
 
         <div class="ht-pillars">
-          <div class="ht-pillar">
-            <div class="ht-pillar-col">
-              <svg width="64" height="90" viewBox="0 0 64 90" xmlns="http://www.w3.org/2000/svg" style="margin:0 auto;display:block;">
-                <rect x="0" y="12" width="64" height="8" fill="none" stroke="#9c9488" stroke-width="1.2"/>
-                <rect x="14" y="20" width="36" height="50" fill="none" stroke="#9c9488" stroke-width="1.2"/>
-                <line x1="21" y1="20" x2="21" y2="70" stroke="#3a352d"/>
-                <line x1="28" y1="20" x2="28" y2="70" stroke="#3a352d"/>
-                <line x1="35" y1="20" x2="35" y2="70" stroke="#3a352d"/>
-                <line x1="42" y1="20" x2="42" y2="70" stroke="#3a352d"/>
-                <rect x="0" y="70" width="64" height="8" fill="none" stroke="#9c9488" stroke-width="1.2"/>
-              </svg>
-            </div>
-            <div class="ht-pillar-en">Mind</div>
-            <h3>Tâm lý giao dịch</h3>
-            <p>Thị trường là nơi hàng triệu người mua bán vì sợ hãi và tham lam. Elder cho rằng nhiệm vụ của trader là đứng tách khỏi đám đông đó, quan sát nó một cách tỉnh táo thay vì bị cuốn theo.</p>
+          <div class="ht-pillar-card">
+            <div class="ht-pillar-num">01</div>
+            <h3>Tâm Lý Giao Dịch</h3>
+            <p>Thị trường là nơi phản chiếu lòng tham và sự sợ hãi. Người quản trị được cảm xúc chính là người làm chủ cuộc chơi.</p>
             <ul>
-              <li>Giao dịch như một cá nhân độc lập, không chạy theo cảm xúc số đông</li>
-              <li>Ghi nhật ký giao dịch để nhìn lại chính mình, không chỉ nhìn lại thị trường</li>
-              <li>Chấp nhận thua lỗ như chi phí vận hành, không phải thất bại cá nhân</li>
+              <li>Không chạy theo đám đông khi thị trường hưng phấn</li>
+              <li>Chấp nhận thua lỗ ngắn hạn một cách thản nhiên</li>
+              <li>Luôn giữ sự tĩnh lặng và tỉnh táo trước mọi nhịp sóng</li>
             </ul>
           </div>
 
-          <div class="ht-pillar">
-            <div class="ht-pillar-col">
-              <svg width="64" height="90" viewBox="0 0 64 90" xmlns="http://www.w3.org/2000/svg" style="margin:0 auto;display:block;">
-                <rect x="0" y="12" width="64" height="8" fill="none" stroke="#c9a227" stroke-width="1.4"/>
-                <rect x="14" y="20" width="36" height="50" fill="none" stroke="#c9a227" stroke-width="1.4"/>
-                <line x1="21" y1="20" x2="21" y2="70" stroke="#8a6f1c"/>
-                <line x1="28" y1="20" x2="28" y2="70" stroke="#8a6f1c"/>
-                <line x1="35" y1="20" x2="35" y2="70" stroke="#8a6f1c"/>
-                <line x1="42" y1="20" x2="42" y2="70" stroke="#8a6f1c"/>
-                <rect x="0" y="70" width="64" height="8" fill="none" stroke="#c9a227" stroke-width="1.4"/>
-              </svg>
-            </div>
-            <div class="ht-pillar-en">Method</div>
-            <h3>Kỹ thuật</h3>
-            <p>Một phương pháp phân tích kỹ thuật rõ ràng giúp trader tìm ra những giao dịch có lợi thế thống kê — nhưng Elder nhấn mạnh: phương pháp chỉ cần đủ tốt và được kiểm chứng, không cần hoàn hảo hay phức tạp.</p>
+          <div class="ht-pillar-card">
+            <div class="ht-pillar-num">02</div>
+            <h3>Phương Pháp Kỹ Thuật</h3>
+            <p>Bộ công cụ phân tích đơn giản, dễ hiểu và đã được kiểm chứng qua thời gian để tìm điểm vào lệnh lợi thế.</p>
             <ul>
-              <li>Xác định xu hướng trước khi tìm điểm vào lệnh</li>
-              <li>Dùng một bộ công cụ đơn giản, hiểu rõ, thay vì chạy theo mọi chỉ báo mới</li>
-              <li>Mỗi giao dịch phải trả lời được: vào vì lý do gì, ra khi nào</li>
+              <li>Xác định xu hướng chủ đạo (H1, D1) trước khi giao dịch</li>
+              <li>Vào lệnh có lý do rõ ràng, dừng lỗ và chốt lời cụ thể</li>
+              <li>Không lạm dụng quá nhiều chỉ báo gây rối trí</li>
             </ul>
           </div>
 
-          <div class="ht-pillar">
-            <div class="ht-pillar-col">
-              <svg width="64" height="90" viewBox="0 0 64 90" xmlns="http://www.w3.org/2000/svg" style="margin:0 auto;display:block;">
-                <rect x="0" y="12" width="64" height="8" fill="none" stroke="#9c9488" stroke-width="1.2"/>
-                <rect x="14" y="20" width="36" height="50" fill="none" stroke="#9c9488" stroke-width="1.2"/>
-                <line x1="21" y1="20" x2="21" y2="70" stroke="#3a352d"/>
-                <line x1="28" y1="20" x2="28" y2="70" stroke="#3a352d"/>
-                <line x1="35" y1="20" x2="35" y2="70" stroke="#3a352d"/>
-                <line x1="42" y1="20" x2="42" y2="70" stroke="#3a352d"/>
-                <rect x="0" y="70" width="64" height="8" fill="none" stroke="#9c9488" stroke-width="1.2"/>
-              </svg>
-            </div>
-            <div class="ht-pillar-en">Money</div>
-            <h3>Quản lý vốn</h3>
-            <p>Đây là chữ M mà Elder cho là bị xem nhẹ nhất. Sống sót qua chuỗi lệnh thua quan trọng hơn việc thắng lệnh tiếp theo — vì chỉ cần còn vốn, bạn còn cơ hội.</p>
+          <div class="ht-pillar-card">
+            <div class="ht-pillar-num">03</div>
+            <h3>Quản Lý Rủi Ro</h3>
+            <p>Trụ cột bảo vệ tính mạng của trader. Còn vốn là còn cơ hội, mất vốn là cuộc chơi kết thúc.</p>
             <ul>
-              <li>Không để một lệnh thua đe dọa toàn bộ tài khoản</li>
-              <li>Giới hạn mức lỗ được phép trong một tháng</li>
-              <li>Kích thước lệnh tính theo vốn hiện có, không theo mức độ tự tin</li>
+              <li>Tuyệt đối không nhồi lệnh hoặc trả thù thị trường</li>
+              <li>Tính toán khối lượng vào lệnh chuẩn xác theo % vốn</li>
+              <li>Ngắt kết nối ngay khi chạm hạn mức dừng lỗ cho phép</li>
             </ul>
           </div>
         </div>
 
+        <!-- 2 NGUYÊN TẮC VÀNG -->
         <div class="ht-rules">
-          <div class="ht-rule-card">
-            <div class="ht-rule-tag">Nguyên tắc 2%</div>
-            <div class="ht-rule-title">Không quá 2% mỗi lệnh</div>
-            <div class="ht-rule-body">Elder đề xuất không bao giờ mạo hiểm quá 2% vốn tài khoản cho một giao dịch. Thua vài lệnh liên tiếp vẫn không làm lung lay hệ thống.</div>
+          <div class="ht-rule-box">
+            <div class="ht-rule-tag">Nguyên Tắc Sinh Tồn 1</div>
+            <div class="ht-rule-title">Rủi Ro Tối Đa 2% Mỗi Lệnh</div>
+            <div class="ht-rule-body">Dù bạn tự tin đến đâu, tuyệt đối không đặt cược quá 2% tổng tài khoản vào một giao dịch đơn lẻ. Thua 5 lệnh liên tiếp bạn vẫn an toàn để làm lại.</div>
           </div>
-          <div class="ht-rule-card">
-            <div class="ht-rule-tag">Nguyên tắc 6%</div>
-            <div class="ht-rule-title">Dừng lại ở 6% mỗi tháng</div>
-            <div class="ht-rule-body">Nếu tổng lỗ trong tháng chạm 6% vốn, dừng giao dịch. Đây là lúc để xem lại tâm lý và phương pháp, không phải cố gỡ.</div>
+          <div class="ht-rule-box">
+            <div class="ht-rule-tag">Nguyên Tắc Sinh Tồn 2</div>
+            <div class="ht-rule-title">Dừng Lại Ở Mức Lỗ 6% Mỗi Tháng</div>
+            <div class="ht-rule-body">Nếu tổng lỗ trong tháng chạm mốc 6%, hãy lập tức đóng máy và ngừng giao dịch. Đây là khoảng nghỉ bắt buộc để đánh giá lại tâm lý và thị trường.</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- MENTOR -->
-    <section class="ht-section ht-mentor" id="mentor">
-      <div class="container">
-        <div class="ht-sec-eyebrow">Vai trò của mentor</div>
-        <h2>Không cần <span class="ht-keyword">thắng lớn</span>.<br>Cần <span class="ht-keyword">đều đặn</span>.</h2>
-        <p class="ht-mentor-body">Một pha thắng lớn chỉ chứng minh một lệnh tốt. Elder chỉ ra rằng nhà giao dịch nghiệp dư đo thành công bằng tiền lãi của một lệnh, còn nhà giao dịch chuyên nghiệp đo thành công bằng chất lượng quyết định — lặp lại đúng quy trình hàng trăm, hàng ngàn lần.</p>
-        <p class="ht-mentor-body">Vai trò của mentor không phải đưa ra "chén thánh" hay tín hiệu để copy. Mentor đồng hành cùng bạn xây dựng và giữ vững cả ba chữ M — để lợi nhuận đến từ một hệ thống đều đặn, không phải từ may mắn ngắn hạn rồi mất trắng.</p>
-
-        <div class="ht-mentor-points">
-          <div class="ht-mentor-point">
-            <div class="ht-mp-label">01 — Mind</div>
-            <p>Rèn kỷ luật, xây thói quen ghi nhật ký và nhìn lại chính mình sau mỗi giao dịch.</p>
-          </div>
-          <div class="ht-mentor-point">
-            <div class="ht-mp-label">02 — Method</div>
-            <p>Xây dựng và kiểm chứng một phương pháp phân tích phù hợp với tính cách của bạn.</p>
-          </div>
-          <div class="ht-mentor-point">
-            <div class="ht-mp-label">03 — Money</div>
-            <p>Thiết lập quy tắc quản trị rủi ro rõ ràng, áp dụng nhất quán qua từng lệnh.</p>
-          </div>
+    <!-- SECTION 4: HIỂU CHÍNH BẢN THÂN MÌNH -->
+    <section class="ht-section ht-self">
+      <div class="ht-wrap">
+        <div class="ht-self-content">
+          <div class="ht-sec-badge">Yếu Tố Quyết Định</div>
+          <h3>Không Có Hệ Thống "Dùng Chung". Bạn Phải Hiểu Chính Bản Thân Mình.</h3>
+          <p>Mỗi người có một tính cách, khung thời gian sinh hoạt, vị thế tài chính và khả năng chịu đựng áp lực hoàn toàn khác nhau. Một hệ thống giao dịch tuyệt vời với người này có thể là thảm họa với người khác.</p>
+          <p>Chỉ khi bạn nhìn sâu vào bên trong, hiểu rõ điểm mạnh, điểm yếu và giới hạn cảm xúc của chính mình — bạn mới có thể tự tay xây dựng một <strong>hệ thống giao dịch của riêng mình</strong>.</p>
         </div>
-
-        <a class="ht-mentor-cta" href="#lienhe">Tìm hiểu chương trình mentor</a>
       </div>
     </section>
 
-    <!-- LIÊN HỆ -->
-    <section class="ht-section ht-contact" id="lienhe">
-      <div class="container">
+    <!-- SECTION: LỘ TRÌNH RÈN LUYỆN TRADER (5 GIAI ĐOẠN CHUẨN NGHỀ TRADING) -->
+    <section class="ht-section ht-roadmap">
+      <div class="ht-wrap">
         <div class="ht-sec-head">
-          <div class="ht-sec-eyebrow">Liên hệ</div>
-          <h2>Bắt đầu xây hệ thống của riêng bạn</h2>
-          <p class="ht-sec-body">Nội dung liên hệ chi tiết sẽ được cập nhật — dưới đây là các kênh chính.</p>
+          <div class="ht-sec-badge">Hành Trình Thực Chiến</div>
+          <h2 class="ht-sec-title ht-sec-title-single">5 Giai Đoạn Để Trở Thành Trader Có Lợi Nhuận Ổn Định</h2>
+          <p class="ht-sec-sub">Hành trình biến Trading từ ngây thơ thành một Nghề Nghiệp thản nhiên kiếm tiền bền vững. Đã có 95% người bỏ cuộc giữa chừng vì đi sai hướng.</p>
         </div>
-        <div class="ht-contact-list">
-          <div class="ht-contact-row">
-            <span class="ht-contact-label">Website</span>
-            <span class="ht-contact-value">nghetrading.com</span>
+
+        <div class="ht-roadmap-steps">
+          <div class="ht-step-item">
+            <div>
+              <div class="ht-step-badge">Giai Đoạn 1</div>
+              <h3>Ngây Thơ Vô Số Tội</h3>
+            </div>
+            <p>Mới bước vào thị trường, ngộ nhận trading thật dễ dàng. Risk quá nhiều, giao dịch cảm xúc, thắng may mắn rồi bầm dập thua lỗ nghiêm trọng.</p>
           </div>
-          <div class="ht-contact-row">
-            <span class="ht-contact-label">Substack</span>
-            <span class="ht-contact-value">neointhezone.substack.com</span>
+
+          <div class="ht-step-item">
+            <div>
+              <div class="ht-step-badge">Giai Đoạn 2</div>
+              <h3>Loay Hoay Tìm "Chén Thánh"</h3>
+            </div>
+            <p>Ý thức được sự thiếu hụt kiến thức nhưng lại sa vào vòng lặp mua chỉ báo, thử 100 hệ thống thần kỳ, đổi phương pháp liên tục mà vẫn thua lỗ.</p>
           </div>
-          <div class="ht-contact-row">
-            <span class="ht-contact-label">Telegram</span>
-            <span class="ht-contact-value">t.me/nhatkytradingvn</span>
+
+          <div class="ht-step-item">
+            <div>
+              <div class="ht-step-badge">Giai Đoạn 3</div>
+              <h3>Thời Khắc Eureka</h3>
+            </div>
+            <p>Ngộ ra không ai đoán trước được thị trường. Tập trung mài dũa 1 hệ thống duy nhất, kiên định quản lý vốn và làm chủ tâm lý bản thân.</p>
           </div>
-          <div class="ht-contact-row">
-            <span class="ht-contact-label">Email / Zalo</span>
-            <span class="ht-contact-value">[cập nhật sau]</span>
+
+          <div class="ht-step-item">
+            <div>
+              <div class="ht-step-badge">Giai Đoạn 4</div>
+              <h3>Năng Lực Có Ý Thức</h3>
+            </div>
+            <p>Vào lệnh kỷ luật theo tín hiệu, chấp nhận thua lỗ nhẹ nhàng. Tài khoản đạt mốc hòa vốn rồi bắt đầu có lợi nhuận tăng trưởng đều đặn.</p>
           </div>
+
+          <div class="ht-step-item ht-step-active">
+            <div>
+              <div class="ht-step-badge">Giai Đoạn 5</div>
+              <h3>Năng Lực Vô Thức</h3>
+            </div>
+            <p>Trading ở chế độ "lái tự động". Làm chủ hoàn toàn cảm xúc, thản nhiên như một công việc hàng ngày — chính thức sống bằng Nghề.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: NGƯỜI ĐỒNG HÀNH (MENTOR) -->
+    <section class="ht-section ht-mentor" id="mentor">
+      <div class="ht-wrap">
+        <div class="ht-sec-badge">Giải Pháp Thực Chiến</div>
+        <h2 class="ht-sec-title ht-sec-title-single">Tại Sao Bạn Cần Một Người Đồng Hành?</h2>
+        <p class="ht-mentor-sub">Tự mò mẫm một mình sẽ khiến bạn trả giá bằng 5-10 năm hoang mang, mất tiền, mất niềm tin và rất có thể sẽ bỏ cuộc trước khi chạm tới thành công.</p>
+
+        <div class="ht-mentor-grid">
+          <div class="ht-mg-card">
+            <span class="ht-mg-icon">🎯</span>
+            <h4>Định Hướng Đúng Ngay Từ Đầu</h4>
+            <p>Không lãng phí thời gian vào những kiến thức rác, không chạy theo những lời hứa hẹn làm giàu ảo tưởng trên mạng.</p>
+          </div>
+          <div class="ht-mg-card">
+            <span class="ht-mg-icon">🔍</span>
+            <h4>Nhìn Ra Điểm Mù Cá Nhân</h4>
+            <p>Con người rất khó tự nhận ra lỗi sai tâm lý của chính mình. Người dẫn dắt sẽ giúp bạn soi chiếu và sửa chữa từng thói quen xấu.</p>
+          </div>
+          <div class="ht-mg-card">
+            <span class="ht-mg-icon">🛡️</span>
+            <h4>Đồng Hành Xây Hệ Thống</h4>
+            <p>Giúp bạn tự định hình hệ thống phù hợp nhất với tính cách bản thân, rèn luyện kỷ luật đến khi bạn tự đứng vững trên đôi chân mình.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: CALL TO ACTION (CHỐT SALE NỐI VỀ TU-VAN.HTML) -->
+    <section class="ht-section ht-cta-sec" id="lienhe">
+      <div class="ht-wrap">
+        <div class="ht-cta-box">
+          <h2 class="ht-cta-title">Dừng Loay Hoay Một Mình.<br>Hãy Bắt Đầu Con Đường Trading Nghiêm Túc.</h2>
+          <p class="ht-cta-desc">Nếu bạn đã mệt mỏi với việc thua lỗ, muốn coi Trading là một NGHỀ NGHIỆP thực sự và tìm kiếm người đồng hành dẫn dắt đúng hướng — tôi sẵn sàng kết nối cùng bạn.</p>
+          
+          <a href="tu-van.html" class="ht-btn-primary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            Mời Tôi 1 Cốc Cafe Để Bắt Đầu Đồng Hành
+          </a>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- FOOTER (giống hệt các trang khác) -->
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
