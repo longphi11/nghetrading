@@ -250,9 +250,9 @@
 
   <script src="main.js"></script>
   <script>
-    // Cấu hình Telegram Bot Token & Chat ID
+    // Cấu hình Telegram Bot Token & Chat ID Cá Nhân (Đồng bộ bảo mật riêng cho ĐẠI KA ID: 488901419)
     window.TG_BOT_TOKEN = "8875937327:AAHP0mfU-qEXk7c96YqgUny44KxTZnKb4QU";
-    window.TG_CHAT_ID = "@nhatkytradingvn";
+    window.TG_CHAT_ID = "488901419"; // ID Telegram riêng của ĐẠI KA
 
     function copyWalletAddress() {
       const addr = "0x40b2E60ad1E5657278c8dC6c533d2Bd1470017b9";
@@ -265,7 +265,7 @@
       });
     }
 
-    // Xử lý gửi Form Đăng Ký thẳng về Telegram & Formspree
+    // Xử lý gửi Form Đăng Ký THẲNG VỀ TELEGRAM CÁ NHÂN ĐẠI KA & Formspree
     document.addEventListener("DOMContentLoaded", function() {
       const bookingForm = document.getElementById('booking-form');
       if (bookingForm) {
@@ -292,7 +292,7 @@
                             `⏰ <b>Thời gian:</b> ${new Date().toLocaleString('vi-VN')}`;
 
           try {
-            // 1. Gửi Telegram Bot
+            // 1. Gửi Telegram Bot riêng cho ĐẠI KA
             if (window.TG_BOT_TOKEN) {
               await fetch(`https://api.telegram.org/bot${window.TG_BOT_TOKEN}/sendMessage`, {
                 method: 'POST',
