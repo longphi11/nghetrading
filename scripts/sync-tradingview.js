@@ -29,17 +29,50 @@ function extractFirstImage(html) {
   return match ? match[1] : null;
 }
 
-function extractCoverImage(item) {
-  if (item.thumbnail && typeof item.thumbnail === "string" && item.thumbnail.startsWith("http")) return item.thumbnail;
-  if (item.enclosure && item.enclosure.link && item.enclosure.link.startsWith("http")) return item.enclosure.link;
+async function extractCoverImage(item) {
+  const link = item.link || "";
+  if (link) {
+    const match = link.match(/\/chart\/[^\/]+\/([a-zA-Z0-9]+)/);
+    if (match && match[1]) {
+      const code = match[1];
+      const prefix = code.charAt(0).toLowerCase();
+      const s3Url = `https://s3.tradingview.com/${prefix}/${code}_big.png`;
+      try {
+        const headRes = await fetch(s3Url, { method: "HEAD" });
+        if (headRes.ok) return s3Url;
+      } catch (e) {}
+    }
+    try {
+      const res = await fetch(link, {
+        headers: {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+          "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        },
+      });
+      if (res.ok) {
+        const html = await res.text();
+        const ogMatch = html.match(/<meta\s+property="og:image"\s+content="([^"]+)"/i) ||
+                        html.match(/<meta\s+name="twitter:image"\s+content="([^"]+)"/i);
+        if (ogMatch && ogMatch[1] && !ogMatch[1].includes("userpics/")) {
+          return ogMatch[1];
+        }
+      }
+    } catch (e) {}
+  }
   const imgFromContent = extractFirstImage(item.content || item.description || "");
-  if (imgFromContent) return imgFromContent;
+  if (imgFromContent && !imgFromContent.includes("userpics/")) return imgFromContent;
   return "https://placehold.co/1000x600?text=Ngh%E1%BB%81+Trading";
 }
 
-function toParagraphs(text) {
+function toParagraphs(text, title) {
   if (!text) return "";
-  const cleaned = text.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  let cleaned = text.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  if (title) {
+    const titleEsc = title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const regex = new RegExp("^" + titleEsc + "\\s*[^\\.]*?longphibtc\\s*", "gi");
+    cleaned = cleaned.replace(regex, "").trim();
+    cleaned = cleaned.replace(/^(Gold|BTC|Bitcoin|Crypto|FOREXCOM|OANDA|BYBIT|BITSTAMP)[^\\.]*?longphibtc\\s*/gi, "").trim();
+  }
   return cleaned
     .split(/(?<=\.)\s+/)
     .filter(Boolean)
@@ -85,7 +118,7 @@ async function main() {
     const dateStr = pubDate.toISOString().split("T")[0];
 
     const contentText = item.content || item.description || "";
-    const cover_image = extractCoverImage(item);
+    const cover_image = await extractCoverImage(item);
 
     const titleLower = title.toLowerCase();
     const isBtc = titleLower.includes("btc") || titleLower.includes("bitcoin");
@@ -98,7 +131,7 @@ async function main() {
     if (existingIds.has(id)) continue;
 
     const excerpt = title;
-    const content_html = toParagraphs(contentText);
+    const content_html = toParagraphs(contentText, title);
     const maxEntryNo = existingPosts.reduce((max, p) => Math.max(max, p.entry_no || 0), 0);
 
     const newPost = {
@@ -114,7 +147,7 @@ async function main() {
       source_link: link,
     };
 
-    existingPosts.push(newPost);
+    existingPosts.unshift(newPost);
     existingIds.add(id);
     existingLinks.add(link);
     addedCount++;

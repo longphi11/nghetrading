@@ -39,8 +39,46 @@ const observer = new IntersectionObserver((entries) => {
 
 fadeEls.forEach(el => observer.observe(el));
 
-// (Đã bỏ đoạn xử lý form đăng ký giả — ô "ĐĂNG KÝ NHẬN BÀI VIẾT" giờ dùng iframe
-// đăng ký thật của Substack, Substack tự xử lý toàn bộ phần lưu email và gửi mail.)
+// Cập nhật tự động bảng giá thị trường (VN-Index, S&P 500, BTC, Vàng, USD)
+(async function initVNMarketPrices() {
+  const btmcEl = document.getElementById('btmc-vrtl-price');
+  const vcbEl = document.getElementById('vcb-usd-price');
+  const vnindexEl = document.getElementById('vnindex-price');
+  const vnindexChangeEl = document.getElementById('vnindex-change');
+  const sp500El = document.getElementById('sp500-price');
+  const sp500ChangeEl = document.getElementById('sp500-change');
+  const btcEl = document.getElementById('btc-price');
+  const goldWorldEl = document.getElementById('gold-world-price');
+
+  if (!btmcEl && !vnindexEl) return;
+
+  try {
+    const res = await fetch('data/market-prices.json', { cache: 'no-store' });
+    if (res.ok) {
+      const data = await res.json();
+      if (btmcEl && data.btmc_vrtl) btmcEl.textContent = data.btmc_vrtl.price;
+      if (vcbEl && data.vcb_usd) vcbEl.textContent = data.vcb_usd.price;
+      if (btcEl && data.btc) btcEl.textContent = data.btc.price;
+      if (goldWorldEl && data.gold_world) goldWorldEl.textContent = data.gold_world.price;
+
+      if (vnindexEl && data.vnindex) {
+        vnindexEl.textContent = data.vnindex.price;
+        if (vnindexChangeEl && data.vnindex.change) {
+          vnindexChangeEl.textContent = data.vnindex.change;
+          vnindexChangeEl.style.color = data.vnindex.isUp ? 'var(--green)' : '#d93025';
+        }
+      }
+
+      if (sp500El && data.sp500) {
+        sp500El.textContent = data.sp500.price;
+        if (sp500ChangeEl && data.sp500.change) {
+          sp500ChangeEl.textContent = data.sp500.change;
+          sp500ChangeEl.style.color = data.sp500.isUp ? 'var(--green)' : '#d93025';
+        }
+      }
+    }
+  } catch (err) {}
+})();
 
 // ===========================
 //  TIỆN ÍCH TRANG BÀI VIẾT

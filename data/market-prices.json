@@ -1,0 +1,32 @@
+{
+  "vnindex": {
+    "price": "1.669,01",
+    "change": "▼ -17,10 (-1,01%)",
+    "isUp": false
+  },
+  "sp500": {
+    "price": "7.411,98",
+    "change": "▲ +3.68 (+0.05%)",
+    "isUp": true
+  },
+  "btc": {
+    "price": "$65.250",
+    "change": "▲ Tiền mã hóa",
+    "isUp": true
+  },
+  "gold_world": {
+    "price": "$4.110,00",
+    "change": "▲ USD / oz",
+    "isUp": true
+  },
+  "btmc_vrtl": {
+    "price": "144,20 triệu/lượng",
+    "change": "▲ Vàng Rồng Thăng Long",
+    "isUp": true
+  },
+  "vcb_usd": {
+    "price": "26.257 VNĐ",
+    "change": "▲ Tỷ giá niêm yết",
+    "isUp": true
+  }
+}
