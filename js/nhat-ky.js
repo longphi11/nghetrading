@@ -13,7 +13,7 @@ let currentPage = 1;
 
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const res = await fetch('data/journal.json', { cache: 'no-store' });
+    const res = await fetch('data/journal.json?v=' + Date.now(), { cache: 'no-store' });
     allJournalPosts = await res.json();
     allJournalPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
   } catch (err) {

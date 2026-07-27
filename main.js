@@ -53,7 +53,7 @@ fadeEls.forEach(el => observer.observe(el));
   if (!btmcEl && !vnindexEl) return;
 
   try {
-    const res = await fetch('data/market-prices.json', { cache: 'no-store' });
+    const res = await fetch('data/market-prices.json?v=' + Date.now(), { cache: 'no-store' });
     if (res.ok) {
       const data = await res.json();
       if (btmcEl && data.btmc_vrtl) btmcEl.textContent = data.btmc_vrtl.price;
@@ -169,7 +169,7 @@ const DISQUS_SHORTNAME = "nghetrading";
   // ----- 2. BÀI VIẾT LIÊN QUAN (Tối ưu giữ chân độc giả) -----
   try {
     const dataPath = window.location.pathname.includes('/posts/') ? '../data/posts.json' : 'data/posts.json';
-    const res = await fetch(dataPath, { cache: 'no-store' });
+    const res = await fetch(dataPath + '?v=' + Date.now(), { cache: 'no-store' });
     if (!res.ok) throw new Error(`Không tải được posts.json: status ${res.status}`);
     const allPosts = await res.json();
 
