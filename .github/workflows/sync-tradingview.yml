@@ -21,9 +21,6 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Cài đặt rss-parser
-        run: npm install rss-parser
-
       - name: Chạy script đồng bộ TradingView
         run: node scripts/sync-tradingview.js
         env:

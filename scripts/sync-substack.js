@@ -1,20 +1,20 @@
 // scripts/sync-substack.js
-// Tự động đồng bộ bài viết từ Substack RSS feed vào website.
+// Tự động đồng bộ bài viết từ Substack (Instant JSON API + RSS Fallback) vào website.
 // Chạy bởi GitHub Actions (xem .github/workflows/sync-substack.yml)
 
 const fs = require("fs");
 const path = require("path");
-const Parser = require("rss-parser");
 
-// ⚙️ CẤU HÌNH — đổi feed URL nếu bạn đổi tên Substack
-const FEED_URL = "https://neointhezone.substack.com/feed";
+const SUBSTACK_DOMAIN = "neointhezone.substack.com";
+const API_URL = `https://${SUBSTACK_DOMAIN}/api/v1/posts?limit=20`;
+const FEED_URL = `https://${SUBSTACK_DOMAIN}/feed`;
+
 const ROOT = path.join(__dirname, "..");
 const POSTS_DIR = path.join(ROOT, "posts");
 const DATA_FILE = path.join(ROOT, "data", "posts.json");
 const TEMPLATE_FILE = path.join(ROOT, "templates", "post-template.html");
 const OVERRIDES_FILE = path.join(ROOT, "data", "category-overrides.json");
 
-// Đọc bảng phân loại thủ công (nếu có). Dạng: { "slug-bai-viet": "Tâm Lý" }
 function loadCategoryOverrides() {
   if (!fs.existsSync(OVERRIDES_FILE)) return {};
   try {
@@ -24,18 +24,6 @@ function loadCategoryOverrides() {
   }
 }
 
-const parser = new Parser({
-  headers: {
-    "User-Agent":
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
-    Accept: "application/rss+xml, application/xml, text/xml, */*",
-  },
-  customFields: {
-    item: [["content:encoded", "contentEncoded"]],
-  },
-});
-
-// Bỏ dấu tiếng Việt + tạo slug URL-friendly
 function slugify(str) {
   return str
     .normalize("NFD")
@@ -49,146 +37,103 @@ function slugify(str) {
     .replace(/-+/g, "-");
 }
 
-// Định dạng ngày kiểu "10 Tháng 7, 2026"
 function formatDateVN(dateStr) {
   const d = new Date(dateStr);
-  const months = [
-    "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12",
-  ];
+  const months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
   return `${d.getDate()} Tháng ${months[d.getMonth()]}, ${d.getFullYear()}`;
 }
 
-// Lấy ảnh cover đầu tiên trong nội dung bài viết (nếu có)
 function extractFirstImage(html) {
   const match = html && html.match(/<img[^>]+src="([^">]+)"/);
   return match ? match[1] : null;
 }
 
-// Cắt đoạn tóm tắt ngắn (bỏ thẻ HTML) từ nội dung
-function extractExcerpt(html, maxLen = 200) {
-  const text = (html || "")
-    .replace(/<[^>]+>/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-  return text.length > maxLen ? text.slice(0, maxLen).trim() + "..." : text;
+function extractExcerpt(html) {
+  if (!html) return "";
+  const text = html.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  return text.slice(0, 160) + (text.length > 160 ? "..." : "");
 }
 
-async function fetchViaRss2Json() {
-  const url = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(FEED_URL)}`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`status ${res.status}`);
+async function fetchFromSubstackApi() {
+  console.log(`Đang lấy bài từ Substack Instant API: ${API_URL}`);
+  const res = await fetch(API_URL, {
+    headers: {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+      Accept: "application/json",
+    },
+  });
+  if (!res.ok) throw new Error(`API status ${res.status}`);
   const data = await res.json();
-  if (data.status !== "ok") throw new Error(data.message || "rss2json báo lỗi");
-  return {
-    items: data.items.map((item) => ({
-      title: item.title,
-      link: item.link,
-      pubDate: item.pubDate,
-      isoDate: item.pubDate,
-      categories: item.categories,
-      contentEncoded: item.content || item.description || "",
-      content: item.content || item.description || "",
-    })),
-  };
+  if (!Array.isArray(data)) throw new Error("Dữ liệu API không phải mảng");
+
+  return data.map((item) => ({
+    title: item.title,
+    slug: item.slug || slugify(item.title),
+    pubDate: item.post_date || item.published_at || new Date().toISOString(),
+    content: item.body_html || item.description || "",
+    link: item.canonical_url || `https://${SUBSTACK_DOMAIN}/p/${item.slug}`,
+    cover_image: item.cover_image || "",
+    categories: (item.postTags || []).map((t) => t.name || t.slug),
+  }));
 }
 
-async function fetchFeed() {
-  // 1. Thử gọi thẳng trước
-  try {
-    return await parser.parseURL(FEED_URL);
-  } catch (err) {
-    console.log(`Gọi thẳng thất bại (${err.message}), thử qua rss2json...`);
-  }
-
-  // 2. Thử dịch vụ chuyên đọc RSS (thường vượt chặn tốt hơn proxy CORS thông thường)
-  try {
-    return await fetchViaRss2Json();
-  } catch (err) {
-    console.log(`rss2json thất bại (${err.message}), thử qua proxy CORS...`);
-  }
-
-  // 3. Danh sách proxy CORS dự phòng — thử lần lượt cho tới khi có cái chạy được
-  const proxies = [
-    (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-    (url) => `https://corsproxy.io/?url=${encodeURIComponent(url)}`,
-    (url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
-  ];
-
-  let lastError;
-  for (const buildProxyUrl of proxies) {
-    const proxyUrl = buildProxyUrl(FEED_URL);
-    try {
-      console.log(`Đang thử proxy: ${proxyUrl}`);
-      const res = await fetch(proxyUrl, {
-        headers: { "User-Agent": "Mozilla/5.0 (compatible; NgheTradingBot/1.0)" },
-      });
-      if (!res.ok) throw new Error(`status ${res.status}`);
-      const xml = await res.text();
-      if (!xml || !xml.includes("<rss") && !xml.includes("<feed")) {
-        throw new Error("phản hồi không phải XML hợp lệ");
-      }
-      return await parser.parseString(xml);
-    } catch (err) {
-      console.log(`Proxy này thất bại: ${err.message}`);
-      lastError = err;
-    }
-  }
-
-  throw new Error(`Tất cả các cách lấy feed đều thất bại. Lỗi cuối cùng: ${lastError && lastError.message}`);
-}
-
-// Tự động phân loại bài viết Substack theo từ khóa thông minh
 function autoDetectCategory(title, content, categories) {
-  const catText = (categories || []).join(' ').toLowerCase();
-  if (catText.includes('tâm lý') || catText.includes('kỷ luật')) return 'Tâm lý & Kỷ luật';
-  if (catText.includes('rủi ro') || catText.includes('quản lý vốn')) return 'Quản trị rủi ro';
-  if (catText.includes('kỹ thuật') || catText.includes('phương pháp')) return 'Phương pháp & Kỹ thuật';
-  if (catText.includes('xác suất')) return 'Tư duy xác suất';
+  const catText = (categories || []).join(" ").toLowerCase();
+  if (catText.includes("tâm lý") || catText.includes("kỷ luật")) return "Tâm lý & Kỷ luật";
+  if (catText.includes("rủi ro") || catText.includes("quản lý vốn")) return "Quản trị rủi ro";
+  if (catText.includes("kỹ thuật") || catText.includes("phương pháp")) return "Phương pháp & Kỹ thuật";
+  if (catText.includes("xác suất")) return "Tư duy xác suất";
 
   const text = `${title} ${content.slice(0, 500)}`.toLowerCase();
   if (/rủi ro|quản lý vốn|cháy tài khoản|cắt lỗ|bảo vệ tài khoản|vốn/i.test(text)) {
-    return 'Quản trị rủi ro';
+    return "Quản trị rủi ro";
   }
-  if (/tâm lý|cảm xúc|kỷ luật|cái tôi|nỗi sợ|con quỷ|quyết định|cờ bạc|hiểu bản thân|hoang đường/i.test(text)) {
-    return 'Tâm lý & Kỷ luật';
+  if (/tâm lý|cảm xúc|kỷ luật|cái tôi|nỗi sợ|con quỷ|quyết định|cờ bạc|hiểu bản thân|hoang đường|tĩnh lặng/i.test(text)) {
+    return "Tâm lý & Kỷ luật";
   }
-  if (/điểm vào lệnh|kỹ thuật|kế hoạch|lính bắn tỉa|cặp tiền|hết ngày/i.test(text)) {
-    return 'Phương pháp & Kỹ thuật';
+  if (/điểm vào lệnh|kỹ thuật|kế hoạch|lính bắn tỉa|cặp tiền|hết ngày|vào lệnh/i.test(text)) {
+    return "Phương pháp & Kỹ thuật";
   }
   if (/xác suất|poker|may mắn/i.test(text)) {
-    return 'Tư duy xác suất';
+    return "Tư duy xác suất";
   }
-  return 'Nghề trading';
+  return "Nghề trading";
 }
 
 async function main() {
-  console.log(`Đang lấy feed: ${FEED_URL}`);
-  const feed = await fetchFeed();
+  let items = [];
+  try {
+    items = await fetchFromSubstackApi();
+  } catch (err) {
+    console.error(`Không lấy được bài từ Instant API (${err.message}). Bỏ qua lần này.`);
+    fs.writeFileSync(path.join(ROOT, ".sync-result"), "unchanged");
+    return;
+  }
+
   const overrides = loadCategoryOverrides();
 
-  // Đọc danh sách bài viết đã có
   let existingPosts = [];
   if (fs.existsSync(DATA_FILE)) {
     existingPosts = JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
   }
   const existingSlugs = new Set(existingPosts.map((p) => p.slug));
-
+  const existingTitles = new Set(existingPosts.map((p) => p.title.toLowerCase().trim()));
   const template = fs.readFileSync(TEMPLATE_FILE, "utf-8");
   if (!fs.existsSync(POSTS_DIR)) fs.mkdirSync(POSTS_DIR, { recursive: true });
 
   let addedCount = 0;
 
-  for (const item of feed.items) {
-    const slug = slugify(item.title);
-    if (existingSlugs.has(slug)) continue; // đã có rồi, bỏ qua
+  for (const item of items) {
+    if (existingTitles.has(item.title.toLowerCase().trim())) continue;
+    const slug = item.slug || slugify(item.title);
+    if (existingSlugs.has(slug)) continue;
 
-    const contentHtml = item.contentEncoded || item.content || item.contentSnippet || "";
-    const thumb = extractFirstImage(contentHtml) || "";
+    const contentHtml = item.content || "";
+    const thumb = item.cover_image || extractFirstImage(contentHtml) || "";
     const excerpt = extractExcerpt(contentHtml);
     const category = overrides[slug] || autoDetectCategory(item.title, contentHtml, item.categories);
-    const dateVN = formatDateVN(item.pubDate || item.isoDate);
+    const dateVN = formatDateVN(item.pubDate);
 
-    // Tạo trang bài viết từ template
     const postHtml = template
       .replace(/{{TITLE}}/g, item.title || "")
       .replace(/{{DATE}}/g, dateVN)
@@ -202,7 +147,7 @@ async function main() {
     existingPosts.unshift({
       title: item.title,
       date: dateVN,
-      pubDate: item.pubDate || item.isoDate,
+      pubDate: item.pubDate,
       category,
       excerpt,
       link: `posts/${slug}.html`,
@@ -213,28 +158,20 @@ async function main() {
     addedCount++;
   }
 
-  // Áp lại bảng phân loại thủ công cho cả những bài đã có sẵn (phòng khi bạn vừa sửa category-overrides.json)
   existingPosts.forEach((p) => {
     if (overrides[p.slug]) p.category = overrides[p.slug];
   });
 
-  // Sắp xếp mới nhất lên đầu, lưu lại
   existingPosts.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
   fs.mkdirSync(path.dirname(DATA_FILE), { recursive: true });
   fs.writeFileSync(DATA_FILE, JSON.stringify(existingPosts, null, 2), "utf-8");
 
-  // Tự động tạo liên kết nội bộ chéo cho bài viết mới và bài cũ
   applyAutoInternalLinks();
 
-  console.log(`Hoàn tất. ${addedCount} bài viết mới được thêm.`);
-  // Ghi cờ để workflow biết có thay đổi hay không
-  fs.writeFileSync(
-    path.join(ROOT, ".sync-result"),
-    addedCount > 0 ? "changed" : "unchanged"
-  );
+  console.log(`Hoàn tất. Thêm mới ${addedCount} bài viết Substack.`);
+  fs.writeFileSync(path.join(ROOT, ".sync-result"), addedCount > 0 ? "changed" : "unchanged");
 }
 
-// Tự động tạo liên kết nội bộ chéo cho toàn bộ bài viết
 function applyAutoInternalLinks() {
   const linkRules = [
     { kw: 'quản trị rủi ro', target: 'quan-tri-rui-ro.html' },
