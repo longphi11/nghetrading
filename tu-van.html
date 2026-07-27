@@ -124,6 +124,10 @@
                 <input type="tel" id="phone" name="Số điện thoại" placeholder="Nhập số điện thoại" required />
               </div>
               <div class="tv-form-row">
+                <label for="telegram">Username Telegram</label>
+                <input type="text" id="telegram" name="Username Telegram" placeholder="VD: @username hoặc SĐT Telegram" />
+              </div>
+              <div class="tv-form-row">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="Email" placeholder="Nhập địa chỉ email" required />
               </div>
@@ -250,7 +254,7 @@
 
   <script src="main.js"></script>
   <script>
-    // Cấu hình Telegram Bot Token & Chat ID Cá Nhân (Đồng bộ bảo mật riêng cho ĐẠI KA ID: 488901419)
+    // Cấu hình Telegram Bot Token & Chat ID Cá Nhân (Bảo mật riêng cho ĐẠI KA ID: 488901419)
     window.TG_BOT_TOKEN = "8875937327:AAHP0mfU-qEXk7c96YqgUny44KxTZnKb4QU";
     window.TG_CHAT_ID = "488901419"; // ID Telegram riêng của ĐẠI KA
 
@@ -277,6 +281,7 @@
 
           const name = form.querySelector('#name').value.trim();
           const phone = form.querySelector('#phone').value.trim();
+          const telegram = form.querySelector('#telegram') ? form.querySelector('#telegram').value.trim() : '';
           const email = form.querySelector('#email').value.trim();
           const note = form.querySelector('#note').value.trim();
 
@@ -287,6 +292,7 @@
                             `----------------------------------\n` +
                             `👤 <b>Họ tên:</b> ${name}\n` +
                             `📞 <b>SĐT / Zalo:</b> ${phone}\n` +
+                            `✈️ <b>Telegram:</b> ${telegram || 'Không điền'}\n` +
                             `✉️ <b>Email:</b> ${email}\n` +
                             `📝 <b>Nội dung:</b> ${note || 'Không có'}\n` +
                             `⏰ <b>Thời gian:</b> ${new Date().toLocaleString('vi-VN')}`;
