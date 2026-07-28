@@ -100,14 +100,58 @@ function autoDetectCategory(title, content, categories) {
   return "Nghề trading";
 }
 
+async function fetchFromSubstackRss() {
+  console.log(`Đang lấy bài từ Substack RSS Feed: ${FEED_URL}`);
+  const res = await fetch(FEED_URL, {
+    headers: {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+      Accept: "text/xml,application/xml,application/rss+xml",
+    },
+  });
+  if (!res.ok) throw new Error(`RSS status ${res.status}`);
+  const xml = await res.text();
+  const itemMatches = xml.match(/<item>[\s\S]*?<\/item>/gi) || [];
+
+  return itemMatches.map((itemXml) => {
+    const titleMatch = itemXml.match(/<title>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/title>/i);
+    const linkMatch = itemXml.match(/<link>([\s\S]*?)<\/link>/i);
+    const pubDateMatch = itemXml.match(/<pubDate>([\s\S]*?)<\/pubDate>/i);
+    const contentMatch = itemXml.match(/<content:encoded>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/content:encoded>/i) || itemXml.match(/<description>(?:<!\[CDATA\[)?([\s\S]*?)(?:\]\]>)?<\/description>/i);
+    const coverMatch = itemXml.match(/<enclosure[^>]+url="([^">]+)"/i) || itemXml.match(/<media:content[^>]+url="([^">]+)"/i);
+
+    const title = titleMatch ? titleMatch[1].trim() : "";
+    const link = linkMatch ? linkMatch[1].trim() : "";
+    const slugMatch = link.match(/\/p\/([a-zA-Z0-9-]+)/);
+    const slug = slugMatch ? slugMatch[1] : slugify(title);
+    const pubDate = pubDateMatch ? new Date(pubDateMatch[1].trim()).toISOString() : new Date().toISOString();
+    const content = contentMatch ? contentMatch[1].trim() : "";
+    const cover_image = coverMatch ? coverMatch[1] : "";
+
+    return {
+      title,
+      slug,
+      pubDate,
+      content,
+      link: link || `https://${SUBSTACK_DOMAIN}/p/${slug}`,
+      cover_image,
+      categories: [],
+    };
+  });
+}
+
 async function main() {
   let items = [];
   try {
     items = await fetchFromSubstackApi();
   } catch (err) {
-    console.error(`Không lấy được bài từ Instant API (${err.message}). Bỏ qua lần này.`);
-    fs.writeFileSync(path.join(ROOT, ".sync-result"), "unchanged");
-    return;
+    console.warn(`Lỗi Instant API (${err.message}). Chuyển sang RSS Feed fallback...`);
+    try {
+      items = await fetchFromSubstackRss();
+    } catch (rssErr) {
+      console.error(`Cả Instant API và RSS Feed đều lỗi (${rssErr.message}). Thất bại.`);
+      fs.writeFileSync(path.join(ROOT, ".sync-result"), "unchanged");
+      process.exit(1);
+    }
   }
 
   const overrides = loadCategoryOverrides();
