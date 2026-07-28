@@ -1,0 +1,84 @@
+{
+  "redirects": [
+    {
+      "source": "/posts/oi-ieu-chia-se-ve-giao-dich-tren.html",
+      "destination": "/posts/doi-dieu-chia-se-ve-giao-dich-tren-thi-truong-ngoai-hoi.html",
+      "permanent": true
+    },
+    {
+      "source": "/posts/mot-so-cau-noi-kinh-ien-ve-trading.html",
+      "destination": "/posts/mot-so-cau-noi-kinh-dien-ve-trading.html",
+      "permanent": true
+    },
+    {
+      "source": "/posts/4-goi-y-e-co-iem-vao-lenh-tot-nhat.html",
+      "destination": "/posts/4-goi-y-de-co-diem-vao-lenh-tot-nhat.html",
+      "permanent": true
+    },
+    {
+      "source": "/posts/tai-sao-ban-nen-giao-dich-khi-het.html",
+      "destination": "/posts/tai-sao-ban-nen-giao-dich-khi-het-ngay-giao-dich.html",
+      "permanent": true
+    },
+    {
+      "source": "/posts/poker-day-ban-ieu-gi-ve-trading.html",
+      "destination": "/posts/poker-day-ban-dieu-gi-ve-trading.html",
+      "permanent": true
+    },
+    {
+      "source": "/posts/tai-sao-ban-can-bao-ve-tai-khoan.html",
+      "destination": "/posts/tai-sao-ban-can-bao-ve-tai-khoan-cua-minh-va-bang-cach-nao.html",
+      "permanent": true
+    },
+    {
+      "source": "/posts/nhung-chuyen-hoang-uong-ve-trading.html",
+      "destination": "/posts/nhung-chuyen-hoang-duong-ve-trading-ma-ban-can-phai-loai-bo-khoi-tam-tri.html",
+      "permanent": true
+    },
+    {
+      "source": "/posts/thoi-gian-ieu-thuong-bi-coi-nhe-trong.html",
+      "destination": "/posts/thoi-gian-dieu-thuong-bi-coi-nhe-trong-trading.html",
+      "permanent": true
+    },
+    {
+      "source": "/posts/toi-len-ke-hoach-giao-dich-nhu-the.html",
+      "destination": "/posts/toi-len-ke-hoach-giao-dich-nhu-the-nao.html",
+      "permanent": true
+    },
+    {
+      "source": "/posts/nhung-ieu-cang-biet-som-cang-tot.html",
+      "destination": "/posts/nhung-dieu-cang-biet-som-cang-tot-khi-trading.html",
+      "permanent": true
+    },
+    {
+      "source": "/posts/tai-sao-ban-nen-chi-chon-1-cap-tien.html",
+      "destination": "/posts/tai-sao-ban-nen-chi-chon-1-cap-tien-te-yeu-thich-de-giao-dich.html",
+      "permanent": true
+    },
+    {
+      "source": "/posts/cam-xuc-la-thu-vat-i.html",
+      "destination": "/posts/cam-xuc-la-thu-vat-di.html",
+      "permanent": true
+    },
+    {
+      "source": "/posts/trading-la-1-hanh-trinh-khong-phai.html",
+      "destination": "/posts/trading-la-1-hanh-trinh-khong-phai-la-dich-den.html",
+      "permanent": true
+    },
+    {
+      "source": "/posts/nhung-con-quy-can-tranh-xa-bang-moi.html",
+      "destination": "/posts/nhung-con-quy-can-tranh-xa-bang-moi-gia-trong-trading.html",
+      "permanent": true
+    },
+    {
+      "source": "/posts/nguoi-giao-dich-va-nguoi-co-bac-trong.html",
+      "destination": "/posts/nguoi-giao-dich-va-nguoi-co-bac-trong-trading.html",
+      "permanent": true
+    },
+    {
+      "source": "/posts/vuot-qua-noi-so-hai-trong-giao-dich.html",
+      "destination": "/posts/vuot-qua-noi-so-hai-trong-giao-dich-ngoai-hoi.html",
+      "permanent": true
+    }
+  ]
+}
