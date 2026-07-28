@@ -2,8 +2,8 @@ name: Đồng bộ bài viết từ Substack
 
 on:
   schedule:
-    # Tự động quét & đồng bộ bài mới từ Substack mỗi 5 phút
-    - cron: "*/5 * * * *"
+    # Tự động quét & đồng bộ bài mới từ Substack lúc 8:00 sáng hàng ngày (01:00 UTC)
+    - cron: "0 1 * * *"
   workflow_dispatch: {} # cho phép bấm "Run workflow" thủ công trên GitHub
 
 permissions:
