@@ -90,6 +90,48 @@ Trading không phải là cờ bạc, và bạn **không hề cô đơn** trong 
   bot.sendMessage(chatId, welcomeMsg, { parse_mode: 'Markdown' });
 });
 
+// Lấy API Key của Gemini nếu có
+const geminiApiKey = process.env.GEMINI_API_KEY;
+
+/**
+ * Gọi Google Gemini AI để trò chuyện thông minh tự do
+ */
+async function askGeminiAI(userText, obstacleContext = '') {
+  if (!geminiApiKey || geminiApiKey === 'YOUR_GEMINI_API_KEY_HERE') return null;
+
+  const systemInstruction = 
+`Bạn là Trợ lý AI nhập vai ĐẠI KA - Chuyên gia Trading sáng lập thương hiệu Nghề Trading (nghetrading.com).
+Tôn chỉ phong cách của bạn:
+1. Thấu cảm, điềm tĩnh, thẳng thắn, hiểu sâu sắc nỗi đau bế tắc của các trader (gồng lỗ, trả thù thị trường, sợ hãi, coi trading là cờ bạc).
+2. Định hình tư duy trading chuẩn theo trường phái tâm lý "Trading in the Zone" (Mark Douglas) và quản trị rủi ro nghiêm ngặt.
+3. Thị trường tập trung phân tích chính là Vàng (XAU/USD).
+4. Trả lời ngắn gọn, tinh tế, không dông dài. Luôn lắng nghe và đưa ra góc nhìn đúng đắn.
+5. Gợi ý nhẹ nhàng độc giả thực hiện bài test trắc nghiệm 8 câu Mark Douglas hoặc Đặt lịch cafe 1-1 với ĐẠI KA nếu họ cần tháo gỡ nút thắt triệt để.`;
+
+  try {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [
+          {
+            role: 'user',
+            parts: [{ text: `${systemInstruction}\n\n[Bế tắc trước đó của khách: "${obstacleContext}"]\n\nTin nhắn/Câu hỏi mới của khách: "${userText}"` }]
+          }
+        ]
+      })
+    });
+
+    const data = await res.json();
+    if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+      return data.candidates[0].content.parts[0].text;
+    }
+  } catch (err) {
+    console.error('⚠️ Lỗi gọi Gemini API:', err.message);
+  }
+  return null;
+}
+
 /**
  * Xử lý tin nhắn văn bản nhập từ người dùng
  */
@@ -100,8 +142,11 @@ bot.on('message', async (msg) => {
   // Bỏ qua nếu là các lệnh hệ thống
   if (!text || text.startsWith('/')) return;
 
-  const session = userSessions.get(chatId);
-  if (!session) return;
+  let session = userSessions.get(chatId);
+  if (!session) {
+    session = { step: 'IDLE', obstacle: '', questions: [], currentIdx: 0, score: 0, traits: [], bookingData: {} };
+    userSessions.set(chatId, session);
+  }
 
   // Bước 1: Khách vừa nhập lý do bế tắc
   if (session.step === 'AWAITING_OBSTACLE') {
@@ -152,6 +197,31 @@ Chúc bạn giữ vững tâm lý và giao dịch kỷ luật!`,
 👉 *ĐẠI KA hãy bấm vào username @${msg.from.username || ''} hoặc chat trực tiếp để phản hồi khách!*`;
 
       bot.sendMessage(adminChatId, adminMsg, { parse_mode: 'Markdown' }).catch(err => console.error('Lỗi gửi tin admin:', err.message));
+    }
+  }
+
+  // Khách nhắn tin trò chuyện tự do ngoài kịch bản -> Dùng Gemini AI phản hồi
+  else {
+    // Hiển thị trạng thái đang soạn tin (typing)
+    bot.sendChatAction(chatId, 'typing');
+
+    const aiReply = await askGeminiAI(text, session.obstacle);
+    if (aiReply) {
+      await bot.sendMessage(chatId, aiReply, {
+        parse_mode: 'Markdown',
+        ...getMainMenuKeyboard()
+      }).catch(async () => {
+        // Fallback nếu Markdown lỗi
+        await bot.sendMessage(chatId, aiReply, getMainMenuKeyboard());
+      });
+    } else {
+      // Nếu chưa có Gemini API Key
+      await bot.sendMessage(chatId,
+`Cảm ơn chia sẻ của bạn! Tôi đã ghi nhận tin nhắn.
+
+Để chẩn đoán tâm lý trading của bạn một cách chính xác nhất, bạn có thể bấm nút bên dưới để làm bài trắc nghiệm Mark Douglas hoặc Đặt lịch hẹn Cafe 1-1 với ĐẠI KA nhé!`,
+        getMainMenuKeyboard()
+      );
     }
   }
 });
