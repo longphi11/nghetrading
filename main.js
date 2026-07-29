@@ -330,7 +330,7 @@ const DISQUS_SHORTNAME = "nghetrading";
         <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
       </svg>
     </a>
-    <div class="telegram-float-text">Hỗ trợ</div>
+    <div class="telegram-float-text">Tâm sự trading</div>
   `;
   document.body.appendChild(widget);
 
