@@ -2,3 +2,6 @@ node_modules/
 .sync-result
 .journal-sync-result
 .DS_Store
+.env
+telegram-bot/node_modules/
+telegram-bot/.env

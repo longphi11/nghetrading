@@ -1,0 +1,15 @@
+{
+  "name": "nghetrading-telegram-bot",
+  "version": "1.0.0",
+  "description": "Telegram Bot Bắt Bệnh Tâm Lý Trading & Đặt Lịch Coaching 1-1 cho Nghề Trading",
+  "main": "bot.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node bot.js",
+    "dev": "node --watch bot.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "node-telegram-bot-api": "^0.66.0"
+  }
+}

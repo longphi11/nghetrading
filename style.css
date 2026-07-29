@@ -743,15 +743,21 @@ img { display: block; max-width: 100%; }
   margin-right: 2px;
   margin-top: 2px;
 }
-.telegram-float-text {
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--text-color, #555);
-}
 @media (max-width: 768px) {
   .telegram-float-wrapper {
-    display: none !important;
+    bottom: 16px;
+    left: 16px;
+  }
+  .telegram-float-btn {
+    width: 46px;
+    height: 46px;
+  }
+  .telegram-float-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+  .telegram-float-text {
+    font-size: 10px;
   }
 }
 
