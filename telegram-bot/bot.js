@@ -12,6 +12,15 @@ if (!token || token === 'YOUR_TELEGRAM_BOT_TOKEN_HERE') {
   process.exit(1);
 }
 
+const http = require('http');
+const port = process.env.PORT || 3000;
+http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+  res.end('🤖 Telegram Bot Nghề Trading đang hoạt động 24/7!\n');
+}).listen(port, () => {
+  console.log(`🌐 HTTP Server listening on port ${port} for Render Health Check`);
+});
+
 const bot = new TelegramBot(token, { polling: true });
 
 // Lưu trữ trạng thái phiên làm việc của người dùng (in-memory)
