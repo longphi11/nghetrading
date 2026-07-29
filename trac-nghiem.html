@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trắc Nghiệm Tâm Lý Trading | Nghề Trading</title>
+  <meta name="description" content="Bài trắc nghiệm 8 câu chẩn đoán tâm lý trading dựa trên sách Trading in the Zone (Mark Douglas). Nhận diện điểm mù và nút thắt bế tắc trong giao dịch Vàng & Forex." />
+  
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Trắc Nghiệm Tâm Lý Trading - Bắt Bệnh Nút Thắt Giao Dịch" />
+  <meta property="og:description" content="Chẩn đoán chính xác tính cách trading và tâm lý gồng lỗ/sợ hãi theo chuẩn Mark Douglas." />
+  <meta property="og:image" content="https://nghetrading.com/images/og-image.jpg" />
+
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* CSS Riêng Cho Trang Trắc Nghiệm Tâm Lý */
+    .quiz-container {
+      max-width: 800px;
+      margin: 40px auto 80px;
+      padding: 0 20px;
+    }
+    .quiz-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 36px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+    .quiz-progress-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .quiz-progress-fill {
+      height: 100%;
+      width: 12.5%;
+      background: linear-gradient(90deg, #2AABEE, #00d2ff);
+      transition: width 0.4s ease;
+    }
+    .quiz-step-text {
+      font-size: 13px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    .quiz-question-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 28px;
+      line-height: 1.4;
+    }
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .quiz-option-item {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 18px 20px;
+      cursor: pointer;
+      color: #ddd;
+      font-size: 15px;
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .quiz-option-item:hover {
+      background: rgba(42, 171, 238, 0.1);
+      border-color: rgba(42, 171, 238, 0.5);
+      color: #fff;
+      transform: translateX(4px);
+    }
+    .quiz-option-item.selected {
+      background: rgba(42, 171, 238, 0.2);
+      border-color: #2AABEE;
+      color: #fff;
+      font-weight: 600;
+    }
+    .quiz-option-radio {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .quiz-option-item.selected .quiz-option-radio {
+      border-color: #2AABEE;
+      background: #2AABEE;
+    }
+    .quiz-option-radio::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #fff;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .quiz-option-item.selected .quiz-option-radio::after {
+      opacity: 1;
+    }
+    .quiz-btn-next {
+      background: #2AABEE;
+      color: #fff;
+      border: none;
+      padding: 14px 32px;
+      border-radius: 30px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(42, 171, 238, 0.3);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .quiz-btn-next:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    .quiz-btn-next:not(:disabled):hover {
+      background: #0088cc;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(42, 171, 238, 0.4);
+    }
+    
+    /* Màn Hình Kết Quả */
+    .result-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: rgba(42, 171, 238, 0.15);
+      border: 1px solid rgba(42, 171, 238, 0.4);
+      color: #2AABEE;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+    .result-score-box {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0 28px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .result-score-num {
+      font-size: 38px;
+      font-weight: 800;
+      color: #2AABEE;
+      line-height: 1;
+    }
+    .result-cta-box {
+      background: linear-gradient(135deg, rgba(42, 171, 238, 0.15), rgba(0, 0, 0, 0.4));
+      border: 1px solid rgba(42, 171, 238, 0.3);
+      border-radius: 16px;
+      padding: 28px;
+      margin-top: 32px;
+      text-align: center;
+    }
+    .result-cta-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .result-cta-desc {
+      font-size: 14px;
+      color: #aaa;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .result-cta-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .btn-tg-chat {
+      background: #2AABEE;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+    .btn-tg-chat:hover {
+      background: #0088cc;
+      transform: translateY(-2px);
+      color: #fff;
+    }
+    .btn-cafe-booking {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .btn-cafe-booking:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR HEADER -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">NGHỀ TRADING</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Trang Chủ</a></li>
+        <li><a href="bai-viet.html">Tư Duy Gốc</a></li>
+        <li><a href="nhat-ky.html">Nhật Ký Giao Dịch</a></li>
+        <li><a href="he-thong.html">Hệ Thống</a></li>
+        <li><a href="trac-nghiem.html" class="active">Trắc Nghiệm Tâm Lý</a></li>
+        <li><a href="tu-van.html">Mời Tôi 1 Cốc Cafe</a></li>
+        <li><a href="gioi-thieu.html">Giới Thiệu</a></li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- HERO HEADER SECTION -->
+  <header class="page-header text-center">
+    <div class="container">
+      <span class="badge">TRADING IN THE ZONE</span>
+      <h1 class="page-title">Trắc Nghiệm Bắt Bệnh Tâm Lý Trading</h1>
+      <p class="page-subtitle">
+        8 câu hỏi chẩn đoán nút thắt tư duy & điểm mù giao dịch dựa trên nguyên lý của Mark Douglas
+      </p>
+    </div>
+  </header>
+
+  <!-- MAIN QUIZ SECTION -->
+  <main class="quiz-container">
+    <div class="quiz-card" id="quiz-box">
+      <!-- Thanh Tiến Trình -->
+      <div class="quiz-progress-bar">
+        <div class="quiz-progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="quiz-step-text" id="step-counter">CÂU HỎI 1 / 8</div>
+
+      <!-- Nội Dung Câu Hỏi -->
+      <div class="quiz-question-title" id="question-title">
+        Đang tải câu hỏi...
+      </div>
+
+      <!-- Các Lựa Chọn -->
+      <div class="quiz-options" id="options-container"></div>
+
+      <!-- Nút Chuyển Tiếp -->
+      <div style="text-align: right;">
+        <button class="quiz-btn-next" id="btn-next" disabled>
+          <span>Câu Tiếp Theo</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container text-center">
+      <p>&copy; 2026 Nghề Trading. Tất cả quyền được bảo lưu.</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+  <script>
+    // NGÂN HÀNG CÂU HỎI TRẮC NGHIỆM MARK DOUGLAS
+    const questionsPool = [
+      {
+        question: "1. Trước khi bấm nút vào lệnh, bạn có xác định trước số tiền chính xác mình sẵn sàng ĐÁNH MẤT không?",
+        options: [
+          { text: "A. Có, tôi đặt Stop Loss cố định và hoàn toàn chấp nhận nếu mất số tiền đó.", score: 2, trait: "Kỷ luật chuẩn" },
+          { text: "B. Tôi có đặt SL nhưng nếu dính tôi thấy rất tiếc nuối và bực bội.", score: 1, trait: "Chưa chấp nhận rủi ro" },
+          { text: "C. Tôi hiếm khi đặt SL, vì tôi tin giá sẽ sớm quay lại điểm hòa vốn.", score: 0, trait: "Gồng lỗ nguy hiểm" }
+        ]
+      },
+      {
+        question: "2. Sau khi dính 3 lệnh thua liên tiếp (Stop Loss), bạn thường làm gì tiếp theo?",
+        options: [
+          { text: "A. Tạm dừng nghỉ ngơi, vì hiểu rằng chuỗi thua là xác suất tự nhiên.", score: 2, trait: "Tư duy xác suất" },
+          { text: "B. Tăng khối lượng lệnh sau để gỡ lại nhanh số tiền đã mất.", score: 0, trait: "Trả thù thị trường" },
+          { text: "C. Hoang mang, nghi ngờ phương pháp và đi tìm hệ thống indicator mới.", score: 1, trait: "Thiếu niềm tin" }
+        ]
+      },
+      {
+        question: "3. Khi một lệnh đang có lợi nhuận xanh tốt, bạn thường hành xử như thế nào?",
+        options: [
+          { text: "A. Chốt lời sớm vì sợ thị trường quay đầu cướp mất lợi nhuận đang có.", score: 1, trait: "Sợ mất lợi nhuận" },
+          { text: "B. Giữ đúng đến mốc TP kế hoạch hoặc dời SL bảo toàn vốn theo quy tắc.", score: 2, trait: "Tâm lý vững vàng" },
+          { text: "C. Tiếp tục gồng tham vọng x2 x3 dù đã vượt xa kế hoạch ban đầu.", score: 0, trait: "Lòng tham kiểm soát" }
+        ]
+      },
+      {
+        question: "4. Khi hệ thống của bạn xuất hiện tín hiệu vào lệnh chuẩn, bạn thấy thế nào?",
+        options: [
+          { text: "A. Vào lệnh ngay lập tức không chần chừ.", score: 2, trait: "Hành động không sợ hãi" },
+          { text: "B. Do dự, phân tích thêm khung nhỏ/tin tức rồi bỏ lỡ điểm vào đẹp.", score: 1, trait: "Do dự / Sợ sai" },
+          { text: "C. Đợi giá chạy xa rồi mới nhảy vào đuổi theo vì sợ bỏ lỡ (FOMO).", score: 0, trait: "Tâm lý FOMO" }
+        ]
+      },
+      {
+        question: "5. Cảm giác của bạn thế nào nếu một lệnh trading bị dính Stop Loss?",
+        options: [
+          { text: "A. Bình thường, thua lỗ chỉ là chi phí kinh doanh.", score: 2, trait: "Coi thua lỗ là chi phí" },
+          { text: "B. Tổn thương cái ego, cảm thấy bản thân phán đoán kém cỏi.", score: 1, trait: "Nhu cầu muốn luôn ĐÚNG" },
+          { text: "C. Tức giận với thị trường, sàn giao dịch hoặc các KOL.", score: 0, trait: "Đổ lỗi ngoại cảnh" }
+        ]
+      },
+      {
+        question: "6. Bạn có ghi chép nhật ký giao dịch và xem lại định kỳ không?",
+        options: [
+          { text: "A. Có ghi chép chi tiết cả lý do vào lệnh & cảm xúc khi đó.", score: 2, trait: "Trader chuyên nghiệp" },
+          { text: "B. Thỉnh thoảng mới ghi khi nhớ ra.", score: 1, trait: "Kỷ luật chưa nhất quán" },
+          { text: "C. Không ghi chép bao giờ, đánh theo cảm giác.", score: 0, trait: "Giao dịch cảm tính" }
+        ]
+      },
+      {
+        question: "7. Bạn kỳ vọng điều gì ở lệnh giao dịch TIẾP THEO của mình?",
+        options: [
+          { text: "A. Chắc chắn phải thắng.", score: 0, trait: "Kỳ vọng sai lệch" },
+          { text: "B. Không đoán trước, vì bất cứ điều gì cũng có thể xảy ra.", score: 2, trait: "Chấp nhận tính ngẫu nhiên" },
+          { text: "C. Mong hòa vốn là may mắn lắm rồi.", score: 1, trait: "Tự tin thấp" }
+        ]
+      },
+      {
+        question: "8. Yếu tố nào chi phối quyết định cắt lệnh của bạn nhiều nhất?",
+        options: [
+          { text: "A. Cảm xúc sợ hãi hoặc tham lam tại thời điểm đó.", score: 0, trait: "Bị cảm xúc chi phối" },
+          { text: "B. Quy tắc cắt lỗ/chốt lời đã định sẵn từ trước.", score: 2, trait: "Tuân thủ quy tắc" },
+          { text: "C. Nhìn theo phán đoán của các nhóm tín hiệu trên mạng.", score: 1, trait: "Bị ảnh hưởng đám đông" }
+        ]
+      }
+    ];
+
+    let currentIdx = 0;
+    let selectedOptionIdx = null;
+    let totalScore = 0;
+    let userTraits = [];
+
+    const progressFill = document.getElementById('progress-fill');
+    const stepCounter = document.getElementById('step-counter');
+    const questionTitle = document.getElementById('question-title');
+    const optionsContainer = document.getElementById('options-container');
+    const btnNext = document.getElementById('btn-next');
+    const quizBox = document.getElementById('quiz-box');
+
+    function renderQuestion() {
+      selectedOptionIdx = null;
+      btnNext.disabled = true;
+
+      const q = questionsPool[currentIdx];
+      const progressPct = ((currentIdx + 1) / questionsPool.length) * 100;
+      progressFill.style.width = progressPct + '%';
+      stepCounter.innerText = `CÂU HỎI ${currentIdx + 1} / ${questionsPool.length}`;
+      questionTitle.innerText = q.question;
+
+      optionsContainer.innerHTML = '';
+      q.options.forEach((opt, idx) => {
+        const item = document.createElement('div');
+        item.className = 'quiz-option-item';
+        item.innerHTML = `
+          <div class="quiz-option-radio"></div>
+          <div>${opt.text}</div>
+        `;
+        item.addEventListener('click', () => {
+          document.querySelectorAll('.quiz-option-item').forEach(el => el.classList.remove('selected'));
+          item.classList.add('selected');
+          selectedOptionIdx = idx;
+          btnNext.disabled = false;
+        });
+        optionsContainer.appendChild(item);
+      });
+
+      btnNext.querySelector('span').innerText = (currentIdx === questionsPool.length - 1) ? 'Xem Báo Cáo Chẩn Đoán' : 'Câu Tiếp Theo';
+    }
+
+    btnNext.addEventListener('click', () => {
+      if (selectedOptionIdx === null) return;
+
+      const q = questionsPool[currentIdx];
+      const chosen = q.options[selectedOptionIdx];
+      totalScore += chosen.score;
+      userTraits.push(chosen.trait);
+
+      currentIdx++;
+      if (currentIdx < questionsPool.length) {
+        renderQuestion();
+      } else {
+        renderResult();
+      }
+    });
+
+    function renderResult() {
+      let levelTitle = '';
+      let summaryText = '';
+      let adviceText = '';
+
+      const pct = (totalScore / 16) * 100;
+      if (pct >= 80) {
+        levelTitle = 'Tâm Lý Vững Vàng (Chuẩn Mark Douglas)';
+        summaryText = 'Bạn có tư duy xác suất tốt và chấp nhận rủi ro. Nút thắt của bạn chỉ là tối ưu kiên nhẫn khi vào lệnh trên thị trường Vàng (XAU/USD).';
+        adviceText = 'Bạn cần một môi trường đồng hành chuyên sâu để giữ vững phong độ kỷ luật dài hạn.';
+      } else if (pct >= 50) {
+        levelTitle = 'Bế Tắc Nút Thắt Tâm Lý';
+        summaryText = 'Bạn đã có kiến thức cơ bản nhưng vẫn bị cảm xúc chi phối (sợ hãi do dự khi vào lệnh hoặc chốt lời quá sớm). Bạn hiểu lý thuyết nhưng chưa thể nhất quán giữa BIẾT và LÀM.';
+        adviceText = 'Trò chuyện 1-1 với ĐẠI KA sẽ giúp bạn mổ xẻ chính xác và tháo gỡ điểm mù này.';
+      } else {
+        levelTitle = 'Coi Trading Như Cờ Bạc / Gồng Lỗ Nguy Hiểm';
+        summaryText = 'Bạn đang giao dịch dựa trên hy vọng, cay cú gỡ gạc sau thua lỗ hoặc gồng lệnh không đặt Stop Loss. Đây là nguyên nhân khiến bạn luôn mệt mỏi và cháy tài khoản.';
+        adviceText = 'Bạn cần định hình lại Tư Duy Gốc và trao đổi trực tiếp 1-1 với ĐẠI KA càng sớm càng tốt.';
+      }
+
+      quizBox.innerHTML = `
+        <div style="text-align: center;">
+          <span class="result-badge">${levelTitle}</span>
+          <h2 style="color: #fff; font-size: 24px; margin-bottom: 8px;">KẾT QUẢ CHẨN ĐOÁN TÂM LÝ TRADING</h2>
+          <p style="color: #aaa; font-size: 14px;">Tính cách đặc trưng: ${userTraits.slice(0, 4).join(' • ')}</p>
+
+          <div class="result-score-box">
+            <div style="font-size: 13px; color: #888; margin-bottom: 6px;">ĐIỂM CHẨN ĐOÁN CỦA BẠN</div>
+            <div class="result-score-num">${totalScore} / 16</div>
+          </div>
+
+          <div style="text-align: left; background: rgba(255,255,255,0.02); padding: 20px; border-radius: 12px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.05);">
+            <h4 style="color: #2AABEE; margin-bottom: 8px; font-size: 16px;">🔍 Phân tích điểm mù:</h4>
+            <p style="color: #ddd; font-size: 14px; line-height: 1.6; margin-bottom: 14px;">${summaryText}</p>
+            <h4 style="color: #2AABEE; margin-bottom: 8px; font-size: 16px;">💡 Lời khuyên dành cho bạn:</h4>
+            <p style="color: #ddd; font-size: 14px; line-height: 1.6;">${adviceText}</p>
+          </div>
+
+          <div class="result-cta-box">
+            <div class="result-cta-title">💬 Tâm Sự 1-1 & Nhận Giải Pháp Từ ĐẠI KA</div>
+            <div class="result-cta-desc">1 bài trắc nghiệm tự động chưa thể giúp bạn sửa ngay thói quen. Hãy trò chuyện trực tiếp 1-1 với ĐẠI KA để mổ xẻ triệt để nút thắt của bạn.</div>
+            <div class="result-cta-btns">
+              <a href="https://t.me/NgheTradingSupport_Bot" target="_blank" rel="noopener noreferrer" class="btn-tg-chat">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8-1.7 8.02c-.12.56-.46.7-.93.43l-2.57-1.89-1.24 1.19c-.14.14-.25.25-.51.25l.18-2.61 4.7-4.25c.2-.18-.04-.28-.32-.1L7.38 15.3l-2.52-.79c-.55-.17-.56-.55.12-.81l9.85-3.8c.45-.17.85.11.81.1z"/></svg>
+                <span>Tâm Sự 1-1 Qua Telegram Bot</span>
+              </a>
+              <a href="tu-van.html" class="btn-cafe-booking">☕ Hẹn Cafe 1-1 Với ĐẠI KA</a>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Chạy câu hỏi đầu tiên
+    renderQuestion();
+  </script>
+</body>
+</html>
