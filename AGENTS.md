@@ -57,6 +57,8 @@ Nếu có nhiều cách giải quyết:
 
 - Trả lời cực kỳ ngắn gọn, súc tích, đi thẳng vào kết quả, không giải thích dài dòng.
 
+- **Tối ưu chi phí:** Luôn ưu tiên các giải pháp Miễn phí (Free Tier / Open Source) tối ưu nhất.
+
 Không dùng Bootstrap.
 
 Không dùng Tailwind.
