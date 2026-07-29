@@ -148,9 +148,9 @@ async function main() {
     try {
       items = await fetchFromSubstackRss();
     } catch (rssErr) {
-      console.error(`Cả Instant API và RSS Feed đều lỗi (${rssErr.message}). Thất bại.`);
+      console.warn(`Tạm thời không kết nối được Substack API & RSS (${rssErr.message}). Sẽ tự thử lại vào lần quét tiếp theo.`);
       fs.writeFileSync(path.join(ROOT, ".sync-result"), "unchanged");
-      process.exit(1);
+      return;
     }
   }
 
