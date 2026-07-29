@@ -39,9 +39,25 @@ Mục tiêu của website:
    - Độc giả mệt mỏi/tuyệt vọng -> Click Telegram Bot hỗ trợ từ Website.
    - **Kịch bản Bot:**
      - *Bước 1:* Mở lời thấu cảm, giải tỏa tâm lý, mời khách trải lòng lý do bế tắc.
-     - *Bước 2:* Trắc nghiệm 8 câu ngẫu nhiên từ *Trading in the Zone* (Mark Douglas) để xác định tính cách trading & nút thắt tâm lý.
+     - *Bước 2:* Trắc nghiệm 8 câu ngẫu nhiên để xác định tính cách trading & nút thắt tâm lý.
      - *Bước 3:* Chuyển toàn bộ dữ liệu (bế tắc + tính cách) về Telegram của ĐẠI KA để lên chiến lược chốt sale cá nhân hóa.
      - *Bước 4:* Gửi phân tích Vàng chọn lọc (chống spam) + Đặt lịch hẹn Cafe/Coaching 1-1 trực tiếp với ĐẠI KA.
+
+## Quy tắc phân loại Telegram Bot theo điểm chạm
+
+Mỗi nút Telegram trên website kết nối đến bot khác nhau theo logic phễu:
+
+| Điểm chạm | Bot | Lý do |
+|---|---|---|
+| Nút float "Tâm Sự Trading" (mọi trang) | `@NgheTradingSupport_Bot` | Khách đại trà, chưa vào phễu → Bot AI tự động trả lời chung chung |
+| Nút Telegram trong **kết quả Trắc Nghiệm** | `@nghetrading_bot` | Khách đã vào phễu → Admin trực tiếp chat, cần tin tưởng cao |
+| Nút Telegram trong **xác nhận thanh toán** | `@nghetrading_bot` | Giao dịch nhạy cảm → Admin trực tiếp xử lý, không để bot tự động |
+
+**Nguyên tắc cốt lõi:**
+- Khách **chưa vào phễu** (đang lướt web, chưa tương tác sâu) → `@NgheTradingSupport_Bot` (bot AI tự động, trả lời đại trà).
+- Khách **đã vào phễu** (sau trắc nghiệm, sau thanh toán, tình huống nhạy cảm) → `@nghetrading_bot` (Admin trực tiếp chat, tạo niềm tin).
+- **Không để bot tự động xử lý** những điểm chạm mang tính tư vấn cá nhân hoặc tài chính — khách sẽ mất niềm tin vào hệ thống.
+
 
 ## Khi chỉnh sửa code
 

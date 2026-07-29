@@ -4,105 +4,183 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trắc Nghiệm Tâm Lý Trading | Nghề Trading</title>
-  <meta name="description" content="Bài trắc nghiệm 8 câu chẩn đoán tâm lý trading dựa trên sách Trading in the Zone (Mark Douglas). Nhận diện điểm mù và nút thắt bế tắc trong giao dịch Vàng & Forex." />
-  
-  <!-- Open Graph / Meta -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Trắc Nghiệm Tâm Lý Trading - Bắt Bệnh Nút Thắt Giao Dịch" />
-  <meta property="og:description" content="Chẩn đoán chính xác tính cách trading và tâm lý gồng lỗ/sợ hãi theo chuẩn Mark Douglas." />
-  <meta property="og:image" content="https://nghetrading.com/images/og-image.jpg" />
+  <meta name="description" content="Bài trắc nghiệm 20 câu chẩn đoán tâm lý giao dịch giúp bạn nhận diện điểm mù và nút thắt bế tắc trong hành trình trading của mình." />
+  <link rel="canonical" href="https://nghetrading.com/trac-nghiem.html" />
 
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Trắc Nghiệm Tâm Lý Trading - Nghề Trading" />
+  <meta property="og:description" content="Chẩn đoán chính xác tính cách & nút thắt tâm lý trong giao dịch của bạn." />
+  <meta property="og:url" content="https://nghetrading.com/trac-nghiem.html" />
+  <meta property="og:locale" content="vi_VN" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+
   <style>
-    /* CSS Riêng Cho Trang Trắc Nghiệm Tâm Lý */
-    .quiz-container {
-      max-width: 800px;
-      margin: 40px auto 80px;
-      padding: 0 20px;
+    :root {
+      --tn-bg: #f8fafc;
+      --tn-card-bg: #ffffff;
+      --tn-line: #e2e8f0;
+      --tn-text: #0f172a;
+      --tn-muted: #475569;
+      --tn-accent: #059669;
+      --tn-accent-hover: #047857;
+      --tn-accent-light: #ecfdf5;
     }
-    .quiz-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 36px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+    .tn-page {
+      background: var(--tn-bg);
+      color: var(--tn-text);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      padding-top: var(--nav-h);
+      min-height: 100vh;
     }
-    .quiz-progress-bar {
-      width: 100%;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 24px;
+
+    /* HERO */
+    .tn-hero {
+      background: #ffffff;
+      border-bottom: 1px solid var(--tn-line);
+      padding: 64px 0 56px;
+      text-align: center;
     }
-    .quiz-progress-fill {
-      height: 100%;
-      width: 12.5%;
-      background: linear-gradient(90deg, #2AABEE, #00d2ff);
-      transition: width 0.4s ease;
-    }
-    .quiz-step-text {
-      font-size: 13px;
-      color: #888;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
+    .tn-hero-badge {
+      display: inline-block;
+      font-size: 12px;
       font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--tn-accent);
+      background: var(--tn-accent-light);
+      border: 1px solid rgba(5,150,105,0.2);
+      padding: 5px 16px;
+      border-radius: 99px;
+      margin-bottom: 20px;
     }
-    .quiz-question-title {
-      font-size: 22px;
+    .tn-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 4vw, 42px);
       font-weight: 700;
-      color: #fff;
-      margin-bottom: 28px;
-      line-height: 1.4;
+      color: var(--tn-text);
+      line-height: 1.3;
+      max-width: 760px;
+      margin: 0 auto 16px;
+      letter-spacing: -0.02em;
     }
-    .quiz-options {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+    .tn-hero p {
+      color: var(--tn-muted);
+      font-size: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* MAIN QUIZ CONTAINER */
+    .tn-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 56px 20px 96px;
+    }
+
+    /* PROGRESS */
+    .tn-progress-wrap {
       margin-bottom: 32px;
     }
-    .quiz-option-item {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 18px 20px;
-      cursor: pointer;
-      color: #ddd;
-      font-size: 15px;
-      transition: all 0.25s ease;
+    .tn-progress-label {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 14px;
+      margin-bottom: 10px;
     }
-    .quiz-option-item:hover {
-      background: rgba(42, 171, 238, 0.1);
-      border-color: rgba(42, 171, 238, 0.5);
-      color: #fff;
-      transform: translateX(4px);
-    }
-    .quiz-option-item.selected {
-      background: rgba(42, 171, 238, 0.2);
-      border-color: #2AABEE;
-      color: #fff;
+    .tn-progress-label span {
+      font-size: 13px;
       font-weight: 600;
+      color: var(--tn-muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
-    .quiz-option-radio {
+    .tn-progress-label strong {
+      font-size: 13px;
+      color: var(--tn-accent);
+      font-weight: 700;
+    }
+    .tn-progress-bar {
+      width: 100%;
+      height: 6px;
+      background: var(--tn-line);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .tn-progress-fill {
+      height: 100%;
+      background: var(--tn-accent);
+      border-radius: 99px;
+      transition: width 0.4s ease;
+    }
+
+    /* QUIZ CARD */
+    .tn-card {
+      background: var(--tn-card-bg);
+      border: 1px solid var(--tn-line);
+      border-radius: 16px;
+      padding: 36px 40px 32px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    }
+    .tn-question {
+      font-family: var(--font-display);
+      font-size: clamp(17px, 2.5vw, 21px);
+      font-weight: 600;
+      color: var(--tn-text);
+      line-height: 1.45;
+      margin-bottom: 28px;
+    }
+
+    /* OPTIONS */
+    .tn-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .tn-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 20px;
+      border: 1.5px solid var(--tn-line);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #fff;
+    }
+    .tn-option:hover {
+      border-color: var(--tn-accent);
+      background: var(--tn-accent-light);
+    }
+    .tn-option.selected {
+      border-color: var(--tn-accent);
+      background: var(--tn-accent-light);
+    }
+    .tn-radio {
       width: 20px;
       height: 20px;
       border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      border: 2px solid #cbd5e1;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      margin-top: 2px;
+      transition: all 0.2s ease;
     }
-    .quiz-option-item.selected .quiz-option-radio {
-      border-color: #2AABEE;
-      background: #2AABEE;
+    .tn-option.selected .tn-radio {
+      border-color: var(--tn-accent);
+      background: var(--tn-accent);
     }
-    .quiz-option-radio::after {
+    .tn-radio::after {
       content: '';
       width: 8px;
       height: 8px;
@@ -111,92 +189,151 @@
       opacity: 0;
       transition: opacity 0.2s ease;
     }
-    .quiz-option-item.selected .quiz-option-radio::after {
+    .tn-option.selected .tn-radio::after {
       opacity: 1;
     }
-    .quiz-btn-next {
-      background: #2AABEE;
+    .tn-option-text {
+      font-size: 15px;
+      color: var(--tn-text);
+      line-height: 1.5;
+    }
+
+    /* BUTTON */
+    .tn-btn-row {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .tn-btn-next {
+      background: var(--tn-accent);
       color: #fff;
       border: none;
-      padding: 14px 32px;
+      padding: 13px 28px;
       border-radius: 30px;
       font-size: 15px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(42, 171, 238, 0.3);
+      transition: all 0.25s ease;
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      box-shadow: 0 4px 12px rgba(5,150,105,0.25);
     }
-    .quiz-btn-next:disabled {
-      opacity: 0.4;
+    .tn-btn-next:disabled {
+      opacity: 0.35;
       cursor: not-allowed;
       box-shadow: none;
     }
-    .quiz-btn-next:not(:disabled):hover {
-      background: #0088cc;
+    .tn-btn-next:not(:disabled):hover {
+      background: var(--tn-accent-hover);
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(42, 171, 238, 0.4);
+      box-shadow: 0 6px 18px rgba(5,150,105,0.3);
     }
-    
-    /* Màn Hình Kết Quả */
-    .result-badge {
+
+    /* RESULT PAGE */
+    .tn-result-badge {
       display: inline-block;
-      padding: 6px 16px;
-      background: rgba(42, 171, 238, 0.15);
-      border: 1px solid rgba(42, 171, 238, 0.4);
-      color: #2AABEE;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 16px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 99px;
+      margin-bottom: 16px;
     }
-    .result-score-box {
-      background: rgba(255, 255, 255, 0.03);
+    .tn-result-badge.level-high { background: #ecfdf5; color: #059669; border: 1px solid rgba(5,150,105,0.25); }
+    .tn-result-badge.level-mid { background: #fefce8; color: #ca8a04; border: 1px solid rgba(202,138,4,0.25); }
+    .tn-result-badge.level-low { background: #fef2f2; color: #dc2626; border: 1px solid rgba(220,38,38,0.25); }
+
+    .tn-result-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 700;
+      color: var(--tn-text);
+      margin-bottom: 8px;
+    }
+    .tn-result-traits {
+      font-size: 13px;
+      color: var(--tn-muted);
+      margin-bottom: 28px;
+    }
+    .tn-score-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: var(--tn-bg);
+      border: 1px solid var(--tn-line);
       border-radius: 12px;
-      padding: 20px;
-      margin: 20px 0 28px;
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 20px 24px;
+      margin-bottom: 28px;
     }
-    .result-score-num {
-      font-size: 38px;
-      font-weight: 800;
-      color: #2AABEE;
+    .tn-score-num {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--tn-accent);
       line-height: 1;
     }
-    .result-cta-box {
-      background: linear-gradient(135deg, rgba(42, 171, 238, 0.15), rgba(0, 0, 0, 0.4));
-      border: 1px solid rgba(42, 171, 238, 0.3);
+    .tn-score-label {
+      font-size: 14px;
+      color: var(--tn-muted);
+      line-height: 1.4;
+    }
+    .tn-analysis-box {
+      background: #fff;
+      border: 1px solid var(--tn-line);
+      border-left: 4px solid var(--tn-accent);
+      border-radius: 0 10px 10px 0;
+      padding: 20px 24px;
+      margin-bottom: 12px;
+    }
+    .tn-analysis-box h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--tn-accent);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .tn-analysis-box p {
+      font-size: 15px;
+      color: var(--tn-text);
+      line-height: 1.65;
+    }
+    .tn-cta-box {
+      margin-top: 36px;
+      background: var(--tn-accent-light);
+      border: 1px solid rgba(5,150,105,0.2);
       border-radius: 16px;
-      padding: 28px;
-      margin-top: 32px;
+      padding: 32px;
       text-align: center;
     }
-    .result-cta-title {
-      font-size: 18px;
+    .tn-cta-box h3 {
+      font-family: var(--font-display);
+      font-size: 20px;
       font-weight: 700;
-      color: #fff;
+      color: var(--tn-text);
       margin-bottom: 10px;
     }
-    .result-cta-desc {
+    .tn-cta-box p {
       font-size: 14px;
-      color: #aaa;
-      margin-bottom: 20px;
-      line-height: 1.5;
+      color: var(--tn-muted);
+      margin-bottom: 24px;
+      line-height: 1.6;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .result-cta-btns {
+    .tn-cta-btns {
       display: flex;
       flex-wrap: wrap;
       gap: 12px;
       justify-content: center;
     }
-    .btn-tg-chat {
+    .tn-btn-tg {
       background: #2AABEE;
       color: #fff;
-      padding: 12px 24px;
+      padding: 13px 24px;
       border-radius: 30px;
       font-size: 14px;
       font-weight: 600;
@@ -204,33 +341,32 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.3s ease;
+      transition: all 0.25s ease;
+      box-shadow: 0 4px 12px rgba(42,171,238,0.3);
     }
-    .btn-tg-chat:hover {
-      background: #0088cc;
-      transform: translateY(-2px);
-      color: #fff;
-    }
-    .btn-cafe-booking {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #fff;
-      padding: 12px 24px;
+    .tn-btn-tg:hover { background: #0088cc; transform: translateY(-2px); color: #fff; }
+    .tn-btn-cafe {
+      background: #fff;
+      border: 1.5px solid var(--tn-accent);
+      color: var(--tn-accent);
+      padding: 13px 24px;
       border-radius: 30px;
       font-size: 14px;
       font-weight: 600;
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: all 0.25s ease;
     }
-    .btn-cafe-booking:hover {
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
+    .tn-btn-cafe:hover { background: var(--tn-accent); color: #fff; }
+
+    @media (max-width: 640px) {
+      .tn-card { padding: 24px 20px 22px; }
+      .tn-cta-box { padding: 24px 16px; }
     }
   </style>
 </head>
-<body>
+<body class="tn-page">
 
-  <!-- NAVBAR HEADER -->
+  <!-- NAVBAR -->
   <nav class="navbar" id="navbar">
     <div class="nav-inner">
       <a href="index.html" class="logo">NGHỀ TRADING</a>
@@ -249,173 +385,310 @@
     </div>
   </nav>
 
-  <!-- HERO HEADER SECTION -->
-  <header class="page-header text-center">
+  <!-- HERO -->
+  <header class="tn-hero">
     <div class="container">
-      <span class="badge">TRADING IN THE ZONE</span>
-      <h1 class="page-title">Trắc Nghiệm Bắt Bệnh Tâm Lý Trading</h1>
-      <p class="page-subtitle">
-        8 câu hỏi chẩn đoán nút thắt tư duy & điểm mù giao dịch dựa trên nguyên lý của Mark Douglas
-      </p>
+      <div class="tn-hero-badge">Bắt Bệnh Tư Duy Giao Dịch</div>
+      <h1>Tâm Lý Bạn Đang Ở Đâu Trên Hành Trình Trading?</h1>
+      <p>20 câu hỏi chẩn đoán tính cách & nút thắt tư duy. Không có đáp án đúng hay sai — chỉ có sự thật về con người bạn trong giao dịch.</p>
     </div>
   </header>
 
-  <!-- MAIN QUIZ SECTION -->
-  <main class="quiz-container">
-    <div class="quiz-card" id="quiz-box">
-      <!-- Thanh Tiến Trình -->
-      <div class="quiz-progress-bar">
-        <div class="quiz-progress-fill" id="progress-fill"></div>
+  <!-- QUIZ -->
+  <main class="tn-wrap">
+
+    <!-- PROGRESS -->
+    <div class="tn-progress-wrap" id="progress-wrap">
+      <div class="tn-progress-label">
+        <span id="step-label">Câu hỏi 1 / 20</span>
+        <strong id="pct-label">5%</strong>
       </div>
-      <div class="quiz-step-text" id="step-counter">CÂU HỎI 1 / 8</div>
-
-      <!-- Nội Dung Câu Hỏi -->
-      <div class="quiz-question-title" id="question-title">
-        Đang tải câu hỏi...
+      <div class="tn-progress-bar">
+        <div class="tn-progress-fill" id="progress-fill" style="width: 5%"></div>
       </div>
+    </div>
 
-      <!-- Các Lựa Chọn -->
-      <div class="quiz-options" id="options-container"></div>
-
-      <!-- Nút Chuyển Tiếp -->
-      <div style="text-align: right;">
-        <button class="quiz-btn-next" id="btn-next" disabled>
-          <span>Câu Tiếp Theo</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    <!-- CARD -->
+    <div class="tn-card" id="quiz-card">
+      <div class="tn-question" id="question-text">Đang tải...</div>
+      <div class="tn-options" id="options-list"></div>
+      <div class="tn-btn-row">
+        <button class="tn-btn-next" id="btn-next" disabled>
+          <span id="btn-label">Câu tiếp theo</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
       </div>
     </div>
+
   </main>
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="container text-center">
-      <p>&copy; 2026 Nghề Trading. Tất cả quyền được bảo lưu.</p>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>NGHỀ TRADING</h4>
+          <p style="color:#999;font-size:13px;margin-top:8px;line-height:1.6;">Nơi chia sẻ kiến thức và tư duy giao dịch chuyên nghiệp.</p>
+        </div>
+        <div class="footer-col">
+          <h4>KHÁM PHÁ</h4>
+          <ul>
+            <li><a href="bai-viet.html">Tư Duy Gốc</a></li>
+            <li><a href="nhat-ky.html">Nhật Ký Giao Dịch</a></li>
+            <li><a href="he-thong.html">Hệ Thống</a></li>
+            <li><a href="trac-nghiem.html">Trắc Nghiệm Tâm Lý</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>KẾT NỐI</h4>
+          <ul>
+            <li><a href="https://t.me/NgheTradingSupport_Bot" target="_blank" rel="noopener noreferrer">Telegram Bot</a></li>
+            <li><a href="mailto:longphi11@gmail.com">Email</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Nghề Trading. Tất cả quyền được bảo lưu.</p>
+      </div>
     </div>
   </footer>
 
   <script src="main.js"></script>
   <script>
-    // NGÂN HÀNG CÂU HỎI TRẮC NGHIỆM MARK DOUGLAS
     const questionsPool = [
       {
-        question: "1. Trước khi bấm nút vào lệnh, bạn có xác định trước số tiền chính xác mình sẵn sàng ĐÁNH MẤT không?",
-        options: [
-          { text: "A. Có, tôi đặt Stop Loss cố định và hoàn toàn chấp nhận nếu mất số tiền đó.", score: 2, trait: "Kỷ luật chuẩn" },
-          { text: "B. Tôi có đặt SL nhưng nếu dính tôi thấy rất tiếc nuối và bực bội.", score: 1, trait: "Chưa chấp nhận rủi ro" },
-          { text: "C. Tôi hiếm khi đặt SL, vì tôi tin giá sẽ sớm quay lại điểm hòa vốn.", score: 0, trait: "Gồng lỗ nguy hiểm" }
+        q: "Khi bạn bước vào một lệnh giao dịch, điều gì là nền tảng quyết định của bạn?",
+        opts: [
+          { t: "Tôi có một kế hoạch rõ ràng với điểm vào, điểm dừng lỗ và mục tiêu lợi nhuận cụ thể.", s: 3, trait: "Kỷ luật có hệ thống" },
+          { t: "Tôi dựa vào phân tích kỹ thuật nhưng đôi khi điều chỉnh theo cảm nhận thị trường.", s: 2, trait: "Phân tích kỹ thuật" },
+          { t: "Tôi chủ yếu dựa vào cảm giác và kinh nghiệm tích lũy.", s: 1, trait: "Giao dịch trực giác" },
+          { t: "Tôi thường hành động ngay khi thấy cơ hội mà không cần lên kế hoạch chi tiết.", s: 0, trait: "Giao dịch bộc phát" }
         ]
       },
       {
-        question: "2. Sau khi dính 3 lệnh thua liên tiếp (Stop Loss), bạn thường làm gì tiếp theo?",
-        options: [
-          { text: "A. Tạm dừng nghỉ ngơi, vì hiểu rằng chuỗi thua là xác suất tự nhiên.", score: 2, trait: "Tư duy xác suất" },
-          { text: "B. Tăng khối lượng lệnh sau để gỡ lại nhanh số tiền đã mất.", score: 0, trait: "Trả thù thị trường" },
-          { text: "C. Hoang mang, nghi ngờ phương pháp và đi tìm hệ thống indicator mới.", score: 1, trait: "Thiếu niềm tin" }
+        q: "Sau một loạt lệnh thua, bạn thường phản ứng như thế nào?",
+        opts: [
+          { t: "Tôi dừng giao dịch, phân tích kỹ nguyên nhân và học từ những sai lầm đó.", s: 3, trait: "Phục hồi chuyên nghiệp" },
+          { t: "Tôi tiếp tục giao dịch nhưng thận trọng hơn, giảm quy mô vị thế.", s: 2, trait: "Thận trọng sau thua" },
+          { t: "Tôi cảm thấy nản lòng và cần thời gian nghỉ ngơi để lấy lại tinh thần.", s: 1, trait: "Nhạy cảm với thua lỗ" },
+          { t: "Tôi tăng quy mô giao dịch để nhanh chóng lấy lại vốn đã mất.", s: 0, trait: "Trả thù thị trường" }
         ]
       },
       {
-        question: "3. Khi một lệnh đang có lợi nhuận xanh tốt, bạn thường hành xử như thế nào?",
-        options: [
-          { text: "A. Chốt lời sớm vì sợ thị trường quay đầu cướp mất lợi nhuận đang có.", score: 1, trait: "Sợ mất lợi nhuận" },
-          { text: "B. Giữ đúng đến mốc TP kế hoạch hoặc dời SL bảo toàn vốn theo quy tắc.", score: 2, trait: "Tâm lý vững vàng" },
-          { text: "C. Tiếp tục gồng tham vọng x2 x3 dù đã vượt xa kế hoạch ban đầu.", score: 0, trait: "Lòng tham kiểm soát" }
+        q: "Bạn quản lý cảm xúc như thế nào khi thị trường đi ngược với vị thế của mình?",
+        opts: [
+          { t: "Tôi giữ bình tĩnh, theo dõi mức cắt lỗ đã định và sẵn sàng chấp nhận thua lỗ.", s: 3, trait: "Cân bằng cảm xúc" },
+          { t: "Tôi lo lắng nhưng vẫn tuân thủ kế hoạch, dù đôi khi khó khăn.", s: 2, trait: "Kiểm soát được áp lực" },
+          { t: "Tôi thường xuyên kiểm tra biểu đồ và cảm thấy căng thẳng.", s: 1, trait: "Lo âu khi thua" },
+          { t: "Tôi thường dời mức cắt lỗ hoặc nắm giữ lệnh thua với hy vọng giá sẽ quay đầu.", s: 0, trait: "Gồng lỗ hy vọng" }
         ]
       },
       {
-        question: "4. Khi hệ thống của bạn xuất hiện tín hiệu vào lệnh chuẩn, bạn thấy thế nào?",
-        options: [
-          { text: "A. Vào lệnh ngay lập tức không chần chừ.", score: 2, trait: "Hành động không sợ hãi" },
-          { text: "B. Do dự, phân tích thêm khung nhỏ/tin tức rồi bỏ lỡ điểm vào đẹp.", score: 1, trait: "Do dự / Sợ sai" },
-          { text: "C. Đợi giá chạy xa rồi mới nhảy vào đuổi theo vì sợ bỏ lỡ (FOMO).", score: 0, trait: "Tâm lý FOMO" }
+        q: "Điều gì xảy ra khi một lệnh giao dịch của bạn đạt mục tiêu lợi nhuận?",
+        opts: [
+          { t: "Tôi chốt lời theo kế hoạch và tìm kiếm cơ hội tiếp theo.", s: 3, trait: "Kỷ luật chốt lời" },
+          { t: "Tôi thường giữ lệnh lâu hơn một chút để tối đa hóa lợi nhuận.", s: 2, trait: "Tối ưu lợi nhuận" },
+          { t: "Tôi chốt lời sớm hơn mục tiêu vì lo ngại thị trường đảo chiều.", s: 1, trait: "Chốt lời sớm do sợ" },
+          { t: "Tôi thường để lệnh chạy mà không có kế hoạch chốt lời rõ ràng.", s: 0, trait: "Thiếu kế hoạch chốt lời" }
         ]
       },
       {
-        question: "5. Cảm giác của bạn thế nào nếu một lệnh trading bị dính Stop Loss?",
-        options: [
-          { text: "A. Bình thường, thua lỗ chỉ là chi phí kinh doanh.", score: 2, trait: "Coi thua lỗ là chi phí" },
-          { text: "B. Tổn thương cái ego, cảm thấy bản thân phán đoán kém cỏi.", score: 1, trait: "Nhu cầu muốn luôn ĐÚNG" },
-          { text: "C. Tức giận với thị trường, sàn giao dịch hoặc các KOL.", score: 0, trait: "Đổ lỗi ngoại cảnh" }
+        q: "Bạn xác định quy mô vị thế (position sizing) trong mỗi giao dịch như thế nào?",
+        opts: [
+          { t: "Tôi sử dụng công thức cố định dựa trên phần trăm vốn và mức cắt lỗ.", s: 3, trait: "Quản lý vốn chuẩn" },
+          { t: "Tôi thường giao dịch với quy mô cố định, không tính toán chi tiết.", s: 2, trait: "Quy mô cố định" },
+          { t: "Tôi điều chỉnh theo cảm giác về mức độ chắc chắn của tín hiệu.", s: 1, trait: "Quy mô theo cảm tính" },
+          { t: "Tôi thường tăng quy mô khi tự tin cao và giảm khi không chắc chắn.", s: 0, trait: "Quy mô biến động theo cảm xúc" }
         ]
       },
       {
-        question: "6. Bạn có ghi chép nhật ký giao dịch và xem lại định kỳ không?",
-        options: [
-          { text: "A. Có ghi chép chi tiết cả lý do vào lệnh & cảm xúc khi đó.", score: 2, trait: "Trader chuyên nghiệp" },
-          { text: "B. Thỉnh thoảng mới ghi khi nhớ ra.", score: 1, trait: "Kỷ luật chưa nhất quán" },
-          { text: "C. Không ghi chép bao giờ, đánh theo cảm giác.", score: 0, trait: "Giao dịch cảm tính" }
+        q: "Bạn đối mặt với áp lực tâm lý khi giao dịch quy mô lớn như thế nào?",
+        opts: [
+          { t: "Tôi giao dịch theo cùng quy trình bất kể quy mô, không bị ảnh hưởng nhiều.", s: 3, trait: "Không bị áp lực quy mô" },
+          { t: "Tôi cảm thấy áp lực hơn nhưng vẫn duy trì kỷ luật.", s: 2, trait: "Có áp lực nhưng kiểm soát được" },
+          { t: "Áp lực khiến tôi đưa ra quyết định khác so với khi giao dịch nhỏ.", s: 1, trait: "Áp lực ảnh hưởng đến quyết định" },
+          { t: "Tôi thường xuyên lo lắng và kiểm tra vị thế liên tục.", s: 0, trait: "Lo âu nghiêm trọng" }
         ]
       },
       {
-        question: "7. Bạn kỳ vọng điều gì ở lệnh giao dịch TIẾP THEO của mình?",
-        options: [
-          { text: "A. Chắc chắn phải thắng.", score: 0, trait: "Kỳ vọng sai lệch" },
-          { text: "B. Không đoán trước, vì bất cứ điều gì cũng có thể xảy ra.", score: 2, trait: "Chấp nhận tính ngẫu nhiên" },
-          { text: "C. Mong hòa vốn là may mắn lắm rồi.", score: 1, trait: "Tự tin thấp" }
+        q: "Bạn xử lý tình huống khi bị 'missed out' (bỏ lỡ cơ hội) như thế nào?",
+        opts: [
+          { t: "Tôi chấp nhận điều đó và chờ đợi cơ hội tiếp theo theo kế hoạch.", s: 3, trait: "Không sợ bỏ lỡ" },
+          { t: "Tôi cảm thấy tiếc nhưng không để điều đó ảnh hưởng đến quyết định tiếp theo.", s: 2, trait: "Tiếc nuối kiểm soát được" },
+          { t: "Tôi thường cảm thấy thất vọng và lo lắng về những cơ hội bỏ lỡ.", s: 1, trait: "Tiếc nuối ảnh hưởng tâm lý" },
+          { t: "Tôi thường 'đuổi theo' thị trường, vào lệnh muộn để không bỏ lỡ.", s: 0, trait: "FOMO - Vào lệnh đuổi" }
         ]
       },
       {
-        question: "8. Yếu tố nào chi phối quyết định cắt lệnh của bạn nhiều nhất?",
-        options: [
-          { text: "A. Cảm xúc sợ hãi hoặc tham lam tại thời điểm đó.", score: 0, trait: "Bị cảm xúc chi phối" },
-          { text: "B. Quy tắc cắt lỗ/chốt lời đã định sẵn từ trước.", score: 2, trait: "Tuân thủ quy tắc" },
-          { text: "C. Nhìn theo phán đoán của các nhóm tín hiệu trên mạng.", score: 1, trait: "Bị ảnh hưởng đám đông" }
+        q: "Bạn nhìn nhận về rủi ro trong giao dịch như thế nào?",
+        opts: [
+          { t: "Rủi ro là phần không thể tách rời; tôi chỉ giao dịch với số tiền sẵn sàng mất.", s: 3, trait: "Chấp nhận rủi ro hoàn toàn" },
+          { t: "Tôi hiểu rủi ro nhưng đôi khi khó chấp nhận thực tế khi thua lỗ.", s: 2, trait: "Hiểu rủi ro, khó chấp nhận" },
+          { t: "Tôi thường đặt ra mức độ rủi ro nhưng không tuân thủ nhất quán.", s: 1, trait: "Thiếu nhất quán với rủi ro" },
+          { t: "Tôi thường không xác định rủi ro trước khi vào lệnh.", s: 0, trait: "Không kiểm soát rủi ro" }
+        ]
+      },
+      {
+        q: "Bạn duy trì nhật ký giao dịch và học từ kinh nghiệm như thế nào?",
+        opts: [
+          { t: "Tôi ghi lại mỗi giao dịch với lý do vào lệnh, kết quả và bài học.", s: 3, trait: "Học tập có hệ thống" },
+          { t: "Tôi thỉnh thoảng ghi lại những giao dịch quan trọng.", s: 2, trait: "Ghi chép không đều" },
+          { t: "Tôi học từ kinh nghiệm nhưng không ghi chép có hệ thống.", s: 1, trait: "Học từ trí nhớ" },
+          { t: "Tôi ít quan tâm đến việc phân tích giao dịch sau khi kết thúc.", s: 0, trait: "Không rút kinh nghiệm" }
+        ]
+      },
+      {
+        q: "Bạn xử lý áp lực từ cộng đồng hoặc mạng xã hội như thế nào?",
+        opts: [
+          { t: "Tôi tập trung vào hệ thống của mình và không bị ảnh hưởng bởi ý kiến bên ngoài.", s: 3, trait: "Độc lập tư duy" },
+          { t: "Tôi tham khảo ý kiến người khác nhưng vẫn tự đưa ra quyết định cuối cùng.", s: 2, trait: "Tham khảo có chọn lọc" },
+          { t: "Tôi đôi khi thay đổi kế hoạch dựa trên ý kiến của những người có ảnh hưởng.", s: 1, trait: "Dễ bị ảnh hưởng" },
+          { t: "Tôi thường giao dịch theo xu hướng và ý kiến phổ biến trong cộng đồng.", s: 0, trait: "Đi theo đám đông" }
+        ]
+      },
+      {
+        q: "Khi giao dịch của bạn đang có lời, bạn thường làm gì?",
+        opts: [
+          { t: "Tôi theo dõi kế hoạch, có thể điều chỉnh mức dừng lỗ theo chiều có lợi.", s: 3, trait: "Quản lý lệnh lời có kế hoạch" },
+          { t: "Tôi thường thêm vào vị thế khi xu hướng xác nhận.", s: 2, trait: "Tăng vị thế theo xu hướng" },
+          { t: "Tôi lo lắng về việc mất lợi nhuận và thường chốt lời sớm.", s: 1, trait: "Lo sợ mất lãi" },
+          { t: "Tôi giữ vị thế quá lâu với hy vọng lợi nhuận sẽ tiếp tục tăng.", s: 0, trait: "Tham lam quá mức" }
+        ]
+      },
+      {
+        q: "Bạn đặt mục tiêu lợi nhuận trong giao dịch như thế nào?",
+        opts: [
+          { t: "Tôi có mục tiêu cụ thể dựa trên phân tích kỹ thuật và tỷ lệ risk/reward.", s: 3, trait: "Mục tiêu có cơ sở" },
+          { t: "Tôi đặt mục tiêu nhưng sẵn sàng điều chỉnh dựa trên biến động thị trường.", s: 2, trait: "Mục tiêu linh hoạt" },
+          { t: "Tôi thường không có mục tiêu cụ thể mà để thị trường quyết định.", s: 1, trait: "Thiếu mục tiêu rõ ràng" },
+          { t: "Tôi đặt mục tiêu rất cao và thường không đạt được.", s: 0, trait: "Kỳ vọng không thực tế" }
+        ]
+      },
+      {
+        q: "Bạn phản ứng như thế nào khi thấy cơ hội giao dịch hấp dẫn nhưng không nằm trong kế hoạch?",
+        opts: [
+          { t: "Tôi bỏ qua nếu không đáp ứng tiêu chí hệ thống của mình.", s: 3, trait: "Kỷ luật hệ thống tuyệt đối" },
+          { t: "Tôi đánh giá nhanh và vào lệnh nếu cảm thấy chắc chắn.", s: 2, trait: "Linh hoạt có chọn lọc" },
+          { t: "Tôi thường vào lệnh theo cơ hội và cảm thấy tiếc nếu bỏ lỡ.", s: 1, trait: "Khó từ chối cơ hội" },
+          { t: "Tôi thường nhảy vào những cơ hội hấp dẫn mà không cần phân tích nhiều.", s: 0, trait: "Hành động bộc phát" }
+        ]
+      },
+      {
+        q: "Bạn xem xét kết quả giao dịch của mình trong dài hạn như thế nào?",
+        opts: [
+          { t: "Tôi theo dõi hiệu suất theo thống kê và tập trung vào cải thiện quy trình.", s: 3, trait: "Tư duy dài hạn" },
+          { t: "Tôi kiểm tra định kỳ nhưng chủ yếu quan tâm đến lợi nhuận tổng thể.", s: 2, trait: "Theo dõi tổng quan" },
+          { t: "Tôi thường chỉ nhớ những giao dịch nổi bật, thành công hoặc thất bại lớn.", s: 1, trait: "Nhớ chọn lọc" },
+          { t: "Tôi ít khi nhìn lại kết quả dài hạn, tập trung vào từng giao dịch.", s: 0, trait: "Tư duy ngắn hạn" }
+        ]
+      },
+      {
+        q: "Bạn xử lý tình huống thị trường biến động mạnh và khó dự đoán như thế nào?",
+        opts: [
+          { t: "Tôi giảm quy mô hoặc đứng ngoài cho đến khi thị trường rõ ràng hơn.", s: 3, trait: "Thận trọng trong biến động" },
+          { t: "Tôi cố gắng thích ứng và tìm cơ hội trong biến động.", s: 2, trait: "Linh hoạt với biến động" },
+          { t: "Tôi cảm thấy bị áp lực và thường đưa ra quyết định không tốt.", s: 1, trait: "Mất bình tĩnh trong biến động" },
+          { t: "Tôi tăng cường giao dịch để tận dụng biến động lớn.", s: 0, trait: "Liều lĩnh trong biến động" }
+        ]
+      },
+      {
+        q: "Bạn xác định và tuân thủ mức cắt lỗ như thế nào?",
+        opts: [
+          { t: "Tôi xác định mức cắt lỗ trước khi vào lệnh và luôn tuân thủ.", s: 3, trait: "Cắt lỗ kỷ luật" },
+          { t: "Tôi có mức cắt lỗ nhưng đôi khi điều chỉnh dựa trên tình huống.", s: 2, trait: "Cắt lỗ linh hoạt" },
+          { t: "Tôi đặt mức cắt lỗ nhưng khó thực hiện khi thực sự đến lúc.", s: 1, trait: "Khó cắt lỗ" },
+          { t: "Tôi thường không đặt mức cắt lỗ hoặc dời đi khi giá tiếp cận.", s: 0, trait: "Không cắt lỗ" }
+        ]
+      },
+      {
+        q: "Bạn cảm thấy thế nào về sự không chắc chắn trong giao dịch?",
+        opts: [
+          { t: "Tôi chấp nhận rằng không thể biết chắc kết quả; tôi chỉ tập trung vào xác suất.", s: 3, trait: "Tư duy xác suất" },
+          { t: "Tôi hiểu điều này nhưng vẫn cảm thấy khó chịu với sự không chắc chắn.", s: 2, trait: "Hiểu nhưng khó chịu" },
+          { t: "Sự không chắc chắn thường khiến tôi do dự và bỏ lỡ cơ hội.", s: 1, trait: "Do dự vì không chắc" },
+          { t: "Tôi thường cố gắng tìm sự chắc chắn, đôi khi đến mức phân tích quá mức.", s: 0, trait: "Paralysis by analysis" }
+        ]
+      },
+      {
+        q: "Bạn duy trì sự cân bằng giữa cuộc sống và giao dịch như thế nào?",
+        opts: [
+          { t: "Tôi có ranh giới rõ ràng; giao dịch không ảnh hưởng tiêu cực đến cuộc sống cá nhân.", s: 3, trait: "Cân bằng cuộc sống" },
+          { t: "Đôi khi giao dịch chiếm nhiều thời gian và suy nghĩ hơn tôi muốn.", s: 2, trait: "Đôi khi mất cân bằng" },
+          { t: "Tôi thường nghĩ về giao dịch ngay cả khi không ở trước màn hình.", s: 1, trait: "Trading chiếm nhiều tâm trí" },
+          { t: "Giao dịch đang ảnh hưởng tiêu cực đến các mối quan hệ và sức khỏe.", s: 0, trait: "Mất cân bằng nghiêm trọng" }
+        ]
+      },
+      {
+        q: "Bạn tiếp cận việc học và cải thiện kỹ năng giao dịch như thế nào?",
+        opts: [
+          { t: "Tôi có kế hoạch học tập có cấu trúc và thực hành có chủ đích.", s: 3, trait: "Học tập chủ động" },
+          { t: "Tôi học khi cảm thấy cần thiết hoặc sau những thất bại lớn.", s: 2, trait: "Học theo nhu cầu" },
+          { t: "Tôi muốn cải thiện nhưng khó duy trì việc học một cách đều đặn.", s: 1, trait: "Học không đều" },
+          { t: "Tôi thường tìm kiếm 'chiến lược thần kỳ' thay vì xây dựng nền tảng vững chắc.", s: 0, trait: "Tìm kiếm công thức nhanh" }
+        ]
+      },
+      {
+        q: "Bạn xử lý phản hồi tiêu cực từ kết quả giao dịch của mình như thế nào?",
+        opts: [
+          { t: "Tôi xem thua lỗ là chi phí học tập và thông tin quý giá để cải thiện.", s: 3, trait: "Nhìn nhận thua lỗ tích cực" },
+          { t: "Tôi chấp nhận thua lỗ nhưng vẫn cảm thấy thất vọng một thời gian.", s: 2, trait: "Chấp nhận, có tiếc nuối" },
+          { t: "Thua lỗ ảnh hưởng đến tự tin và quyết định của tôi trong thời gian sau.", s: 1, trait: "Thua lỗ ảnh hưởng dài" },
+          { t: "Tôi thường đổ lỗi cho thị trường, các yếu tố bên ngoài hoặc người khác.", s: 0, trait: "Đổ lỗi ngoại cảnh" }
         ]
       }
     ];
 
     let currentIdx = 0;
-    let selectedOptionIdx = null;
+    let selectedOpt = null;
     let totalScore = 0;
-    let userTraits = [];
+    let traits = [];
+    const total = questionsPool.length;
 
     const progressFill = document.getElementById('progress-fill');
-    const stepCounter = document.getElementById('step-counter');
-    const questionTitle = document.getElementById('question-title');
-    const optionsContainer = document.getElementById('options-container');
+    const stepLabel = document.getElementById('step-label');
+    const pctLabel = document.getElementById('pct-label');
+    const questionText = document.getElementById('question-text');
+    const optionsList = document.getElementById('options-list');
     const btnNext = document.getElementById('btn-next');
-    const quizBox = document.getElementById('quiz-box');
+    const btnLabel = document.getElementById('btn-label');
+    const progressWrap = document.getElementById('progress-wrap');
+    const quizCard = document.getElementById('quiz-card');
 
     function renderQuestion() {
-      selectedOptionIdx = null;
+      selectedOpt = null;
       btnNext.disabled = true;
 
-      const q = questionsPool[currentIdx];
-      const progressPct = ((currentIdx + 1) / questionsPool.length) * 100;
-      progressFill.style.width = progressPct + '%';
-      stepCounter.innerText = `CÂU HỎI ${currentIdx + 1} / ${questionsPool.length}`;
-      questionTitle.innerText = q.question;
+      const pct = Math.round(((currentIdx + 1) / total) * 100);
+      progressFill.style.width = pct + '%';
+      stepLabel.textContent = `Câu hỏi ${currentIdx + 1} / ${total}`;
+      pctLabel.textContent = pct + '%';
 
-      optionsContainer.innerHTML = '';
-      q.options.forEach((opt, idx) => {
-        const item = document.createElement('div');
-        item.className = 'quiz-option-item';
-        item.innerHTML = `
-          <div class="quiz-option-radio"></div>
-          <div>${opt.text}</div>
-        `;
-        item.addEventListener('click', () => {
-          document.querySelectorAll('.quiz-option-item').forEach(el => el.classList.remove('selected'));
-          item.classList.add('selected');
-          selectedOptionIdx = idx;
+      const q = questionsPool[currentIdx];
+      questionText.textContent = q.q;
+      optionsList.innerHTML = '';
+      btnLabel.textContent = (currentIdx === total - 1) ? 'Xem Kết Quả' : 'Câu tiếp theo';
+
+      q.opts.forEach((opt, idx) => {
+        const el = document.createElement('div');
+        el.className = 'tn-option';
+        el.innerHTML = `<div class="tn-radio"></div><div class="tn-option-text">${opt.t}</div>`;
+        el.addEventListener('click', () => {
+          document.querySelectorAll('.tn-option').forEach(o => o.classList.remove('selected'));
+          el.classList.add('selected');
+          selectedOpt = idx;
           btnNext.disabled = false;
         });
-        optionsContainer.appendChild(item);
+        optionsList.appendChild(el);
       });
-
-      btnNext.querySelector('span').innerText = (currentIdx === questionsPool.length - 1) ? 'Xem Báo Cáo Chẩn Đoán' : 'Câu Tiếp Theo';
     }
 
     btnNext.addEventListener('click', () => {
-      if (selectedOptionIdx === null) return;
-
-      const q = questionsPool[currentIdx];
-      const chosen = q.options[selectedOptionIdx];
-      totalScore += chosen.score;
-      userTraits.push(chosen.trait);
-
+      if (selectedOpt === null) return;
+      const chosen = questionsPool[currentIdx].opts[selectedOpt];
+      totalScore += chosen.s;
+      traits.push(chosen.trait);
       currentIdx++;
-      if (currentIdx < questionsPool.length) {
+      if (currentIdx < total) {
         renderQuestion();
       } else {
         renderResult();
@@ -423,59 +696,69 @@
     });
 
     function renderResult() {
-      let levelTitle = '';
-      let summaryText = '';
-      let adviceText = '';
+      progressWrap.style.display = 'none';
+      const maxScore = total * 3;
+      const pct = (totalScore / maxScore) * 100;
 
-      const pct = (totalScore / 16) * 100;
-      if (pct >= 80) {
-        levelTitle = 'Tâm Lý Vững Vàng (Chuẩn Mark Douglas)';
-        summaryText = 'Bạn có tư duy xác suất tốt và chấp nhận rủi ro. Nút thắt của bạn chỉ là tối ưu kiên nhẫn khi vào lệnh trên thị trường Vàng (XAU/USD).';
-        adviceText = 'Bạn cần một môi trường đồng hành chuyên sâu để giữ vững phong độ kỷ luật dài hạn.';
-      } else if (pct >= 50) {
-        levelTitle = 'Bế Tắc Nút Thắt Tâm Lý';
-        summaryText = 'Bạn đã có kiến thức cơ bản nhưng vẫn bị cảm xúc chi phối (sợ hãi do dự khi vào lệnh hoặc chốt lời quá sớm). Bạn hiểu lý thuyết nhưng chưa thể nhất quán giữa BIẾT và LÀM.';
-        adviceText = 'Trò chuyện 1-1 với ĐẠI KA sẽ giúp bạn mổ xẻ chính xác và tháo gỡ điểm mù này.';
+      let badgeClass, badgeText, resultTitle, summary, advice;
+
+      if (pct >= 70) {
+        badgeClass = 'level-high';
+        badgeText = 'Tư Duy Chuyên Nghiệp';
+        resultTitle = 'Bạn Đang Ở Nền Tảng Vững Chắc';
+        summary = 'Bạn có tư duy giao dịch chuyên nghiệp với khả năng kiểm soát cảm xúc và tuân thủ kỷ luật tốt. Bạn hiểu rằng trading là nghề đòi hỏi sự kiên nhẫn và nhất quán trong dài hạn.';
+        advice = 'Để đạt đỉnh cao hơn, bạn cần người đồng hành để tối ưu hệ thống và duy trì phong độ ổn định trong dài hạn.';
+      } else if (pct >= 40) {
+        badgeClass = 'level-mid';
+        badgeText = 'Đang Phát Triển';
+        resultTitle = 'Nền Tảng Tốt, Còn Nút Thắt Cần Tháo Gỡ';
+        summary = 'Bạn đã có kiến thức cơ bản và hiểu lý thuyết, nhưng vẫn đang vật lộn với việc thực hiện nhất quán trong thực tế. Khoảng cách giữa "biết" và "làm được" là nút thắt cốt lõi bạn cần vượt qua.';
+        advice = 'Một buổi trò chuyện 1-1 sẽ giúp bạn xác định chính xác điểm mù và đưa ra lộ trình cụ thể để đột phá.';
       } else {
-        levelTitle = 'Coi Trading Như Cờ Bạc / Gồng Lỗ Nguy Hiểm';
-        summaryText = 'Bạn đang giao dịch dựa trên hy vọng, cay cú gỡ gạc sau thua lỗ hoặc gồng lệnh không đặt Stop Loss. Đây là nguyên nhân khiến bạn luôn mệt mỏi và cháy tài khoản.';
-        adviceText = 'Bạn cần định hình lại Tư Duy Gốc và trao đổi trực tiếp 1-1 với ĐẠI KA càng sớm càng tốt.';
+        badgeClass = 'level-low';
+        badgeText = 'Cần Định Hình Lại Nền Tảng';
+        resultTitle = 'Đây Chính Là Nút Thắt Khiến Bạn Mệt Mỏi';
+        summary = 'Bạn đang giao dịch chủ yếu dựa vào cảm xúc và chưa có hệ thống vững chắc. Điều này khiến kết quả lên xuống thất thường và tạo ra vòng lặp thua lỗ — gỡ gạc — thua tiếp không có điểm dừng.';
+        advice = 'Điều quan trọng nhất lúc này không phải là tìm thêm chiến lược, mà là xây lại đúng nền tảng tư duy và hệ thống giao dịch từ gốc rễ.';
       }
 
-      quizBox.innerHTML = `
-        <div style="text-align: center;">
-          <span class="result-badge">${levelTitle}</span>
-          <h2 style="color: #fff; font-size: 24px; margin-bottom: 8px;">KẾT QUẢ CHẨN ĐOÁN TÂM LÝ TRADING</h2>
-          <p style="color: #aaa; font-size: 14px;">Tính cách đặc trưng: ${userTraits.slice(0, 4).join(' • ')}</p>
-
-          <div class="result-score-box">
-            <div style="font-size: 13px; color: #888; margin-bottom: 6px;">ĐIỂM CHẨN ĐOÁN CỦA BẠN</div>
-            <div class="result-score-num">${totalScore} / 16</div>
-          </div>
-
-          <div style="text-align: left; background: rgba(255,255,255,0.02); padding: 20px; border-radius: 12px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.05);">
-            <h4 style="color: #2AABEE; margin-bottom: 8px; font-size: 16px;">🔍 Phân tích điểm mù:</h4>
-            <p style="color: #ddd; font-size: 14px; line-height: 1.6; margin-bottom: 14px;">${summaryText}</p>
-            <h4 style="color: #2AABEE; margin-bottom: 8px; font-size: 16px;">💡 Lời khuyên dành cho bạn:</h4>
-            <p style="color: #ddd; font-size: 14px; line-height: 1.6;">${adviceText}</p>
-          </div>
-
-          <div class="result-cta-box">
-            <div class="result-cta-title">💬 Tâm Sự 1-1 & Nhận Giải Pháp Từ ĐẠI KA</div>
-            <div class="result-cta-desc">1 bài trắc nghiệm tự động chưa thể giúp bạn sửa ngay thói quen. Hãy trò chuyện trực tiếp 1-1 với ĐẠI KA để mổ xẻ triệt để nút thắt của bạn.</div>
-            <div class="result-cta-btns">
-              <a href="https://t.me/NgheTradingSupport_Bot" target="_blank" rel="noopener noreferrer" class="btn-tg-chat">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8-1.7 8.02c-.12.56-.46.7-.93.43l-2.57-1.89-1.24 1.19c-.14.14-.25.25-.51.25l.18-2.61 4.7-4.25c.2-.18-.04-.28-.32-.1L7.38 15.3l-2.52-.79c-.55-.17-.56-.55.12-.81l9.85-3.8c.45-.17.85.11.81.1z"/></svg>
-                <span>Tâm Sự 1-1 Qua Telegram Bot</span>
-              </a>
-              <a href="tu-van.html" class="btn-cafe-booking">☕ Hẹn Cafe 1-1 Với ĐẠI KA</a>
+      quizCard.innerHTML = `
+        <div style="text-align:center; margin-bottom: 28px;">
+          <span class="tn-result-badge ${badgeClass}">${badgeText}</span>
+          <div class="tn-result-title">${resultTitle}</div>
+          <div class="tn-result-traits">Đặc điểm nổi bật: ${traits.filter((v,i,a)=>a.indexOf(v)===i).slice(0,4).join(' · ')}</div>
+          <div class="tn-score-box">
+            <div>
+              <div class="tn-score-num">${totalScore}</div>
             </div>
+            <div class="tn-score-label">
+              trên tổng <strong>${maxScore}</strong> điểm<br/>
+              <span style="font-size:12px;color:#94a3b8;">Hoàn thành ${total} câu hỏi</span>
+            </div>
+          </div>
+        </div>
+        <div class="tn-analysis-box">
+          <h4>Đánh giá</h4>
+          <p>${summary}</p>
+        </div>
+        <div class="tn-analysis-box" style="margin-top: 10px; border-left-color: #2AABEE;">
+          <h4 style="color:#2AABEE;">Gợi ý cho bạn</h4>
+          <p>${advice}</p>
+        </div>
+        <div class="tn-cta-box">
+          <h3>Tâm Sự 1-1 Với Admin</h3>
+          <p>Bài trắc nghiệm chẩn đoán tổng quan. Để mổ xẻ chính xác nút thắt và nhận lộ trình riêng cho bạn, hãy kết nối trực tiếp với Admin.</p>
+          <div class="tn-cta-btns">
+            <a href="https://t.me/nghetrading_bot" target="_blank" rel="noopener noreferrer" class="tn-btn-tg">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8-1.7 8.02c-.12.56-.46.7-.93.43l-2.57-1.89-1.24 1.19c-.14.14-.25.25-.51.25l.18-2.61 4.7-4.25c.2-.18-.04-.28-.32-.1L7.38 15.3l-2.52-.79c-.55-.17-.56-.55.12-.81l9.85-3.8c.45-.17.85.11.81.1z"/></svg>
+              Tâm Sự Trực Tiếp Với Admin
+            </a>
+            <a href="tu-van.html" class="tn-btn-cafe">☕ Hẹn Cafe 1-1 Với Admin</a>
           </div>
         </div>
       `;
     }
 
-    // Chạy câu hỏi đầu tiên
     renderQuestion();
   </script>
 </body>
