@@ -1,17 +1,49 @@
 // ===========================================================
 //  NGHỀ TRADING – nhat-ky.js
-//  Dùng chung cho nhat-ky.html (danh sách) và phan-tich.html (chi tiết)
-//  Dữ liệu lấy từ data/journal.json
+//  nhat-ky.html: Tab lọc (Tất cả / Phân tích / Lệnh đã vào)
+//  phan-tich.html: Chi tiết bài phân tích
+//  Dữ liệu: data/journal.json (phân tích) + data/trades.json (lệnh)
 // ===========================================================
 
 const TAG_LABEL = { bitcoin: 'Bitcoin', vang: 'Vàng' };
 const PER_PAGE = 6;
 
 let allJournalPosts = [];
+let allTrades = [];
 let activeTag = 'Tất cả';
 let currentPage = 1;
 
+// Tab đang active: 'all' | 'analysis' | 'lenh'
+let activeNkTab = 'all';
+
+// ID lệnh đang xem chi tiết (nếu có)
+let activeTradeId = null;
+
 document.addEventListener('DOMContentLoaded', async () => {
+  // Đọc URL params
+  const params = new URLSearchParams(window.location.search);
+  const tabParam = params.get('tab');
+  const idParam = params.get('id');
+
+  activeNkTab = (tabParam === 'lenh') ? 'lenh' : 'analysis';
+  if (idParam) activeTradeId = idParam;
+
+  // Load dữ liệu song song
+  await Promise.all([loadJournalPosts(), loadTrades()]);
+
+  // Trang danh sách
+  if (document.getElementById('journal-grid')) {
+    renderTabBar();
+    applyTab();
+  }
+
+  // Trang chi tiết phân tích
+  if (document.getElementById('pt-content-header')) {
+    initPostDetail();
+  }
+});
+
+async function loadJournalPosts() {
   try {
     const res = await fetch('data/journal.json?v=' + Date.now(), { cache: 'no-store' });
     allJournalPosts = await res.json();
@@ -20,22 +52,82 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('Không tải được data/journal.json:', err);
     allJournalPosts = [];
   }
+}
 
-  if (document.getElementById('journal-grid')) {
-    renderTagFilter();
-    renderPage(currentPage);
+async function loadTrades() {
+  try {
+    const res = await fetch('data/trades.json?v=' + Date.now(), { cache: 'no-store' });
+    allTrades = await res.json();
+    allTrades.sort((a, b) => new Date(b.date) - new Date(a.date));
+  } catch (err) {
+    console.error('Không tải được data/trades.json:', err);
+    allTrades = [];
   }
-  if (document.getElementById('pt-content-header')) {
-    initPostDetail();
-  }
-});
+}
 
 function formatDate(iso) {
   const [y, m, d] = iso.split('-');
   return `${d}/${m}/${y}`;
 }
 
-/* ---------------- Trang danh sách (nhat-ky.html) ---------------- */
+/* ============================================================
+   TAB BAR
+   ============================================================ */
+
+function renderTabBar() {
+  const bar = document.getElementById('nk-tab-bar');
+  if (!bar) return;
+  bar.querySelectorAll('.nk-tab').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.tab === activeNkTab);
+  });
+}
+
+function setNkTab(tab) {
+  activeNkTab = tab;
+  activeTradeId = null;
+  activeTag = 'Tất cả';
+  currentPage = 1;
+  // Cập nhật URL param không reload
+  const url = new URL(window.location.href);
+  url.searchParams.set('tab', tab);
+  url.searchParams.delete('id');
+  window.history.replaceState({}, '', url);
+  renderTabBar();
+  applyTab();
+}
+
+function applyTab() {
+  const journalGrid = document.getElementById('journal-grid');
+  const tradesGrid = document.getElementById('trades-grid');
+  const tradeDetail = document.getElementById('trade-detail');
+  const catBox = document.getElementById('category-sidebar-box');
+
+  if (activeNkTab === 'lenh') {
+    journalGrid.style.display = 'none';
+    if (catBox) catBox.style.display = 'none';
+    if (activeTradeId) {
+      tradesGrid.style.display = 'none';
+      tradeDetail.style.display = 'block';
+      renderTradeDetail(activeTradeId);
+    } else {
+      tradesGrid.style.display = 'block';
+      tradeDetail.style.display = 'none';
+      renderTradesGrid();
+    }
+  } else {
+    // Tab 'analysis'
+    journalGrid.style.display = '';
+    tradesGrid.style.display = 'none';
+    tradeDetail.style.display = 'none';
+    if (catBox) catBox.style.display = '';
+    renderTagFilter();
+    renderPage(currentPage);
+  }
+}
+
+/* ============================================================
+   TAB PHÂN TÍCH (journal-grid)
+   ============================================================ */
 
 function renderTagFilter() {
   const filterBar = document.getElementById('category-filter');
@@ -115,7 +207,6 @@ function renderPage(page) {
 
     paginationHtml += `<button onclick="changeJournalPage(${page + 1})" ${page === totalPages ? 'disabled' : ''}>Sau →</button>`;
     paginationHtml += `</div></div>`;
-
     html += paginationHtml;
   }
 
@@ -142,7 +233,215 @@ function changeJournalPage(page) {
   renderPage(currentPage);
 }
 
-/* ---------------- Trang chi tiết (phan-tich.html) ---------------- */
+/* ============================================================
+   TAB LỆNH ĐÃ VÀO (trades-grid)
+   ============================================================ */
+
+function resultBadge(trade) {
+  if (trade.result === 'pending') return `<span class="result pending">Đang chờ</span>`;
+  if (trade.result === 'win') return `<span class="result win">Thắng</span>`;
+  if (trade.result === 'loss') return `<span class="result loss">Thua</span>`;
+  if (trade.result === 'be') return `<span class="result be">Hòa</span>`;
+  return `<span class="result pending">—</span>`;
+}
+
+function directionBadge(dir) {
+  const isLong = dir === 'LONG';
+  return `<span class="trade-dir ${isLong ? 'long' : 'short'}">${dir}</span>`;
+}
+
+function pnlText(trade) {
+  if (trade.result === 'pending') return `<span class="trade-pnl neutral">Chờ kết quả</span>`;
+  const cls = trade.result === 'win' ? 'win' : trade.result === 'loss' ? 'loss' : 'neutral';
+  return `<span class="trade-pnl ${cls}">${trade.pnl_r || '0R'}</span>`;
+}
+
+function renderTradesGrid() {
+  const grid = document.getElementById('trades-grid');
+  if (!grid) return;
+
+  if (allTrades.length === 0) {
+    grid.innerHTML = `<div class="journal-empty">Chưa có lệnh nào được ghi lại.</div>`;
+    return;
+  }
+
+  // Stats summary
+  const completed = allTrades.filter(t => t.result !== 'pending');
+  const wins = completed.filter(t => t.result === 'win').length;
+  const losses = completed.filter(t => t.result === 'loss').length;
+  const winRate = completed.length > 0 ? Math.round((wins / completed.length) * 100) : 0;
+
+  grid.innerHTML = `
+    <div class="trades-stats-bar">
+      <div class="trades-stat">
+        <span class="trades-stat-label">Tổng lệnh</span>
+        <span class="trades-stat-value">${allTrades.length}</span>
+      </div>
+      <div class="trades-stat">
+        <span class="trades-stat-label">Thắng</span>
+        <span class="trades-stat-value" style="color:#27ae60">${wins}</span>
+      </div>
+      <div class="trades-stat">
+        <span class="trades-stat-label">Thua</span>
+        <span class="trades-stat-value" style="color:#e74c3c">${losses}</span>
+      </div>
+      <div class="trades-stat">
+        <span class="trades-stat-label">Win rate</span>
+        <span class="trades-stat-value">${winRate}%</span>
+      </div>
+    </div>
+
+    <div class="trades-list">
+      ${allTrades.map((t, i) => `
+        <article class="trade-card" onclick="openTradeDetail('${t.id}')" role="button" tabindex="0">
+          <div class="trade-card-img">
+            <img src="${t.chart_image}" alt="Chart ${t.pair}" onerror="this.src='https://placehold.co/600x400?text=Chart'"/>
+            ${directionBadge(t.direction)}
+          </div>
+          <div class="trade-card-body">
+            <div class="trade-card-meta">${formatDate(t.date)} • ${t.pair}</div>
+            <div class="trade-card-stats">
+              <div class="trade-stat-row">
+                <span>Entry</span><strong>${t.entry}</strong>
+              </div>
+              <div class="trade-stat-row">
+                <span>SL</span><strong style="color:#e74c3c">${t.sl}</strong>
+              </div>
+              <div class="trade-stat-row">
+                <span>TP</span><strong style="color:#27ae60">${t.tp}</strong>
+              </div>
+              <div class="trade-stat-row">
+                <span>RR mục tiêu</span><strong>1:${t.rr_target}</strong>
+              </div>
+            </div>
+            <div class="trade-card-footer">
+              ${resultBadge(t)}
+              ${pnlText(t)}
+            </div>
+          </div>
+        </article>
+      `).join('')}
+    </div>
+  `;
+}
+
+function openTradeDetail(id) {
+  activeTradeId = id;
+  const url = new URL(window.location.href);
+  url.searchParams.set('tab', 'lenh');
+  url.searchParams.set('id', id);
+  window.history.pushState({}, '', url);
+
+  const journalGrid = document.getElementById('journal-grid');
+  const tradesGrid = document.getElementById('trades-grid');
+  const tradeDetail = document.getElementById('trade-detail');
+
+  journalGrid.style.display = 'none';
+  tradesGrid.style.display = 'none';
+  tradeDetail.style.display = 'block';
+  renderTradeDetail(id);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderTradeDetail(id) {
+  const tradeDetail = document.getElementById('trade-detail');
+  const t = allTrades.find(t => t.id === id);
+
+  if (!t) {
+    tradeDetail.innerHTML = `<div class="journal-empty">Không tìm thấy lệnh này. <a href="nhat-ky.html?tab=lenh" style="text-decoration:underline;">Quay lại</a></div>`;
+    return;
+  }
+
+  tradeDetail.innerHTML = `
+    <div class="trade-detail-wrap">
+      <a href="nhat-ky.html?tab=lenh" class="trade-detail-back" onclick="handleBackToList(event)">← Quay lại danh sách lệnh</a>
+
+      <div class="trade-detail-header">
+        <div class="trade-detail-meta">${formatDate(t.date)} • ${t.pair}</div>
+        <div class="trade-detail-title">
+          ${directionBadge(t.direction)}
+          <span>Lệnh ${t.direction} ${t.pair}</span>
+        </div>
+      </div>
+
+      <div class="trade-detail-chart">
+        <img src="${t.chart_image}" alt="Chart lệnh ${t.pair}" onerror="this.src='https://placehold.co/900x500?text=Chart'"/>
+      </div>
+
+      <div class="trade-detail-grid">
+        <div class="trade-detail-box">
+          <div class="trade-detail-box-title">THÔNG SỐ LỆNH</div>
+          <div class="trade-detail-stats">
+            <div class="tds-row"><span>Cặp tiền</span><strong>${t.pair}</strong></div>
+            <div class="tds-row"><span>Hướng</span>${directionBadge(t.direction)}</div>
+            <div class="tds-row"><span>Entry</span><strong>${t.entry}</strong></div>
+            <div class="tds-row"><span>Stop Loss</span><strong style="color:#e74c3c">${t.sl}</strong></div>
+            <div class="tds-row"><span>Take Profit</span><strong style="color:#27ae60">${t.tp}</strong></div>
+            <div class="tds-row"><span>RR mục tiêu</span><strong>1:${t.rr_target}</strong></div>
+          </div>
+        </div>
+
+        <div class="trade-detail-box">
+          <div class="trade-detail-box-title">KẾT QUẢ</div>
+          <div class="trade-detail-result-wrap">
+            ${t.result === 'pending' ? `
+              <div class="trade-result-pending">
+                <div class="trade-result-icon">⏳</div>
+                <div class="trade-result-label">Đang chờ kết quả</div>
+                <div class="trade-result-sub">Sẽ được cập nhật sau khi lệnh kết thúc</div>
+              </div>
+            ` : `
+              <div class="trade-result-done ${t.result}">
+                <div class="trade-result-icon">${t.result === 'win' ? '✅' : t.result === 'loss' ? '❌' : '⚖️'}</div>
+                <div class="trade-result-pnl">${t.pnl_r}</div>
+                <div class="trade-result-label">${t.result === 'win' ? 'Thắng' : t.result === 'loss' ? 'Thua' : 'Hòa'}</div>
+              </div>
+            `}
+          </div>
+        </div>
+      </div>
+
+      ${t.note ? `
+        <div class="trade-detail-note">
+          <div class="trade-detail-box-title">GHI CHÚ</div>
+          <p>${t.note}</p>
+        </div>
+      ` : ''}
+    </div>
+  `;
+}
+
+function handleBackToList(e) {
+  e.preventDefault();
+  activeTradeId = null;
+  const url = new URL(window.location.href);
+  url.searchParams.set('tab', 'lenh');
+  url.searchParams.delete('id');
+  window.history.pushState({}, '', url);
+  const journalGrid = document.getElementById('journal-grid');
+  const tradesGrid = document.getElementById('trades-grid');
+  const tradeDetail = document.getElementById('trade-detail');
+  journalGrid.style.display = 'none';
+  tradesGrid.style.display = 'block';
+  tradeDetail.style.display = 'none';
+  renderTradesGrid();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Xử lý nút back trình duyệt
+window.addEventListener('popstate', () => {
+  const params = new URLSearchParams(window.location.search);
+  const tabParam = params.get('tab');
+  const idParam = params.get('id');
+  activeNkTab = tabParam || 'all';
+  activeTradeId = idParam || null;
+  renderTabBar();
+  applyTab();
+});
+
+/* ============================================================
+   TRANG CHI TIẾT PHÂN TÍCH (phan-tich.html)
+   ============================================================ */
 
 function initPostDetail() {
   const params = new URLSearchParams(window.location.search);
@@ -170,8 +469,6 @@ function initPostDetail() {
     <h1 class="pt-title">${post.title}</h1>
   `;
 
-  // Form hiện tại dùng ảnh chụp chart (upload imgur) thay cho mã nhúng TradingView sống,
-  // nên hiển thị ảnh bìa lớn ở vị trí khung nhúng cũ — dùng đúng class .pt-hero-image có sẵn trong nhat-ky.css
   if (embedContainer) {
     embedContainer.innerHTML = post.cover_image
       ? `<div class="pt-hero-image"><img src="${post.cover_image}" alt="${post.title}" onerror="this.src='https://placehold.co/1000x600?text=Nghề+Trading'"/></div>`
@@ -189,7 +486,6 @@ function initPostDetail() {
   shareContainer.innerHTML = buildShareHtml(post);
   bindShareCopyButton();
 
-  // Nhúng bình luận Disqus
   if (document.getElementById('disqus_thread')) {
     window.disqus_config = function () {
       this.page.url = window.location.href;

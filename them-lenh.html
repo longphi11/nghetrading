@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thêm Lệnh Giao Dịch – Công cụ nội bộ</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: #f9f9f9; color: #111; }
+
+  .tool-wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 56px 24px 100px;
+  }
+
+  h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+  .hint {
+    font-size: 13.5px;
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 36px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #eee;
+  }
+  .hint strong { color: #111; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #aaa;
+    margin: 28px 0 14px;
+  }
+
+  .field { margin-bottom: 16px; }
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    color: #555;
+    margin-bottom: 6px;
+  }
+  .field input, .field select, .field textarea {
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 10px 12px;
+    font-family: inherit;
+    font-size: 14px;
+    background: #fff;
+    border-radius: 3px;
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: #111;
+  }
+  .field textarea { min-height: 80px; resize: vertical; }
+  .field .sub { font-size: 11px; color: #aaa; margin-top: 4px; }
+
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+  /* Direction toggle */
+  .dir-toggle { display: flex; gap: 0; }
+  .dir-toggle input[type="radio"] { display: none; }
+  .dir-toggle label {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    color: #aaa;
+    transition: all 0.15s;
+    margin: 0;
+  }
+  .dir-toggle label:first-of-type { border-radius: 3px 0 0 3px; }
+  .dir-toggle label:last-of-type { border-radius: 0 3px 3px 0; border-left: none; }
+  .dir-toggle input[value="LONG"]:checked + label { background: #27ae60; color: #fff; border-color: #27ae60; }
+  .dir-toggle input[value="SHORT"]:checked + label { background: #e74c3c; color: #fff; border-color: #e74c3c; }
+
+  /* RR preview */
+  #rr-preview {
+    margin-top: 12px;
+    padding: 12px 16px;
+    background: #f5f5f5;
+    border-radius: 3px;
+    font-size: 13px;
+    color: #555;
+    display: none;
+  }
+  #rr-preview strong { color: #111; font-size: 15px; }
+
+  .btn-generate {
+    width: 100%;
+    padding: 14px;
+    background: #111;
+    color: #fff;
+    border: none;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-top: 8px;
+    transition: background 0.2s;
+  }
+  .btn-generate:hover { background: #333; }
+
+  #output { margin-top: 28px; display: none; }
+  #output .output-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #aaa;
+    margin-bottom: 10px;
+  }
+  #output pre {
+    background: #0f0f0f;
+    color: #7ee787;
+    padding: 20px;
+    font-size: 12.5px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    line-height: 1.6;
+  }
+  .btn-copy {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background: none;
+    border: 1px solid #111;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  .btn-copy:hover { background: #111; color: #fff; }
+
+  .instructions {
+    margin-top: 20px;
+    padding: 16px 18px;
+    background: #fffbe6;
+    border: 1px solid #f0d060;
+    border-radius: 3px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #555;
+    display: none;
+  }
+  .instructions strong { color: #111; }
+
+  .error { color: #e74c3c; font-size: 13px; margin-top: 8px; display: none; }
+
+  @media (max-width: 480px) {
+    .row2, .row3 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="tool-wrap">
+
+  <h1>➕ Thêm Lệnh Giao Dịch</h1>
+  <p class="hint">
+    Công cụ nội bộ — không xuất hiện trên menu. Quy trình:<br>
+    1. Điền thông tin lệnh bên dưới → <strong>Tạo JSON</strong><br>
+    2. Copy kết quả → Dán vào <strong>đầu mảng</strong> trong <code>data/trades.json</code><br>
+    3. Cuối ngày vào <code>trades.json</code> sửa <code>"result"</code> và <code>"pnl_r"</code> sau khi lệnh kết thúc
+  </p>
+
+  <!-- THÔNG TIN CƠ BẢN -->
+  <div class="section-label">Thông tin cơ bản</div>
+
+  <div class="row2">
+    <div class="field">
+      <label>Cặp tiền</label>
+      <select id="f_pair">
+        <option value="XAU/USD">Vàng (XAU/USD)</option>
+        <option value="BTC/USD">Bitcoin (BTC/USD)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Ngày vào lệnh</label>
+      <input id="f_date" type="date">
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Hướng lệnh</label>
+    <div class="dir-toggle">
+      <input type="radio" name="direction" id="dir-short" value="SHORT" checked>
+      <label for="dir-short">SHORT ↓</label>
+      <input type="radio" name="direction" id="dir-long" value="LONG">
+      <label for="dir-long">LONG ↑</label>
+    </div>
+  </div>
+
+  <!-- GIÁ VÀO LỆNH -->
+  <div class="section-label">Thông số lệnh</div>
+
+  <div class="row3">
+    <div class="field">
+      <label>Entry</label>
+      <input id="f_entry" type="number" step="0.01" placeholder="2415.00" oninput="calcRR()">
+    </div>
+    <div class="field">
+      <label>Stop Loss</label>
+      <input id="f_sl" type="number" step="0.01" placeholder="2425.00" oninput="calcRR()">
+    </div>
+    <div class="field">
+      <label>Take Profit</label>
+      <input id="f_tp" type="number" step="0.01" placeholder="2390.00" oninput="calcRR()">
+    </div>
+  </div>
+
+  <div id="rr-preview"></div>
+
+  <!-- CHART IMAGE -->
+  <div class="section-label">Chart</div>
+
+  <div class="field">
+    <label>Link ảnh chart từ TradingView</label>
+    <input id="f_image" type="url" placeholder="https://s3.tradingview.com/...">
+    <div class="sub">Mở chart trên TradingView → Share → Copy link ảnh (đuôi _big.png hoặc _mid.png)</div>
+  </div>
+
+  <div class="field">
+    <label>Ghi chú ngắn <span style="font-weight:400;color:#aaa">(không bắt buộc)</span></label>
+    <textarea id="f_note" placeholder="VD: Giá thất bại tại kháng cự 407x, phe gấu tham gia quyết liệt..."></textarea>
+  </div>
+
+  <div class="error" id="form-error">⚠️ Vui lòng điền đầy đủ: Ngày, Entry, SL, TP, và Link ảnh chart.</div>
+
+  <button class="btn-generate" onclick="generateJSON()">TẠO JSON →</button>
+
+  <div id="output">
+    <div class="output-label">JSON — Copy và dán vào đầu mảng trong data/trades.json</div>
+    <pre id="jsonResult"></pre>
+    <button class="btn-copy" id="copyBtn" onclick="copyResult()">Copy vào clipboard</button>
+    <div class="instructions" id="instructions">
+      📋 <strong>Bước tiếp theo:</strong><br>
+      1. Mở file <code>data/trades.json</code><br>
+      2. Dán đoạn JSON trên ngay sau dấu <code>[</code> đầu tiên<br>
+      3. Đảm bảo có dấu <code>,</code> ngăn cách với entry tiếp theo<br>
+      4. Cuối ngày: sửa <code>"result": "pending"</code> → <code>"win"</code> / <code>"loss"</code> / <code>"be"</code><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;và <code>"pnl_r": null</code> → <code>"+2.5R"</code> / <code>"-1R"</code> / <code>"0R"</code>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Set today's date as default
+document.getElementById('f_date').valueAsDate = new Date();
+
+function calcRR() {
+  const entry = parseFloat(document.getElementById('f_entry').value);
+  const sl    = parseFloat(document.getElementById('f_sl').value);
+  const tp    = parseFloat(document.getElementById('f_tp').value);
+  const prev  = document.getElementById('rr-preview');
+
+  if (!entry || !sl || !tp) { prev.style.display = 'none'; return; }
+
+  const risk   = Math.abs(entry - sl);
+  const reward = Math.abs(tp - entry);
+
+  if (risk === 0) { prev.style.display = 'none'; return; }
+
+  const rr = (reward / risk).toFixed(2);
+  const isLong = document.querySelector('input[name="direction"]:checked').value === 'LONG';
+  const valid = isLong ? (tp > entry && entry > sl) : (tp < entry && entry < sl);
+
+  prev.style.display = 'block';
+  prev.innerHTML = valid
+    ? `RR tính được: <strong>1 : ${rr}</strong> &nbsp;|&nbsp; Risk: <strong>${risk.toFixed(2)}</strong> pts &nbsp;|&nbsp; Reward: <strong>${reward.toFixed(2)}</strong> pts`
+    : `⚠️ Kiểm tra lại: Entry / SL / TP chưa đúng chiều lệnh đang chọn.`;
+  prev.style.color = valid ? '#27ae60' : '#e74c3c';
+}
+
+// Recalc RR when direction changes
+document.querySelectorAll('input[name="direction"]').forEach(r => r.addEventListener('change', calcRR));
+
+function slugify(str) {
+  return str.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd').replace(/[^a-z0-9\s-]/g, '')
+    .trim().replace(/\s+/g, '-');
+}
+
+function generateJSON() {
+  const pair      = document.getElementById('f_pair').value;
+  const date      = document.getElementById('f_date').value;
+  const direction = document.querySelector('input[name="direction"]:checked').value;
+  const entry     = parseFloat(document.getElementById('f_entry').value);
+  const sl        = parseFloat(document.getElementById('f_sl').value);
+  const tp        = parseFloat(document.getElementById('f_tp').value);
+  const image     = document.getElementById('f_image').value.trim();
+  const note      = document.getElementById('f_note').value.trim();
+  const errEl     = document.getElementById('form-error');
+
+  // Validate
+  if (!date || !entry || !sl || !tp || !image) {
+    errEl.style.display = 'block';
+    return;
+  }
+  errEl.style.display = 'none';
+
+  const risk   = Math.abs(entry - sl);
+  const reward = Math.abs(tp - entry);
+  const rr     = risk > 0 ? parseFloat((reward / risk).toFixed(2)) : 0;
+
+  const pairSlug = pair === 'XAU/USD' ? 'xauusd' : 'btcusd';
+  const dateSlug = date.replace(/-/g, '');
+  const id = `trade-${pairSlug}-${dateSlug}-001`;
+
+  const obj = {
+    id,
+    date,
+    pair,
+    direction,
+    entry,
+    sl,
+    tp,
+    rr_target: rr,
+    chart_image: image,
+    note: note || null,
+    result: "pending",
+    pnl_r: null
+  };
+
+  // Remove null note if empty
+  if (!note) delete obj.note;
+
+  document.getElementById('jsonResult').textContent = JSON.stringify(obj, null, 2) + ',';
+  const out = document.getElementById('output');
+  out.style.display = 'block';
+  document.getElementById('instructions').style.display = 'block';
+  out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function copyResult() {
+  const text = document.getElementById('jsonResult').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = '✓ Đã copy!';
+    setTimeout(() => { btn.textContent = 'Copy vào clipboard'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>

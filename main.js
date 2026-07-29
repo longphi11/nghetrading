@@ -269,6 +269,73 @@ const DISQUS_SHORTNAME = "nghetrading";
     console.error('Không tải được bài viết mới nhất cho trang chủ:', err);
   }
 })();
+
+// ===========================
+//  TRANG CHỦ: BẢNG LỆNH GIAO DỊCH THỰC TẾ
+//  Render động từ data/trades.json — chỉ chạy trên index.html (có #trades-tbody)
+// ===========================
+(async function initTradesTable() {
+  const tbody = document.getElementById('trades-tbody');
+  if (!tbody) return;
+
+  function fmtDate(iso) {
+    const [y, m, d] = iso.split('-');
+    return `${d}/${m}/${y}`;
+  }
+
+  function resultBadge(trade) {
+    if (trade.result === 'pending') {
+      return `<span class="result pending">Đang chờ</span>`;
+    }
+    if (trade.result === 'win') return `<span class="result win">Thắng</span>`;
+    if (trade.result === 'loss') return `<span class="result loss">Thua</span>`;
+    if (trade.result === 'be') return `<span class="result be">Hòa</span>`;
+    return `<span class="result pending">—</span>`;
+  }
+
+  function pnlText(trade) {
+    if (trade.result === 'pending') return `<span style="color:#aaa;">—</span>`;
+    const cls = trade.result === 'win' ? 'color:#27ae60;font-weight:600;'
+              : trade.result === 'loss' ? 'color:#e74c3c;font-weight:600;'
+              : 'color:#888;';
+    return `<span style="${cls}">${trade.pnl_r || '0R'}</span>`;
+  }
+
+  function directionBadge(dir) {
+    const isLong = dir === 'LONG';
+    return `<span style="font-size:11px;font-weight:700;letter-spacing:1px;padding:2px 8px;border-radius:2px;background:${isLong ? '#e8f5e9' : '#fdecea'};color:${isLong ? '#27ae60' : '#e74c3c'};">${dir}</span>`;
+  }
+
+  try {
+    const res = await fetch('/data/trades.json?v=' + Date.now(), { cache: 'no-store' });
+    if (!res.ok) throw new Error(`status ${res.status}`);
+    const trades = await res.json();
+
+    trades.sort((a, b) => new Date(b.date) - new Date(a.date));
+    const recent = trades.slice(0, 5);
+
+    if (recent.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#aaa;padding:24px;">Chưa có lệnh nào.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = recent.map((t, i) => `
+      <tr style="cursor:pointer;" onclick="window.location='nhat-ky.html?tab=lenh&id=${encodeURIComponent(t.id)}'" title="Xem chi tiết lệnh">
+        <td style="color:#aaa;font-size:12px;">#${String(trades.indexOf(t) + 1).padStart(3,'0')}</td>
+        <td><strong>${t.pair}</strong></td>
+        <td>${directionBadge(t.direction)}</td>
+        <td>${resultBadge(t)}</td>
+        <td>${pnlText(t)}</td>
+        <td style="color:#888;font-size:12px;">${fmtDate(t.date)}</td>
+      </tr>
+    `).join('');
+
+  } catch (err) {
+    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#aaa;padding:24px;">Không tải được dữ liệu.</td></tr>`;
+    console.error('Không tải được trades.json:', err);
+  }
+})();
+
 // ===========================
 //  BANNER NỔI "MỜI TÔI 1 CỐC CAFE"
 //  Chỉ hiện trên trang bài viết chi tiết (posts/*.html), trang danh sách

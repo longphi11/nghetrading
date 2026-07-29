@@ -187,56 +187,25 @@
           <!-- 🤖 3 bài viết mới nhất được nạp tự động từ data/posts.json (xem main.js) -->
           <div class="articles-grid" id="latest-articles-grid"></div>
          </div>
-          <!-- Trade Journal -->
+          <!-- Trade Journal — render động từ data/trades.json -->
           <div class="section-header" style="margin-top: 48px;">
-            <h2>NHẬT KÝ GIAO DỊCH GẦN NHẤT</h2>
-            <a href="nhat-ky.html" class="see-all">Xem tất cả nhật ký →</a>
+            <h2>LỆNH GIAO DỊCH THỰC TẾ</h2>
+            <a href="nhat-ky.html?tab=lenh" class="see-all">Xem tất cả lệnh →</a>
           </div>
           <div class="journal-table-wrap">
-            <table class="journal-table">
+            <table class="journal-table" id="trades-table">
               <thead>
                 <tr>
                   <th>#</th>
                   <th>CẶP TIỀN</th>
-                  <th>Ý TƯỞNG</th>
+                  <th>HƯỚNG</th>
                   <th>KẾT QUẢ</th>
-                  <th>R (RISK)</th>
+                  <th>P&amp;L</th>
                   <th>NGÀY</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>#237</td>
-                  <td>BTCUSD</td>
-                  <td>Liquidity sweep tại vùng H4 High</td>
-                  <td><span class="result win">Thắng</span></td>
-                  <td>+2.8R</td>
-                  <td>12/05/2024</td>
-                </tr>
-                <tr>
-                  <td>#236</td>
-                  <td>XAUUSD</td>
-                  <td>Break cấu trúc M15, entry vùng OB</td>
-                  <td><span class="result loss">Thua</span></td>
-                  <td>-1R</td>
-                  <td>10/05/2024</td>
-                </tr>
-                <tr>
-                  <td>#235</td>
-                  <td>XAUUSD</td>
-                  <td>Retest vùng demand D1, confluence H4</td>
-                  <td><span class="result win">Thắng</span></td>
-                  <td>+3.1R</td>
-                  <td>08/05/2024</td>
-                </tr>
-                <tr>
-                  <td>#234</td>
-                  <td>XAUUSD</td>
-                  <td>FVG fill trên H1, trend M15 bullish</td>
-                  <td><span class="result be">Hòa</span></td>
-                  <td>0R</td>
-                  <td>06/05/2024</td>
-                </tr>
+              <tbody id="trades-tbody">
+                <tr><td colspan="6" style="text-align:center;color:#aaa;padding:24px;">Đang tải...</td></tr>
               </tbody>
             </table>
           </div>

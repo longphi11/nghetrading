@@ -89,7 +89,20 @@
       <div class="content-grid">
 
         <main class="content-main">
+          <!-- Tab lọc -->
+          <div class="nk-tab-bar" id="nk-tab-bar">
+            <button class="nk-tab active" data-tab="analysis" onclick="setNkTab('analysis')">Phân tích Daily</button>
+            <button class="nk-tab" data-tab="lenh" onclick="setNkTab('lenh')">Lệnh đã vào</button>
+          </div>
+
+          <!-- Grid bài phân tích (Loại 1) -->
           <div class="articles-grid" id="journal-grid"></div>
+
+          <!-- Grid lệnh (Loại 2) -->
+          <div id="trades-grid" style="display:none;"></div>
+
+          <!-- Chi tiết lệnh (khi click từ trang chủ hoặc từ trades-grid) -->
+          <div id="trade-detail" style="display:none;"></div>
         </main>
 
         <aside class="sidebar">
