@@ -745,16 +745,31 @@ img { display: block; max-width: 100%; }
 }
 .telegram-float-text {
   font-family: var(--font-body);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  line-height: 1.1;
+  color: var(--text-color, #444);
+}
+.telegram-float-text .line-1 {
   font-size: 11px;
-  font-weight: 600;
-  color: var(--text-color, #555);
+  font-weight: 700;
   white-space: nowrap;
+}
+.telegram-float-text .line-2 {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  margin-top: 1px;
 }
 @media (max-width: 768px) {
   .telegram-float-wrapper {
-    bottom: 16px;
-    left: 14px;
-    gap: 3px;
+    bottom: 14px;
+    left: 12px;
+    gap: 2px;
   }
   .telegram-float-btn {
     width: 35px;
@@ -766,9 +781,12 @@ img { display: block; max-width: 100%; }
     margin-right: 1px;
     margin-top: 1px;
   }
-  .telegram-float-text {
-    font-size: 10px;
-    font-weight: 600;
+  .telegram-float-text .line-1 {
+    font-size: 9.5px;
+  }
+  .telegram-float-text .line-2 {
+    font-size: 8px;
+    letter-spacing: 1.4px;
   }
 }
 
