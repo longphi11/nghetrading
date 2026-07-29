@@ -26,10 +26,9 @@ const bot = new TelegramBot(token, { polling: true });
 const geminiApiKey = process.env.GEMINI_API_KEY;
 
 // Lưu trữ trạng thái phiên làm việc của người dùng (in-memory)
-// Session: { step: 'CHAT_CONVERSATION' | 'QUIZ' | 'AWAITING_BOOKING_INFO', history: [], obstacle: '', questions: [], currentIdx: 0, score: 0, traits: [] }
 const userSessions = new Map();
 
-console.log('🤖 Telegram Bot Nghề Trading đã sẵn sàng hoạt động với chế độ Trò Chuyện Tự Nhiên!');
+console.log('🤖 Telegram Bot Nghề Trading đã sẵn sàng ở chế độ Trò Chuyện Bạn Bè!');
 
 /**
  * Menu chức năng (Chỉ hiện khi khách gõ /menu hoặc yêu cầu)
@@ -54,19 +53,18 @@ function getMainMenuKeyboard() {
 }
 
 /**
- * Gọi Google Gemini AI trò chuyện tự nhiên (có bộ nhớ cuộc trò chuyện)
+ * Gọi Google Gemini AI trò chuyện tự nhiên như 2 người bạn trader
  */
 async function askGeminiAI(userText, session) {
   if (!geminiApiKey || geminiApiKey === 'YOUR_GEMINI_API_KEY_HERE') return null;
 
   const systemInstruction = 
-`Bạn là ĐẠI KA - Chuyên gia Trading thực chiến và là chủ sáng lập thương hiệu Nghề Trading (website nghetrading.com).
+`Bạn là ĐẠI KA - Chủ sáng lập Nghề Trading (nghetrading.com), một trader thực chiến lâu năm và giàu kinh nghiệm.
 
-TÔN CHỈ PHONG CÁCH TRÒ CHUYỆN:
-1. TRÒ CHUYỆN NHƯ NGƯỜI THẬT: Bạn là một người anh/người thầy đi trước trong nghề trading. Nói chuyện tự nhiên, thấu cảm, điềm tĩnh, ấm áp nhưng rất thẳng thắn và sắc bén. Tuyệt đối KHÔNG giống robot hay mẫu quảng cáo.
-2. THẤU HIỂU NỖI ĐAU: Khách nhắn tin vào đây thường đang mệt mỏi, bế tắc, cay đắng vì thua lỗ (gồng lỗ, trả thù thị trường, sợ vào lệnh, coi trading là cờ bạc...). Bạn lắng nghe họ tâm sự, giúp họ định hình lại Tư Duy Gốc.
-3. CHUYÊN MÔN CỐT LÕI: Định hình tư duy trading theo trường phái tâm lý "Trading in the Zone" (Mark Douglas) và quản trị rủi ro nghiêm ngặt. Sản phẩm phân tích chính là Vàng (XAU/USD).
-4. ĐIỀU HƯỚNG TỰ NHIÊN: Khi trò chuyện qua 2-3 lượt tin nhắn hoặc khi bạn cảm thấy khách đã giải tỏa tâm lý, bạn có thể tự nhiên rủ họ: "Nếu muốn chẩn đoán chính xác tính cách trading qua 8 câu test Mark Douglas hoặc hẹn cafe 1-1 với tôi để mổ xẻ nút thắt này, bạn gõ /menu nhé."`;
+PHONG CÁCH TRÒ CHUYỆN (NHƯ 2 NGƯỜI BẠN TRADING):
+1. TRÒ CHUYỆN TỰ NHIÊN BẠN BÈ: Bạn xưng "tôi" - "bạn". Nói chuyện cởi mở, tự nhiên như 2 người bạn trader ngồi cafe trao đổi kinh nghiệm. Bạn chào hỏi thân tình, hỏi thăm về kinh nghiệm trading của đối phương (hỏi xem họ trade lâu chưa, đợt này kết quả ổn không, hay đánh cặp tiền gì - chủ yếu trao đổi về Vàng XAU/USD).
+2. LẮNG NGHE & CHƯA ÉP CẦU: Tuyệt đối KHÔNG vội vàng giới thiệu menu, bán hàng hay chèn kịch bản web khi đối phương mới chỉ nhắn tin giao lưu bình thường.
+3. CHỈ ĐIỀU HƯỚNG KHI KHÁCH BẾ TẮC / CẦN TƯ VẤN: Chỉ khi đối phương chia sẻ họ đang bế tắc, mệt mỏi, thua lỗ, cần tư vấn chiến lược hay tâm lý trading, bạn mới bắt đầu thấu cảm sâu sắc, chỉ ra nút thắt tư duy theo trường phái "Trading in the Zone" (Mark Douglas) và nhẹ nhàng gợi ý: "Nếu bạn muốn chẩn đoán chính xác tính cách trading qua bài test 8 câu Mark Douglas hoặc muốn hẹn cafe 1-1 để tôi mổ xẻ trực tiếp nút thắt này, bạn gõ /menu hoặc bảo tôi nhé!"`;
 
   // Xây dựng lịch sử trò chuyện
   const contents = [
@@ -76,13 +74,13 @@ TÔN CHỈ PHONG CÁCH TRÒ CHUYỆN:
     },
     {
       role: 'model',
-      parts: [{ text: 'Tôi hiểu rõ phong cách của mình. Tôi sẽ trò chuyện như một người anh đi trước, lắng nghe thấu cảm và định hướng tư duy trading chuẩn cho khách hàng.' }]
+      parts: [{ text: 'Tôi hiểu rồi. Tôi sẽ trò chuyện hoàn toàn tự nhiên như 2 người bạn trader ngồi cafe giao lưu, lắng nghe họ chia sẻ trước khi điều hướng.' }]
     }
   ];
 
   // Thêm lịch sử hội thoại gần nhất của khách
   if (session.history && session.history.length > 0) {
-    session.history.slice(-6).forEach(h => {
+    session.history.slice(-8).forEach(h => {
       contents.push({
         role: h.role,
         parts: [{ text: h.text }]
@@ -120,7 +118,7 @@ TÔN CHỈ PHONG CÁCH TRÒ CHUYỆN:
 }
 
 /**
- * Lệnh /start - Đón tiếp mở lời tự nhiên (KHÔNG HIỆN BẢNG BẤM)
+ * Lệnh /start - Đón tiếp mở lời tự nhiên như bạn bè (KHÔNG HIỆN BẢNG BẤM)
  */
 bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
@@ -137,12 +135,9 @@ bot.onText(/\/start/, (msg) => {
     traits: []
   });
 
-  const welcomeMsg = 
-`Chào ${firstName}, mừng bạn ghé thăm Nghề Trading.
+  const welcomeMsg = `Chào ${firstName} nhé! Mừng bạn ghé sang Nghề Trading.
 
-Tôi hiểu khi bạn chủ động nhắn tin vào đây, có thể bạn đang cảm thấy mệt mỏi, bế tắc hoặc cay đắng sau những lệnh thua trên thị trường đúng không?
-
-Hãy cứ coi đây là một góc nhỏ riêng tư. Điều gì đang khiến bạn trăn trở hoặc vướng mắc nhất trong trading hiện tại, cứ thoải mái chia sẻ với tôi nhé...`;
+Bạn đã bước chân vào thị trường trading này lâu chưa? Kết quả đợt này của bạn vẫn ổn cả chứ?`;
 
   bot.sendMessage(chatId, welcomeMsg);
 });
@@ -226,7 +221,7 @@ Buổi trò chuyện 1-1 sẽ giúp bạn mổ xẻ chính xác nút thắt tâm
     );
   }
 
-  // 3. Trò chuyện 1-1 tự nhiên bằng Gemini AI (Phản hồi thuần văn bản)
+  // 3. Trò chuyện 1-1 tự nhiên giữa 2 bạn trader bằng Gemini AI
   bot.sendChatAction(chatId, 'typing');
 
   const aiReply = await askGeminiAI(text, session);
@@ -238,21 +233,20 @@ Buổi trò chuyện 1-1 sẽ giúp bạn mổ xẻ chính xác nút thắt tâm
     // Báo cáo tóm tắt bế tắc của khách về Telegram cá nhân cho ĐẠI KA
     if (adminChatId && session.history.length === 2) {
       const alertMsg = 
-`📥 **TÂM SỰ MỚI TỪ KHÁCH HÀNG!**
+`📥 **GIAO LƯU MỚI TỪ KHÁCH HÀNG!**
 
 👤 **Khách hàng:** ${msg.from.first_name || ''} ${msg.from.last_name || ''} (@${msg.from.username || 'Không username'})
-💬 **Nội dung tâm sự:** "${text}"
+💬 **Nội dung:** "${text}"
 
-👉 *ĐẠI KA có thể vào theo dõi hoặc nhắn trực tiếp cho khách qua @${msg.from.username || ''}!*`;
+👉 *ĐẠI KA có thể nhắn trực tiếp cho khách qua @${msg.from.username || ''}!*`;
 
       bot.sendMessage(adminChatId, alertMsg, { parse_mode: 'Markdown' }).catch(err => console.error('Lỗi báo admin:', err.message));
     }
   } else {
-    // Fallback nếu không gọi được Gemini API Key
     await bot.sendMessage(chatId, 
-`Tôi hiểu cảm giác của bạn. Trading là một hành trình quản trị tâm lý và rủi ro rất khắc nghiệt.
+`Giao dịch trên thị trường này quả thực có rất nhiều thăng trầm.
 
-Nếu bạn muốn bóc tách bài test tâm lý Mark Douglas hoặc đặt lịch cafe 1-1 với tôi, bạn gõ lệnh /menu nhé.`
+Nếu bạn đang vướng mắc hoặc muốn làm bài test tâm lý Mark Douglas, bạn gõ lệnh /menu nhé.`
     );
   }
 });
