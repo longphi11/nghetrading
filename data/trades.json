@@ -1,5 +1,18 @@
 [
   {
+    "id": "trade-xauusd-2026-07-31-001",
+    "date": "2026-07-31",
+    "pair": "XAU/USD",
+    "direction": "SHORT",
+    "entry": 4102,
+    "sl": 4123,
+    "tp": 4039,
+    "rr_target": 3,
+    "chart_image": "https://s3.tradingview.com/1/1snVQgMS_big.png",
+    "result": "pending",
+    "pnl_r": null
+  },
+  {
     "id": "trade-xauusd-2026-07-29-001",
     "date": "2026-07-29",
     "pair": "XAU/USD",
