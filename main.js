@@ -179,12 +179,12 @@ const DISQUS_SHORTNAME = "nghetrading";
     // Lấy bài cùng chủ đề trước
     let related = allPosts.filter(p => p.category === effectiveCategory && p.slug !== slug);
 
-    // Nếu chưa đủ 3 bài cùng chủ đề, điền bổ sung các bài mới nhất khác để LUÔN ĐỦ 3 BÀI
-    if (related.length < 3) {
+    // Nếu chưa đủ 6 bài cùng chủ đề, điền bổ sung các bài mới nhất khác để LUÔN ĐỦ 6 BÀI
+    if (related.length < 6) {
       const otherPosts = allPosts.filter(p => p.slug !== slug && !related.some(r => r.slug === p.slug));
       related = [...related, ...otherPosts];
     }
-    related = related.slice(0, 3);
+    related = related.slice(0, 6);
 
     if (related.length > 0) {
       const relatedSection = document.createElement('section');
