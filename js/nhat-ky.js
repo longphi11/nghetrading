@@ -365,8 +365,15 @@ function renderTradeDetail(id) {
       </div>
 
       <div class="trade-detail-chart">
+        ${t.chart_image_result ? `<div style="font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #555; text-transform: uppercase;">Chart lúc vào lệnh:</div>` : ''}
         <img src="${t.chart_image}" alt="Chart lệnh ${t.pair}" onerror="this.src='https://placehold.co/900x500?text=Chart'"/>
       </div>
+      ${t.chart_image_result ? `
+      <div class="trade-detail-chart" style="margin-top: 32px;">
+        <div style="font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #555; text-transform: uppercase;">Chart sau khi kết thúc:</div>
+        <img src="${t.chart_image_result}" alt="Chart kết quả lệnh ${t.pair}" onerror="this.src='https://placehold.co/900x500?text=Chart'"/>
+      </div>
+      ` : ''}
 
       <div class="trade-detail-grid">
         <div class="trade-detail-box">
