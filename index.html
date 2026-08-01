@@ -228,31 +228,7 @@
           <div class="market-price-card">
             <h3>GIÁ THỊ TRƯỜNG</h3>
             <div class="vn-market-prices" style="display: flex; flex-direction: column; gap: 8px;">
-              <!-- 1. VN-Index -->
-              <div class="stat-row" style="padding: 6px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #eee;">
-                <div>
-                  <strong style="font-size: 13px; color: var(--text); display: block;">VN-Index</strong>
-                  <span style="font-size: 11px; color: var(--muted);">Chứng khoán VN</span>
-                </div>
-                <div style="text-align: right;">
-                  <strong style="font-size: 13px; color: #111;" id="vnindex-price">1.258,40</strong>
-                  <span style="font-size: 10px; color: var(--green); display: block; margin-top: 1px;" id="vnindex-change">▲ +4.85 (+0.39%)</span>
-                </div>
-              </div>
-
-              <!-- 2. S&P 500 -->
-              <div class="stat-row" style="padding: 6px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #eee;">
-                <div>
-                  <strong style="font-size: 13px; color: var(--text); display: block;">S&P 500</strong>
-                  <span style="font-size: 11px; color: var(--muted);">Chứng khoán Mỹ</span>
-                </div>
-                <div style="text-align: right;">
-                  <strong style="font-size: 13px; color: #111;" id="sp500-price">5.465,80</strong>
-                  <span style="font-size: 10px; color: var(--green); display: block; margin-top: 1px;" id="sp500-change">▲ +18.20 (+0.33%)</span>
-                </div>
-              </div>
-
-              <!-- 3. Bitcoin (BTC/USD) -->
+              <!-- 1. Bitcoin (BTC/USD) -->
               <div class="stat-row" style="padding: 6px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #eee;">
                 <div>
                   <strong style="font-size: 13px; color: var(--text); display: block;">Bitcoin (BTC/USD)</strong>
@@ -264,8 +240,8 @@
                 </div>
               </div>
 
-              <!-- 4. Vàng Thế Giới (XAU/USD) -->
-              <div class="stat-row" style="padding: 6px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #eee;">
+              <!-- 2. Vàng Thế Giới (XAU/USD) -->
+              <div class="stat-row" style="padding: 6px 0; display: flex; justify-content: space-between; align-items: center;">
                 <div>
                   <strong style="font-size: 13px; color: var(--text); display: block;">Vàng Thế Giới</strong>
                   <span style="font-size: 11px; color: var(--muted);">XAU / USD</span>
@@ -273,30 +249,6 @@
                 <div style="text-align: right;">
                   <strong style="font-size: 13px; color: #111;" id="gold-world-price">$2.415,50</strong>
                   <span style="font-size: 10px; color: var(--green); display: block; margin-top: 1px;">▲ USD / oz</span>
-                </div>
-              </div>
-
-              <!-- 5. Vàng VRTL Bảo Tín Minh Châu -->
-              <div class="stat-row" style="padding: 6px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #eee;">
-                <div>
-                  <strong style="font-size: 13px; color: var(--text); display: block;">Vàng VRTL (Bán ra)</strong>
-                  <span style="font-size: 11px; color: var(--muted);">Bảo Tín Minh Châu</span>
-                </div>
-                <div style="text-align: right;">
-                  <strong style="font-size: 13px; color: #111;" id="btmc-vrtl-price">90,50 triệu/lượng</strong>
-                  <span style="font-size: 10px; color: var(--green); display: block; margin-top: 1px;">▲ Vàng Rồng Thăng Long</span>
-                </div>
-              </div>
-
-              <!-- 6. USD Vietcombank -->
-              <div class="stat-row" style="padding: 6px 0; display: flex; justify-content: space-between; align-items: center;">
-                <div>
-                  <strong style="font-size: 13px; color: var(--text); display: block;">USD / VND (Bán ra)</strong>
-                  <span style="font-size: 11px; color: var(--muted);">Vietcombank</span>
-                </div>
-                <div style="text-align: right;">
-                  <strong style="font-size: 13px; color: #111;" id="vcb-usd-price">26.256 VNĐ</strong>
-                  <span style="font-size: 10px; color: var(--green); display: block; margin-top: 1px;">▲ Tỷ giá niêm yết</span>
                 </div>
               </div>
             </div>
@@ -354,5 +306,6 @@
   </footer>
 
   <script src="main.js"></script>
+  <script src="js/market.js"></script>
 </body>
 </html>
