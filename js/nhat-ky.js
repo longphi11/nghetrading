@@ -414,6 +414,16 @@ function renderTradeDetail(id) {
           <p>${t.note}</p>
         </div>
       ` : ''}
+
+      ${t.tv_link ? `
+        <div class="trade-detail-tv" style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #e2e8f0; text-align: center;">
+          <p style="font-size: 14px; color: #64748b; margin-bottom: 12px;">Bài viết này đã được đăng tải và xác thực trên TradingView.</p>
+          <a href="${t.tv_link}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; background: #2962ff; color: #fff; padding: 12px 24px; border-radius: 4px; text-decoration: none; font-size: 14px; font-weight: 600; box-shadow: 0 4px 6px rgba(41, 98, 255, 0.2);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3"/></svg>
+            Kiểm chứng trên TradingView
+          </a>
+        </div>
+      ` : ''}
     </div>
   `;
 }
