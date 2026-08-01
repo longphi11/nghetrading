@@ -162,6 +162,14 @@ img { display: block; max-width: 100%; }
   font-weight: 400;
   color: rgba(255, 255, 255, 0.92);
 }
+.hero-text h1 .highlight-white {
+  background-color: var(--white);
+  color: var(--black);
+  font-style: normal;
+  font-weight: 600;
+  padding: 2px 0;
+  border-radius: 4px;
+}
 .hero-text p {
   color: rgba(255,255,255,.6);
   font-size: 15px;

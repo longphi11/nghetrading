@@ -202,6 +202,26 @@
     .tn-btn-row {
       display: flex;
       justify-content: flex-end;
+      gap: 12px;
+    }
+    .tn-btn-back {
+      margin-right: auto;
+      background: #f1f5f9;
+      color: var(--tn-muted);
+      border: 1px solid var(--tn-line);
+      padding: 13px 28px;
+      border-radius: 30px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tn-btn-back:hover {
+      background: #e2e8f0;
+      color: var(--tn-text);
     }
     .tn-btn-next {
       background: var(--tn-accent);
@@ -413,6 +433,10 @@
       <div class="tn-question" id="question-text">Đang tải...</div>
       <div class="tn-options" id="options-list"></div>
       <div class="tn-btn-row">
+        <button class="tn-btn-back" id="btn-back" style="display: none;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <span>Quay lại</span>
+        </button>
         <button class="tn-btn-next" id="btn-next" disabled>
           <span id="btn-label">Câu tiếp theo</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -638,10 +662,9 @@
       }
     ];
 
+    let userAnswers = new Array(questionsPool.length).fill(null);
     let currentIdx = 0;
     let selectedOpt = null;
-    let totalScore = 0;
-    let traits = [];
     const total = questionsPool.length;
 
     const progressFill = document.getElementById('progress-fill');
@@ -651,12 +674,14 @@
     const optionsList = document.getElementById('options-list');
     const btnNext = document.getElementById('btn-next');
     const btnLabel = document.getElementById('btn-label');
+    const btnBack = document.getElementById('btn-back');
     const progressWrap = document.getElementById('progress-wrap');
     const quizCard = document.getElementById('quiz-card');
 
     function renderQuestion() {
-      selectedOpt = null;
-      btnNext.disabled = true;
+      selectedOpt = userAnswers[currentIdx];
+      btnNext.disabled = (selectedOpt === null);
+      btnBack.style.display = (currentIdx === 0) ? 'none' : 'inline-flex';
 
       const pct = Math.round(((currentIdx + 1) / total) * 100);
       progressFill.style.width = pct + '%';
@@ -671,6 +696,7 @@
       q.opts.forEach((opt, idx) => {
         const el = document.createElement('div');
         el.className = 'tn-option';
+        if (selectedOpt === idx) el.classList.add('selected');
         el.innerHTML = `<div class="tn-radio"></div><div class="tn-option-text">${opt.t}</div>`;
         el.addEventListener('click', () => {
           document.querySelectorAll('.tn-option').forEach(o => o.classList.remove('selected'));
@@ -684,9 +710,7 @@
 
     btnNext.addEventListener('click', () => {
       if (selectedOpt === null) return;
-      const chosen = questionsPool[currentIdx].opts[selectedOpt];
-      totalScore += chosen.s;
-      traits.push(chosen.trait);
+      userAnswers[currentIdx] = selectedOpt;
       currentIdx++;
       if (currentIdx < total) {
         renderQuestion();
@@ -695,8 +719,24 @@
       }
     });
 
+    btnBack.addEventListener('click', () => {
+      if (currentIdx > 0) {
+        currentIdx--;
+        renderQuestion();
+      }
+    });
+
     function renderResult() {
       progressWrap.style.display = 'none';
+      let totalScore = 0;
+      let traits = [];
+      userAnswers.forEach((ansIdx, i) => {
+        if (ansIdx !== null) {
+          const chosen = questionsPool[i].opts[ansIdx];
+          totalScore += chosen.s;
+          traits.push(chosen.trait);
+        }
+      });
       const maxScore = total * 3;
       const pct = (totalScore / maxScore) * 100;
 
