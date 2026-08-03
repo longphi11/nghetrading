@@ -1,5 +1,19 @@
 [
   {
+    "id": "trade-xauusd-2026-08-03-001",
+    "date": "2026-08-03",
+    "pair": "XAU/USD",
+    "direction": "LONG",
+    "entry": 4025,
+    "sl": 4010,
+    "tp": 4100,
+    "rr_target": 6.5,
+    "chart_image": "images/journal/xau-long-4025.png",
+    "result": "pending",
+    "pnl_r": "+6.5R",
+    "tv_link": ""
+  },
+  {
     "id": "trade-xauusd-2026-07-31-001",
     "date": "2026-07-31",
     "pair": "XAU/USD",
