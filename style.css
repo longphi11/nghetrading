@@ -19,7 +19,7 @@
   --be: #888;
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body: 'Inter', system-ui, sans-serif;
-  --nav-h: 60px;
+  --nav-h: 90px;
 }
 
 html { scroll-behavior: smooth; }
@@ -66,14 +66,14 @@ img { display: block; max-width: 100%; }
 .logo {
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: 18px;
+  font-size: 24px;
   letter-spacing: .12em;
   color: var(--white);
   white-space: nowrap;
 }
 .navbar .logo {
   border: 2px solid var(--white);
-  padding: 6px 14px;
+  padding: 8px 18px;
   line-height: 1;
   display: inline-flex;
   align-items: center;
@@ -86,7 +86,7 @@ img { display: block; max-width: 100%; }
 }
 .nav-links a {
   color: rgba(255,255,255,.65);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: .06em;
   transition: color .2s;
@@ -141,12 +141,12 @@ img { display: block; max-width: 100%; }
   min-height: 520px;
 }
 .hero-content {
-  max-width: 1100px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 72px 24px 80px;
+  padding: 80px 24px 90px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  gap: 80px;
   align-items: center;
 }
 .hero-text h1 {
@@ -157,24 +157,26 @@ img { display: block; max-width: 100%; }
   font-weight: 500;
   margin-bottom: 24px;
 }
-.hero-text h1 em {
-  font-style: italic;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.92);
+.hero-text h1 .hero-line-1,
+.hero-text h1 .hero-line-2 {
+  display: block;
+}
+.hero-text h1 .hero-line-2 {
+  margin-top: 14px;
 }
 .hero-text h1 .highlight-white {
   background-color: var(--white);
   color: var(--black);
   font-style: normal;
   font-weight: 600;
-  padding: 2px 0;
+  padding: 2px 6px;
   border-radius: 4px;
 }
 .hero-text p {
   color: rgba(255,255,255,.6);
   font-size: 15px;
   line-height: 1.7;
-  max-width: 380px;
+  max-width: 440px;
   margin-bottom: 36px;
 }
 .btn-primary {
@@ -197,7 +199,7 @@ img { display: block; max-width: 100%; }
 .hero-visual {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
 }
 .chart-mockup {
   background: #1c1c1c;
@@ -217,23 +219,24 @@ img { display: block; max-width: 100%; }
 }
 .hero-quote {
   background: #1c1c1c;
-  border-left: 2px solid rgba(255,255,255,.3);
-  padding: 20px 24px;
+  border-left: 3px solid rgba(255,255,255,.6);
+  padding: 22px 26px;
 }
 .quote-mark {
   font-family: var(--font-display);
-  font-size: 40px;
-  color: rgba(255,255,255,.2);
+  font-size: 44px;
+  color: rgba(255,255,255,.3);
   line-height: 1;
   display: block;
   margin-bottom: 8px;
 }
 .hero-quote p {
-  color: rgba(255,255,255,.7);
-  font-size: 13px;
+  color: rgba(255,255,255,.95);
+  font-size: 16px;
   line-height: 1.6;
+  font-weight: 600;
   font-style: italic;
-  margin-bottom: 8px;
+  margin-bottom: 0;
 }
 .hero-quote cite {
   color: rgba(255,255,255,.4);
