@@ -410,7 +410,7 @@ function renderTradeDetail(id) {
 
       ${t.note ? `
         <div class="trade-detail-note">
-          <div class="trade-detail-box-title">GHI CHÚ</div>
+          <div class="trade-detail-box-title">DIỄN GIẢI LỆNH</div>
           <p>${t.note}</p>
         </div>
       ` : ''}
