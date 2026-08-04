@@ -430,11 +430,11 @@
   padding: 20px;
 }
 .trade-detail-box-title {
-  font-size: 10px;
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 800;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #aaa;
+  color: #333;
   margin-bottom: 14px;
 }
 .trade-detail-stats { display: flex; flex-direction: column; gap: 8px; }
