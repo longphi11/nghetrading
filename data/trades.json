@@ -9,8 +9,9 @@
     "tp": 4100,
     "rr_target": 6.5,
     "chart_image": "images/journal/xau-long-4025.png",
-    "result": "pending",
-    "pnl_r": "+6.5R",
+    "chart_image_result": "images/journal/xau-long-4025-result.png",
+    "result": "win",
+    "pnl_r": "+3.0R",
     "tv_link": ""
   },
   {
