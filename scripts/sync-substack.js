@@ -168,12 +168,22 @@ async function main() {
   let addedCount = 0;
 
   for (const item of items) {
-    if (existingTitles.has(item.title.toLowerCase().trim())) continue;
     const slug = item.slug || slugify(item.title);
-    if (existingSlugs.has(slug)) continue;
-
     const contentHtml = item.content || "";
     const thumb = item.cover_image || extractFirstImage(contentHtml) || "";
+
+    const existingIndex = existingPosts.findIndex(
+      (p) => p.slug === slug || p.title.toLowerCase().trim() === item.title.toLowerCase().trim()
+    );
+
+    if (existingIndex !== -1) {
+      if (thumb && existingPosts[existingIndex].thumb !== thumb) {
+        existingPosts[existingIndex].thumb = thumb;
+        console.log(`✓ Đã cập nhật thumb mới cho bài: ${item.title}`);
+      }
+      continue;
+    }
+
     const excerpt = extractExcerpt(contentHtml);
     const category = overrides[slug] || autoDetectCategory(item.title, contentHtml, item.categories);
     const dateVN = formatDateVN(item.pubDate);
