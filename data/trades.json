@@ -1,5 +1,19 @@
 [
   {
+    "id": "trade-xauusd-2026-08-12-001",
+    "date": "2026-08-12",
+    "pair": "XAU/USD",
+    "direction": "LONG",
+    "entry": 4369,
+    "sl": 4355,
+    "tp": 4433,
+    "rr_target": 4.5,
+    "chart_image": "images/journal/xau-long-4369.png",
+    "result": "pending",
+    "pnl_r": null,
+    "note": "Kế hoạch Long XAU/USD tại vùng hỗ trợ 4369, Stop Loss tại 4355 và Take Profit tại 4433 đạt tỷ lệ RR 1:4.5."
+  },
+  {
     "id": "trade-xauusd-2026-08-03-001",
     "date": "2026-08-03",
     "pair": "XAU/USD",
