@@ -9,9 +9,11 @@
     "tp": 4433,
     "rr_target": 4.5,
     "chart_image": "images/journal/xau-long-4369.png",
-    "result": "pending",
-    "pnl_r": null,
-    "note": "Kế hoạch Long XAU/USD tại vùng hỗ trợ 4369, Stop Loss tại 4355 và Take Profit tại 4433 đạt tỷ lệ RR 1:4.5."
+    "chart_image_result": "images/journal/xau-long-4369-result.png",
+    "result": "win",
+    "pnl_r": "+4.5R",
+    "note": "Có thể thấy chart đã hình thành 1 đường băng tại vùng 435x. Với việc cụm nến doji liên tục xuất hiện cùng nhau, cho thấy sự quyết tâm của phe bò tại đây. Mặc dù đang vào đầu phiên Á nhưng vẫn có thể mở vị thế Long với SL ngay phía dưới đường băng. RR 1:4 là hoàn toàn đáng để chơi kèo này.",
+    "tv_link": "https://vn.tradingview.com/chart/XAUUSD/2H9c8eM1/"
   },
   {
     "id": "trade-xauusd-2026-08-03-001",
