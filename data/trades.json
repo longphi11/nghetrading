@@ -1,5 +1,21 @@
 [
   {
+    "id": "trade-xauusd-2026-08-28-001",
+    "date": "2026-08-28",
+    "pair": "XAU/USD",
+    "direction": "SHORT",
+    "entry": 4625,
+    "sl": 4645,
+    "tp": 4526,
+    "rr_target": 5,
+    "chart_image": "images/journal/xau-short-4625.png",
+    "chart_image_result": "",
+    "result": "pending",
+    "pnl_r": "",
+    "note": "Vị thế Short tại 4625 với SL ở 4645 và TP mục tiêu ở 4526 (RR 1:5). Kiên nhẫn chờ đợi xác nhận và tuân thủ đúng kỷ luật giao dịch theo hệ thống.",
+    "tv_link": "https://vn.tradingview.com/chart/XAUUSD/fBkOMXSF/"
+  },
+  {
     "id": "trade-xauusd-2026-08-12-001",
     "date": "2026-08-12",
     "pair": "XAU/USD",
