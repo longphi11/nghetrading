@@ -9,10 +9,10 @@
     "tp": 4526,
     "rr_target": 5,
     "chart_image": "images/journal/xau-short-4625.png",
-    "chart_image_result": "",
-    "result": "pending",
-    "pnl_r": "",
-    "note": "Vị thế Short tại 4625 với SL ở 4645 và TP mục tiêu ở 4526 (RR 1:5). Kiên nhẫn chờ đợi xác nhận và tuân thủ đúng kỷ luật giao dịch theo hệ thống.",
+    "chart_image_result": "images/journal/xau-short-4625-result.png",
+    "result": "win",
+    "pnl_r": "+5.0R",
+    "note": "Vị thế Short tại 4625 với SL ở 4645 và TP mục tiêu ở 4526 (RR 1:5). Giá đã chạm đúng Take Profit mục tiêu theo kế hoạch. Kèo đạt trọn vẹn +5.0R.",
     "tv_link": "https://vn.tradingview.com/chart/XAUUSD/fBkOMXSF/"
   },
   {
