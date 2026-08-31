@@ -5,3 +5,5 @@ node_modules/
 .env
 telegram-bot/node_modules/
 telegram-bot/.env
+.x-browser-session/
+.env.x_api
