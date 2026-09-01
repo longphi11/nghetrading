@@ -1,5 +1,21 @@
 [
   {
+    "id": "trade-xauusd-2026-09-01-001",
+    "date": "2026-09-01",
+    "pair": "XAU/USD",
+    "direction": "SHORT",
+    "entry": 4452,
+    "sl": 4475,
+    "tp": 4355,
+    "rr_target": 4,
+    "chart_image": "https://s3.tradingview.com/k/KHFLKOUV_big.png",
+    "chart_image_result": "",
+    "result": "pending",
+    "pnl_r": "0R",
+    "note": "Trên h1 có thể thấy đường băng 446x là 1 cản trở thật sự với phe bò. Tại thời điểm này phe bò vẫn đang là phe chiếm ưu thế. Vậy Trend Short đang có xác suất cao hơn, đường băng 446x là 1 key level đã xác nhận ít nhất 2 lần thất bại của phe bò. Với việc hình thành cây doji, ta đủ điều kiện của T-L-S để mở vị thế Short.",
+    "tv_link": "https://vn.tradingview.com/chart/XAUUSD/KHFLKOUV/"
+  },
+  {
     "id": "trade-xauusd-2026-08-28-001",
     "date": "2026-08-28",
     "pair": "XAU/USD",
