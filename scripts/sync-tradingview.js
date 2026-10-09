@@ -107,11 +107,30 @@ async function main() {
 
   const existingIds = new Set(existingPosts.map((p) => p.id));
   const existingLinks = new Set(existingPosts.map((p) => p.source_link));
+
+  const TRADES_FILE = path.join(ROOT, "data", "trades.json");
+  if (fs.existsSync(TRADES_FILE)) {
+    try {
+      const existingTrades = JSON.parse(fs.readFileSync(TRADES_FILE, "utf-8"));
+      existingTrades.forEach((t) => {
+        if (t.tv_link) {
+          existingLinks.add(t.tv_link);
+          existingLinks.add(t.tv_link.replace(/\/+$/, ""));
+          existingLinks.add(t.tv_link.replace(/\/+$/, "") + "/");
+        }
+      });
+    } catch (e) {}
+  }
+
   let addedCount = 0;
 
   for (const item of items) {
     const link = item.link || "";
-    if (existingLinks.has(link)) continue;
+    if (
+      existingLinks.has(link) ||
+      existingLinks.has(link.replace(/\/+$/, "")) ||
+      existingLinks.has(link.replace(/\/+$/, "") + "/")
+    ) continue;
 
     const title = item.title || "Bài phân tích mới";
     const pubDate = new Date(item.pubDate || Date.now());
