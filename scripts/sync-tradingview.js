@@ -81,6 +81,41 @@ function toParagraphs(text, title) {
 }
 
 async function fetchFeed() {
+  // 1. Thử đọc trực tiếp RSS XML từ TradingView
+  try {
+    const res = await fetch(FEED_URL, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36",
+        "Accept": "application/rss+xml, application/xml, text/xml, */*",
+      },
+    });
+    if (res.ok) {
+      const xml = await res.text();
+      const items = [];
+      const regex = /<item>([\s\S]*?)<\/item>/g;
+      let m;
+      while ((m = regex.exec(xml)) !== null) {
+        const block = m[1];
+        const title = (block.match(/<title><!\[CDATA\[(.*?)\]\]><\/title>/) || block.match(/<title>(.*?)<\/title>/))?.[1] || "";
+        const link = (block.match(/<link>(.*?)<\/link>/))?.[1] || "";
+        const pubDate = (block.match(/<pubDate>(.*?)<\/pubDate>/))?.[1] || "";
+        const desc = (block.match(/<description><!\[CDATA\[([\s\S]*?)\]\]><\/description>/) || block.match(/<description>([\s\S]*?)<\/description>/))?.[1] || "";
+        const content = (block.match(/<content:encoded><!\[CDATA\[([\s\S]*?)\]\]><\/content:encoded>/) || block.match(/<content:encoded>([\s\S]*?)<\/content:encoded>/))?.[1] || desc;
+        items.push({
+          title: title.trim(),
+          link: link.trim(),
+          pubDate,
+          description: desc.trim(),
+          content: content.trim(),
+        });
+      }
+      if (items.length > 0) return items;
+    }
+  } catch (e) {
+    console.log(`Fetch trực tiếp RSS thất bại (${e.message}), thử qua rss2json...`);
+  }
+
+  // 2. Dự phòng qua rss2json
   const url = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(FEED_URL)}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`status ${res.status}`);
