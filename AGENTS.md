@@ -117,11 +117,11 @@ Không thêm animation nặng.
 
 Đảm bảo Console sạch lỗi.
 
-## Quy trình làm việc & Git (Local-First)
+## Quy trình làm việc & Quyền tự quyết (Autonomous Execution)
 
-- Kiểm tra kĩ Responsive trên Mobile, Tablet, Desktop trước khi bàn giao.
-- Sau khi hoàn thành code local: Mời ĐẠI KA kiểm tra bản Local (trên Live Server/Trình duyệt).
-- CHỈ thực hiện commit và push lên GitHub sau khi ĐẠI KA đã xem và duyệt bản Local thành công.
+- **Tự chủ thực hiện liên tục (Autonomous Mode):** Tự động thực hiện liên tục từ đầu đến cuối mọi nhiệm vụ ĐẠI KA giao cho đến khi có kết quả hoàn chỉnh. Tự kiểm tra, tự sửa lỗi, không hỏi lại hay xin xác nhận lắt nhắt.
+- Kiểm tra kĩ Responsive trên Mobile, Tablet, Desktop.
+- Đảm bảo kiểm tra local kỹ lưỡng, sau đó tự động commit & push thẳng lên GitHub khi hoàn tất để cập nhật website ngay lập tức.
 - Chuẩn hóa cấu trúc dữ liệu bài viết (JSON / Templates) để dễ mở rộng.
 - Chủ động cập nhật file .md quy tắc khi có chỉ thị hoặc phản hồi mới từ ĐẠI KA.
 
