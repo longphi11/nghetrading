@@ -119,9 +119,8 @@ Không thêm animation nặng.
 
 ## Quy trình làm việc & Quyền tự quyết (Autonomous Execution)
 
-- **Tự chủ thực hiện liên tục (Autonomous Mode):** Tự động thực hiện liên tục từ đầu đến cuối mọi nhiệm vụ ĐẠI KA giao cho đến khi có kết quả hoàn chỉnh. Tự kiểm tra, tự sửa lỗi, không hỏi lại hay xin xác nhận lắt nhắt.
-- Kiểm tra kĩ Responsive trên Mobile, Tablet, Desktop.
-- Đảm bảo kiểm tra local kỹ lưỡng, sau đó tự động commit & push thẳng lên GitHub khi hoàn tất để cập nhật website ngay lập tức.
+- **TUYỆT ĐỐI KHÔNG HỎI XÁC NHẬN (Zero Confirmation Questions):** Trong suốt quá trình làm việc, KHÔNG BAO GIỜ dừng lại hỏi ĐẠI KA xin phép, xin duyệt hay hỏi xác nhận lắt nhắt dưới bất kỳ hình thức nào. Tự động đưa ra quyết định kỹ thuật tối ưu nhất và làm thẳng một mạch từ đầu đến cuối.
+- **Tự động làm & Push thẳng lên Web:** Tự thực hiện liên tục, tự kiểm tra lỗi (Responsive, Console), tự commit & push thẳng lên GitHub khi xong. Chỉ phản hồi báo cáo kết quả cuối cùng khi công việc đã xong xuôi 100%.
 - Chuẩn hóa cấu trúc dữ liệu bài viết (JSON / Templates) để dễ mở rộng.
 - Chủ động cập nhật file .md quy tắc khi có chỉ thị hoặc phản hồi mới từ ĐẠI KA.
 
