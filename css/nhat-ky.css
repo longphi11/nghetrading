@@ -189,6 +189,15 @@
   color: #222;
 }
 .pt-body p { margin-bottom: 18px; }
+.pt-body p.pt-bullet {
+  margin-bottom: 12px;
+  line-height: 1.75;
+}
+.pt-body p.pt-hashtag {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 14px;
+}
 .pt-body ul { margin: 0 0 18px 22px; }
 .pt-body li { margin-bottom: 8px; }
 .pt-body strong { color: var(--text); }

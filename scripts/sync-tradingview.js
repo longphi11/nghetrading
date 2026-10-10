@@ -66,18 +66,38 @@ async function extractCoverImage(item) {
 
 function toParagraphs(text, title) {
   if (!text) return "";
-  let cleaned = text.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  let cleaned = text
+    .replace(/<br\s*[\/]?>/gi, "\n")
+    .replace(/<\/p>/gi, "\n\n")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\r\n/g, "\n")
+    .replace(/\r/g, "\n")
+    .trim();
+
   if (title) {
     const titleEsc = title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    const regex = new RegExp("^" + titleEsc + "\\s*[^\\.]*?longphibtc\\s*", "gi");
+    const regex = new RegExp("^" + titleEsc + "\\s*", "i");
     cleaned = cleaned.replace(regex, "").trim();
-    cleaned = cleaned.replace(/^(Gold|BTC|Bitcoin|Crypto|FOREXCOM|OANDA|BYBIT|BITSTAMP)[^\\.]*?longphibtc\\s*/gi, "").trim();
   }
-  return cleaned
-    .split(/(?<=\.)\s+/)
-    .filter(Boolean)
-    .map((p) => `<p>${p.trim()}</p>`)
-    .join("");
+  cleaned = cleaned.replace(/^(Gold|BTC|Bitcoin|Crypto|FOREXCOM|OANDA|BYBIT|BITSTAMP)[^\n]*?longphibtc\s*/gi, "").trim();
+
+  const lines = cleaned.split("\n");
+  const htmlParts = [];
+
+  for (let line of lines) {
+    line = line.trim();
+    if (!line) continue;
+
+    if (/^[-+*•]\s+/.test(line)) {
+      htmlParts.push(`<p class="pt-bullet">${line}</p>`);
+    } else if (line.startsWith("#")) {
+      htmlParts.push(`<p class="pt-hashtag">${line}</p>`);
+    } else {
+      htmlParts.push(`<p>${line}</p>`);
+    }
+  }
+
+  return htmlParts.join("");
 }
 
 async function fetchFeed() {
