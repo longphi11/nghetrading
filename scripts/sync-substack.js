@@ -193,7 +193,16 @@ async function main() {
       .replace(/{{DATE}}/g, dateVN)
       .replace(/{{CATEGORY}}/g, category)
       .replace(/{{CONTENT}}/g, contentHtml)
-      .replace(/{{SUBSTACK_LINK}}/g, item.link || "");
+      .replace(/{{SUBSTACK_LINK}}/g, item.link || "")
+      .replace(/{{EXCERPT}}/g, excerpt)
+      .replace(/{{SLUG}}/g, slug)
+      .replace(/{{THUMB}}/g, thumb)
+      .replace(/{{PUBDATE}}/g, item.pubDate)
+      .replace(/{{TITLE_JSON}}/g, JSON.stringify(item.title || ""))
+      .replace(/{{EXCERPT_JSON}}/g, JSON.stringify(excerpt))
+      .replace(/{{PUBDATE_JSON}}/g, JSON.stringify(item.pubDate))
+      .replace(/{{THUMB_JSON}}/g, JSON.stringify(thumb))
+      .replace(/{{CATEGORY_JSON}}/g, JSON.stringify(category));
 
     fs.writeFileSync(path.join(POSTS_DIR, `${slug}.html`), postHtml, "utf-8");
     console.log(`✓ Đã tạo posts/${slug}.html`);
@@ -220,70 +229,12 @@ async function main() {
   fs.mkdirSync(path.dirname(DATA_FILE), { recursive: true });
   fs.writeFileSync(DATA_FILE, JSON.stringify(existingPosts, null, 2), "utf-8");
 
-  applyAutoInternalLinks();
-
-  console.log(`Hoàn tất. Thêm mới ${addedCount} bài viết Substack.`);
-  fs.writeFileSync(path.join(ROOT, ".sync-result"), addedCount > 0 ? "changed" : "unchanged");
-}
-
-function applyAutoInternalLinks() {
-  const linkRules = [
-    { kw: 'quản trị rủi ro', target: 'quan-tri-rui-ro.html' },
-    { kw: 'quản lý vốn', target: 'chia-se-meo-quan-ly-von-trong-giao-dich.html' },
-    { kw: 'tâm lý giao dịch', target: 'cam-xuc-la-thu-vat-di.html' },
-    { kw: 'tâm lý', target: 'cam-xuc-la-thu-vat-di.html' },
-    { kw: 'nỗi sợ hãi', target: 'vuot-qua-noi-so-hai-trong-giao-dich-ngoai-hoi.html' },
-    { kw: 'nỗi sợ', target: 'vuot-qua-noi-so-hai-trong-giao-dich-ngoai-hoi.html' },
-    { kw: 'kỷ luật', target: 'ren-luyen-ky-luat-trong-trading-nhu-nao.html' },
-    { kw: 'xác suất', target: 'trading-la-tro-choi-xac-suat.html' },
-    { kw: 'lính bắn tỉa', target: 'hay-giao-dich-nhu-mot-linh-ban-tia.html' },
-    { kw: 'điểm vào lệnh', target: '4-goi-y-de-co-diem-vao-lenh-tot-nhat.html' },
-    { kw: 'poker', target: 'poker-day-ban-dieu-gi-ve-trading.html' },
-    { kw: 'kế hoạch giao dịch', target: 'toi-len-ke-hoach-giao-dich-nhu-the-nao.html' },
-    { kw: 'hiểu bản thân', target: 'hieu-ban-than.html' },
-    { kw: 'cái tôi', target: 'hay-chia-tay-cai-toi-cua-ban-trong-forex.html' },
-    { kw: 'bảo vệ tài khoản', target: 'tai-sao-ban-can-bao-ve-tai-khoan-cua-minh-va-bang-cach-nao.html' },
-    { kw: '5 giai đoạn', target: '5-giai-doan-de-tro-thanh-trader-co-loi-nhuan-on-dinh.html' },
-    { kw: 'trader chuyên nghiệp', target: 'dac-diem-cua-mot-trader-chuyen-nghiep.html' },
-    { kw: 'thời gian', target: 'thoi-gian-dieu-thuong-bi-coi-nhe-trong-trading.html' },
-    { kw: 'trader thành công', target: 'vai-thoi-quen-it-biet-cua-cac-trader-thanh-cong.html' }
-  ];
-
-  const files = fs.readdirSync(POSTS_DIR);
-  files.forEach(file => {
-    if (file.endsWith('.html') && file !== 'test.html' && file !== 'test2.html' && file !== 'post-sample.html') {
-      const filePath = path.join(POSTS_DIR, file);
-      let content = fs.readFileSync(filePath, 'utf8');
-
-      let linksInFile = 0;
-      const usedTargets = new Set([file]);
-
-      content = content.replace(/<p>(.*?)<\/p>/gs, (match, pText) => {
-        if (linksInFile >= 3 || pText.includes('<a ') || pText.includes('<img')) {
-          return match;
-        }
-
-        let newPText = pText;
-        for (const rule of linkRules) {
-          if (usedTargets.has(rule.target)) continue;
-          if (linksInFile >= 3) break;
-
-          const kwIndex = newPText.toLowerCase().indexOf(rule.kw.toLowerCase());
-          if (kwIndex !== -1) {
-            const actualKw = newPText.substr(kwIndex, rule.kw.length);
-            const linkHtml = `<a href="${rule.target}" class="internal-link">${actualKw}</a>`;
-            newPText = newPText.substring(0, kwIndex) + linkHtml + newPText.substring(kwIndex + rule.kw.length);
-            usedTargets.add(rule.target);
-            linksInFile++;
-            break;
-          }
-        }
-        return `<p>${newPText}</p>`;
-      });
-
-      fs.writeFileSync(filePath, content, 'utf8');
-    }
-  });
+  try {
+    const { execSync } = require('child_process');
+    execSync('node scripts/optimize-seo-and-internal-links.js', { cwd: ROOT, stdio: 'inherit' });
+  } catch (err) {
+    console.error('Lỗi khi chạy tối ưu SEO & liên kết nội bộ:', err);
+  }
 }
 
 main().catch((err) => {
