@@ -11,6 +11,14 @@ const KEY_FILE = path.join(ROOT, 'ga-credentials.json');
 const SITEMAP_FILE = path.join(ROOT, 'sitemap.xml');
 
 async function getAuthClient() {
+  if (process.env.GA_CREDENTIALS_JSON) {
+    const credentials = JSON.parse(process.env.GA_CREDENTIALS_JSON);
+    const auth = new GoogleAuth({
+      credentials,
+      scopes: ['https://www.googleapis.com/auth/indexing'],
+    });
+    return await auth.getClient();
+  }
   if (!fs.existsSync(KEY_FILE)) {
     throw new Error(`Không tìm thấy file credentials tại ${KEY_FILE}`);
   }

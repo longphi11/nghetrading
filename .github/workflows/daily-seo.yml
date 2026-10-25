@@ -1,0 +1,41 @@
+name: Daily SEO & Google Indexing Engine
+
+on:
+  schedule:
+    # Chạy tự động lúc 06:30 sáng giờ Việt Nam (UTC+7) tức 23:30 UTC mỗi ngày
+    - cron: "30 23 * * *"
+  workflow_dispatch: {} # Cho phép bấm chạy thủ công trên GitHub bất cứ lúc nào
+
+permissions:
+  contents: write
+
+jobs:
+  seo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install @google-analytics/data google-auth-library
+
+      - name: Chạy tác vụ Daily SEO & Google Indexing
+        run: node scripts/daily-seo-task.js
+        env:
+          GA_CREDENTIALS_JSON: ${{ secrets.GA_CREDENTIALS_JSON }}
+
+      - name: Commit & push lịch sử SEO nếu có thay đổi
+        run: |
+          git config user.name "seo-robot"
+          git config user.email "actions@github.com"
+          if [ -f data/seo-history.json ]; then
+            git add data/seo-history.json
+            git diff --quiet && git diff --staged --quiet || (git commit -m "📈 [Auto SEO] Cập nhật lịch sử thứ hạng từ khóa & nhật ký Index hàng ngày" && git pull --rebase origin main && git push)
+          fi
