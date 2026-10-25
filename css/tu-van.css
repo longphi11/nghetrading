@@ -361,13 +361,14 @@
 
 .tv-qr-large {
   display: block;
-  width: 190px;
-  height: 190px;
+  width: 220px;
+  max-width: 100%;
+  height: auto;
   margin: 0 auto;
   border: 1px solid var(--tv-line);
   border-radius: 12px;
   background: #ffffff;
-  padding: 10px;
+  padding: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
