@@ -47,15 +47,15 @@ Mục tiêu của website:
 
 Mỗi nút Telegram trên website kết nối đến bot khác nhau theo logic phễu:
 
-| Điểm chạm | Bot | Lý do |
+| Điểm chạm | Bot / Tài khoản | Lý do |
 |---|---|---|
 | Nút float "Tâm Sự Trading" (mọi trang) | `@NgheTradingSupport_Bot` | Khách đại trà, chưa vào phễu → Bot AI tự động trả lời chung chung |
-| Nút Telegram trong **kết quả Trắc Nghiệm** | `@nghetrading_bot` | Khách đã vào phễu → Admin trực tiếp chat, cần tin tưởng cao |
-| Nút Telegram trong **xác nhận thanh toán** | `@nghetrading_bot` | Giao dịch nhạy cảm → Admin trực tiếp xử lý, không để bot tự động |
+| Nút Telegram trong **kết quả Trắc Nghiệm** | `@longphibtc` (Telegram cá nhân ĐẠI KA) | Khách đã vào phễu → ĐẠI KA trực tiếp chat, cần tin tưởng cao |
+| Nút Telegram trong **xác nhận thanh toán** | `@longphibtc` (Telegram cá nhân ĐẠI KA) | Giao dịch nhạy cảm → ĐẠI KA trực tiếp xử lý, không để bot tự động |
 
 **Nguyên tắc cốt lõi:**
 - Khách **chưa vào phễu** (đang lướt web, chưa tương tác sâu) → `@NgheTradingSupport_Bot` (bot AI tự động, trả lời đại trà).
-- Khách **đã vào phễu** (sau trắc nghiệm, sau thanh toán, tình huống nhạy cảm) → `@nghetrading_bot` (Admin trực tiếp chat, tạo niềm tin).
+- Khách **đã vào phễu** (sau trắc nghiệm, sau thanh toán, tình huống nhạy cảm) → `@longphibtc` (ĐẠI KA trực tiếp chat người thật, tạo niềm tin tuyệt đối).
 - **Không để bot tự động xử lý** những điểm chạm mang tính tư vấn cá nhân hoặc tài chính — khách sẽ mất niềm tin vào hệ thống.
 
 
