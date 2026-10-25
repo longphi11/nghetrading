@@ -232,6 +232,14 @@ async function main() {
   try {
     const { execSync } = require('child_process');
     execSync('node scripts/optimize-seo-and-internal-links.js', { cwd: ROOT, stdio: 'inherit' });
+    if (addedCount > 0) {
+      console.log(`🚀 Phát hiện ${addedCount} bài viết mới. Đang tự động gửi yêu cầu Google Indexing...`);
+      try {
+        execSync('node scripts/google-indexing.js', { cwd: ROOT, stdio: 'inherit' });
+      } catch (idxErr) {
+        console.warn('⚠️ Google Indexing thông báo:', idxErr.message);
+      }
+    }
   } catch (err) {
     console.error('Lỗi khi chạy tối ưu SEO & liên kết nội bộ:', err);
   }
