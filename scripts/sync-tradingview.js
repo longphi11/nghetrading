@@ -229,6 +229,14 @@ async function main() {
 
   if (addedCount > 0) {
     fs.writeFileSync(DATA_FILE, JSON.stringify(existingPosts, null, 2), "utf-8");
+    console.log(`🚀 Phát hiện ${addedCount} bài phân tích mới. Đang tự động bắn Google Indexing...`);
+    try {
+      const { execSync } = require('child_process');
+      execSync('node scripts/google-indexing.js https://nghetrading.com/', { cwd: ROOT, stdio: 'inherit' });
+      execSync('node scripts/google-indexing.js https://nghetrading.com/nhat-ky.html', { cwd: ROOT, stdio: 'inherit' });
+    } catch (e) {
+      console.warn('⚠️ Google Indexing thông báo:', e.message);
+    }
   }
 
   console.log(`Hoàn tất. Thêm ${addedCount} bài phân tích mới từ TradingView.`);
