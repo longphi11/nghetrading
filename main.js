@@ -391,16 +391,16 @@ const DISQUS_SHORTNAME = "nghetrading";
   const widget = document.createElement('div');
   widget.className = 'telegram-float-wrapper';
   widget.innerHTML = `
-    <a href="https://t.me/NgheTradingSupport_Bot" target="_blank" rel="noopener noreferrer" class="telegram-float-btn" aria-label="Chat Telegram Bot">
+    <a href="https://t.me/longphibtc" target="_blank" rel="noopener noreferrer" class="telegram-float-btn" aria-label="Chat Telegram Bot">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <line x1="22" y1="2" x2="11" y2="13"></line>
         <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
       </svg>
     </a>
-    <div class="telegram-float-text">
+    <a href="https://t.me/longphibtc" target="_blank" rel="noopener noreferrer" class="telegram-float-text" style="text-decoration:none; cursor:pointer;">
       <span class="line-1">Tâm Sự</span>
       <span class="line-2">Trading</span>
-    </div>
+    </a>
   `;
   document.body.appendChild(widget);
 

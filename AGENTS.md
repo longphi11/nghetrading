@@ -49,7 +49,7 @@ Mỗi nút Telegram trên website kết nối đến bot khác nhau theo logic p
 
 | Điểm chạm | Bot / Tài khoản | Lý do |
 |---|---|---|
-| Nút float "Tâm Sự Trading" (mọi trang) | `@NgheTradingSupport_Bot` | Khách đại trà, chưa vào phễu → Bot AI tự động trả lời chung chung |
+| Nút float "Tâm Sự Trading" (mọi trang) | `@longphibtc` (Telegram cá nhân ĐẠI KA) | Khách muốn tâm sự, trao đổi trực tiếp người thật với ĐẠI KA |
 | Nút Telegram trong **kết quả Trắc Nghiệm** | `@longphibtc` (Telegram cá nhân ĐẠI KA) | Khách đã vào phễu → ĐẠI KA trực tiếp chat, cần tin tưởng cao |
 | Nút Telegram trong **xác nhận thanh toán** | `@longphibtc` (Telegram cá nhân ĐẠI KA) | Giao dịch nhạy cảm → ĐẠI KA trực tiếp xử lý, không để bot tự động |
 
