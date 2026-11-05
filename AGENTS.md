@@ -59,6 +59,13 @@ Mỗi nút Telegram trên website kết nối đến bot khác nhau theo logic p
 - **Không để bot tự động xử lý** những điểm chạm mang tính tư vấn cá nhân hoặc tài chính — khách sẽ mất niềm tin vào hệ thống.
 
 
+## Hệ thống Subagent & Vai trò chuyên biệt
+
+- **Agent Phân Tích Kỹ Thuật (`technical-analyst`):**
+  - Chi tiết vai trò: `.agents/roles/agent-technical-analyst.md`
+  - Kỹ năng chuyên sâu: `.agents/skills/technical-chart-analysis/SKILL.md`
+  - Nhiệm vụ: Phân tích kỹ thuật thực chiến Vàng (XAU/USD) & Bitcoin (BTC), soi chart H4/H1, đọc tương quan phe Bò/Gấu, xác định key levels ("đường băng"), lập 2 kịch bản Long/Short, quản trị rủi ro RR cao và tự động hóa xuất bản dữ liệu cho mục "Nhật ký giao dịch" (`data/journal.json`).
+
 ## Khi chỉnh sửa code
 
 Luôn đọc toàn bộ file liên quan trước khi sửa.
