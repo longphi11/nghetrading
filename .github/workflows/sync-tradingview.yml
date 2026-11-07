@@ -24,7 +24,7 @@ jobs:
           node-version: "20"
 
       - name: Install dependencies
-        run: npm install google-auth-library
+        run: npm install --no-save google-auth-library
 
       - name: Chạy script đồng bộ TradingView & Tự động bắn Google Indexing
         run: node scripts/sync-tradingview.js
@@ -37,10 +37,11 @@ jobs:
           if [ "$(cat .journal-sync-result)" = "changed" ]; then
             git config user.name "tradingview-sync-bot"
             git config user.email "actions@github.com"
+            git checkout -- package*.json 2>/dev/null || true
             git add data/journal.json
             git commit -m "🤖 Tự động đồng bộ bài nhật ký phân tích mới từ TradingView & Index Google"
             # Luôn pull --rebase trước khi push để tránh conflict
-            git pull --rebase origin main
+            git pull --rebase --autostash origin main
             git push
           else
             echo "Không có bài phân tích mới, bỏ qua commit."
