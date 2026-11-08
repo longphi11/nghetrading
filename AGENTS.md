@@ -129,6 +129,20 @@ Không thêm animation nặng.
 
 Đảm bảo Console sạch lỗi.
 
+## Quy tắc Bình luận Seeding (Seeding Comments Policy)
+
+- **Số lượng bình luận seeding:** Mỗi bài viết phải có từ **3 đến 5 comment seeding**.
+- **TUYỆT ĐỐI KHÔNG LẶP LẠI (No Repetition):**
+  - Các bình luận tuyệt đối không được trùng lặp nội dung giữa các bài viết.
+  - Tên độc giả ảo (persona), văn phong, cảm xúc và cách đặt vấn đề phải đa dạng, tự nhiên, không mang tính rập khuôn bot.
+- **BÁM SÁT NỘI DUNG BÀI VIẾT (Context-Driven 100%):**
+  - Nội dung bình luận seeding phải bám sát trực tiếp vào chủ đề, luận điểm cốt lõi, ví dụ thực chiến hoặc nút thắt tâm lý được phân tích trong chính bài viết đó.
+  - Thể hiện sự thấu cảm sâu sắc: chia sẻ trải nghiệm từng mắc đúng lỗi đó, bài học rút ra, hoặc đặt câu hỏi đào sâu về kỹ thuật/tư duy trong bài.
+- **Phản hồi chính thức (Author Reply):**
+  - Mỗi bài viết có 1–2 bình luận được "Nghề Trading" phản hồi chính thức để định hướng tư duy đúng đắn, gia tăng uy tín thực chiến hoặc khéo léo dẫn dắt độc giả tới Telegram `@longphibtc`.
+- **Cấu trúc lưu trữ dữ liệu:**
+  - Hỗ trợ lưu trữ theo slug riêng biệt (`by_slug[slug]`) trong `data/comments.json` để đảm bảo bài nào có bình luận riêng biệt gắn chặt bài đó.
+
 ## Quy trình làm việc & Quyền tự quyết (Autonomous Execution)
 
 - **TUYỆT ĐỐI KHÔNG HỎI XÁC NHẬN (Zero Confirmation Questions):** Trong suốt quá trình làm việc, KHÔNG BAO GIỜ dừng lại hỏi ĐẠI KA xin phép, xin duyệt hay hỏi xác nhận lắt nhắt dưới bất kỳ hình thức nào. Tự động đưa ra quyết định kỹ thuật tối ưu nhất và làm thẳng một mạch từ đầu đến cuối.

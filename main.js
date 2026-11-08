@@ -223,9 +223,11 @@ fadeEls.forEach(el => observer.observe(el));
       console.warn('Không tải được comments.json:', e);
     }
 
-    // Lấy seed comments theo category hoặc hash slug
+    // Lấy seed comments: Ưu tiên tuyệt đối theo slug riêng của bài viết, sau đó mới đến category hoặc pool chung
     let seedingComments = [];
-    if (commentsData.category_pools && commentsData.category_pools[effectiveCategory]) {
+    if (commentsData.by_slug && Array.isArray(commentsData.by_slug[slug]) && commentsData.by_slug[slug].length > 0) {
+      seedingComments = commentsData.by_slug[slug].slice(0, 5);
+    } else if (commentsData.category_pools && commentsData.category_pools[effectiveCategory]) {
       seedingComments = commentsData.category_pools[effectiveCategory];
     } else {
       const pool = commentsData.general_pool || [];
