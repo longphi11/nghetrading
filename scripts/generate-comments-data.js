@@ -1,0 +1,202 @@
+const fs = require('fs');
+const path = require('path');
+
+const ROOT = path.resolve(__dirname, '..');
+
+const commentsData = {
+  general_pool: [
+    {
+      id: "c_gen_01",
+      name: "Trần Tuấn Anh",
+      avatar_color: "#1e3a8a",
+      date: "2 ngày trước",
+      content: "Đọc bài viết này đúng thời điểm thật sự. Tuần trước em vừa dính chuỗi 3 lệnh thua liên tiếp rồi cay cú vào lệnh gỡ, kết quả bay mất 25% tài khoản. Phải chi đọc bài sớm hơn để học cách buông bỏ cái tôi.",
+      reply: {
+        author: "Nghề Trading",
+        date: "1 ngày trước",
+        content: "Chào Tuấn Anh, ai trong nghề này cũng từng trải qua giai đoạn cay cú đó. Quan trọng là nhận ra sớm để rút lui bảo toàn vốn. Cứ bình tĩnh làm lại nhé!"
+      }
+    },
+    {
+      id: "c_gen_02",
+      name: "Nguyễn Hải Đăng",
+      avatar_color: "#065f46",
+      date: "3 ngày trước",
+      content: "Một bài viết quá sâu sắc cho bất kỳ ai đang ảo tưởng làm giàu nhanh. Trading đúng nghĩa là trò chơi quản trị tâm lý và bảo vệ vốn chứ không phải đặt cược may rủi.",
+      reply: null
+    },
+    {
+      id: "c_gen_03",
+      name: "Hoàng Minh Đức",
+      avatar_color: "#831843",
+      date: "5 ngày trước",
+      content: "Hôm trước em có nhắn tin qua Telegram @longphibtc được anh Long phân tích điểm yếu trong việc gồng lỗ. Sau khi chỉnh lại cách đặt Stoploss thì tuần này tâm lý nhẹ nhõm hẳn. Cảm ơn anh rất nhiều!",
+      reply: {
+        author: "Nghề Trading",
+        date: "4 ngày trước",
+        content: "Chúc mừng em đã vượt qua rào cản tâm lý đầu tiên. Nhớ luôn tuân thủ đúng tỷ lệ rủi ro mỗi lệnh nhé."
+      }
+    },
+    {
+      id: "c_gen_04",
+      name: "Lê Văn Hùng",
+      avatar_color: "#7c2d12",
+      date: "1 tuần trước",
+      content: "Bài học đắt giá nhất của em sau 2 năm bầm dập: Không phải thị trường lấy tiền của mình, mà chính sự thiếu kiên nhẫn và tham lam đã tự đốt tài khoản. Đọc bài của anh thấy bóng dáng mình trong đó.",
+      reply: null
+    },
+    {
+      id: "c_gen_05",
+      name: "Đặng Quang Khoa",
+      avatar_color: "#312e81",
+      date: "1 tuần trước",
+      content: "Rất thích cách tác giả diễn đạt: mộc mạc, thực chiến, không hoa mỹ hay bán khóa học viển vông. Mục Tư Duy Gốc này xứng đáng đọc đi đọc lại nhiều lần.",
+      reply: null
+    },
+    {
+      id: "c_gen_06",
+      name: "Vũ Bảo Nam",
+      avatar_color: "#0f766e",
+      date: "2 tuần trước",
+      content: "Em từng thử qua hàng chục indicator từ RSI, MACD đến Ichimoku nhưng đều thất bại. Sau khi quay về Price Action đơn giản và tập trung vào quản lý vốn thì tài khoản mới bắt đầu có chuyển biến tích cực.",
+      reply: null
+    },
+    {
+      id: "c_gen_07",
+      name: "Phạm Quốc Tuấn",
+      avatar_color: "#4338ca",
+      date: "2 tuần trước",
+      content: "Hay quá tác giả ơi! Cắt lỗ là một phần của chi phí kinh doanh, hiểu được câu này tự nhiên không còn sợ hãi hay tức tối mỗi khi giá chạm SL nữa.",
+      reply: {
+        author: "Nghề Trading",
+        date: "2 tuần trước",
+        content: "Chính xác Quốc Tuấn. Coi mỗi lệnh SL như tiền thuê mặt bằng kinh doanh, nhẹ đầu thì mới ra quyết định sáng suốt được."
+      }
+    },
+    {
+      id: "c_gen_08",
+      name: "Ngô Trọng Hiếu",
+      avatar_color: "#1e293b",
+      date: "3 tuần trước",
+      content: "Theo dõi blog của anh từ những bài đầu tiên trên Substack. Các góc nhìn về tâm lý giao dịch của anh thật sự chạm tới nỗi đau của những anh em đang loay hoay tìm bờ.",
+      reply: null
+    }
+  ],
+  category_pools: {
+    "tam-ly-ky-luat": [
+      {
+        id: "c_psy_01",
+        name: "Bùi Thanh Tùng",
+        avatar_color: "#0f766e",
+        date: "1 ngày trước",
+        content: "Kỷ luật chờ đợi là thứ khó nhất. Có những ngày thị trường sideway vô hướng, ngồi nhìn chart ngứa tay vào lệnh bừa là y như rằng ăn đòn. Bài viết này nhắc nhở rất đúng thời điểm.",
+        reply: null
+      },
+      {
+        id: "c_psy_02",
+        name: "Trịnh Đình Dũng",
+        avatar_color: "#991b1b",
+        date: "3 ngày trước",
+        content: "Em vừa đăng ký buổi cafe trao đổi 1-1 với anh Long qua form tư vấn. Hy vọng được anh chỉ ra những nút thắt tâm lý mà bản thân tự nhìn không thấy.",
+        reply: {
+          author: "Nghề Trading",
+          date: "2 ngày trước",
+          content: "Đã nhận được thông tin của Dũng. Hẹn gặp bạn trong buổi trò chuyện sắp tới để mổ xẻ cụ thể hành vi giao dịch nhé."
+        }
+      },
+      {
+        id: "c_psy_03",
+        name: "Nguyễn Minh Châu",
+        avatar_color: "#475569",
+        date: "4 ngày trước",
+        content: "Đoạn nói về 'sự cô độc của trader' chuẩn không cần chỉnh. Bạn bè gia đình không ai hiểu được cảm giác ngồi một mình trước màn hình chịu áp lực biến động giá. Cảm ơn anh đã đồng cảm.",
+        reply: null
+      },
+      {
+        id: "c_psy_04",
+        name: "Lâm Hoàng Phát",
+        avatar_color: "#854d0e",
+        date: "1 tuần trước",
+        content: "Sau khi đọc xong bài này em đã quyết định đóng máy tính nghỉ ngơi 3 ngày sau chuỗi lệnh thua. Không cố gỡ lúc tâm lý bất ổn là quyết định đúng đắn nhất.",
+        reply: null
+      }
+    ],
+    "quan-tri-rui-ro": [
+      {
+        id: "c_risk_01",
+        name: "Đỗ Thành Long",
+        avatar_color: "#065f46",
+        date: "2 ngày trước",
+        content: "Quy tắc 1R cho mỗi lệnh nghe thì đơn giản nhưng phải mất nửa năm cháy 2 tài khoản em mới chịu thực hiện nghiêm túc. Còn vốn là còn tất cả.",
+        reply: null
+      },
+      {
+        id: "c_risk_02",
+        name: "Phan Văn Thịnh",
+        avatar_color: "#1e3a8a",
+        date: "4 ngày trước",
+        content: "Bài viết phân tích tỷ lệ Risk/Reward rất thực tế. Không cần winrate 80-90%, chỉ cần 45-50% mà duy trì R:R 1:2 trở lên là tài khoản đã tăng trưởng đều đặn rồi.",
+        reply: {
+          author: "Nghề Trading",
+          date: "3 ngày trước",
+          content: "Rất chuẩn bạn Thịnh. Đám đông cứ mải mê săn chén thánh winrate cao mà quên mất chỉ cần kiểm soát R:R là đã có lợi thế toán học."
+        }
+      },
+      {
+        id: "c_risk_03",
+        name: "Trần Đức Thắng",
+        avatar_color: "#701a75",
+        date: "1 tuần trước",
+        content: "Không bao giờ dời Stoploss theo hướng bất lợi – đây là quy tắc sống còn mà bài viết đã nhấn mạnh rất rõ ràng.",
+        reply: null
+      }
+    ],
+    "phuong-phap-ky-thuat": [
+      {
+        id: "c_tech_01",
+        name: "Nguyễn Văn Chiến",
+        avatar_color: "#15803d",
+        date: "2 ngày trước",
+        content: "Phương pháp đơn giản mà hiệu quả cao. Trước đây chart của em nhìn như mạng nhện, giờ chỉ để nến trần và key level H4/H1, điểm vào lệnh sắc bén hơn hẳn.",
+        reply: null
+      },
+      {
+        id: "c_tech_02",
+        name: "Vũ Đình Trọng",
+        avatar_color: "#0369a1",
+        date: "5 ngày trước",
+        content: "Anh Long phân tích con sóng Vàng nhịp vừa rồi rất chuẩn. Chờ giá quét thanh khoản ở đáy xong mới canh Buy lên, lệnh chạy mượt mà không bị đau tim.",
+        reply: {
+          author: "Nghề Trading",
+          date: "4 ngày trước",
+          content: "Cảm ơn Trọng. Thị trường Vàng luôn tôn trọng các vùng thanh khoản lớn, cứ kiên nhẫn bám sát kế hoạch nhé."
+        }
+      }
+    ],
+    "tu-duy-xac-suat": [
+      {
+        id: "c_prob_01",
+        name: "Đinh Xuân Trường",
+        avatar_color: "#4338ca",
+        date: "3 ngày trước",
+        content: "Tư duy xác suất giống như luật số lớn của sòng bạc. Khi chấp nhận rằng kết quả của từng lệnh đơn lẻ là ngẫu nhiên thì không còn bị cảm xúc chi phối nữa.",
+        reply: null
+      },
+      {
+        id: "c_prob_02",
+        name: "Lê Quang Khải",
+        avatar_color: "#0f766e",
+        date: "1 tuần trước",
+        content: "Bài viết này giúp em đả thông kinh mạch tư duy! Cứ nghĩ phải dự đoán đúng tương lai, hóa ra chỉ cần tìm vùng cược có xác suất nghiêng về mình.",
+        reply: null
+      }
+    ]
+  }
+};
+
+const DATA_DIR = path.join(ROOT, 'data');
+if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+
+const commentsPath = path.join(DATA_DIR, 'comments.json');
+fs.writeFileSync(commentsPath, JSON.stringify(commentsData, null, 2), 'utf8');
+console.log('✓ Đã tạo thành công data/comments.json với kho seeding chất lượng cao');

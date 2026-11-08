@@ -82,14 +82,10 @@ fadeEls.forEach(el => observer.observe(el));
 
 // ===========================
 //  TIỆN ÍCH TRANG BÀI VIẾT
-//  (Bài liên quan + Chia sẻ mạng xã hội + Bình luận Disqus)
+//  (Bài liên quan + Chia sẻ mạng xã hội + Bình luận Native Seeding & Không cần đăng nhập)
 //  Tự động chạy trên MỌI trang trong thư mục posts/ — kể cả bài cũ đã tạo từ trước,
 //  không cần chạy lại robot đồng bộ Substack.
 // ===========================
-
-// ⚙️ Điền shortname Disqus của bạn vào đây sau khi đăng ký xong (xem hướng dẫn Claude gửi kèm).
-// Để trống ("") thì phần bình luận sẽ không hiển thị.
-const DISQUS_SHORTNAME = "nghetrading";
 
 (async function initPostPageExtras() {
   const postBody = document.querySelector('.post-body');
@@ -101,6 +97,7 @@ const DISQUS_SHORTNAME = "nghetrading";
 
   const metaParts = (metaEl.textContent || '').split('•');
   const category = metaParts.length > 1 ? metaParts[1].trim() : '';
+  let effectiveCategory = category;
   const slug = location.pathname.split('/').filter(Boolean).pop().replace(/\.html$/, '');
   const pageUrl = location.href;
   const pageTitle = document.title.replace(/\s*–\s*Nghề Trading\s*$/, '');
@@ -215,24 +212,216 @@ const DISQUS_SHORTNAME = "nghetrading";
     console.error('Không tải được bài viết liên quan:', err);
   }
 
-  // ----- 3. BÌNH LUẬN (Disqus — hỗ trợ đăng nhập Gmail/Facebook/X) -----
-  if (DISQUS_SHORTNAME) {
+  // ----- 3. HỆ THỐNG BÌNH LUẬN NATIVE (Không cần đăng nhập, tức thì, bảo mật) -----
+  try {
+    const commentsDataPath = window.location.pathname.includes('/posts/') ? '../data/comments.json' : 'data/comments.json';
+    let commentsData = { general_pool: [], category_pools: {} };
+    try {
+      const cRes = await fetch(commentsDataPath + '?v=' + Date.now(), { cache: 'no-store' });
+      if (cRes.ok) commentsData = await cRes.json();
+    } catch (e) {
+      console.warn('Không tải được comments.json:', e);
+    }
+
+    // Lấy seed comments theo category hoặc hash slug
+    let seedingComments = [];
+    if (commentsData.category_pools && commentsData.category_pools[effectiveCategory]) {
+      seedingComments = commentsData.category_pools[effectiveCategory];
+    } else {
+      const pool = commentsData.general_pool || [];
+      if (pool.length > 0) {
+        let hash = 0;
+        for (let i = 0; i < slug.length; i++) hash = (hash << 5) - hash + slug.charCodeAt(i);
+        const startIndex = Math.abs(hash) % pool.length;
+        seedingComments = [
+          pool[startIndex],
+          pool[(startIndex + 1) % pool.length],
+          pool[(startIndex + 2) % pool.length]
+        ].filter(Boolean);
+      }
+    }
+
+    // Lấy local comments của người dùng cho bài viết này
+    const localCommentsKey = `nt_comments_${slug}`;
+    let userComments = [];
+    try {
+      userComments = JSON.parse(localStorage.getItem(localCommentsKey) || '[]');
+    } catch (e) {
+      userComments = [];
+    }
+
+    let allComments = [...userComments, ...seedingComments];
+
     const commentSection = document.createElement('section');
     commentSection.className = 'post-comments';
-    commentSection.innerHTML = `<h3>Bình luận</h3><p style="font-size: 14px; color: #666; margin-bottom: 20px;">Hãy cho tôi biết bạn nghĩ gì về bài viết?</p><div id="disqus_thread"></div>`;
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function renderCommentItem(c) {
+      const initial = (c.name || 'U').trim().charAt(0).toUpperCase();
+      const avatarBg = c.avatar_color || '#1e3a8a';
+      const replyHtml = c.reply ? `
+        <div class="comment-reply">
+          <div class="reply-header">
+            <span class="author-badge">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+              ${escapeHtml(c.reply.author || 'Nghề Trading')}
+            </span>
+            <span class="reply-date">${escapeHtml(c.reply.date || '')}</span>
+          </div>
+          <div class="reply-text">${escapeHtml(c.reply.content || '')}</div>
+        </div>
+      ` : '';
+
+      return `
+        <div class="comment-item" id="${c.id || ''}">
+          <div class="comment-header">
+            <div class="comment-avatar" style="background-color: ${avatarColor(avatarBg)};">${initial}</div>
+            <div class="comment-user-info">
+              <div class="comment-name">${escapeHtml(c.name || 'Độc giả')}</div>
+              <div class="comment-date">${escapeHtml(c.date || 'Gần đây')}</div>
+            </div>
+          </div>
+          <div class="comment-text">${escapeHtml(c.content || '').replace(/\n/g, '<br>')}</div>
+          ${replyHtml}
+        </div>
+      `;
+    }
+
+    function avatarColor(color) {
+      return color && color.startsWith('#') ? color : '#1e3a8a';
+    }
+
+    commentSection.innerHTML = `
+      <h3 id="comments-title">Bình luận (<span id="comments-count">${allComments.length}</span>)</h3>
+      <p class="comments-sub">Chia sẻ góc nhìn hoặc đặt câu hỏi cùng cộng đồng Nghề Trading. Bình luận của bạn sẽ được hiển thị ngay.</p>
+      
+      <div class="comments-list" id="comments-list">
+        ${allComments.map(renderCommentItem).join('')}
+      </div>
+
+      <div class="comment-form-card">
+        <h4>Để lại bình luận</h4>
+        <p>Không cần đăng nhập tài khoản. Tôn trọng quan điểm và cùng nhau tiến bộ.</p>
+        <div class="comment-alert" id="comment-alert"></div>
+        <form id="native-comment-form" class="comment-form-grid">
+          <div>
+            <input type="text" id="comment-author" class="comment-input" placeholder="Họ và tên hoặc biệt danh của bạn..." required maxlength="50" autocomplete="name" />
+          </div>
+          <div>
+            <textarea id="comment-content" class="comment-textarea" rows="3" placeholder="Chia sẻ suy nghĩ, câu hỏi hoặc trải nghiệm của bạn về bài viết..." required maxlength="1000"></textarea>
+          </div>
+          <div class="comment-form-footer">
+            <span class="comment-notice">⚡ Bình luận sẽ xuất hiện ngay sau khi gửi</span>
+            <button type="submit" id="comment-submit-btn" class="comment-submit-btn">
+              <span>Gửi bình luận</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    `;
+
     insertAfter(commentSection);
 
-    window.disqus_config = function () {
-      this.page.url = pageUrl;
-      this.page.identifier = slug;
-      this.page.title = pageTitle;
-      this.language = "vi"; // Thử hiển thị giao diện Disqus bằng tiếng Việt (nếu Disqus hỗ trợ đủ)
-    };
+    // Xử lý gửi bình luận
+    const commentForm = commentSection.querySelector('#native-comment-form');
+    const authorInput = commentSection.querySelector('#comment-author');
+    const contentInput = commentSection.querySelector('#comment-content');
+    const submitBtn = commentSection.querySelector('#comment-submit-btn');
+    const alertBox = commentSection.querySelector('#comment-alert');
+    const commentsListEl = commentSection.querySelector('#comments-list');
+    const commentsCountEl = commentSection.querySelector('#comments-count');
 
-    const script = document.createElement('script');
-    script.src = `https://${DISQUS_SHORTNAME}.disqus.com/embed.js`;
-    script.setAttribute('data-timestamp', +new Date());
-    document.body.appendChild(script);
+    // Tự động điền tên từ localStorage nếu đã từng comment
+    const savedName = localStorage.getItem('nt_comment_author_name');
+    if (savedName && authorInput) authorInput.value = savedName;
+
+    if (commentForm) {
+      commentForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const author = (authorInput.value || '').trim();
+        const content = (contentInput.value || '').trim();
+
+        if (!author || author.length < 2) {
+          alert('Vui lòng nhập tên của bạn (tối thiểu 2 ký tự).');
+          authorInput.focus();
+          return;
+        }
+        if (!content || content.length < 3) {
+          alert('Nội dung bình luận quá ngắn (tối thiểu 3 ký tự).');
+          contentInput.focus();
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.6';
+
+        // Chọn màu avatar từ danh sách màu sang trọng
+        const colors = ['#1e3a8a', '#065f46', '#7c2d12', '#4c1d95', '#831843', '#0f766e', '#b45309', '#374151'];
+        let colorHash = 0;
+        for (let i = 0; i < author.length; i++) colorHash = (colorHash << 5) - colorHash + author.charCodeAt(i);
+        const avatarCol = colors[Math.abs(colorHash) % colors.length];
+
+        const newComment = {
+          id: 'nt_' + Date.now(),
+          name: author,
+          avatar_color: avatarCol,
+          date: 'Vừa xong',
+          content: content,
+          reply: null
+        };
+
+        // Lưu vào localStorage
+        userComments.unshift(newComment);
+        try {
+          localStorage.setItem(localCommentsKey, JSON.stringify(userComments));
+          localStorage.setItem('nt_comment_author_name', author);
+        } catch (err) {}
+
+        // Render lên DOM ngay lập tức
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = renderCommentItem(newComment);
+        if (commentsListEl.firstChild) {
+          commentsListEl.insertBefore(tempDiv.firstElementChild, commentsListEl.firstChild);
+        } else {
+          commentsListEl.appendChild(tempDiv.firstElementChild);
+        }
+
+        // Cập nhật số lượng
+        allComments.unshift(newComment);
+        if (commentsCountEl) commentsCountEl.textContent = allComments.length;
+
+        // Reset ô nhập và báo thành công
+        contentInput.value = '';
+        if (alertBox) {
+          alertBox.style.display = 'block';
+          alertBox.textContent = '✓ Cảm ơn bạn! Bình luận đã được đăng thành công.';
+          setTimeout(() => { alertBox.style.display = 'none'; }, 4000);
+        }
+
+        submitBtn.disabled = false;
+        submitBtn.style.opacity = '1';
+
+        // Gửi thông báo tới Telegram của ĐẠI KA (chạy ngầm không ảnh hưởng UX)
+        try {
+          const tgToken = '8762904355:AAHStauxcLI-iceQX_OSvu99rQZaE-qYXgY';
+          const tgChatId = '488901419';
+          const tgMsg = `💬 BÌNH LUẬN MỚI TRÊN NGHỀ TRADING\n\n📌 Bài viết: ${pageTitle}\n🔗 Link: ${pageUrl}\n👤 Người gửi: ${author}\n📝 Nội dung:\n"${content}"\n\n⏰ Thời gian: ${new Date().toLocaleString('vi-VN')}`;
+          fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: tgChatId, text: tgMsg })
+          }).catch(() => {});
+        } catch (tgErr) {}
+      });
+    }
+  } catch (commentErr) {
+    console.error('Lỗi khởi tạo bình luận:', commentErr);
   }
 })();
 

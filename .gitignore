@@ -8,3 +8,4 @@ telegram-bot/.env
 .x-browser-session/
 .env.x_api
 ga-credentials*.json
+scratch/
