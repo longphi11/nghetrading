@@ -667,6 +667,20 @@
     let selectedOpt = null;
     const total = questionsPool.length;
 
+    // Thuật toán Fisher-Yates đảo ngẫu nhiên các phương án
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Đảo ngẫu nhiên vị trí các đáp án của từng câu hỏi để tránh thiên vị
+    questionsPool.forEach(q => {
+      shuffleArray(q.opts);
+    });
+
     const progressFill = document.getElementById('progress-fill');
     const stepLabel = document.getElementById('step-label');
     const pctLabel = document.getElementById('pct-label');
@@ -794,6 +808,11 @@
               Tâm Sự Trực Tiếp Với Admin
             </a>
             <a href="tu-van.html" class="tn-btn-cafe">☕ Hẹn Cafe 1-1 Với Admin</a>
+          </div>
+          <div style="text-align: center; margin-top: 24px;">
+            <button onclick="window.location.reload();" style="background: transparent; border: 1px solid #cbd5e1; padding: 10px 20px; font-size: 13px; font-weight: 600; color: #475569; border-radius: 4px; cursor: pointer; transition: all 0.2s;" onmouseover="this.style.borderColor='#94a3b8'; this.style.color='#0f172a';" onmouseout="this.style.borderColor='#cbd5e1'; this.style.color='#475569';">
+              🔄 Làm Lại Bài Trắc Nghiệm (Đảo Đề Mới)
+            </button>
           </div>
         </div>
       `;
