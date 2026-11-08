@@ -383,6 +383,15 @@
       .tn-cta-box { padding: 24px 16px; }
     }
   </style>
+  <script>
+    (function(){
+      try {
+        var s = localStorage.getItem('nghetrading_theme');
+        var t = s || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', t);
+      } catch(e) {}
+    })();
+  </script>
 </head>
 <body class="tn-page">
 

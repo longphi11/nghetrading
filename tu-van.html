@@ -48,6 +48,15 @@
     "description": "Một buổi cafe 1-1 trao đổi thẳng thắn về chiến lược, tâm lý và khó khăn trading cụ thể."
   }
   </script>
+  <script>
+    (function(){
+      try {
+        var s = localStorage.getItem('nghetrading_theme');
+        var t = s || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', t);
+      } catch(e) {}
+    })();
+  </script>
 </head>
 <body>
 

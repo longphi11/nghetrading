@@ -495,3 +495,50 @@
   margin: 0;
 }
 
+
+
+/* ===== DARK MODE CHO NHẬT KÝ GIAO DỊCH ===== */
+[data-theme="dark"] .journal-card {
+  background: var(--bg-card) !important;
+  border-color: var(--border) !important;
+}
+[data-theme="dark"] .journal-card:hover {
+  box-shadow: 0 12px 24px rgba(0,0,0,0.4) !important;
+}
+[data-theme="dark"] .journal-thumb {
+  background: var(--bg-card-inner) !important;
+}
+[data-theme="dark"] .journal-card h2 a {
+  color: var(--text) !important;
+}
+[data-theme="dark"] .journal-card p {
+  color: var(--text-secondary) !important;
+}
+[data-theme="dark"] .journal-card .read-more {
+  color: var(--text) !important;
+  border-bottom-color: var(--text) !important;
+}
+[data-theme="dark"] .page-header p {
+  color: var(--text) !important;
+}
+[data-theme="dark"] .pagination button {
+  background: var(--bg-card);
+  border-color: var(--border);
+  color: var(--text);
+}
+[data-theme="dark"] .pagination button:hover:not(:disabled) {
+  background: var(--bg-card-inner);
+  border-color: var(--text);
+}
+[data-theme="dark"] .pagination button.active {
+  background: #ffffff !important;
+  color: #0d0d0d !important;
+  border-color: #ffffff !important;
+}
+[data-theme="dark"] .tab-btn {
+  color: var(--text-secondary);
+}
+[data-theme="dark"] .tab-btn.active {
+  color: var(--text);
+  border-bottom-color: var(--text);
+}

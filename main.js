@@ -1,3 +1,109 @@
+
+// ===========================
+//  CHẾ ĐỘ SÁNG / TỐI (THEME ENGINE — GIỐNG CARDANO.VN)
+// ===========================
+(function initThemeEngine() {
+  const STORAGE_KEY = 'nghetrading_theme';
+
+  function getPreferredTheme() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved === 'dark' || saved === 'light') return saved;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    } catch (e) {
+      return 'light';
+    }
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    document.querySelectorAll('.theme-toggle').forEach(btn => {
+      const isDark = theme === 'dark';
+      btn.setAttribute('title', isDark ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối');
+      btn.setAttribute('aria-label', isDark ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối');
+    });
+  }
+
+    function injectToggleIfMissing() {
+    const navInners = document.querySelectorAll('.nav-inner');
+    navInners.forEach(nav => {
+      if (nav.querySelector('.theme-toggle')) return;
+      const actions = nav.querySelector('.nav-actions');
+      const toggleBtn = document.createElement('button');
+      toggleBtn.className = 'theme-toggle';
+      toggleBtn.type = 'button';
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      toggleBtn.setAttribute('title', isDark ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối');
+      toggleBtn.setAttribute('aria-label', isDark ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối');
+      toggleBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" width="20" height="20" class="theme-icon light-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg viewBox="0 0 24 24" width="20" height="20" class="theme-icon dark-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      `;
+
+      if (actions) {
+        actions.insertBefore(toggleBtn, actions.firstChild);
+      } else {
+        const wrap = document.createElement('div');
+        wrap.className = 'nav-actions';
+        wrap.appendChild(toggleBtn);
+        const hb = nav.querySelector('.hamburger');
+        if (hb) {
+          nav.insertBefore(wrap, hb);
+        } else {
+          nav.appendChild(wrap);
+        }
+      }
+    });
+  }
+      if (!actions.querySelector('.theme-toggle')) {
+        const toggleBtn = document.createElement('button');
+        toggleBtn.className = 'theme-toggle';
+        toggleBtn.type = 'button';
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        toggleBtn.setAttribute('title', isDark ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối');
+        toggleBtn.setAttribute('aria-label', isDark ? 'Chuyển sang chế độ sáng' : 'Chuyển sang chế độ tối');
+        toggleBtn.innerHTML = `
+          <svg viewBox="0 0 24 24" width="20" height="20" class="theme-icon light-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20" class="theme-icon dark-icon" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        `;
+        actions.insertBefore(toggleBtn, sBtn);
+      }
+    });
+  }
+
+  // Khởi động theme ngay lập tức
+  const initialTheme = getPreferredTheme();
+  applyTheme(initialTheme);
+
+  // Lắng nghe click thông qua event delegation trên document
+  document.addEventListener('click', function(e) {
+    const toggle = e.target.closest('.theme-toggle');
+    if (!toggle) return;
+    e.preventDefault();
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    try {
+      localStorage.setItem(STORAGE_KEY, next);
+    } catch(err) {}
+    applyTheme(next);
+  });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', injectToggleIfMissing);
+  } else {
+    injectToggleIfMissing();
+  }
+
+  // Theo dõi đổi theme hệ thống
+  try {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem(STORAGE_KEY)) {
+        applyTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+  } catch(e) {}
+})();
+
 // ===========================
 //  NGHỀ TRADING – main.js
 // ===========================
@@ -246,7 +352,7 @@ const DISQUS_SHORTNAME = "nghetrading";
   if (!grid) return; // không phải trang chủ, bỏ qua
 
   try {
-    const res = await fetch('/data/posts.json', { cache: 'no-store' });
+    const res = await fetch(window.location.protocol === 'file:' ? 'data/posts.json' : '/data/posts.json', { cache: 'no-store' });
     if (!res.ok) throw new Error(`status ${res.status}`);
     const allPosts = await res.json();
 
@@ -307,7 +413,8 @@ const DISQUS_SHORTNAME = "nghetrading";
   }
 
   try {
-    const res = await fetch('/data/trades.json?v=' + Date.now(), { cache: 'no-store' });
+    const tradesPath = window.location.protocol === 'file:' ? 'data/trades.json' : '/data/trades.json';
+    const res = await fetch(tradesPath + '?v=' + Date.now(), { cache: 'no-store' });
     if (!res.ok) throw new Error(`status ${res.status}`);
     const trades = await res.json();
 

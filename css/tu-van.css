@@ -492,3 +492,21 @@
   .tv-process { flex-direction: column; align-items: stretch; gap: 32px; }
   .tv-process-line { display: none; }
 }
+
+
+/* ===== DARK MODE CHO TRANG TƯ VẤN ===== */
+[data-theme="dark"] {
+  --tv-bg: #0e1117;
+  --tv-card-bg: #161b22;
+  --tv-line: #30363d;
+  --tv-text: #f0f6fc;
+  --tv-muted: #8b949e;
+  --tv-accent-light: rgba(5, 150, 105, 0.15);
+  --tv-dark: #161b22;
+}
+[data-theme="dark"] .tv-pay-card,
+[data-theme="dark"] .tv-proof-card,
+[data-theme="dark"] .tv-pillar-card {
+  background: var(--tv-card-bg);
+  border-color: var(--tv-line);
+}
