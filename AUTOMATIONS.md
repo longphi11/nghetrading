@@ -30,7 +30,7 @@ Hiện tại dự án đang vận hành độc lập **2 luồng tự động h�
 Các luồng AI của Nghề Trading sử dụng chung cơ chế bể chứa API Key tự động xoay vòng để giải quyết triệt để lỗi hạn mức `429 RESOURCE_EXHAUSTED`:
 - **Model ưu tiên:** `gemini-3.1-flash-lite` (Hạn mức 1.500 requests/ngày).
 - **Cơ chế xoay vòng:** Tự động bắt lỗi HTTP 429 hoặc lỗi quota để chuyển đổi tức thì sang API Key kế tiếp mà không làm gián đoạn luồng chạy.
-- **Danh sách Key Pool hiện tại:** 4 API Keys của ĐẠI KA được lưu trữ trong mã nguồn các bot.
+- **Danh sách Key Pool hiện tại:** Bể chứa 6 API Keys của ĐẠI KA được lưu trữ và tự động failover trong mã nguồn các bot.
 
 ### 3.2. Hệ thống Chữ ký Chuyển đổi Thương hiệu (Cross-Promotion Footers)
 Tất cả các luồng xuất bản nội dung ra Telegram đều đính kèm chữ ký đồng bộ để dẫn phễu độc giả:
