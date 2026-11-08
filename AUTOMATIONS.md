@@ -16,12 +16,13 @@
 
 ## 2. DANH MỤC CÁC LUỒNG TỰ ĐỘNG (ACTIVE WORKFLOWS)
 
-Hiện tại dự án đang vận hành độc lập **2 luồng tự động hóa cốt lõi**, mỗi luồng có tài liệu cấu hình chi tiết riêng:
+Hiện tại dự án đang vận hành độc lập **3 luồng tự động hóa cốt lõi**, mỗi luồng có tài liệu cấu hình chi tiết riêng:
 
-| Luồng | Tên Luồng | Kênh Telegram Tiếp Nhận | Tần Suất Chạy | File Quản Lý Chi Tiết |
+| Luồng | Tên Luồng | Kênh / Nền Tảng Tiếp Nhận | Tần Suất Chạy | File Quản Lý Chi Tiết |
 |---|---|---|---|---|
 | **01** | **Bản Tin Kinh Tế & Vĩ Mô Chiến Lược** | `@tinkinhtenghetrading` | • **Tin lẻ:** 2 tiếng / lần *(08h, 10h, 12h, 14h, 16h, 18h, 20h, 22h)*<br>• **Tin tổng hợp đáng chú ý:** **09:00, 15:00, 21:00** hàng ngày | [`automations/flow-01-economic-news.md`](./automations/flow-01-economic-news.md) |
 | **02** | **Quote Tâm Lý & Kỷ Luật Thực Chiến** | `@quotetradingvn` | **09:00, 15:00, 21:00** hàng ngày *(9h sáng, 15h chiều, 21h tối)* | [`automations/flow-02-trading-quotes.md`](./automations/flow-02-trading-quotes.md) |
+| **03** | **Đăng Bài Tự Động Fanpage Facebook** | Fanpage `Nghề Trading`<br>*(ID: 1103661363146221)* | • **10:00 sáng Thứ 2-6:** Kế hoạch Vàng ngày (ảnh chart + full bài)<br>• **20:30 tối hàng ngày:** Bài viết Tư Duy Gốc (~200 từ AI)<br>• **First Comment:** Kêu gọi vào nhóm Telegram | [`automations/flow-03-facebook-page.md`](./automations/flow-03-facebook-page.md) |
 
 ---
 

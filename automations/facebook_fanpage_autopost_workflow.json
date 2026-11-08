@@ -1,0 +1,87 @@
+{
+  "name": "Nghề Trading - Facebook Fanpage AutoPost System",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "30 20 * * *"
+            }
+          ]
+        }
+      },
+      "id": "trigger-evening-2030",
+      "name": "Lịch 20h30 Tối Hàng Ngày (Tư Duy Gốc)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 260]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 10 * * 1-5"
+            }
+          ]
+        }
+      },
+      "id": "trigger-morning-1000",
+      "name": "Lịch 10h00 Sáng Thứ 2-6 (Kế Hoạch Vàng)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [240, 460]
+    },
+    {
+      "parameters": {
+        "command": "python3 /root/facebook_agent/facebook_agent.py --trigger evening"
+      },
+      "id": "exec-evening-script",
+      "name": "Chạy Bài Tối (Tư Duy Gốc + Comment Telegram)",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [500, 260]
+    },
+    {
+      "parameters": {
+        "command": "python3 /root/facebook_agent/facebook_agent.py --trigger morning"
+      },
+      "id": "exec-morning-script",
+      "name": "Chạy Bài Sáng (Kế Hoạch Vàng + Comment Telegram)",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [500, 460]
+    }
+  ],
+  "connections": {
+    "Lịch 20h30 Tối Hàng Ngày (Tư Duy Gốc)": {
+      "main": [
+        [
+          {
+            "node": "Chạy Bài Tối (Tư Duy Gốc + Comment Telegram)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lịch 10h00 Sáng Thứ 2-6 (Kế Hoạch Vàng)": {
+      "main": [
+        [
+          {
+            "node": "Chạy Bài Sáng (Kế Hoạch Vàng + Comment Telegram)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
