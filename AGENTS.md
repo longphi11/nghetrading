@@ -70,6 +70,7 @@ Mỗi nút Telegram trên website kết nối đến bot khác nhau theo logic p
 
 - **TUYỆT ĐỐI BỎ QUA CÁC DỰ ÁN KHÁC TRÊN VPS:** Trên VPS có các dự án khác chạy chung (n8n, traicainghien, may_agent...). Đây là không gian riêng của dự án khác, TUYỆT ĐỐI BỎ QUA, không liệt kê, không nhắc tới trong bất kỳ báo cáo/thống kê nào, không can thiệp, không sửa đổi hay tác động dưới bất kỳ hình thức nào.
 - **Chỉ tập trung 100% vào Nghề Trading:** Mọi báo cáo, thống kê, tối ưu hóa và thao tác chỉ gói gọn trong các luồng và tài nguyên của dự án Nghề Trading (`/root/news_agent/`, `/root/quote_agent/` và website Nghề Trading).
+- **QUY TẮC CẬP NHẬT LUỒNG TỰ ĐỘNG (N8N / WORKFLOWS):** Đối với các luồng tự động / n8n đã có sẵn, khi chỉnh sửa/nâng cấp **TUYỆT ĐỐI KHÔNG TẠO RA LUỒNG MỚI MÀ BẮT BUỘC EDIT TRỰC TIẾP LUỒNG CŨ** (giữ nguyên Workflow ID, Webhook, file cấu hình và Service hiện tại để tránh trùng lặp và rác tài nguyên VPS).
 
 ## Khi chỉnh sửa code
 

@@ -10,6 +10,7 @@
 - **Quy tắc phân tách bảo mật (BẮT BUỘC):**
   - **CHỈ TẬP TRUNG 100% VÀO NGHỀ TRADING:** Mọi thao tác, báo cáo, thống kê và tài liệu chỉ gói gọn trong các dịch vụ và tài nguyên của dự án Nghề Trading (`/root/news_agent/`, `/root/quote_agent/`, database và bot liên quan).
   - **TUYỆT ĐỐI KHÔNG CAN THIỆP VÀO CÁC DỰ ÁN KHÁC:** Trên VPS có các dự án khác chạy song song (n8n, traicainghien, may_agent...), tuyệt đối không sửa đổi, không liệt kê hay can thiệp dưới bất kỳ hình thức nào.
+  - **NGUYÊN TẮC CẬP NHẬT LUỒNG TỰ ĐỘNG (N8N / SYSTEMD):** Khi chỉnh sửa, cập nhật hoặc nâng cấp các luồng đã có sẵn, **BẮT BUỘC EDIT TRỰC TIẾP LUỒNG CŨ, TUYỆT ĐỐI KHÔNG TẠO RA LUỒNG MỚI** để giữ nguyên ID kết nối, Webhook, file cấu hình và tránh gây trùng lặp/rác tài nguyên VPS.
 
 ---
 
