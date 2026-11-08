@@ -30,7 +30,7 @@ Luồng hoạt động theo 2 kịch bản cố định trong ngày:
   - Hình ảnh đăng kèm: Chính là hình ảnh đồ thị chart TradingView HD của bài viết.
 - **Bình luận đầu tiên (First Comment):**
   - Tự động ghim bình luận dẫn link vào nhóm Telegram:
-    `👉 Anh em tham gia nhóm Telegram cập nhật phân tích thị trường & nhận định lệnh Vàng (XAU/USD), BTC hàng ngày tại đây nhé: https://t.me/nhatkytradingvn`
+    `👉 Anh em tham gia nhóm Telegram cập nhật phân tích thị trường & nhận định về Vàng (XAU/USD) hàng ngày tại đây nhé: https://t.me/nhatkytradingvn`
 
 ---
 
@@ -45,7 +45,7 @@ Luồng hoạt động theo 2 kịch bản cố định trong ngày:
   - Hình ảnh đăng kèm: Ảnh minh họa bài viết chất lượng cao từ website.
 - **Bình luận đầu tiên (First Comment):**
   - Tự động bình luận dẫn link nhóm Telegram:
-    `👉 Anh em tham gia nhóm Telegram cập nhật phân tích thị trường & nhận định lệnh Vàng (XAU/USD), BTC hàng ngày tại đây nhé: https://t.me/nhatkytradingvn`
+    `👉 Anh em tham gia nhóm Telegram cập nhật phân tích thị trường & nhận định về Vàng (XAU/USD) hàng ngày tại đây nhé: https://t.me/nhatkytradingvn`
 
 ---
 
