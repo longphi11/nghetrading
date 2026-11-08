@@ -68,8 +68,8 @@ Mỗi nút Telegram trên website kết nối đến bot khác nhau theo logic p
 
 ## Quy tắc an toàn VPS & Phân tách phạm vi dự án
 
-- **TUYỆT ĐỐI KHÔNG CAN THIỆP N8N & CÁC DỰ ÁN KHÁC TRÊN VPS:** Toàn bộ các luồng `n8n`, thư mục `n8n_data` và các dự án khác trên VPS (như `traicainghien`, `may_agent`...) KHÔNG thuộc phạm vi Nghề Trading. TUYỆT ĐỐI KHÔNG can thiệp, không sửa đổi, không restart, không xóa dưới bất kỳ hình thức nào.
-- **Chỉ làm việc trong phạm vi Nghề Trading:** Chỉ thao tác trên các thư mục và dịch vụ của dự án Nghề Trading (`/root/news_agent/`, `/root/quote_agent/` và website Nghề Trading).
+- **TUYỆT ĐỐI BỎ QUA CÁC DỰ ÁN KHÁC TRÊN VPS:** Trên VPS có các dự án khác chạy chung (n8n, traicainghien, may_agent...). Đây là không gian riêng của dự án khác, TUYỆT ĐỐI BỎ QUA, không liệt kê, không nhắc tới trong bất kỳ báo cáo/thống kê nào, không can thiệp, không sửa đổi hay tác động dưới bất kỳ hình thức nào.
+- **Chỉ tập trung 100% vào Nghề Trading:** Mọi báo cáo, thống kê, tối ưu hóa và thao tác chỉ gói gọn trong các luồng và tài nguyên của dự án Nghề Trading (`/root/news_agent/`, `/root/quote_agent/` và website Nghề Trading).
 
 ## Khi chỉnh sửa code
 
