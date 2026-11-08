@@ -19,8 +19,8 @@ Hiện tại dự án đang vận hành độc lập **2 luồng tự động h�
 
 | Luồng | Tên Luồng | Kênh Telegram Tiếp Nhận | Tần Suất Chạy | File Quản Lý Chi Tiết |
 |---|---|---|---|---|
-| **01** | **Bản Tin Kinh Tế & Vĩ Mô Chiến Lược** | `@tinkinhtenghetrading` | **2 tiếng / lần**<br>*(08h, 10h, 12h, 14h, 16h, 18h, 20h, 22h)* | [`automations/flow-01-economic-news.md`](./automations/flow-01-economic-news.md) |
-| **02** | **Quote Tâm Lý & Kỷ Luật Thực Chiến** | `@quotetradingvn` | **Định kỳ hàng ngày** | [`automations/flow-02-trading-quotes.md`](./automations/flow-02-trading-quotes.md) |
+| **01** | **Bản Tin Kinh Tế & Vĩ Mô Chiến Lược** | `@tinkinhtenghetrading` | • **Tin lẻ:** 2 tiếng / lần *(08h, 10h, 12h, 14h, 16h, 18h, 20h, 22h)*<br>• **Tin tổng hợp đáng chú ý:** **09:00, 15:00, 21:00** hàng ngày | [`automations/flow-01-economic-news.md`](./automations/flow-01-economic-news.md) |
+| **02** | **Quote Tâm Lý & Kỷ Luật Thực Chiến** | `@quotetradingvn` | **09:00, 15:00, 21:00** hàng ngày *(9h sáng, 15h chiều, 21h tối)* | [`automations/flow-02-trading-quotes.md`](./automations/flow-02-trading-quotes.md) |
 
 ---
 

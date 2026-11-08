@@ -9,7 +9,11 @@
 - **Mã luồng:** `FLOW-02`
 - **Tên luồng:** Quote Tâm Lý, Quản Trị Rủi Ro & Kỷ Luật Trading
 - **Kênh tiếp nhận:** `@quotetradingvn` (Telegram Channel ID: `-1004367907410`)
-- **Tần suất hoạt động:** Định kỳ hàng ngày.
+- **Tần suất hoạt động:** **3 lần / ngày** vào các khung giờ vàng:
+  - **09:00 sáng:** Định tâm và thiết lập kỷ luật đầu phiên Á.
+  - **15:00 chiều:** Củng cố tâm lý và kiềm chế FOMO trước thềm phiên Âu/Mỹ.
+  - **21:00 tối:** Chiêm nghiệm, chữa lành và quản trị rủi ro trong cao điểm phiên Mỹ.
+- **Mốc giờ cố định:** `[09:00, 15:00, 21:00]` (Giờ Việt Nam).
 - **Mục tiêu:** Cảnh tỉnh tâm lý cờ bạc, gỡ rối bế tắc cho trader thua lỗ, định hình tư duy giao dịch chuyên nghiệp và dẫn phễu về buổi tư vấn/tâm sự trực tiếp với ĐẠI KA qua `@longphibtc`.
 
 ---

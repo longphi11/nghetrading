@@ -9,9 +9,9 @@
 - **Mã luồng:** `FLOW-01`
 - **Tên luồng:** Tin tức Kinh tế & Phân tích Vĩ mô Chiến lược
 - **Kênh tiếp nhận:** `@tinkinhtenghetrading` (Telegram Channel ID: `-1003558641458`)
-- **Tần suất hoạt động:** **2 tiếng / lần** trong khung giờ hoạt động.
-- **Khung giờ chạy:** `08:00 - 22:00` (Giờ Việt Nam).
-- **Mốc giờ cố định:** `[08:00, 10:00, 12:00, 14:00, 16:00, 18:00, 20:00, 22:00]`
+- **Tần suất hoạt động:**
+  - **Tin lẻ kinh tế:** **2 tiếng / lần** trong khung giờ hoạt động `[08:00, 10:00, 12:00, 14:00, 16:00, 18:00, 20:00, 22:00]`
+  - **Bản tin tổng hợp đáng chú ý:** Cố định vào các khung giờ **9h sáng (09:00), 15h chiều (15:00), 21h tối (21:00)** hàng ngày.
 - **Thời gian im lặng (Quiet Hours):** Sau `22:00` đến trước `08:00` sáng hôm sau không bắn tin để không làm phiền độc giả.
 
 ---
