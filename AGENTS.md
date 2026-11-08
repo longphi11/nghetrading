@@ -66,6 +66,11 @@ Mỗi nút Telegram trên website kết nối đến bot khác nhau theo logic p
   - Kỹ năng chuyên sâu: `.agents/skills/technical-chart-analysis/SKILL.md`
   - Nhiệm vụ: Phân tích kỹ thuật thực chiến Vàng (XAU/USD) & Bitcoin (BTC), soi chart H4/H1, đọc tương quan phe Bò/Gấu, xác định key levels ("đường băng"), lập 2 kịch bản Long/Short, quản trị rủi ro RR cao và tự động hóa xuất bản dữ liệu cho mục "Nhật ký giao dịch" (`data/journal.json`).
 
+## Quy tắc an toàn VPS & Phân tách phạm vi dự án
+
+- **TUYỆT ĐỐI KHÔNG CAN THIỆP N8N & CÁC DỰ ÁN KHÁC TRÊN VPS:** Toàn bộ các luồng `n8n`, thư mục `n8n_data` và các dự án khác trên VPS (như `traicainghien`, `may_agent`...) KHÔNG thuộc phạm vi Nghề Trading. TUYỆT ĐỐI KHÔNG can thiệp, không sửa đổi, không restart, không xóa dưới bất kỳ hình thức nào.
+- **Chỉ làm việc trong phạm vi Nghề Trading:** Chỉ thao tác trên các thư mục và dịch vụ của dự án Nghề Trading (`/root/news_agent/`, `/root/quote_agent/` và website Nghề Trading).
+
 ## Khi chỉnh sửa code
 
 Luôn đọc toàn bộ file liên quan trước khi sửa.
