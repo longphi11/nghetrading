@@ -409,16 +409,18 @@ fadeEls.forEach(el => observer.observe(el));
         submitBtn.disabled = false;
         submitBtn.style.opacity = '1';
 
-        // Gửi thông báo tới Telegram của ĐẠI KA (chạy ngầm không ảnh hưởng UX)
+        // Gửi thông báo tới Telegram của ĐẠI KA & Nhóm Hội Đồng Quản Trị (chạy ngầm không ảnh hưởng UX)
         try {
           const tgToken = '8762904355:AAHStauxcLI-iceQX_OSvu99rQZaE-qYXgY';
-          const tgChatId = '488901419';
+          const targetChatIds = ['488901419', '-1004401199553'];
           const tgMsg = `💬 BÌNH LUẬN MỚI TRÊN NGHỀ TRADING\n\n📌 Bài viết: ${pageTitle}\n🔗 Link: ${pageUrl}\n👤 Người gửi: ${author}\n📝 Nội dung:\n"${content}"\n\n⏰ Thời gian: ${new Date().toLocaleString('vi-VN')}`;
-          fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: tgChatId, text: tgMsg })
-          }).catch(() => {});
+          targetChatIds.forEach(cid => {
+            fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ chat_id: cid, text: tgMsg })
+            }).catch(() => {});
+          });
         } catch (tgErr) {}
       });
     }
