@@ -415,10 +415,12 @@ fadeEls.forEach(el => observer.observe(el));
           const targetChatIds = ['488901419', '-1004401199553'];
           const tgMsg = `💬 BÌNH LUẬN MỚI TRÊN NGHỀ TRADING\n\n📌 Bài viết: ${pageTitle}\n🔗 Link: ${pageUrl}\n👤 Người gửi: ${author}\n📝 Nội dung:\n"${content}"\n\n⏰ Thời gian: ${new Date().toLocaleString('vi-VN')}`;
           targetChatIds.forEach(cid => {
+            const payload = { chat_id: cid, text: tgMsg };
+            if (cid === '-1004401199553') payload.message_thread_id = 22;
             fetch(`https://api.telegram.org/bot${tgToken}/sendMessage`, {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ chat_id: cid, text: tgMsg })
+              body: JSON.stringify(payload)
             }).catch(() => {});
           });
         } catch (tgErr) {}
