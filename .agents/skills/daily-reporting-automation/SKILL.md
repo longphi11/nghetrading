@@ -24,18 +24,26 @@ Kỹ năng này chuẩn hóa toàn bộ quy trình vận hành hệ thống báo
 
 ## 2. Chi Tiết Lịch Trình Báo Cáo Hàng Ngày
 
-### 🌅 06h00 Sáng VN — Báo Cáo Sẵn Sàng Vận Hành & Tự Động Phục Hồi (Auto-Heal)
+### 🌅 06h00 Sáng VN — Báo Cáo Sẵn Sàng Vận Hành, n8n Active, API Nền Tảng & Tự Động Phục Hồi (Auto-Heal)
 
-- **Mục đích:** Đảm bảo toàn bộ hạ tầng công nghệ và luồng xuất bản nội dung của Nghề Trading đã thức giấc, chạy trơn tru 100% trước giờ thị trường hoạt động.
+- **Mục đích:** Đảm bảo toàn bộ luồng n8n, API kết nối các nền tảng và dịch vụ hệ thống của Nghề Trading đều ở trạng thái ACTIVE và sẵn sàng 100% trước giờ thị trường hoạt động.
 - **Quy trình thực thi:**
-  1. Kiểm tra trạng thái HTTP của website: `https://nghetrading.com` (Yêu cầu mã 200 OK).
-  2. Kiểm tra trạng thái 3 dịch vụ Systemd cốt lõi:
+  1. **Đảm bảo các luồng n8n ở trạng thái Active:**
+     - Truy vấn trực tiếp trạng thái workflow `nCdYu9TcfeITfJ7q` (`Nghề Trading - Facebook Fanpage AutoPost System`) trong cơ sở dữ liệu `/root/n8n_data/database.sqlite`.
+     - **Cơ chế Auto-Heal cho n8n:** Nếu phát hiện `active == 0` (inactive), tự động thực thi lệnh publish kích hoạt lại (`docker exec n8n n8n publish:workflow --id=nCdYu9TcfeITfJ7q`) và tái kiểm tra.
+  2. **Đảm bảo kết nối API tới các nền tảng:**
+     - **Facebook Graph API:** Kiểm tra Meta Fanpage Token (endpoint `https://graph.facebook.com/v19.0/1103661363146221`), xác thực quyền quản trị Fanpage Nghề Trading.
+     - **Telegram Bot API:** Gọi `getMe` với token bot, đảm bảo bot trợ lý `@NgheTradingSupport_Bot` kết nối bình thường.
+     - **Google Analytics 4 API:** Kiểm tra tệp Service Account `ga-credentials.json` và yêu cầu OAuth2 token với quyền truy cập Property `547085712`.
+     - **Gemini AI API Pool:** Gửi ping thử nghiệm qua multi-key pool, xác nhận model AI sẵn sàng phục vụ phân tích.
+  3. **Kiểm tra trạng thái HTTP của website:** `https://nghetrading.com` (yêu cầu mã 200 OK kèm thời gian phản hồi ping).
+  4. **Kiểm tra 3 dịch vụ Systemd cốt lõi:**
      - `news-agent.service` (Cào & cập nhật tin tức ForexFactory / TradingView).
      - `quote-agent.service` (Châm ngôn & tâm lý trading).
      - `nghetrading-telegram-bot.service` (Trợ lý bot trực Topic 22).
-  3. **Cơ chế Auto-Heal (Tự phục hồi):** Nếu phát hiện bất kỳ dịch vụ nào bị lỗi hoặc dừng (`inactive` / `failed`), script tự động kích hoạt `systemctl restart <service>` và tái kiểm tra trước khi lập báo cáo.
-  4. Lấy kế hoạch giao dịch Vàng mới nhất trong `data/journal.json`.
-  5. Xuất bản báo cáo chào buổi sáng xác nhận hệ sinh thái sẵn sàng 100% kèm lịch trình các luồng tự động sẽ chạy trong ngày.
+     - *Cơ chế Auto-Heal:* Nếu phát hiện dịch vụ nào bị dừng, tự động `systemctl restart <service>` ngay lập tức.
+  5. Lấy kế hoạch giao dịch Vàng mới nhất trong `data/journal.json`.
+  6. Xuất bản báo cáo chào buổi sáng xác nhận toàn bộ luồng n8n, API nền tảng và dịch vụ đã sẵn sàng 100% kèm lịch trình vận hành trong ngày vào Topic 22.
 
 ---
 
@@ -58,7 +66,7 @@ Kỹ năng này chuẩn hóa toàn bộ quy trình vận hành hệ thống báo
     ✅ **Cộng đồng Kênh Telegram:**
        - Tổng số thành viên Kênh `@nhatkytradingvn` (gọi Telegram API `getChatMemberCount`).
     ✅ **Chiến Lược Tăng Trưởng AI (AI Growth Strategy):**
-       - Đưa toàn bộ metrics hôm nay vào Gemini 2.5 Flash để phân tích điểm nghẽn (bottleneck) và đề xuất đúng 1-2 hành động cụ thể để kéo thêm user vào ngày mai.
+       - Đưa toàn bộ metrics hôm nay vào Gemini để phân tích điểm nghẽn (bottleneck) và đề xuất đúng 1-2 hành động cụ thể để kéo thêm user vào ngày mai.
 
 ---
 
@@ -67,6 +75,7 @@ Kỹ năng này chuẩn hóa toàn bộ quy trình vận hành hệ thống báo
 ### A. Luồng n8n AutoPost Fanpage (`nCdYu9TcfeITfJ7q`)
 - **Tên Workflow:** `Nghề Trading - Facebook Fanpage AutoPost System`.
 - **Nguyên tắc bất di bất dịch:** BẮT BUỘC SỬA TRỰC TIẾP TRÊN WORKFLOW NÀY, TUYỆT ĐỐI KHÔNG TẠO MỚI.
+- **Yêu cầu trạng thái:** BẮT BUỘC LUÔN Ở TRẠNG THÁI ACTIVE. Hệ thống báo cáo 06h00 sáng tự động kiểm tra và kích hoạt lại nếu bị Inactive.
 - **Lịch kích hoạt:**
   - **10:00 Sáng VN (Thứ 2 - Thứ 6):** Lấy bài phân tích Vàng mới nhất từ `data/journal.json` đăng Fanpage.
   - **20:30 Tối VN (Hàng ngày):** Lấy bài viết tư duy gốc từ `data/posts.json` đăng Fanpage.
@@ -89,15 +98,15 @@ Kỹ năng này chuẩn hóa toàn bộ quy trình vận hành hệ thống báo
 - **Lệnh chạy báo cáo thủ công ngay lập tức:**
   ```bash
   # Chạy báo cáo vận hành sáng (06h00):
-  python3 /root/telegram_assistant/daily_reporter.py morning
+  python3 /root/telegram_assistant/daily_reporter.py --report morning
 
   # Chạy báo cáo tăng trưởng tối (22h00):
-  python3 /root/telegram_assistant/daily_reporter.py evening
+  python3 /root/telegram_assistant/daily_reporter.py --report evening
   ```
 - **Lệnh kiểm tra crontab:**
   ```bash
   crontab -l
   # Kết quả chuẩn:
-  # 0 6 * * * python3 /root/telegram_assistant/daily_reporter.py morning >> /root/telegram_assistant/cron.log 2>&1
-  # 0 22 * * * python3 /root/telegram_assistant/daily_reporter.py evening >> /root/telegram_assistant/cron.log 2>&1
+  # 0 6 * * * python3 /root/telegram_assistant/daily_reporter.py --report morning >> /root/telegram_assistant/cron.log 2>&1
+  # 0 22 * * * python3 /root/telegram_assistant/daily_reporter.py --report evening >> /root/telegram_assistant/cron.log 2>&1
   ```

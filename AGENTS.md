@@ -67,7 +67,7 @@ Mỗi nút Telegram trên website kết nối đến bot khác nhau theo logic p
 
 - **Agent Vận Hành & Báo Cáo Định Kỳ (`daily-reporting-automation`):**
   - Kỹ năng chuyên sâu: `.agents/skills/daily-reporting-automation/SKILL.md`
-  - Nhiệm vụ: Tự động hóa báo cáo định kỳ 06h00 Sáng (Kiểm tra & Phục hồi hệ sinh thái) và 22h00 Tối (Chỉ số tăng trưởng GA4 & Kênh), kiểm soát các luồng tự động n8n và Linux Daemons, gửi thông báo thời gian thực về Topic **💡 Nghề Trading** (thread 22).
+  - Nhiệm vụ: Tự động hóa báo cáo định kỳ 06h00 Sáng (Kiểm tra & Phục hồi hệ sinh thái, n8n Active, API nền tảng) và 22h00 Tối (Chỉ số tăng trưởng GA4 & Kênh), kiểm soát các luồng tự động n8n và Linux Daemons, gửi thông báo thời gian thực về Topic **💡 Nghề Trading** (thread 22).
 
 ## Danh mục Luồng Tự Động & Lịch Vận Hành Trên VPS
 
@@ -77,6 +77,7 @@ Hệ sinh thái Nghề Trading được vận hành tự động thông qua n8n,
 - **Workflow ID:** `nCdYu9TcfeITfJ7q`
 - **Mục tiêu:** Tự động hóa đăng bài lên Fanpage Facebook Nghề Trading.
 - **Quy tắc quan trọng:** BẮT BUỘC SỬA TRỰC TIẾP TRÊN WORKFLOW NÀY, TUYỆT ĐỐI KHÔNG TẠO MỚI.
+- **Yêu cầu trạng thái:** BẮT BUỘC LUÔN Ở TRẠNG THÁI ACTIVE. Nếu phát hiện inactive, hệ thống tự động kích hoạt lại (Auto-Healed).
 - **Lịch trình tự động:**
   + **Nhánh Sáng (10:00 VN, Thứ 2 - Thứ 6):** Lấy bài phân tích Vàng trong ngày từ `data/journal.json` và post lên Fanpage (`cron 0 10 * * 1-5`).
   + **Nhánh Tối (20:30 VN, Hàng ngày):** Lấy bài viết tư duy gốc từ `data/posts.json` và post lên Fanpage (`cron 30 20 * * *`).
@@ -92,16 +93,21 @@ Hệ sinh thái Nghề Trading được vận hành tự động thông qua n8n,
 
 ### 3. Lịch Trình Báo Cáo Định Kỳ (Linux Crontab)
 Được cấu hình bằng script `/root/telegram_assistant/daily_reporter.py`:
-- **06h00 Sáng VN (`0 6 * * *`): Báo cáo Sẵn Sàng Vận Hành & Auto-Heal:**
-  + Kiểm tra toàn diện website `nghetrading.com` và các service (`news-agent`, `quote-agent`, `nghetrading-telegram-bot`).
-  + Tự động kích hoạt cơ chế phục hồi (Auto-Heal: `systemctl restart`) nếu có luồng bị lỗi trước khi xuất bản báo cáo.
-  + Gửi tin nhắn xác nhận hệ sinh thái sẵn sàng 100% kèm lịch vận hành trong ngày vào Topic 22.
+- **06h00 Sáng VN (`0 6 * * *`): Báo cáo Sẵn Sàng Vận Hành, n8n Active, API Nền Tảng & Auto-Heal:**
+  + **Đảm bảo các luồng n8n ở trạng thái Active:** Kiểm tra workflow `nCdYu9TcfeITfJ7q` trong database n8n. Nếu Inactive, tự kích hoạt lại ngay lập tức (Auto-Heal).
+  + **Đảm bảo API kết nối tới các nền tảng đều OK:**
+    - Facebook Graph API (Meta Fanpage Token còn hạn, truy cập Fanpage thành công).
+    - Telegram Bot API (Token `@NgheTradingSupport_Bot` kết nối mượt mà).
+    - Google Analytics 4 API (Service Account OAuth xác thực thành công).
+    - Gemini AI API Pool (Multi-Key Failover sẵn sàng).
+  + **Kiểm tra dịch vụ & Website:** `https://nghetrading.com` (mã 200), `news-agent`, `quote-agent`, `nghetrading-telegram-bot`.
+  + Gửi tin nhắn xác nhận toàn bộ hệ sinh thái & API sẵn sàng 100% kèm lịch vận hành trong ngày vào Topic 22.
 - **22h00 Tối VN (`0 22 * * *`): Báo cáo Chỉ Số Tăng Trưởng & Phát Triển Kênh:**
   + **TUYỆT ĐỐI BỎ QUA:** uptime, số lượng bài viết, seeding comments, chất lượng bài viết...
   + **TẬP TRUNG 100% VÀO CHỈ SỐ PHÁT TRIỂN THỰC TẾ:**
     - **Google Analytics 4 (Property 547085712):** User mới (`newUsers`), Tổng User truy cập (`activeUsers`), Lượt xem trang (`screenPageViews`), Số phiên (`sessions`), Thời lượng xem trung bình (`userEngagementDuration`), Top nội dung xem nhiều nhất.
     - **Cộng đồng Telegram:** Quy mô thành viên Kênh `@nhatkytradingvn`.
-    - **Đánh giá chiến lược & Tăng trưởng:** Phân tích điểm nghẽn bằng Gemini 2.5 Flash và đề xuất 1-2 hành động cụ thể để kéo thêm user ngày mai.
+    - **Đánh giá chiến lược & Tăng trưởng:** Phân tích điểm nghẽn bằng Gemini và đề xuất 1-2 hành động cụ thể để kéo thêm user ngày mai.
   + Gửi trực tiếp vào Topic **💡 Nghề Trading** (thread 22).
 
 ## Quy tắc an toàn VPS & Phân tách phạm vi dự án
@@ -186,8 +192,9 @@ Không thêm animation nặng.
 
 Hàng ngày thực hiện tự động 2 nhiệm vụ cốt lõi và gửi vào Topic **💡 Nghề Trading** (`chat_id: -1004401199553`, `message_thread_id: 22`):
 1. **06h00 Sáng VN:**
-   - Quét toàn bộ hệ sinh thái chạy tự động: `news-agent.service`, `quote-agent.service`, `nghetrading-telegram-bot.service`, website `nghetrading.com` và các data feeds.
-   - Cơ chế Auto-Heal: Tự động khởi động lại nếu có luồng nào bị lỗi trước khi xuất bản báo cáo.
+   - **Đảm bảo các luồng n8n ở trạng thái Active:** Luôn kiểm tra workflow `nCdYu9TcfeITfJ7q`, tự động kích hoạt lại nếu Inactive.
+   - **Đảm bảo kết nối API các nền tảng:** Facebook Graph API, Telegram API, Google Analytics 4 API, Gemini AI API Pool.
+   - **Hệ thống & Dịch vụ:** Quét toàn bộ `news-agent.service`, `quote-agent.service`, `nghetrading-telegram-bot.service`, website `nghetrading.com` (Auto-Heal tự phục hồi nếu lỗi).
    - Báo cáo xác nhận tình trạng sẵn sàng 100% cho ngày mới kèm lịch trình vận hành trong ngày.
 2. **22h00 Tối VN (10h Tối) — Báo cáo Chỉ số Tăng trưởng & Phát triển Kênh:**
    - **TUYỆT ĐỐI BỎ QUA** các chỉ số nội bộ/kỹ thuật như: uptime, số lượng bài viết, seeding comments, chất lượng bài viết...
