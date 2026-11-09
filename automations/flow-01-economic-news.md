@@ -63,6 +63,14 @@ Mỗi bài viết được biên tập dưới góc nhìn của chuyên gia vĩ 
 - Hệ thống crawl tự động các nguồn uy tín: CNBC Economy, Investing.com, Federal Reserve, Reuters Business.
 - Tự động lưu hash tin tức vào `news.db` để chống xuất bản trùng lặp.
 
+### 4.4. Cơ chế chống trùng lặp hình ảnh 24h (Image Deduplication Pool)
+- **Vấn đề đã xử lý:** Các bản tin lẻ (Breaking News) và bản tin tổng hợp (Digest) trong cùng một ngày có thể lấy chung thumbnail từ các bài báo CNBC cùng chuyên mục.
+- **Giải pháp:**
+  - Bảng `used_news_images` trong SQLite lưu vết URL ảnh và thời điểm xuất bản.
+  - Hàm `is_image_recently_used(image_url, hours=24)` kiểm tra lịch sử 24h trước khi đăng.
+  - Đối với bản tin tổng hợp: Tự động quét cả 5 tin để chọn tin có ảnh chưa từng xuất hiện. Nếu toàn bộ đều trùng ảnh, tự động kích hoạt kho ảnh vĩ mô Unsplash dự phòng (Gold / Fed / Wall Street).
+  - Tăng timeout gửi Telegram lên 35s và xử lý `ReadTimeout` để không bị mất dấu ID tin tức khi mạng quốc tế chập chờn.
+
 ---
 
 ## 5. HƯỚNG DẪN CUSTOMIZE CHI TIẾT
