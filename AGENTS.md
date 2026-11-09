@@ -58,13 +58,51 @@ Mỗi nút Telegram trên website kết nối đến bot khác nhau theo logic p
 - Khách **đã vào phễu** (sau trắc nghiệm, sau thanh toán, tình huống nhạy cảm) → `@longphibtc` (ĐẠI KA trực tiếp chat người thật, tạo niềm tin tuyệt đối).
 - **Không để bot tự động xử lý** những điểm chạm mang tính tư vấn cá nhân hoặc tài chính — khách sẽ mất niềm tin vào hệ thống.
 
-
 ## Hệ thống Subagent & Vai trò chuyên biệt
 
 - **Agent Phân Tích Kỹ Thuật (`technical-analyst`):**
   - Chi tiết vai trò: `.agents/roles/agent-technical-analyst.md`
   - Kỹ năng chuyên sâu: `.agents/skills/technical-chart-analysis/SKILL.md`
   - Nhiệm vụ: Phân tích kỹ thuật thực chiến Vàng (XAU/USD) & Bitcoin (BTC), soi chart H4/H1, đọc tương quan phe Bò/Gấu, xác định key levels ("đường băng"), lập 2 kịch bản Long/Short, quản trị rủi ro RR cao và tự động hóa xuất bản dữ liệu cho mục "Nhật ký giao dịch" (`data/journal.json`).
+
+- **Agent Vận Hành & Báo Cáo Định Kỳ (`daily-reporting-automation`):**
+  - Kỹ năng chuyên sâu: `.agents/skills/daily-reporting-automation/SKILL.md`
+  - Nhiệm vụ: Tự động hóa báo cáo định kỳ 06h00 Sáng (Kiểm tra & Phục hồi hệ sinh thái) và 22h00 Tối (Chỉ số tăng trưởng GA4 & Kênh), kiểm soát các luồng tự động n8n và Linux Daemons, gửi thông báo thời gian thực về Topic **💡 Nghề Trading** (thread 22).
+
+## Danh mục Luồng Tự Động & Lịch Vận Hành Trên VPS
+
+Hệ sinh thái Nghề Trading được vận hành tự động thông qua n8n, Systemd Services và Linux Crontab:
+
+### 1. Luồng Tự Động n8n (Facebook Fanpage AutoPost System)
+- **Workflow ID:** `nCdYu9TcfeITfJ7q`
+- **Mục tiêu:** Tự động hóa đăng bài lên Fanpage Facebook Nghề Trading.
+- **Quy tắc quan trọng:** BẮT BUỘC SỬA TRỰC TIẾP TRÊN WORKFLOW NÀY, TUYỆT ĐỐI KHÔNG TẠO MỚI.
+- **Lịch trình tự động:**
+  + **Nhánh Sáng (10:00 VN, Thứ 2 - Thứ 6):** Lấy bài phân tích Vàng trong ngày từ `data/journal.json` và post lên Fanpage (`cron 0 10 * * 1-5`).
+  + **Nhánh Tối (20:30 VN, Hàng ngày):** Lấy bài viết tư duy gốc từ `data/posts.json` và post lên Fanpage (`cron 30 20 * * *`).
+- **Thực thi backend:** `python3 /root/facebook_agent/facebook_agent.py --trigger morning/evening`
+
+### 2. Các Dịch Vụ Systemd Chạy Ngầm (Linux Services 24/7)
+- **`news-agent.service`:** Cào tin tức kinh tế từ ForexFactory và tin vĩ mô từ TradingView 24/7, tự động cập nhật dữ liệu tin tức.
+- **`quote-agent.service`:** Tự động đăng châm ngôn / tâm lý giao dịch vào 08:30 & 20:30 hàng ngày.
+- **`nghetrading-telegram-bot.service`:** Trợ lý bot `@NgheTradingSupport_Bot` chạy 24/7:
+  + Lắng nghe và trả lời riêng biệt trong Topic **💡 Nghề Trading** (`chat_id: -1004401199553`, `message_thread_id: 22`).
+  + Bắn thông báo bình luận mới trên website tức thì về Topic 22 và Telegram cá nhân ĐẠI KA (`488901419`).
+  + Hỗ trợ lệnh nhanh: `/check` (soi trạng thái web & dịch vụ), `/vang` (xem kế hoạch Vàng mới nhất), `/baocao` (xuất báo cáo tăng trưởng ngay lập tức).
+
+### 3. Lịch Trình Báo Cáo Định Kỳ (Linux Crontab)
+Được cấu hình bằng script `/root/telegram_assistant/daily_reporter.py`:
+- **06h00 Sáng VN (`0 6 * * *`): Báo cáo Sẵn Sàng Vận Hành & Auto-Heal:**
+  + Kiểm tra toàn diện website `nghetrading.com` và các service (`news-agent`, `quote-agent`, `nghetrading-telegram-bot`).
+  + Tự động kích hoạt cơ chế phục hồi (Auto-Heal: `systemctl restart`) nếu có luồng bị lỗi trước khi xuất bản báo cáo.
+  + Gửi tin nhắn xác nhận hệ sinh thái sẵn sàng 100% kèm lịch vận hành trong ngày vào Topic 22.
+- **22h00 Tối VN (`0 22 * * *`): Báo cáo Chỉ Số Tăng Trưởng & Phát Triển Kênh:**
+  + **TUYỆT ĐỐI BỎ QUA:** uptime, số lượng bài viết, seeding comments, chất lượng bài viết...
+  + **TẬP TRUNG 100% VÀO CHỈ SỐ PHÁT TRIỂN THỰC TẾ:**
+    - **Google Analytics 4 (Property 547085712):** User mới (`newUsers`), Tổng User truy cập (`activeUsers`), Lượt xem trang (`screenPageViews`), Số phiên (`sessions`), Thời lượng xem trung bình (`userEngagementDuration`), Top nội dung xem nhiều nhất.
+    - **Cộng đồng Telegram:** Quy mô thành viên Kênh `@nhatkytradingvn`.
+    - **Đánh giá chiến lược & Tăng trưởng:** Phân tích điểm nghẽn bằng Gemini 2.5 Flash và đề xuất 1-2 hành động cụ thể để kéo thêm user ngày mai.
+  + Gửi trực tiếp vào Topic **💡 Nghề Trading** (thread 22).
 
 ## Quy tắc an toàn VPS & Phân tách phạm vi dự án
 
