@@ -144,6 +144,17 @@ Không thêm animation nặng.
 - **Cấu trúc lưu trữ dữ liệu:**
   - Hỗ trợ lưu trữ theo slug riêng biệt (`by_slug[slug]`) trong `data/comments.json` để đảm bảo bài nào có bình luận riêng biệt gắn chặt bài đó.
 
+## Nhiệm vụ Báo cáo Định kỳ Hàng ngày (Daily Automation Reports)
+
+Hàng ngày thực hiện tự động 2 nhiệm vụ cốt lõi và gửi vào Topic **💡 Nghề Trading** (`chat_id: -1004401199553`, `message_thread_id: 22`):
+1. **06h00 Sáng VN:**
+   - Quét toàn bộ hệ sinh thái chạy tự động: `news-agent.service`, `quote-agent.service`, `nghetrading-telegram-bot.service`, website `nghetrading.com` và các data feeds.
+   - Cơ chế Auto-Heal: Tự động khởi động lại nếu có luồng nào bị lỗi trước khi xuất bản báo cáo.
+   - Báo cáo xác nhận tình trạng sẵn sàng 100% cho ngày mới kèm lịch trình vận hành trong ngày.
+2. **22h00 Tối VN (10h Tối):**
+   - Tổng kết kiểm toán các chỉ số quan trọng trong ngày: Website (bài mới, bình luận độc giả), Facebook Fanpage (bài đã đăng), Kênh Telegram `@nhatkytradingvn` (số lượng thành viên, độ tương tác).
+   - Đánh giá xu hướng phát triển, chỉ ra các nút thắt (bottlenecks) và đề xuất 1-2 hành động chiến lược để thúc đẩy phễu chốt sale coaching 1-1 cho ngày tiếp theo.
+
 ## Quy trình làm việc & Quyền tự quyết (Autonomous Execution)
 
 - **TUYỆT ĐỐI KHÔNG HỎI XÁC NHẬN (Zero Confirmation Questions):** Trong suốt quá trình làm việc, KHÔNG BAO GIỜ dừng lại hỏi ĐẠI KA xin phép, xin duyệt hay hỏi xác nhận lắt nhắt dưới bất kỳ hình thức nào. Tự động đưa ra quyết định kỹ thuật tối ưu nhất và làm thẳng một mạch từ đầu đến cuối.
