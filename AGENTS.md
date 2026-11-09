@@ -151,9 +151,12 @@ Hàng ngày thực hiện tự động 2 nhiệm vụ cốt lõi và gửi vào 
    - Quét toàn bộ hệ sinh thái chạy tự động: `news-agent.service`, `quote-agent.service`, `nghetrading-telegram-bot.service`, website `nghetrading.com` và các data feeds.
    - Cơ chế Auto-Heal: Tự động khởi động lại nếu có luồng nào bị lỗi trước khi xuất bản báo cáo.
    - Báo cáo xác nhận tình trạng sẵn sàng 100% cho ngày mới kèm lịch trình vận hành trong ngày.
-2. **22h00 Tối VN (10h Tối):**
-   - Tổng kết kiểm toán các chỉ số quan trọng trong ngày: Website (bài mới, bình luận độc giả), Facebook Fanpage (bài đã đăng), Kênh Telegram `@nhatkytradingvn` (số lượng thành viên, độ tương tác).
-   - Đánh giá xu hướng phát triển, chỉ ra các nút thắt (bottlenecks) và đề xuất 1-2 hành động chiến lược để thúc đẩy phễu chốt sale coaching 1-1 cho ngày tiếp theo.
+2. **22h00 Tối VN (10h Tối) — Báo cáo Chỉ số Tăng trưởng & Phát triển Kênh:**
+   - **TUYỆT ĐỐI BỎ QUA** các chỉ số nội bộ/kỹ thuật như: uptime, số lượng bài viết, seeding comments, chất lượng bài viết...
+   - **TẬP TRUNG 100% VÀO CHỈ SỐ PHÁT TRIỂN THỰC TẾ:**
+     + **Google Analytics 4:** Số User mới (New Users), Tổng User truy cập (Active Users), Lượt xem trang (Page Views), Số phiên (Sessions), Thời lượng đọc trung bình, Top các bài viết thu hút người đọc nhiều nhất.
+     + **Cộng đồng & Kênh:** Quy mô thành viên Kênh Telegram `@nhatkytradingvn`, khả năng chuyển đổi vào phễu tư vấn Coaching 1-1.
+     + **Đánh giá chiến lược & Tăng trưởng:** Phân tích lưu lượng, chỉ ra các điểm nghẽn (bottlenecks) và đề xuất 1-2 hành động cụ thể để kéo thêm user và phát triển kênh ngày mai.
 
 ## Quy trình làm việc & Quyền tự quyết (Autonomous Execution)
 
