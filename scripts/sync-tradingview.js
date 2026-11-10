@@ -24,6 +24,25 @@ function slugify(str) {
     .slice(0, 60);
 }
 
+// BỘ LỌC CHẶT CHẼ THEO CHỈ THỊ CỦA ĐẠI KA:
+// Chỉ lấy các bài có tiêu đề "Kế hoạch giao dịch vàng ngày ...", bỏ tất cả bài có tiêu đề khác (kế hoạch tuần, bài lệnh, v.v.)
+function isGoldDailyPlan(title) {
+  if (!title) return false;
+  const t = title.toLowerCase().trim();
+  // Loại bỏ bài tuần
+  if (t.includes("tuần") || t.includes("tuan")) return false;
+
+  // Chuẩn hóa bỏ dấu tiếng Việt để so khớp linh hoạt
+  const norm = t
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d");
+
+  // Bắt buộc chứa cụm "kế hoạch giao dịch vàng ngày"
+  return norm.includes("ke hoach giao dich vang ngay");
+}
+
+
 function extractFirstImage(html) {
   const match = html && html.match(/<img[^>]+src="([^">]+)"/);
   return match ? match[1] : null;
@@ -180,6 +199,14 @@ async function main() {
   let addedCount = 0;
 
   for (const item of items) {
+    const title = item.title || "";
+
+    // BỘ LỌC ĐỘC QUYỀN: Chỉ lấy bài có tiêu đề "Kế Hoạch Giao Dịch vàng ngày ...", bỏ tất cả tiêu đề khác
+    if (!isGoldDailyPlan(title)) {
+      console.log(`⏭️ [Bỏ qua] Tiêu đề không thuộc mục Phân tích Daily: "${title}"`);
+      continue;
+    }
+
     const link = item.link || "";
     if (
       existingLinks.has(link) ||
@@ -187,7 +214,6 @@ async function main() {
       existingLinks.has(link.replace(/\/+$/, "") + "/")
     ) continue;
 
-    const title = item.title || "Bài phân tích mới";
     const pubDate = new Date(item.pubDate || Date.now());
     const dateStr = pubDate.toISOString().split("T")[0];
 

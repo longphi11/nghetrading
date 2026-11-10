@@ -33,6 +33,9 @@ Mục tiêu của website:
 3. **Mục "Nhật ký giao dịch" (Tinh hoa của Website):**
    - Đăng bài nhận định & phân tích chart hàng ngày với tỷ lệ chính xác rất cao (lợi thế cốt lõi của ĐẠI KA).
    - **Sản phẩm tập trung chính:** **Vàng (XAU/USD)** (chủ yếu là Vàng, thỉnh thoảng có Bitcoin).
+   - **Quy tắc cào bài từ TradingView vào Phân tích Daily (`data/journal.json`):**
+     + **CHỈ LẤY CÁC BÀI CÓ TIÊU ĐỀ:** `Kế hoạch giao dịch vàng ngày ...` (bài nhận định phân tích daily).
+     + **TUYỆT ĐỐI KHÔNG LẤY CÁC TIÊU ĐỀ KHÁC:** Bỏ qua hoàn toàn bài lệnh (VD: *Lệnh Short Vàng ngày...*, *Lệnh Long...*), bài kế hoạch tuần (VD: *Kế hoạch giao dịch vàng tuần...*) hay các ý tưởng khác.
    - Chứng minh năng lực thực chiến liên tục, tạo niềm tin mạnh mẽ tuyệt đối từ độc giả.
 
 4. **Phễu chốt sale (Telegram Bot -> Hẹn Cafe Coaching):**
