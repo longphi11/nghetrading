@@ -30,10 +30,16 @@
 
 ---
 
-## 3. CẤU TRÚC BÀI VIẾT QUOTE
+## 3. CẤU TRÚC BÀI VIẾT QUOTE & QUY TẮC HÌNH ẢNH
 
 Mỗi bài đăng gồm 3 thành phần hài hòa:
-1. **Hình ảnh nghệ thuật chất lượng cao (Unsplash):** Tông màu trầm tĩnh, chiều sâu, thể hiện sự tĩnh lặng, kỷ luật, thị trường tài chính hoặc chiến binh.
+1. **Hình ảnh tài chính & trading chất lượng cao (Unsplash HD):**
+   - **BẮT BUỘC:** Ảnh phải liên quan trực tiếp đến nội dung câu quote, hoặc **ít nhất phải thuộc chủ đề tài chính / trading chuyên nghiệp**:
+     + Biểu đồ nến Nhật xanh đỏ, màn hình TradingView / Bloomberg Terminal / Multi-monitor desk.
+     + Phố Wall, sàn giao dịch New York (NYSE), tượng Bò Charging Bull Wall Street.
+     + Vàng thỏi tích sản (Gold Bullion XAU/USD), tiền tệ, Cục Dự trữ Liên bang Fed.
+     + Bàn làm việc ghi chép nhật ký giao dịch, sổ lệnh, sự tập trung và kỷ luật của trader.
+   - **TUYỆT ĐỐI CẤM:** Không dùng ảnh truyện tranh (Marvel, Anime), meme hoạt hình, phong cảnh ngẫu nhiên (rừng núi sương mù, ngọn hải đăng, cây cối...) không ăn nhập với trading.
 2. **Nội dung Quote tâm lý đanh thép:**
    - Đánh trúng nỗi đau trader (gồng lỗ, cắt lãi non, FOMO, overtrading, all-in).
    - Câu từ ngắn gọn, giàu sức gợi, chuẩn chất Nghề Trading ("Nói chuyện cà phê nhưng tư duy viện nghiên cứu").

@@ -188,6 +188,19 @@ Không thêm animation nặng.
 - **Cấu trúc lưu trữ dữ liệu:**
   - Hỗ trợ lưu trữ theo slug riêng biệt (`by_slug[slug]`) trong `data/comments.json` để đảm bảo bài nào có bình luận riêng biệt gắn chặt bài đó.
 
+## Quy tắc Hình ảnh Kênh Quote Trading (@quotetradingvn)
+
+- **Nguyên tắc cốt lõi về hình ảnh:** Ảnh đăng kèm câu Quote **BẮT BUỘC phải liên quan trực tiếp đến nội dung câu quote, hoặc ÍT NHẤT PHẢI LÀ ẢNH CỦA CHỦ ĐỀ TÀI CHÍNH / TRADING CHUYÊN NGHIỆP**.
+- **Các chủ đề ảnh được phép sử dụng:**
+  - Biểu đồ nến Nhật, màn hình giao dịch đa màn hình (Candlestick chart, multi-monitor trading desk, technical analysis).
+  - Phố Wall, sàn chứng khoán New York (NYSE), tượng Bò Charging Bull, trung tâm tài chính toàn cầu.
+  - Vàng thỏi tích sản, tiền tệ quốc tế, Cục Dự trữ Liên bang Fed, cán cân quản trị rủi ro & vốn.
+  - Bàn làm việc ghi chép nhật ký lệnh, kế hoạch giao dịch thực chiến của trader chuyên nghiệp.
+- **TUYỆT ĐỐI NGHIÊM CẤM:**
+  - Không dùng ảnh truyện tranh (Marvel, DC, Anime, tranh biếm họa hoạt hình...), meme giải trí.
+  - Không dùng ảnh phong cảnh tự nhiên ngẫu nhiên không dính dáng tài chính (rừng cây, hồ nước sương mù, ngọn hải đăng, biển dạt dào...).
+  - Không dùng ảnh cờ bạc sòng bài lòe loẹt hoặc cờ vua nếu không gắn với chiến lược tài chính thực tế.
+
 ## Nhiệm vụ Báo cáo Định kỳ Hàng ngày (Daily Automation Reports)
 
 Hàng ngày thực hiện tự động 2 nhiệm vụ cốt lõi và gửi vào Topic **💡 Nghề Trading** (`chat_id: -1004401199553`, `message_thread_id: 22`):
