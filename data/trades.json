@@ -1,5 +1,21 @@
 [
   {
+    "id": "trade-xauusd-2026-11-10-001",
+    "date": "2026-11-10",
+    "pair": "XAU/USD",
+    "direction": "SHORT",
+    "entry": 4136,
+    "sl": 4159,
+    "tp": 4022,
+    "rr_target": 4.5,
+    "chart_image": "images/journal/xau-short-4136.png",
+    "chart_image_result": "images/journal/xau-short-4136-result.png",
+    "result": "win",
+    "pnl_r": "+4.5R",
+    "note": "Với việc giá đang tiến sát ở vùng đường băng 413x - 414x thì với tôi đây là vùng Short đẹp với xác suất cao và RR tốt. SL tuyệt đối ngay phía trên vì nếu giá break qua thì nhận định của tôi là sai, và vì vậy kích hoạt SL là 1 việc đúng đắn mà chúng ta cần làm. Kết quả: Lệnh đạt trọn vẹn mục tiêu Take Profit (Win +4.5R).",
+    "tv_link": "https://vn.tradingview.com/chart/XAUUSD/qysraycM/"
+  },
+  {
     "id": "trade-xauusd-2026-10-08-001",
     "date": "2026-10-08",
     "pair": "XAU/USD",
