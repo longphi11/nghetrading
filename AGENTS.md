@@ -78,6 +78,10 @@ Hệ sinh thái Nghề Trading được vận hành tự động thông qua n8n,
 - **Mục tiêu:** Tự động hóa đăng bài lên Fanpage Facebook Nghề Trading.
 - **Quy tắc quan trọng:** BẮT BUỘC SỬA TRỰC TIẾP TRÊN WORKFLOW NÀY, TUYỆT ĐỐI KHÔNG TẠO MỚI.
 - **Yêu cầu trạng thái:** BẮT BUỘC LUÔN Ở TRẠNG THÁI ACTIVE. Nếu phát hiện inactive, hệ thống tự động kích hoạt lại (Auto-Healed).
+- **Quy chuẩn văn phong Facebook (Tinh tế & Chuyên nghiệp):**
+  + **Tuyệt đối loại bỏ các dòng kỹ thuật rác từ TradingView:** Gold   OANDA:XAUUSD, longphibtc (tên cá nhân).
+  + Định dạng khoảng cách dòng thoáng đãng, các kịch bản vào lệnh dùng ký hiệu bullet • rõ ràng, thanh thoát.
+  + Không để hashtag lặp giữa thân bài và chân bài (footer).
 - **Lịch trình tự động:**
   + **Nhánh Sáng (10:00 VN, Thứ 2 - Thứ 6):** Lấy bài phân tích Vàng trong ngày từ `data/journal.json` và post lên Fanpage (`cron 0 10 * * 1-5`).
   + **Nhánh Tối (20:30 VN, Hàng ngày):** Lấy bài viết tư duy gốc từ `data/posts.json` và post lên Fanpage (`cron 30 20 * * *`).
