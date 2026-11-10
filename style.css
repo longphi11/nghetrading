@@ -444,6 +444,49 @@ img { display: block; max-width: 100%; }
 .journal-table tbody tr[onclick]:hover { background: #fafafa; }
 .journal-table tbody tr[onclick] { transition: background 0.15s; }
 
+/* Phân trang bảng lệnh thực tế trên trang chủ */
+.trades-pagination-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding-top: 14px;
+}
+.trades-page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.trades-page-btn:hover:not(:disabled) {
+  border-color: var(--black);
+  background: #f8f8f8;
+}
+.trades-page-btn.active {
+  background: var(--black);
+  color: #fff;
+  border-color: var(--black);
+  font-weight: 700;
+  cursor: default;
+}
+.trades-page-btn:disabled {
+  color: #ccc;
+  border-color: #eee;
+  cursor: not-allowed;
+  background: #fafafa;
+}
+
 /* ===== SIDEBAR ===== */
 .sidebar { display: flex; flex-direction: column; gap: 24px; }
 .signup-box {

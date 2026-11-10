@@ -467,13 +467,19 @@ fadeEls.forEach(el => observer.observe(el));
 
 // ===========================
 //  TRANG CHỦ: BẢNG LỆNH GIAO DỊCH THỰC TẾ
-//  Render động từ data/trades.json — chỉ chạy trên index.html (có #trades-tbody)
+//  Render động từ data/trades.json — tối đa 6 lệnh/trang kèm phân trang
 // ===========================
 (async function initTradesTable() {
   const tbody = document.getElementById('trades-tbody');
+  const paginationWrap = document.getElementById('trades-pagination');
   if (!tbody) return;
 
+  const PER_PAGE = 6;
+  let currentPage = 1;
+  let allTrades = [];
+
   function fmtDate(iso) {
+    if (!iso) return '';
     const [y, m, d] = iso.split('-');
     return `${d}/${m}/${y}`;
   }
@@ -501,22 +507,15 @@ fadeEls.forEach(el => observer.observe(el));
     return `<span style="font-size:11px;font-weight:700;letter-spacing:1px;padding:2px 8px;border-radius:2px;background:${isLong ? '#e8f5e9' : '#fdecea'};color:${isLong ? '#27ae60' : '#e74c3c'};">${dir}</span>`;
   }
 
-  try {
-    const res = await fetch('/data/trades.json?v=' + Date.now(), { cache: 'no-store' });
-    if (!res.ok) throw new Error(`status ${res.status}`);
-    const trades = await res.json();
+  function renderPage(page) {
+    currentPage = page;
+    const totalPages = Math.ceil(allTrades.length / PER_PAGE);
+    const start = (page - 1) * PER_PAGE;
+    const pageTrades = allTrades.slice(start, start + PER_PAGE);
 
-    trades.sort((a, b) => new Date(b.date) - new Date(a.date));
-    const recent = trades.slice(0, 5);
-
-    if (recent.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#aaa;padding:24px;">Chưa có lệnh nào.</td></tr>`;
-      return;
-    }
-
-    tbody.innerHTML = recent.map((t, i) => `
+    tbody.innerHTML = pageTrades.map((t) => `
       <tr style="cursor:pointer;" onclick="window.location='nhat-ky.html?tab=lenh&id=${encodeURIComponent(t.id)}'" title="Xem chi tiết lệnh">
-        <td style="color:#aaa;font-size:12px;">#${String(trades.indexOf(t) + 1).padStart(3,'0')}</td>
+        <td style="color:#aaa;font-size:12px;">#${String(allTrades.indexOf(t) + 1).padStart(3,'0')}</td>
         <td><strong>${t.pair}</strong></td>
         <td>${directionBadge(t.direction)}</td>
         <td>${resultBadge(t)}</td>
@@ -525,8 +524,52 @@ fadeEls.forEach(el => observer.observe(el));
       </tr>
     `).join('');
 
+    renderPagination(totalPages);
+  }
+
+  function renderPagination(totalPages) {
+    if (!paginationWrap) return;
+    if (totalPages <= 1) {
+      paginationWrap.innerHTML = '';
+      return;
+    }
+
+    let html = '';
+    html += `<button class="trades-page-btn" ${currentPage === 1 ? 'disabled' : ''} onclick="window._changeTradesPage(${currentPage - 1})">← Trước</button>`;
+
+    for (let i = 1; i <= totalPages; i++) {
+      html += `<button class="trades-page-btn ${i === currentPage ? 'active' : ''}" onclick="window._changeTradesPage(${i})">${i}</button>`;
+    }
+
+    html += `<button class="trades-page-btn ${currentPage === totalPages ? 'disabled' : ''} onclick="window._changeTradesPage(${currentPage + 1})">Sau →</button>`;
+
+    paginationWrap.innerHTML = html;
+  }
+
+  window._changeTradesPage = function(page) {
+    const totalPages = Math.ceil(allTrades.length / PER_PAGE);
+    if (page < 1 || page > totalPages) return;
+    renderPage(page);
+  };
+
+  try {
+    const res = await fetch('/data/trades.json?v=' + Date.now(), { cache: 'no-store' });
+    if (!res.ok) throw new Error(`status ${res.status}`);
+    allTrades = await res.json();
+
+    allTrades.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    if (allTrades.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#aaa;padding:24px;">Chưa có lệnh nào.</td></tr>`;
+      if (paginationWrap) paginationWrap.innerHTML = '';
+      return;
+    }
+
+    renderPage(1);
+
   } catch (err) {
     tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:#aaa;padding:24px;">Không tải được dữ liệu.</td></tr>`;
+    if (paginationWrap) paginationWrap.innerHTML = '';
     console.error('Không tải được trades.json:', err);
   }
 })();
