@@ -230,6 +230,21 @@ Hàng ngày thực hiện tự động 2 nhiệm vụ cốt lõi và gửi vào 
 - Chuẩn hóa cấu trúc dữ liệu bài viết (JSON / Templates) để dễ mở rộng.
 - Chủ động cập nhật file .md quy tắc khi có chỉ thị hoặc phản hồi mới từ ĐẠI KA.
 
+## Việc đang chờ (BACKLOG — chỉ làm khi ĐẠI KA nhắc)
+
+> Không tự động thực hiện. Khi ĐẠI KA nhắc tới việc tương ứng thì mới làm.
+
+1. **Chuyển VPS sang đăng nhập bằng SSH Key (ưu tiên cao — bảo mật):**
+   - Thêm public key của máy local (`~/.ssh/id_ed25519.pub`, comment `mrfine@Inthezone`) vào `/root/.ssh/authorized_keys` trên VPS.
+   - Sau đó xóa mật khẩu root dạng plaintext khỏi các file trong `scratch/` (`try_ssh_vps.py` và các script deploy liên quan).
+   - Cuối cùng: đổi mật khẩu root mới + cân nhắc tắt `PasswordAuthentication`.
+   - Lý do: repo có thể đã từng push lên GitHub → mật khẩu root bị lộ.
+
+2. **Cấu hình Hermes Agent biết VPS (tùy chọn, sau khi xong việc 1):**
+   - Hiện `terminal.backend: local` nên Hermes không truy cập được VPS và tự báo "Timeout" sai sự thật.
+   - Đã xác minh 12/11/2026: VPS **hoàn toàn khỏe** (uptime 1 tuần 4 ngày, 3 service active, n8n Docker v2.45.7, workflow `nCdYu9TcfeITfJ7q` active=1).
+   - Lưu ý: domain `vnl.1921992.xyz` trỏ về Cloudflare → **không dùng để SSH**, phải dùng IP trực tiếp `103.157.218.111:11985`.
+
 ## Trước khi kết thúc
 
 Kiểm tra:
