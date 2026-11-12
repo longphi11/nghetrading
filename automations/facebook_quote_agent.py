@@ -256,6 +256,13 @@ def fetch_latest_quote_from_telegram():
         return None, None, None
 
     last_offset = load_offset()
+    # Xóa webhook nếu có để tránh lỗi 409 Conflict khi dùng getUpdates
+    try:
+        del_req = urllib.request.Request(f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/deleteWebhook")
+        urllib.request.urlopen(del_req, timeout=10).read()
+    except Exception as e:
+        logger.warning(f"deleteWebhook cảnh báo: {e}")
+
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/getUpdates"
     params = {"offset": last_offset + 1, "limit": 100, "timeout": 5}
     data = urllib.parse.urlencode(params).encode("utf-8")
