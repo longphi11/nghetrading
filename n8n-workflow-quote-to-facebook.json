@@ -7,31 +7,37 @@
           "interval": [
             {
               "field": "cronExpression",
-              "expression": "0 9,15,21 * * *"
+              "expression": "5 9,15,21 * * *"
             }
           ]
         }
       },
       "id": "cron-trigger",
-      "name": "Chạy quote 09h, 15h, 21h VN",
+      "name": "Chạy quote 09h05, 15h05, 21h05 VN",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
       "position": [250, 300]
     },
     {
       "parameters": {
-        "url": "https://api.telegram.org/bot__TELEGRAM_QUOTE_BOT_TOKEN__/getUpdates?limit=1&offset=-1",
-        "options": {}
+        "url": "https://t.me/s/quotetradingvn",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text"
+            }
+          }
+        }
       },
-      "id": "telegram-get-updates",
-      "name": "Lấy quote mới nhất từ kênh",
+      "id": "fetch-channel",
+      "name": "Lấy bài quote mới nhất từ kênh",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
       "position": [450, 300]
     },
     {
       "parameters": {
-        "jsCode": "const data = $input.first().json || {};\nconst updates = data.result || [];\nconst last = updates.length ? updates[updates.length - 1] : null;\nconst post = last?.channel_post || last?.message || null;\nconst text = (post?.text || '').trim();\nif (!text) return [];\n\nconst clean = text.replace(/\\n{3,}/g, '\\n\\n').trim();\nconst store = $getWorkflowStaticData('global');\nif (store.lastQuote === clean) return [];\nstore.lastQuote = clean;\n\nconst cta = '\\n\\n' +\n  'Đừng học thêm một mô hình nến nữa. Bạn đã học đủ rồi. Vấn đề nằm ở chỗ khác, và nó ở đây → nghetrading.com/bai-viet.html\\n' +\n  'Đã đến lúc coi trading là 1 nghề nghiệp thật sự nghiêm túc.';\n\nreturn [{ fb_content: clean + cta }];"
+        "jsCode": "const raw = $input.first().json.data || '';\nconst blocks = String(raw).split('class=\"tgme_widget_message_text');\nif (blocks.length < 2) return [];\n\nlet seg = blocks[blocks.length - 1];\nseg = seg.slice(seg.indexOf('>') + 1);\nseg = seg.slice(0, seg.indexOf('</div>'));\n\nlet text = seg\n  .replace(/<br\\s*\\/?>/gi, '\\n')\n  .replace(/<[^>]+>/g, '')\n  .replace(/&quot;/g, '\"')\n  .replace(/&#39;/g, \"'\")\n  .replace(/&amp;/g, '&')\n  .replace(/&lt;/g, '<')\n  .replace(/&gt;/g, '>')\n  .replace(/&nbsp;/g, ' ')\n  .replace(/\\n{3,}/g, '\\n\\n')\n  .trim();\n\nconst cut = text.indexOf('======');\nif (cut > 0) text = text.slice(0, cut).trim();\nif (!text) return [];\n\nconst store = $getWorkflowStaticData('global');\nif (store.lastQuote === text) return [];\nstore.lastQuote = text;\n\nconst cta = '\\n\\n' +\n  'Đừng học thêm một mô hình nến nữa. Bạn đã học đủ rồi. Vấn đề nằm ở chỗ khác, và nó ở đây → nghetrading.com/bai-viet.html\\n' +\n  'Đã đến lúc coi trading là 1 nghề nghiệp thật sự nghiêm túc.';\n\nreturn [{ fb_content: text + cta }];"
       },
       "id": "format-fb-content",
       "name": "Định dạng nội dung FB",
@@ -129,18 +135,18 @@
     }
   ],
   "connections": {
-    "Chạy quote 09h, 15h, 21h VN": {
+    "Chạy quote 09h05, 15h05, 21h05 VN": {
       "main": [
         [
           {
-            "node": "Lấy quote mới nhất từ kênh",
+            "node": "Lấy bài quote mới nhất từ kênh",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Lấy quote mới nhất từ kênh": {
+    "Lấy bài quote mới nhất từ kênh": {
       "main": [
         [
           {

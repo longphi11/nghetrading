@@ -90,6 +90,15 @@ Hệ sinh thái Nghề Trading được vận hành tự động thông qua n8n,
   + **Nhánh Tối (20:30 VN, Hàng ngày):** Lấy bài viết tư duy gốc từ `data/posts.json` và post lên Fanpage (`cron 30 20 * * *`).
 - **Thực thi backend:** `python3 /root/facebook_agent/facebook_agent.py --trigger morning/evening`
 
+### 1b. Luồng n8n: Quote Telegram → Fanpage `tamlygiaodich`
+- **Workflow ID:** `pHwXwQDZi9GUe5EI` (file `n8n-workflow-quote-to-facebook.json`).
+- **Lịch:** `5 9,15,21 * * *` (09h05, 15h05, 21h05 VN), timezone `Asia/Ho_Chi_Minh`.
+- **Nguồn nội dung:** đọc bài quote mới nhất từ kênh công khai `t.me/s/quotetradingvn` (KHÔNG dùng getUpdates — bot không nhận lại tin do chính nó đăng).
+- **Credentials (n8n UI):** `facebook-page-token` (httpQueryAuth — phải là **Page Access Token**, không dùng User Token), `telegram-bot`, `telegram-quote-bot`.
+- **Đích:** Fanpage `tamlygiaodich` (Page ID `1524010384123604`) + comment CTA Telegram + thông báo Topic 22.
+- **Chống trùng:** hash nội dung lưu trong workflow static data.
+- **Lưu ý:** 3 dòng cron `facebook_quote_agent.py` (9h/15h/21h) đã **comment** để tránh đăng trùng; backup tại `/root/crontab_backup_before_n8n.txt`.
+
 ### 2. Các Dịch Vụ Systemd Chạy Ngầm (Linux Services 24/7)
 - **`news-agent.service`:** Cào tin tức kinh tế từ ForexFactory và tin vĩ mô từ TradingView 24/7, tự động cập nhật dữ liệu tin tức.
 - **`quote-agent.service`:** Tự động đăng châm ngôn / tâm lý giao dịch vào 08:30 & 20:30 hàng ngày.
