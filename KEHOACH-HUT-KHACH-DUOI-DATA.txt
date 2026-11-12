@@ -1,0 +1,71 @@
+================================================================================
+KE HOACH HUT KHACH VA DUOI DATA - WEBSITE NGHE TRADING
+Ngay cap nhat: 11/12/2026
+Nguoi thuc hien: EM (CHO) - Phu tac project Website Nghê Trading
+================================================================================
+
+1. TOM TAT CHUC NANG HIEN TAI CO SAN
+--------------------------------------------------------------------------------
+- Trang chu: Hero, gia thi truong (Vang, BTC, VN-Index...), danh sach bai viet, lien ket Telegram.
+- Bai viet / Tu duy goc: bai-viet.html, lay du lieu tu data/posts.json, SEO va Open Graph.
+- Nhat ky giao dich: nhat-ky.html, lay du lieu tu data/journal.json, embed chart tu TradingView.
+- He thong: he-thong.html, gioi thieu 3 tru cot (Tam ly, Ky thuat, Quan ly von), CTA "Moi cafe 1-1".
+- Trac nghiem tam ly: trac-nghiem.html, 20 cau, tinh diem, hien ket qua, nut dan den Telegram @longphibtc va trang tu van.
+- Tu van 1-1: tu-van.html, form dat lich (ho ten, SDT/Zalo, Telegram, email, ghi chu), gui ngay Telegram ca nhan DAI KA (ID: 488901419) + Formspree (backup), co bang gia va QR thanh toan tin tich.
+- Float button moi trang: Telegram @longphibtc (Tam su Trading) + Floating CTA "Moi cafe & Tro chuyen".
+- Binh luan seeding: data/comments.json (theo slug, general_pool, category_pools).
+- Analytics: GA4 (G-4DBS8D97MS).
+
+2. VAN DE CO LOP (GIUA HIENA TAI VA MUC TIEU CUA DAI KA)
+--------------------------------------------------------------------------------
+- Chua co trang ban goi san pham (bot giao dich, nhom tin hieu thu phi).
+- Chua co form thu thap lead som (chi co form tu van 1-1 o cuoi phễu -> cao effort).
+- Trac nghiem khong luu data: tinh diem xong hien ket qua, het. Khong biet ai lam bai.
+- Chua co he thong luu trữ lead (chua co data/leads.json).
+- Chua co nurture / theo duoi tu dong (khong co email/SMS sequence, khong nhac nho khach quay lai).
+- Thanh toan thu cong: chi co QR anh tin tich, chua co trang xac nhan don hang, chua tu ghi nhan khach da thanh toan.
+
+3. DE XUAT TRIEN KHAI (TU NHANH TUN DEN DAI HAN)
+--------------------------------------------------------------------------------
+
+B1 (Tuan 1): Trang ban goi san pham + Form thu thap lead som
+- Tao trang goi-dich-vu.html (hoac san-pham.html): goi Bot giao dich, nhom tin hieu Vang/BTC, tu van 1-1.
+  Moi goi co: gia, tinh nang, CTA "Dang ky / Lien he".
+- Them form Lead Capture don gian: ho ten, SDT/Zalo, Telegram, goi quan tam.
+- Luu vao data/leads.json + gui Telegram ngay cho DAI KA (@longphibtc ID 488901419).
+- Hien thi form o sidebar bai viet, footer, va popup nhe khi cuon 50% bai.
+
+B2 (Tuan 2): Ket noi trac nghiem -> Luu data khach
+- Sau khi lam xong trac nghiem, them form ngan: "Nhan lo trinh rieng qua Telegram" (ho ten, SDT/Telegram).
+- Luu ket qua trac nghiem + thong tin lien he vao data/leads.json, gan the "nut that: tam ly / ky thuat / quan tri von".
+- Gui toan bo du lieu ve Telegram DAI KA de chot sale ca nhan hoa (theo kich ban bot trong AGENTS.md).
+
+B3 (Tuan 3): Lead magnet & Nurture
+- Tao PDF/Ebook mien phi (vi du: "10 quy tac vang quan tri rui ro") doi email/SDT.
+- Khi khach nhap form, tu dong gui link tai qua email (dung Formspree hoac dich vu mien phi) + luu vao data/leads.json.
+- DAI KA theo duoi khach qua Telegram/Zalo trong 24h.
+
+B4 (Tuan 4): Trang thanh toan don gian
+- Tao thanh-toan.html: chon goi, nhap thong tin, hien thi QR/Momo/Napas + so tai khoan.
+- Sau khi thanh toan, khach nhan "Xac nhan da chuyen khoan" -> gui Telegram DAI KA + luu vao data/payments.json.
+- DAI KA kiem tra va them khach vao nhom tin hieu/bot.
+
+4. MA TRAN TOM TAT
+--------------------------------------------------------------------------------
+| Muc tieu | Hien tai | Can bo sung |
+|---|---|---|
+| Hut khach vao goi san pham | Chua co trang ban | Trang san pham + form dang ky |
+| Hut khach vao tu van 1-1 | Co trang tu-van.html | Giu nguyen, toi uu CTA tren moi trang |
+| Lay data khach | Chua co | data/leads.json, form lead capture, trac nghiem luu data |
+| Theo duoi bam duoi | Chua co | Telegram thong bao lead moi, danh sach cho, nurture |
+
+5. BUOC BUOC THUC HIEN NGAY BAY GIO
+--------------------------------------------------------------------------------
+- Neu DAI KA dong y: EM se bat dau trien khai B1 ngay lap tuc.
+- Tao trang goi-dich-vu.html.
+- Cap nhat form lead capture, ket noi data/leads.json va Telegram thong bao.
+- Kiem tra responsive, console khong loi, khong lam hong giao dien cu.
+
+================================================================================
+KET THUC FILE
+================================================================================

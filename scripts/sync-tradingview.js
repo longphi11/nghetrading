@@ -98,7 +98,17 @@ function toParagraphs(text, title) {
     const regex = new RegExp("^" + titleEsc + "\\s*", "i");
     cleaned = cleaned.replace(regex, "").trim();
   }
-  cleaned = cleaned.replace(/^(Gold|BTC|Bitcoin|Crypto|FOREXCOM|OANDA|BYBIT|BITSTAMP)[^\n]*?longphibtc\s*/gi, "").trim();
+  // Loại bỏ dòng rác từ TradingView: "Gold OANDA:XAUUSD", "longphibtc" và các biến thể (mỗi từ 1 dòng riêng)
+  const trashLines = cleaned.split("\n").filter((line) => {
+    const t = line.trim();
+    if (!t) return true;
+    const lower = t.toLowerCase();
+    if (lower === "longphibtc") return false;
+    if (lower.includes("gold") && lower.includes("oanda")) return false;
+    if (lower.includes("xauusd") && lower.includes("oanda")) return false;
+    return true;
+  });
+  cleaned = trashLines.join("\n").trim();
 
   const lines = cleaned.split("\n");
   const htmlParts = [];
