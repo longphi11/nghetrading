@@ -24,97 +24,18 @@ logger = logging.getLogger("FacebookQuoteAgent")
 PAGE_ID_2 = os.getenv("FB_PAGE_ID_2")
 PAGE_ACCESS_TOKEN_2 = os.getenv("FB_PAGE_ACCESS_TOKEN_2")
 TELEGRAM_GROUP_URL = "https://t.me/nhatkytradingvn"
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+TELEGRAM_QUOTE_CHANNEL = "quotetradingvn"  # without @
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, "facebook_quote.db")
+OFFSET_FILE = os.path.join(BASE_DIR, "telegram_offset.json")
 
-# Thêm shared modules vào path
-sys.path.insert(0, os.path.join(BASE_DIR, "shared"))
+# ================= CTA & COMMENT ĐẦU TIÊN =================
+CTA_FOOTER = "\n\n----------------------------------------\nĐừng học thêm một mô hình nến nữa. Bạn đã học đủ rồi. Vấn đề nằm ở chỗ khác, và nó ở đây → nghetrading.com/bai-viet.html\nĐã đến lúc coi trading là 1 nghề nghiệp thật sự nghiêm túc."
 
-# ================= KHO QUOTE (tương đồng quote_bot trên VPS) =================
-MASTER_BOOK_QUOTES = [
-    {
-        "id": "q_001",
-        "author": "Mark Douglas",
-        "book": "Trading in the Zone",
-        "theme": "discipline_risk",
-        "quote": "Sự nhất quán không đến từ việc biết trước thị trường, mà đến từ việc chấp nhận kết quả của mỗi lệnh.",
-        "lesson": "Trader chuyên nghiệp không sợ thua một lệnh, họ sợ là không tuân thủ quy trình của mình."
-    },
-    {
-        "id": "q_002",
-        "author": "Alexander Elder",
-        "book": "Trading for a Living",
-        "theme": "journal_study",
-        "quote": "Nhân bản thất bại là điều dễ dàng, nhân bản thành công là điều khó khăn vì thành công đòi hỏi kỷ luật.",
-        "lesson": "Nhật ký giao dịch là công cụ quan trọng nhất để trader nhìn thấy mô hình hành vi của chính mình."
-    },
-    {
-        "id": "q_003",
-        "author": "Van Tharp",
-        "book": "Trade Your Way to Financial Freedom",
-        "theme": "zen_mindset",
-        "quote": "Rủi ro không phải là điều cần tránh, mà là điều cần quản lý một cách chặt chẽ.",
-        "lesson": "Quản trị rủi ro là tường防lé surrounds tài khoản của bạn, không phải là cái gì đó tùy chọn."
-    },
-    {
-        "id": "q_004",
-        "author": "Jesse Livermore",
-        "book": "Cách thức kinh doanh và đầu cơ cổ phiếu",
-        "theme": "wall_street_history",
-        "quote": "Thị trường không bao giờ sai, chỉ có người tham gia thị trường mới sai.",
-        "lesson": "Khi thị trường đi ngược lại với bạn, thị trường luôn đúng. Hãy chịu thua sớm và bảo toàn vốn."
-    },
-    {
-        "id": "q_005",
-        "author": "Annie Duke",
-        "book": "Tư duy đặt cược (Thinking in Bets)",
-        "theme": "casino_probability",
-        "quote": "Quyết định tốt không đảm bảo kết quả tốt, và kết quả tốt không đảm bảo quyết định tốt.",
-        "lesson": "Trader cần đánh giá quyết định dựa trên quá trình suy nghĩ, không chỉ dựa trên kết quả cuối cùng."
-    },
-    {
-        "id": "q_006",
-        "author": "Bob Volman",
-        "book": "Understanding Price Action",
-        "theme": "discipline_risk",
-        "quote": "Price action là ngôn ngữ của thị trường, và những người biết đọc nó sẽ không bao giờ bị mù lòa.",
-        "lesson": "Nến từ chối giá, cấu trúc đỉnh đáy và key level là những công cụ cốt lõi mà trader cần nắm vững."
-    },
-    {
-        "id": "q_007",
-        "author": "Michael Covel",
-        "book": "Trend Following",
-        "theme": "chess_strategy",
-        "quote": "Xu hướng là bạn của bạn cho đến khi nó thay đổi, và việc thay đổi đó diễn ra nhanh hơn nhiều người nghĩ.",
-        "lesson": "Không bao giờ chống lại xu hướng chính, hãy theo dòng chảy của thị trường chứ không phải đi ngang dòng."
-    },
-    {
-        "id": "q_008",
-        "author": "Jared Tendler",
-        "book": "The Mental Game of Trading",
-        "theme": "tam-ly-ky-luat",
-        "quote": "Tâm lý không phải là thứ bạn bù đắp sau khi có lỗ, mà là thứ bạn đầu tư trước khi vào lệnh.",
-        "lesson": "Kiểm soát cảm xúc là kỹ năng cốt lõi phân biệt trader thành công và trader thua lỗ."
-    },
-    {
-        "id": "q_009",
-        "author": "Mark Minervini",
-        "book": "Giao Dịch Như Một Phù Thủy Chứng Khoán",
-        "theme": "phuong-phap-ky-thuat",
-        "quote": "Chỉ vào lệnh khi mọi điều kiện đều có lợi cho bạn, không phải chỉ vì bạn muốn vào lệnh.",
-        "lesson": "Đứng ngoài khi thị trường không rõ ràng là một vị thế giao dịch hợp lệ và đáng lượng."
-    },
-    {
-        "id": "q_010",
-        "author": "Richard Weissman",
-        "book": "Trade Like a Casino",
-        "theme": "casino_probability",
-        "quote": "Nhà cái không cần biết con tiếp theo ra gì, họ chỉ cần biết họ có lợi thế toán học trên dài hạn.",
-        "lesson": "Trader nên tư duy như nhà cái: quản lý rủi ro từng lệnh, để xác suất làm việc cho mình trên hàng nghìn lệnh."
-    },
-]
+FIRST_COMMENT = "👉 Anh em tham gia nhóm Telegram cập nhật phân tích thị trường & nhận định về Vàng (XAU/USD) hàng ngày tại đây nhé: https://t.me/nhatkytradingvn"
 
-# ================= POOL ẢNH UNIQUE (tương tự quote_bot) =================
+# ================= POOL ẢNH UNIQUE =================
 THEMATIC_IMAGE_POOLS = {
     "discipline_risk": [
         "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1080&auto=format&fit=crop&q=80",
@@ -197,8 +118,7 @@ class SqliteDb:
         os.makedirs(os.path.dirname(os.path.abspath(db_path)), exist_ok=True)
 
     def connection(self):
-        import sqlite3 as _sqlite3
-        conn = _sqlite3.connect(self.db_path)
+        conn = sqlite3.connect(self.db_path)
         return conn
 
     def execute(self, sql, params=()):
@@ -242,8 +162,6 @@ def init_db():
             used_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
-    db.execute("INSERT OR IGNORE INTO posted_quotes (quote_id, author, book, content) VALUES ('__seed__', 'seed', 'seed', 'seed')")
-    db.execute("DELETE FROM posted_quotes WHERE quote_id = '__seed__'")
     logger.info(f"DB initialized at {DB_PATH}")
 
 
@@ -311,16 +229,94 @@ def download_and_verify_unique_image(theme, quote_id):
     return None, None
 
 
-def format_quote_message(item):
+def load_offset():
+    try:
+        with open(OFFSET_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            return data.get("last_update_id", 0)
+    except Exception:
+        return 0
+
+
+def save_offset(offset):
+    try:
+        with open(OFFSET_FILE, "w", encoding="utf-8") as f:
+            json.dump({"last_update_id": offset}, f, ensure_ascii=False)
+    except Exception as e:
+        logger.warning(f"Cannot save offset: {e}")
+
+
+def fetch_latest_quote_from_telegram():
+    """
+    Lấy quote mới nhất từ channel Telegram @quotetradingvn qua Bot API getUpdates.
+    Trả về (text, author, update_id) hoặc (None, None, None) nếu không có mới.
+    """
+    if not TELEGRAM_BOT_TOKEN:
+        logger.warning("TELEGRAM_BOT_TOKEN chưa cấu hình, không lấy được quote từ Telegram")
+        return None, None, None
+
+    last_offset = load_offset()
+    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/getUpdates"
+    params = {"offset": last_offset + 1, "limit": 100, "timeout": 5}
+    data = urllib.parse.urlencode(params).encode("utf-8")
+    req = urllib.request.Request(url, data=data)
+
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            result = json.loads(resp.read().decode("utf-8"))
+    except Exception as e:
+        logger.warning(f"Telegram getUpdates lỗi: {e}")
+        return None, None, None
+
+    if not result.get("ok"):
+        return None, None, None
+
+    updates = result.get("result", [])
+    if not updates:
+        return None, None, None
+
+    max_update_id = last_offset
+    for upd in updates:
+        uid = upd.get("update_id", 0)
+        if uid > max_update_id:
+            max_update_id = uid
+
+        msg = upd.get("message") or upd.get("channel_post")
+        if not msg:
+            continue
+
+        chat = msg.get("chat", {})
+        if chat.get("username", "").lower() != TELEGRAM_QUOTE_CHANNEL.lower():
+            continue
+
+        text = msg.get("text", "").strip()
+        if not text:
+            continue
+
+        # Trích xuất author nếu có format "— Author" hoặc "- Author"
+        author = "Nghê Trading"
+        quote_text = text
+        m = re.search(r"\n\s*[—–-]\s*(.+)$", text, re.MULTILINE)
+        if m:
+            author = m.group(1).strip()
+            quote_text = text[:m.start()].strip()
+
+        # Lưu offset sau khi xử lý thành công 1 message
+        save_offset(max_update_id)
+        return quote_text, author, max_update_id
+
+    # Cập nhật offset dù không tìm thấy message hợp lệ để không xử lý lại
+    save_offset(max_update_id)
+    return None, None, None
+
+
+def format_quote_message(quote_text, author):
     text = f"""📖 <b>TÂM LÝ GIAO DỊCH THỰC CHIẾN</b>
 
-<i>"{item['quote']}"</i>
-— <b>{item['author']}</b> ({item['book']})
+<i>"{quote_text}"</i>
+— <b>{author}</b>
 
-💡 <b>Góc nhìn Nghề Trading:</b>
-{item['lesson']}
-
-👉 Tham gia nhóm Telegram cập nhật phân tích thị trường hàng ngày: {TELEGRAM_GROUP_URL}"""
+👉 Tham gia nhóm Telegram cập nhật phân tích thị trường hàng ngày: {TELEGRAM_GROUP_URL}{CTA_FOOTER}"""
     return text.strip()
 
 
@@ -357,14 +353,22 @@ class FacebookPoster:
             time.sleep(2)
         return None
 
-
-def select_next_quote():
-    init_db()
-    for item in MASTER_BOOK_QUOTES:
-        if not is_quote_posted(item["id"]):
-            return item
-    # Nếu đã đăng hết, chọn ngẫu nhiên 1 quote chưa được dùng ảnh
-    return random.choice(MASTER_BOOK_QUOTES)
+    def add_first_comment(self, post_id, comment_text, retries=2, timeout=15):
+        import urllib.error
+        url = self._url(f"{post_id}/comments")
+        params = {"message": comment_text, "access_token": self.page_token}
+        data = urllib.parse.urlencode(params).encode("utf-8")
+        req = urllib.request.Request(url, data=data)
+        for attempt in range(retries + 1):
+            try:
+                with urllib.request.urlopen(req, timeout=timeout) as resp:
+                    res = json.loads(resp.read().decode("utf-8"))
+                    logger.info(f"Tạo comment đầu tiên thành công! Comment ID: {res.get('id')}")
+                    return True
+            except Exception as e:
+                logger.error(f"Lỗi tạo comment đầu tiên (lần {attempt+1}): {e}")
+                time.sleep(1)
+        return False
 
 
 def run_quote_post():
@@ -372,24 +376,60 @@ def run_quote_post():
         logger.error("FB_PAGE_ID_2 hoặc FB_PAGE_ACCESS_TOKEN_2 chưa cấu hình trong .env")
         return False
 
-    item = select_next_quote()
-    theme = item.get("theme", DEFAULT_THEME)
+    init_db()
 
-    img_bytes, img_url = download_and_verify_unique_image(theme, item["id"])
+    # 1. Lấy quote từ Telegram channel
+    quote_text, author, update_id = fetch_latest_quote_from_telegram()
+    if quote_text:
+        quote_id = f"tg_{update_id}"
+        theme = DEFAULT_THEME
+        logger.info(f"Lấy quote từ Telegram: [{author}] {quote_text[:60]}...")
+    else:
+        # Fallback quote tĩnh nếu Telegram không có mới
+        static_quotes = [
+            {"id": "sq_001", "quote": "Sự nhất quán không đến từ việc biết trước thị trường, mà từ việc chấp nhận kết quả của mỗi lệnh.", "author": "Mark Douglas", "theme": "discipline_risk"},
+            {"id": "sq_002", "quote": "Rủi ro không phải là điều cần tránh, mà là điều cần quản lý một cách chặt chẽ.", "author": "Van Tharp", "theme": "zen_mindset"},
+            {"id": "sq_003", "quote": "Thị trường không bao giờ sai, chỉ có người tham gia thị trường mới sai.", "author": "Jesse Livermore", "theme": "wall_street_history"},
+            {"id": "sq_004", "quote": "Quyết định tốt không đảm bảo kết quả tốt, và kết quả tốt không đảm bảo quyết định tốt.", "author": "Annie Duke", "theme": "casino_probability"},
+            {"id": "sq_005", "quote": "Chỉ vào lệnh khi mọi điều kiện đều có lợi cho bạn, không phải chỉ vì bạn muốn vào lệnh.", "author": "Mark Minervini", "theme": "phuong-phap-ky-thuat"},
+        ]
+        # Chọn static quote chưa đăng
+        selected = None
+        for sq in static_quotes:
+            if not is_quote_posted(sq["id"]):
+                selected = sq
+                break
+        if not selected:
+            logger.info("Tất cả static quote đã đăng, bỏ qua lần này.")
+            return False
+        quote_id = selected["id"]
+        quote_text = selected["quote"]
+        author = selected["author"]
+        theme = selected["theme"]
+        logger.info(f"Dùng static quote fallback: [{author}]")
+
+    if is_quote_posted(quote_id):
+        logger.info(f"Quote {quote_id} đã đăng rồi, bỏ qua.")
+        return False
+
+    # 2. Chọn ảnh unique
+    img_bytes, img_url = download_and_verify_unique_image(theme, quote_id)
     if not img_url:
-        logger.warning("Không tìm thấy ảnh unique nào, sử dụng ảnh mặc định từ pool")
         pool = THEMATIC_IMAGE_POOLS.get(theme, THEMATIC_IMAGE_POOLS[DEFAULT_THEME])
         img_url = random.choice(pool)
-        img_bytes = None
+        logger.warning("Không tìm thấy ảnh unique, dùng ảnh mặc định từ pool")
 
-    content_html = format_quote_message(item)
+    # 3. Format nội dung
+    content_html = format_quote_message(quote_text, author)
 
+    # 4. Post lên Facebook Fanpage thứ 2
     poster = FacebookPoster(PAGE_ID_2, PAGE_ACCESS_TOKEN_2)
     post_id = poster.post_photo(img_url, content_html)
 
     if post_id:
-        mark_quote_posted(item["id"], item["author"], item["book"], content_html)
-        logger.info(f"Đăng quote thành công: [{item['author']} | {item['book']}]")
+        mark_quote_posted(quote_id, author, quote_id, content_html)
+        poster.add_first_comment(post_id, FIRST_COMMENT)
+        logger.info(f"Đăng quote thành công: [{author} | {theme}]")
         return True
     return False
 
