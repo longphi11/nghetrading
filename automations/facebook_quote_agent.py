@@ -24,11 +24,8 @@ logger = logging.getLogger("FacebookQuoteAgent")
 PAGE_ID_2 = os.getenv("FB_PAGE_ID_2")
 PAGE_ACCESS_TOKEN_2 = os.getenv("FB_PAGE_ACCESS_TOKEN_2")
 TELEGRAM_GROUP_URL = "https://t.me/nhatkytradingvn"
-TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
-TELEGRAM_QUOTE_CHANNEL = "quotetradingvn"  # without @
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_PATH = os.path.join(BASE_DIR, "facebook_quote.db")
-OFFSET_FILE = os.path.join(BASE_DIR, "telegram_offset.json")
 
 # ================= CTA & COMMENT ĐẦU TIÊN =================
 CTA_FOOTER = "\n\n----------------------------------------\nĐừng học thêm một mô hình nến nữa. Bạn đã học đủ rồi. Vấn đề nằm ở chỗ khác, và nó ở đây → nghetrading.com/bai-viet.html\nĐã đến lúc coi trading là 1 nghề nghiệp thật sự nghiêm túc."
@@ -229,94 +226,6 @@ def download_and_verify_unique_image(theme, quote_id):
     return None, None
 
 
-def load_offset():
-    try:
-        with open(OFFSET_FILE, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            return data.get("last_update_id", 0)
-    except Exception:
-        return 0
-
-
-def save_offset(offset):
-    try:
-        with open(OFFSET_FILE, "w", encoding="utf-8") as f:
-            json.dump({"last_update_id": offset}, f, ensure_ascii=False)
-    except Exception as e:
-        logger.warning(f"Cannot save offset: {e}")
-
-
-def fetch_latest_quote_from_telegram():
-    """
-    Lấy quote mới nhất từ channel Telegram @quotetradingvn qua Bot API getUpdates.
-    Trả về (text, author, update_id) hoặc (None, None, None) nếu không có mới.
-    """
-    if not TELEGRAM_BOT_TOKEN:
-        logger.warning("TELEGRAM_BOT_TOKEN chưa cấu hình, không lấy được quote từ Telegram")
-        return None, None, None
-
-    last_offset = load_offset()
-    # Xóa webhook nếu có để tránh lỗi 409 Conflict khi dùng getUpdates
-    try:
-        del_req = urllib.request.Request(f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/deleteWebhook?drop_pending_updates=true")
-        urllib.request.urlopen(del_req, timeout=10).read()
-    except Exception as e:
-        logger.warning(f"deleteWebhook cảnh báo: {e}")
-
-    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/getUpdates?drop_pending_updates=true"
-    params = {"offset": last_offset + 1, "limit": 100, "timeout": 5}
-    data = urllib.parse.urlencode(params).encode("utf-8")
-    req = urllib.request.Request(url, data=data)
-
-    try:
-        with urllib.request.urlopen(req, timeout=15) as resp:
-            result = json.loads(resp.read().decode("utf-8"))
-    except Exception as e:
-        logger.warning(f"Telegram getUpdates lỗi: {e}")
-        return None, None, None
-
-    if not result.get("ok"):
-        return None, None, None
-
-    updates = result.get("result", [])
-    if not updates:
-        return None, None, None
-
-    max_update_id = last_offset
-    for upd in updates:
-        uid = upd.get("update_id", 0)
-        if uid > max_update_id:
-            max_update_id = uid
-
-        msg = upd.get("message") or upd.get("channel_post")
-        if not msg:
-            continue
-
-        chat = msg.get("chat", {})
-        if chat.get("username", "").lower() != TELEGRAM_QUOTE_CHANNEL.lower():
-            continue
-
-        text = msg.get("text", "").strip()
-        if not text:
-            continue
-
-        # Trích xuất author nếu có format "— Author" hoặc "- Author"
-        author = "Nghê Trading"
-        quote_text = text
-        m = re.search(r"\n\s*[—–-]\s*(.+)$", text, re.MULTILINE)
-        if m:
-            author = m.group(1).strip()
-            quote_text = text[:m.start()].strip()
-
-        # Lưu offset sau khi xử lý thành công 1 message
-        save_offset(max_update_id)
-        return quote_text, author, max_update_id
-
-    # Cập nhật offset dù không tìm thấy message hợp lệ để không xử lý lại
-    save_offset(max_update_id)
-    return None, None, None
-
-
 def format_quote_message(quote_text, author):
     text = f"""📖 <b>TÂM LÝ GIAO DỊCH THỰC CHIẾN</b>
 
@@ -385,15 +294,8 @@ def run_quote_post():
 
     init_db()
 
-    # 1. Lấy quote từ Telegram channel
-    quote_text, author, update_id = fetch_latest_quote_from_telegram()
-    if quote_text:
-        quote_id = f"tg_{update_id}"
-        theme = DEFAULT_THEME
-        logger.info(f"Lấy quote từ Telegram: [{author}] {quote_text[:60]}...")
-    else:
-        # Fallback quote tĩnh nếu Telegram không có mới
-        static_quotes = [
+    # Lấy quote từ static pool (Telegram channel sync sẽ bật sau khi cấu hình bot admin)
+    static_quotes = [
             {"id": "sq_001", "quote": "Sự nhất quán không đến từ việc biết trước thị trường, mà từ việc chấp nhận kết quả của mỗi lệnh.", "author": "Mark Douglas", "theme": "discipline_risk"},
             {"id": "sq_002", "quote": "Rủi ro không phải là điều cần tránh, mà là điều cần quản lý một cách chặt chẽ.", "author": "Van Tharp", "theme": "zen_mindset"},
             {"id": "sq_003", "quote": "Thị trường không bao giờ sai, chỉ có người tham gia thị trường mới sai.", "author": "Jesse Livermore", "theme": "wall_street_history"},
