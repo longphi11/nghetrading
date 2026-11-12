@@ -294,69 +294,47 @@ def run_quote_post():
 
     init_db()
 
-    # Lấy quote từ static pool (Telegram channel sync sẽ bật sau khi cấu hình bot admin)
+    # Lấy quote từ static pool
     static_quotes = [
-            {"id": "sq_001", "quote": "Sự nhất quán không đến từ việc biết trước thị trường, mà từ việc chấp nhận kết quả của mỗi lệnh.", "author": "Mark Douglas", "theme": "discipline_risk"},
-            {"id": "sq_002", "quote": "Rủi ro không phải là điều cần tránh, mà là điều cần quản lý một cách chặt chẽ.", "author": "Van Tharp", "theme": "zen_mindset"},
-            {"id": "sq_003", "quote": "Thị trường không bao giờ sai, chỉ có người tham gia thị trường mới sai.", "author": "Jesse Livermore", "theme": "wall_street_history"},
-            {"id": "sq_004", "quote": "Quyết định tốt không đảm bảo kết quả tốt, và kết quả tốt không đảm bảo quyết định tốt.", "author": "Annie Duke", "theme": "casino_probability"},
-            {"id": "sq_005", "quote": "Chỉ vào lệnh khi mọi điều kiện đều có lợi cho bạn, không phải chỉ vì bạn muốn vào lệnh.", "author": "Mark Minervini", "theme": "phuong-phap-ky-thuat"},
-            {"id": "sq_006", "quote": "Kiểm soát cảm xúc là kỹ năng cốt lõi phân biệt trader thành công và trader thua lỗ.", "author": "Jared Tendler", "theme": "tam-ly-ky-luat"},
-            {"id": "sq_007", "quote": "Price action là ngôn ngữ của thị trường, và những người biết đọc nó sẽ không bao giờ bị mù lòa.", "author": "Bob Volman", "theme": "phuong-phap-ky-thuat"},
-            {"id": "sq_008", "quote": "Nhân bản thất bại là điều dễ dàng, nhân bản thành công là điều khó khăn vì thành công đòi hỏi kỷ luật.", "author": "Alexander Elder", "theme": "journal_study"},
-            {"id": "sq_009", "quote": "Chấp nhận lỗ là bước đầu tiên để dừng chक्र spiraling xuống lề.", "author": "Mark Douglas", "theme": "discipline_risk"},
-            {"id": "sq_010", "quote": "Tâm lý không phải là thứ bạn bù đắp sau khi có lỗ, mà là thứ bạn đầu tư trước khi vào lệnh.", "author": "Jared Tendler", "theme": "tam-ly-ky-luat"},
-            {"id": "sq_011", "quote": "Nhà cái không cần biết con tiếp theo ra gì, họ chỉ cần biết họ có lợi thế toán học trên dài hạn.", "author": "Richard Weissman", "theme": "casino_probability"},
-            {"id": "sq_012", "quote": "Khi thị trường đi ngược lại với bạn, thị trường luôn đúng. Hãy chịu thua sớm và bảo toàn vốn.", "author": "Jesse Livermore", "theme": "wall_street_history"},
-            {"id": "sq_013", "quote": "Ít hơn là nhiều hơn. Tập trung vào 20% yếu tố tạo ra 80% kết quả.", "author": "Nghê Trading", "theme": "discipline_risk"},
-            {"id": "sq_014", "quote": "Không vào lệnh đôi khi là lệnh tốt nhất của ngày.", "author": "Nghê Trading", "theme": "zen_mindset"},
-            {"id": "sq_015", "quote": "Chart không nói dối, còn tin tức có thể bị distortions.", "author": "Nghê Trading", "theme": "phuong-phap-ky-thuat"},
-            {"id": "sq_016", "quote": "Quản trị rủi ro là tường phòng surrounds tài khoản của bạn, không phải là cái gì đó tùy chọn.", "author": "Van Tharp", "theme": "zen_mindset"},
-            {"id": "sq_017", "quote": "Tự do trong trading đến từ kỷ luật, không phải từ việc làm theo ý thích của mình.", "author": "Nghê Trading", "theme": "tam-ly-ky-luat"},
-            {"id": "sq_018", "quote": "Có kế hoạch trước khi vào lệnh mới là khác biệt lớn nhất giữa trader và cờ bạc.", "author": "Nghê Trading", "theme": "phuong-phap-ky-thuat"},
-            {"id": "sq_019", "quote": "Winning rate cao không quan trọng nếu risk/reward không được kiểm soát chặt chẽ.", "author": "Van Tharp", "theme": "casino_probability"},
-            {"id": "sq_020", "quote": "Mỗi ngày trong trading đều là một bài học mới, hãy tận hưởng quá trình chứ không chỉ kết quả.", "author": "Nghê Trading", "theme": "tu-duy-xac-suat"},
-        ]
-        # Chọn static quote chưa đăng
-        selected = None
-        for sq in static_quotes:
-            if not is_quote_posted(sq["id"]):
-                selected = sq
-                break
-        if not selected:
-            logger.info("Tất cả static quote đã đăng, bỏ qua lần này.")
-            return False
-        quote_id = selected["id"]
-        quote_text = selected["quote"]
-        author = selected["author"]
-        theme = selected["theme"]
-        logger.info(f"Dùng static quote fallback: [{author}]")
+        {"id": "sq_001", "quote": "Sự nhất quán không đến từ việc biết trước thị trường, mà từ việc chấp nhận kết quả của mỗi lệnh.", "author": "Mark Douglas", "theme": "discipline_risk"},
+        {"id": "sq_002", "quote": "Rủi ro không phải là điều cần tránh, mà là điều cần quản lý một cách chặt chẽ.", "author": "Van Tharp", "theme": "zen_mindset"},
+        {"id": "sq_003", "quote": "Thị trường không bao giờ sai, chỉ có người tham gia thị trường mới sai.", "author": "Jesse Livermore", "theme": "wall_street_history"},
+        {"id": "sq_004", "quote": "Quyết định tốt không đảm bảo kết quả tốt, và kết quả tốt không đảm bảo quyết định tốt.", "author": "Annie Duke", "theme": "casino_probability"},
+        {"id": "sq_005", "quote": "Chỉ vào lệnh khi mọi điều kiện đều có lợi cho bạn, không phải chỉ vì bạn muốn vào lệnh.", "author": "Mark Minervini", "theme": "phuong-phap-ky-thuat"},
+        {"id": "sq_006", "quote": "Kiểm soát cảm xúc là kỹ năng cốt lõi phân biệt trader thành công và trader thua lỗ.", "author": "Jared Tendler", "theme": "tam-ly-ky-luat"},
+        {"id": "sq_007", "quote": "Price action là ngôn ngữ của thị trường, và những người biết đọc nó sẽ không bao giờ bị mù lòa.", "author": "Bob Volman", "theme": "phuong-phap-ky-thuat"},
+        {"id": "sq_008", "quote": "Nhân bản thất bại là điều dễ dàng, nhân bản thành công là điều khó khăn vì thành công đòi hỏi kỷ luật.", "author": "Alexander Elder", "theme": "journal_study"},
+        {"id": "sq_009", "quote": "Chấp nhận lỗ là bước đầu tiên để dừng chक्र spiraling xuống lề.", "author": "Mark Douglas", "theme": "discipline_risk"},
+        {"id": "sq_010", "quote": "Tâm lý không phải là thứ bạn bù đắp sau khi có lỗ, mà là thứ bạn đầu tư trước khi vào lệnh.", "author": "Jared Tendler", "theme": "tam-ly-ky-luat"},
+        {"id": "sq_011", "quote": "Nhà cái không cần biết con tiếp theo ra gì, họ chỉ cần biết họ có lợi thế toán học trên dài hạn.", "author": "Richard Weissman", "theme": "casino_probability"},
+        {"id": "sq_012", "quote": "Khi thị trường đi ngược lại với bạn, thị trường luôn đúng. Hãy chịu thua sớm và bảo toàn vốn.", "author": "Jesse Livermore", "theme": "wall_street_history"},
+        {"id": "sq_013", "quote": "Ít hơn là nhiều hơn. Tập trung vào 20% yếu tố tạo ra 80% kết quả.", "author": "Nghê Trading", "theme": "discipline_risk"},
+        {"id": "sq_014", "quote": "Không vào lệnh đôi khi là lệnh tốt nhất của ngày.", "author": "Nghê Trading", "theme": "zen_mindset"},
+        {"id": "sq_015", "quote": "Chart không nói dối, còn tin tức có thể bị distortions.", "author": "Nghê Trading", "theme": "phuong-phap-ky-thuat"},
+        {"id": "sq_016", "quote": "Quản trị rủi ro là tường phòng surrounds tài khoản của bạn, không phải là cái gì đó tùy chọn.", "author": "Van Tharp", "theme": "zen_mindset"},
+        {"id": "sq_017", "quote": "Tự do trong trading đến từ kỷ luật, không phải từ việc làm theo ý thích của mình.", "author": "Nghê Trading", "theme": "tam-ly-ky-luat"},
+        {"id": "sq_018", "quote": "Có kế hoạch trước khi vào lệnh mới là khác biệt lớn nhất giữa trader và cờ bạc.", "author": "Nghê Trading", "theme": "phuong-phap-ky-thuat"},
+        {"id": "sq_019", "quote": "Winning rate cao không quan trọng nếu risk/reward không được kiểm soát chặt chẽ.", "author": "Van Tharp", "theme": "casino_probability"},
+        {"id": "sq_020", "quote": "Mỗi ngày trong trading đều là một bài học mới, hãy tận hưởng quá trình chứ không chỉ kết quả.", "author": "Nghê Trading", "theme": "tu-duy-xac-suat"},
+    ]
+    # Chọn static quote chưa đăng
+    selected = None
+    for sq in static_quotes:
+        if not is_quote_posted(sq["id"]):
+            selected = sq
+            break
+    if not selected:
+        logger.info("Tất cả static quote đã đăng, bỏ qua lần này.")
+        return False
+    quote_id = selected["id"]
+    quote_text = selected["quote"]
+    author = selected["author"]
+    theme = selected["theme"]
+    logger.info(f"Dùng static quote: [{author} | {theme}]")
 
     if is_quote_posted(quote_id):
         logger.info(f"Quote {quote_id} đã đăng rồi, bỏ qua.")
         return False
-
-    # 2. Chọn ảnh unique
-    img_bytes, img_url = download_and_verify_unique_image(theme, quote_id)
-    if not img_url:
-        pool = THEMATIC_IMAGE_POOLS.get(theme, THEMATIC_IMAGE_POOLS[DEFAULT_THEME])
-        img_url = random.choice(pool)
-        logger.warning("Không tìm thấy ảnh unique, dùng ảnh mặc định từ pool")
-
-    # 3. Format nội dung
-    content_html = format_quote_message(quote_text, author)
-
-    # 4. Post lên Facebook Fanpage thứ 2
-    poster = FacebookPoster(PAGE_ID_2, PAGE_ACCESS_TOKEN_2)
-    post_id = poster.post_photo(img_url, content_html)
-
-    if post_id:
-        mark_quote_posted(quote_id, author, quote_id, content_html)
-        poster.add_first_comment(post_id, FIRST_COMMENT)
-        logger.info(f"Đăng quote thành công: [{author} | {theme}]")
-        return True
-    return False
-
 
 if __name__ == "__main__":
     success = run_quote_post()
