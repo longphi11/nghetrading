@@ -6,65 +6,63 @@
         "rule": {
           "interval": [
             {
-              "field": "hours",
-              "hoursInterval": 6
+              "field": "cronExpression",
+              "expression": "0 9,15,21 * * *"
             }
           ]
-        },
-        "timezone": "Asia/Ho_Chi_Minh"
+        }
       },
       "id": "cron-trigger",
-      "name": "Chạy quote hàng ngày (09h, 15h, 21h VN)",
-      "type": "n8n-nodes-base.cron",
-      "typeVersion": 1.1,
+      "name": "Chạy quote 09h, 15h, 21h VN",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
       "position": [250, 300]
     },
     {
       "parameters": {
-        "operation": "getUpdates",
-        "limit": 1,
-        "reverse": true
+        "url": "https://api.telegram.org/bot__TELEGRAM_QUOTE_BOT_TOKEN__/getUpdates?limit=1&offset=-1",
+        "options": {}
       },
       "id": "telegram-get-updates",
-      "name": "Lấy bài quote từ Telegram",
-      "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1,
-      "position": [450, 300],
-      "credentials": {
-        "telegramApi": {
-          "id": "telegram-quote-bot",
-          "name": "Telegram Bot Quote (@NgheTradingSupport_Bot)"
-        }
-      }
+      "name": "Lấy quote mới nhất từ kênh",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [450, 300]
     },
     {
       "parameters": {
-        "functionCode": "const text = $json.message?.text || $json.channel_post?.text || '';\nconst cleaned = text.replace(/\\n{3,}/g, '\\n\\n').trim();\nconst fbContent = cleaned + '\\n\\n' +\n  'Đừng học thêm một mô hình nến nữa. Bạn đã học đủ rồi. Vấn đề nằm ở chỗ khác, và nó ở đây → nghetrading.com/bai-viet.html\\n' +\n  'Đã đến lúc coi trading là 1 nghề nghiệp thật sự nghiêm túc.';\nreturn [{ fb_content: fbContent }];"
+        "jsCode": "const data = $input.first().json || {};\nconst updates = data.result || [];\nconst last = updates.length ? updates[updates.length - 1] : null;\nconst post = last?.channel_post || last?.message || null;\nconst text = (post?.text || '').trim();\nif (!text) return [];\n\nconst clean = text.replace(/\\n{3,}/g, '\\n\\n').trim();\nconst store = $getWorkflowStaticData('global');\nif (store.lastQuote === clean) return [];\nstore.lastQuote = clean;\n\nconst cta = '\\n\\n' +\n  'Đừng học thêm một mô hình nến nữa. Bạn đã học đủ rồi. Vấn đề nằm ở chỗ khác, và nó ở đây → nghetrading.com/bai-viet.html\\n' +\n  'Đã đến lúc coi trading là 1 nghề nghiệp thật sự nghiêm túc.';\n\nreturn [{ fb_content: clean + cta }];"
       },
       "id": "format-fb-content",
       "name": "Định dạng nội dung FB",
-      "type": "n8n-nodes-base.function",
-      "typeVersion": 1,
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [650, 300]
     },
     {
       "parameters": {
-        "url": "https://graph.facebook.com/v18.0/{{ $env.FB_PAGE_ID_2 }}/feed",
         "method": "POST",
+        "url": "https://graph.facebook.com/v21.0/__FB_PAGE_ID_2__/feed",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
         "sendBody": true,
-        "bodyParametersJson": {
-          "message": "={{ $json.fb_content }}",
-          "access_token": "={{ $env.FB_PAGE_ACCESS_TOKEN_2 }}"
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "message",
+              "value": "={{ $json.fb_content }}"
+            }
+          ]
         },
         "options": {}
       },
       "id": "facebook-post",
       "name": "Đăng bài lên Fanpage",
       "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.1,
+      "typeVersion": 4.2,
       "position": [850, 300],
       "credentials": {
-        "httpHeaderAuth": {
+        "httpQueryAuth": {
           "id": "facebook-page-token",
           "name": "Facebook Page Access Token"
         }
@@ -72,32 +70,38 @@
     },
     {
       "parameters": {
-        "functionCode": "const postId = $json[0]?.id;\nif (!postId) return [];\nreturn [{ post_id: postId }];"
+        "jsCode": "const postId = $json.id || $json.post_id;\nif (!postId) return [];\nreturn [{ post_id: postId }];"
       },
       "id": "extract-post-id",
       "name": "Lấy Post ID",
-      "type": "n8n-nodes-base.function",
-      "typeVersion": 1,
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [850, 450]
     },
     {
       "parameters": {
-        "url": "https://graph.facebook.com/v18.0/={{ $json.post_id }}/comments",
         "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{ $json.post_id }}/comments",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
         "sendBody": true,
-        "bodyParametersJson": {
-          "message": "👉 Anh em tham gia nhóm Telegram cập nhật phân tích thị trường & nhận định về Vàng (XAU/USD) hàng ngày tại đây nhé: https://t.me/nhatkytradingvn",
-          "access_token": "={{ $env.FB_PAGE_ACCESS_TOKEN_2 }}"
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "message",
+              "value": "👉 Anh em tham gia nhóm Telegram cập nhật phân tích thị trường & nhận định về Vàng (XAU/USD) hàng ngày tại đây nhé: https://t.me/nhatkytradingvn"
+            }
+          ]
         },
         "options": {}
       },
       "id": "facebook-comment",
       "name": "Comment đầu tiên (tạo động lực)",
       "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.1,
+      "typeVersion": 4.2,
       "position": [1050, 450],
       "credentials": {
-        "httpHeaderAuth": {
+        "httpQueryAuth": {
           "id": "facebook-page-token",
           "name": "Facebook Page Access Token"
         }
@@ -105,14 +109,16 @@
     },
     {
       "parameters": {
-        "text": "✅ Đã post quote lên Fanpage tamlygiaodich lúc {{ $now.format('YYYY-MM-DD HH:mm:ss') }}",
-        "chatId": "{{ $env.ADMIN_CHAT_ID }}",
-        "messageThreadId": 22
+        "text": "=✅ Đã post quote lên Fanpage tamlygiaodich lúc {{ $now.format('yyyy-LL-dd HH:mm:ss') }}",
+        "chatId": "__ADMIN_CHAT_ID__",
+        "additionalFields": {
+          "message_thread_id": 22
+        }
       },
       "id": "telegram-notify",
       "name": "Thông báo về Topic 22",
       "type": "n8n-nodes-base.telegram",
-      "typeVersion": 1,
+      "typeVersion": 1.2,
       "position": [1050, 300],
       "credentials": {
         "telegramApi": {
@@ -123,18 +129,18 @@
     }
   ],
   "connections": {
-    "Chạy quote hàng ngày (09h, 15h, 21h VN)": {
+    "Chạy quote 09h, 15h, 21h VN": {
       "main": [
         [
           {
-            "node": "Lấy bài quote từ Telegram",
+            "node": "Lấy quote mới nhất từ kênh",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Lấy bài quote từ Telegram": {
+    "Lấy quote mới nhất từ kênh": {
       "main": [
         [
           {
@@ -187,7 +193,10 @@
     }
   },
   "active": false,
-  "settings": {},
+  "settings": {
+    "timezone": "Asia/Ho_Chi_Minh",
+    "executionOrder": "v1"
+  },
   "versionId": "1",
   "meta": {
     "instanceId": 0,
