@@ -1,0 +1,198 @@
+{
+  "name": "Quote Telegram → Fanpage FB (tamlygiaodich)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 6
+            }
+          ]
+        },
+        "timezone": "Asia/Ho_Chi_Minh"
+      },
+      "id": "cron-trigger",
+      "name": "Chạy quote hàng ngày (09h, 15h, 21h VN)",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1.1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "getUpdates",
+        "limit": 1,
+        "reverse": true
+      },
+      "id": "telegram-get-updates",
+      "name": "Lấy bài quote từ Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [450, 300],
+      "credentials": {
+        "telegramApi": {
+          "id": "telegram-quote-bot",
+          "name": "Telegram Bot Quote (@NgheTradingSupport_Bot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "const text = $json.message?.text || $json.channel_post?.text || '';\nconst cleaned = text.replace(/\\n{3,}/g, '\\n\\n').trim();\nconst fbContent = cleaned + '\\n\\n' +\n  'Đừng học thêm một mô hình nến nữa. Bạn đã học đủ rồi. Vấn đề nằm ở chỗ khác, và nó ở đây → nghetrading.com/bai-viet.html\\n' +\n  'Đã đến lúc coi trading là 1 nghề nghiệp thật sự nghiêm túc.';\nreturn [{ fb_content: fbContent }];"
+      },
+      "id": "format-fb-content",
+      "name": "Định dạng nội dung FB",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://graph.facebook.com/v18.0/{{ $env.FB_PAGE_ID_2 }}/feed",
+        "method": "POST",
+        "sendBody": true,
+        "bodyParametersJson": {
+          "message": "={{ $json.fb_content }}",
+          "access_token": "={{ $env.FB_PAGE_ACCESS_TOKEN_2 }}"
+        },
+        "options": {}
+      },
+      "id": "facebook-post",
+      "name": "Đăng bài lên Fanpage",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [850, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "facebook-page-token",
+          "name": "Facebook Page Access Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "functionCode": "const postId = $json[0]?.id;\nif (!postId) return [];\nreturn [{ post_id: postId }];"
+      },
+      "id": "extract-post-id",
+      "name": "Lấy Post ID",
+      "type": "n8n-nodes-base.function",
+      "typeVersion": 1,
+      "position": [850, 450]
+    },
+    {
+      "parameters": {
+        "url": "https://graph.facebook.com/v18.0/={{ $json.post_id }}/comments",
+        "method": "POST",
+        "sendBody": true,
+        "bodyParametersJson": {
+          "message": "👉 Anh em tham gia nhóm Telegram cập nhật phân tích thị trường & nhận định về Vàng (XAU/USD) hàng ngày tại đây nhé: https://t.me/nhatkytradingvn",
+          "access_token": "={{ $env.FB_PAGE_ACCESS_TOKEN_2 }}"
+        },
+        "options": {}
+      },
+      "id": "facebook-comment",
+      "name": "Comment đầu tiên (tạo động lực)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [1050, 450],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "facebook-page-token",
+          "name": "Facebook Page Access Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "text": "✅ Đã post quote lên Fanpage tamlygiaodich lúc {{ $now.format('YYYY-MM-DD HH:mm:ss') }}",
+        "chatId": "{{ $env.ADMIN_CHAT_ID }}",
+        "messageThreadId": 22
+      },
+      "id": "telegram-notify",
+      "name": "Thông báo về Topic 22",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1,
+      "position": [1050, 300],
+      "credentials": {
+        "telegramApi": {
+          "id": "telegram-bot",
+          "name": "Telegram Bot (@NgheTradingSupport_Bot)"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Chạy quote hàng ngày (09h, 15h, 21h VN)": {
+      "main": [
+        [
+          {
+            "node": "Lấy bài quote từ Telegram",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lấy bài quote từ Telegram": {
+      "main": [
+        [
+          {
+            "node": "Định dạng nội dung FB",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Định dạng nội dung FB": {
+      "main": [
+        [
+          {
+            "node": "Đăng bài lên Fanpage",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Đăng bài lên Fanpage": {
+      "main": [
+        [
+          {
+            "node": "Lấy Post ID",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Thông báo về Topic 22",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Lấy Post ID": {
+      "main": [
+        [
+          {
+            "node": "Comment đầu tiên (tạo động lực)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "1",
+  "meta": {
+    "instanceId": 0,
+    "templateCredsSetupCompleted": false
+  },
+  "id": "quote-to-facebook-workflow",
+  "tags": []
+}
