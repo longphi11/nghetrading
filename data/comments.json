@@ -1,5 +1,2316 @@
 {
-  "by_slug": {},
+  "by_slug": {
+    "giao-dich-theo-phong-cach-on-gian": [
+      {
+        "id": "c_gdt_01",
+        "name": "Minh Châu",
+        "avatar_color": "#0f766e",
+        "date": "2 ngày trước",
+        "content": "Bài viết nhắc nhở rất đúng: giao dịch đơn giản thì mới bám được kịp thị trường. Em từng cố gắn hết chỉ số vào chart, kết quả chỉ làm mù mắt bản thân.",
+        "reply": null
+      },
+      {
+        "id": "c_gdt_02",
+        "name": "Hồng Đức",
+        "avatar_color": "#7c2d12",
+        "date": "1 tuần trước",
+        "content": "Ít chỉ số hơn, quan sát nến hơn. Cách tiếp cận trong bài này khiến em thấy rõ mình đã làm phức tạp hóa gì quá nhiều trong suốt hai năm qua.",
+        "reply": null
+      },
+      {
+        "id": "c_gdt_03",
+        "name": "Lan Anh",
+        "avatar_color": "#4338ca",
+        "date": "3 ngày trước",
+        "content": "Đơn giản hóa không phải là bỏ qua chi tiết, mà là tập trung vào những thứ thực sự quan trọng. Bài viết của tác giả thúc đẩy em nhìn lại toàn bộ quy trình của mình.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "2 ngày trước",
+          "content": "Đúng rồi Lan Anh. Ít động tác hơn, thị trường sẽ trả lời rõ ràng hơn."
+        }
+      }
+    ],
+    "thoi-gian-nguy-hiem-nhat-cho-viec": [
+      {
+        "id": "c_tgn_01",
+        "name": "Tuấn Kiệt",
+        "avatar_color": "#831843",
+        "date": "5 ngày trước",
+        "content": "Em từng vào lệnh vào giờ cụm kết phiên, kết quả nến đảo chiều đâm thẳng vào vị thế của em. Bài viết này giải thích rất rõ tại sao giờ đó là thời điểm nguy hiểm.",
+        "reply": null
+      },
+      {
+        "id": "c_tgn_02",
+        "name": "Thùy Dung",
+        "avatar_color": "#1e3a8a",
+        "date": "1 tuần trước",
+        "content": "Kinh nghiệm quý báu. Trước đây em không biết phân biệt giữa khung giờ thanh khoản thấp và khung giờ có xu hướng, kết quả bị chốt lỗ nhiều lần mà không hiểu tại sao.",
+        "reply": null
+      },
+      {
+        "id": "c_tgn_03",
+        "name": "Văn Hiếu",
+        "avatar_color": "#701a75",
+        "date": "2 tuần trước",
+        "content": "Bài viết nhắc nhở trader nên xem đồng hồ trước khi xem chart. Một lệnh vào sai giờ có thể phá hỏng cả tuần làm việc trước đó.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "1 tuần trước",
+          "content": "Chính xác Văn Hiếu. Thời gian là biến số không thể bỏ qua trong quản trị rủi ro."
+        }
+      }
+    ],
+    "suc-manh-cua-su-kien-tri-trong-trading": [
+      {
+        "id": "c_skt_01",
+        "name": "Ngọc Ánh",
+        "avatar_color": "#312e81",
+        "date": "4 ngày trước",
+        "content": "Kiên trì không phải là ngồi im mà là lặp đi lặp lại quy trình đúng đắn. Em đã áp dụng tư duy này được ba tháng và thấy sự khác biệt rõ rệt.",
+        "reply": null
+      },
+      {
+        "id": "c_skt_02",
+        "name": "Đức Anh",
+        "avatar_color": "#065f46",
+        "date": "1 tuần trước",
+        "content": "Nhiều trader bỏ chạy khi chưa thấy kết quả, không biết rằng sự kiên trì mới là yếu tố phân biệt giữa người thành công và người từ bỏ.",
+        "reply": null
+      },
+      {
+        "id": "c_skt_03",
+        "name": "Hà My",
+        "avatar_color": "#0f766e",
+        "date": "2 ngày trước",
+        "content": "Bài viết đưa ra góc nhìn rất mới mẻ: sự kiên trì không phải là bản lĩnh, mà là kết quả của việc có một hệ thống mà bạn tin tưởng.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "1 ngày trước",
+          "content": "Hà My đã nắm bắt cốt lõi. Hệ thống trước, cảm xúc sau."
+        }
+      }
+    ],
+    "tai-sao-ban-tra-lai-loi-nhuan-kiem": [
+      {
+        "id": "c_tln_01",
+        "name": "Bảo Trâm",
+        "avatar_color": "#475569",
+        "date": "3 ngày trước",
+        "content": "Em vừa nhận ra mình đã trả lại toàn bộ lãi bốn tháng chỉ trong hai lệnh thua lớn. Bài viết chọc trúng nỗi đau mà em đã trốn tránh trong nhiều tháng.",
+        "reply": null
+      },
+      {
+        "id": "c_tln_02",
+        "name": "Quốc Khánh",
+        "avatar_color": "#7c2d12",
+        "date": "1 tuần trước",
+        "content": "Lợi nhuận chưa thực hiện là con số ảo. Chỉ khi lệnh được đóng cửa và tiền vào túi, mới gọi là thành công thực sự.",
+        "reply": null
+      },
+      {
+        "id": "c_tln_03",
+        "name": "Thị Huyền",
+        "avatar_color": "#1e293b",
+        "date": "5 ngày trước",
+        "content": "Tác giả viết rất thực tế về심 lý 'đặt cược lại' sau mỗi lệnh thắng. Em đã từng mắc sai lầm này và mất gần một nửa tài khoản.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Thị Huyền, nhận ra lỗi là bước đầu tiên để không lặp lại lần sau."
+        }
+      }
+    ],
+    "nhung-con-ho-day-chung-ta-ieu-gi": [
+      {
+        "id": "c_nch_01",
+        "name": "Hiếu Minh",
+        "avatar_color": "#1e3a8a",
+        "date": "2 tuần trước",
+        "content": "Mỗi con họ đều đại diện cho một nỗi sợ khác nhau trong trading. Bài viết giúp em nhìn thẳng vào những thứ mình đã tránh mặt quá lâu.",
+        "reply": null
+      },
+      {
+        "id": "c_nch_02",
+        "name": "Mai Phương",
+        "avatar_color": "#4338ca",
+        "date": "1 tuần trước",
+        "content": "Sợ lỗ, sợ lỡ, sợ sai... những con họ này xuất hiện mỗi khi em mở phần mềm giao dịch. Bài viết này khiến em cảm thấy không một mình trong cuộc chiến đó.",
+        "reply": null
+      },
+      {
+        "id": "c_nch_03",
+        "name": "Nam Trung",
+        "avatar_color": "#701a75",
+        "date": "3 ngày trước",
+        "content": "Việc đặt tên cho nỗi sợ giúp em dễ dàng đối mặt với nó hơn. Khi biết mình đang đối đầu với cái gì, chiến thuật sẽ khác hẳn.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "2 ngày trước",
+          "content": "Đúng vậy Nam Trung. Đặt tên thì nỗi sợ không còn quái dữ như trước."
+        }
+      }
+    ],
+    "vi-sao-hau-het-trader-thua-lo-khi": [
+      {
+        "id": "c_vht_01",
+        "name": "Trung Kiên",
+        "avatar_color": "#065f46",
+        "date": "1 tuần trước",
+        "content": "Không có kế hoạch, không có quy trình, chỉ vào lệnh theo cảm xúc. Đó chính là hình ảnh của em trước đây, và kết quả là hai tài khoản bị nhưng sạch.",
+        "reply": null
+      },
+      {
+        "id": "c_vht_02",
+        "name": "Ngọc Lan",
+        "avatar_color": "#831843",
+        "date": "2 tuần trước",
+        "content": "Hầu hết trader thua không vì thiếu kiến thức, mà vì thiếu kỷ luật thực thi kiến thức đó. Bài viết phân tích rất sâu sắc về vấn đề gốc.",
+        "reply": null
+      },
+      {
+        "id": "c_vht_03",
+        "name": "Đức Trí",
+        "avatar_color": "#312e81",
+        "date": "4 ngày trước",
+        "content": "Thị trường không hề từ trung với ai. Em đã học được bài học đắt giá sau mười hai tháng giao dịch không có bản ghi chép.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Bản ghi chép là gương helps trader nhìn thấy mình một cách khách quan."
+        }
+      }
+    ],
+    "quy-luat-8020-trong-giao-dich-de6": [
+      {
+        "id": "c_820_01",
+        "name": "Hồng Phúc",
+        "avatar_color": "#0f766e",
+        "date": "3 ngày trước",
+        "content": "Quy tắc 80/20 trong giao dịch giúp em tập trung vào 20% yếu tố tạo ra 80% kết quả. Không cần làm nhiều, chỉ cần làm đúng những thứ quan trọng.",
+        "reply": null
+      },
+      {
+        "id": "c_820_02",
+        "name": "Thanh Nga",
+        "avatar_color": "#475569",
+        "date": "1 tuần trước",
+        "content": "Trước đây em theo dõi mười cặp tiền cùng lúc, kết quả không nắm được bất kỳ cái nào. Sau khi áp dụng quy tắc này, mọi thứ trở nên sáng sủa hơn.",
+        "reply": null
+      },
+      {
+        "id": "c_820_03",
+        "name": "Quang Vinh",
+        "avatar_color": "#7c2d12",
+        "date": "2 ngày trước",
+        "content": "Ít hơn là nhiều hơn. Bài viết này nhắc nhở trader rằng việc lọc chọn những thiết lập chất lượng cao mới là chìa khóa.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "1 ngày trước",
+          "content": "Chính xác Quang Vinh. Chất lượng luôn đánh bại số lượng trong trading."
+        }
+      }
+    ],
+    "7-buoc-thoat-khoi-tinh-trang-thua": [
+      {
+        "id": "c_7bt_01",
+        "name": "Hòa Bình",
+        "avatar_color": "#1e293b",
+        "date": "1 tuần trước",
+        "content": "Tình trạng thua liên tiếp không phải do thị trường chống lại em, mà là do chính em đang chống lại thị trường. Bài viết này phản ánh đúng trải nghiệm của em.",
+        "reply": null
+      },
+      {
+        "id": "c_7bt_02",
+        "name": "Trà My",
+        "avatar_color": "#065f46",
+        "date": "2 tuần trước",
+        "content": "Bước dừng lại để nghỉ ngơi sau chuỗi lệnh thua là quyết định đúng đắn nhất em từng đưa ra. Tâm lý cần thời gian để bình phục.",
+        "reply": null
+      },
+      {
+        "id": "c_7bt_03",
+        "name": "Đức Hậu",
+        "avatar_color": "#4338ca",
+        "date": "5 ngày trước",
+        "content": "Mỗi bước trong bài viết đều rất thực tế và có thể áp dụng ngay. Em đã lưu lại để đọc lại mỗi khi cảm thấy mình đang sai lầm.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Đức Hậu, việc quay lại đọc lại bài viết trong khoảnh khắc khó khăn là thói quen rất tốt."
+        }
+      }
+    ],
+    "suc-manh-cua-viec-khong-lam-gi": [
+      {
+        "id": "c_klg_01",
+        "name": "An Nhiên",
+        "avatar_color": "#1e3a8a",
+        "date": "3 ngày trước",
+        "content": "Không vào lệnh đôi khi là lệnh tốt nhất của ngày. Em đã học được điều này sau nhiều lần vào lệnh chỉ vì ngạo mạn hoặc chán cheste.",
+        "reply": null
+      },
+      {
+        "id": "c_klg_02",
+        "name": "Đông Phương",
+        "avatar_color": "#701a75",
+        "date": "1 tuần trước",
+        "content": "Thị trường không bao giờ chạy thoát. Có những ngày đứng ngoài quan sát mang lại giá trị cao hơn bao giờ hết việc đâm đầu vào lệnh.",
+        "reply": null
+      },
+      {
+        "id": "c_klg_03",
+        "name": "Quốc Anh",
+        "avatar_color": "#312e81",
+        "date": "4 ngày trước",
+        "content": "Bài viết thay đổi cách em nhìn sự 'lazy' trong trading. Không làm gì đôi khi là công việc khó nhất nhưng cũng hiệu quả nhất.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Quốc Anh đã hiểu được tâm trạng của thị trường khi không có thiết lập nào phù hợp."
+        }
+      }
+    ],
+    "khi-co-oc-la-su-lua-chon": [
+      {
+        "id": "c_kco_01",
+        "name": "Thanh Tùng",
+        "avatar_color": "#065f46",
+        "date": "2 tuần trước",
+        "content": "Tùy chọn không vào lệnh là quyền lợi lớn nhất của trader. Bài viết này khiến em tự hào mỗi khi mình chọn cách đứng ngoài.",
+        "reply": null
+      },
+      {
+        "id": "c_kco_02",
+        "name": "Hà Trang",
+        "avatar_color": "#831843",
+        "date": "1 tuần trước",
+        "content": "Em từng cảm thấy 자신이 đang bỏ lỡ cơ hội mỗi khi không vào lệnh. Giờ em hiểu rằng bỏ lỡ lệnh kém hơn là vào lệnh sai.",
+        "reply": null
+      },
+      {
+        "id": "c_kco_03",
+        "name": "Minh Hoàng",
+        "avatar_color": "#475569",
+        "date": "3 ngày trước",
+        "content": "Khi thị trường không rõ ràng, đứng ngoài không phải là thua cuộc, mà là chiến lược bảo vệ vốn. Bài viết này viết đúng tâm trạng của em.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "2 ngày trước",
+          "content": "Minh Hoàng, đứng ngoài khi cần là dấu hiệu của một trader trưởng thành."
+        }
+      }
+    ],
+    "tai-sao-sang-tao-can-co-on": [
+      {
+        "id": "c_tsc_01",
+        "name": "Bảo Ngọc",
+        "avatar_color": "#0f766e",
+        "date": "5 ngày trước",
+        "content": "Ôn là yếu tố thiếu hụt nhất trong cộng đồng trader hiện đại. Mọi người đều muốn kết quả ngay lập tức, quên đi rằng tư duy cần thời gian để chín muồi.",
+        "reply": null
+      },
+      {
+        "id": "c_tsc_02",
+        "name": "Văn Nam",
+        "avatar_color": "#1e3a8a",
+        "date": "2 tuần trước",
+        "content": "Bài viết khiến em nhìn lại những quyết định réo rít trong quá khứ. Nếu em có ôn thêm mười phút, có lẽ nhiều lỗi sẽ không xảy ra.",
+        "reply": null
+      },
+      {
+        "id": "c_tsc_03",
+        "name": "Thuỳ Vân",
+        "avatar_color": "#7c2d12",
+        "date": "1 tuần trước",
+        "content": "Sáng tạo trong trading không phải là ý tưởng kỳ cunning, mà là khả năng nhìn thấy điều mà mọi người khác đang bỏ qua. Bài viết rất hay.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "6 ngày trước",
+          "content": "Thuỳ Vân, quan sát khéo léo mới là nguồn cảm hứng thực sự."
+        }
+      }
+    ],
+    "10-ieu-nhung-nguoi-co-suc-manh-y": [
+      {
+        "id": "c_10l_01",
+        "name": "Hải Âu",
+        "avatar_color": "#4338ca",
+        "date": "2 ngày trước",
+        "content": "Ý chí siêu việt không phải là sinh ra với nó, mà là rèn luyện qua từng ngày. Bài viết này đưa ra danh sách kiểm tra rất hữu ích cho em.",
+        "reply": null
+      },
+      {
+        "id": "c_10l_02",
+        "name": "Đức Bình",
+        "avatar_color": "#701a75",
+        "date": "1 tuần trước",
+        "content": "Em đánh giá lại mình theo từng điểm trong bài và thấy mình còn kém rất nhiều về điều thứ năm. Sẽ tập trung cải thiện từ tuần tới.",
+        "reply": null
+      },
+      {
+        "id": "c_10l_03",
+        "name": "Ngọc Quý",
+        "avatar_color": "#065f46",
+        "date": "4 ngày trước",
+        "content": "Những người có ý chí mạnh không bao giờ tìm pretext cho thất bại của mình. Bài viết này là tiếng động nhắc nhở rất cần thiết.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Ngọc Quý đã nắm được tinh thần cốt lõi của bài viết."
+        }
+      }
+    ],
+    "nhung-cau-noi-truyen-cam-hung-tu": [
+      {
+        "id": "c_ncn_01",
+        "name": "Việt Hùng",
+        "avatar_color": "#1e293b",
+        "date": "3 tuần trước",
+        "content": "Một câu nói có thể thay đổi cách nhìn về trading của một người. Bài viết sưu tầm những câu nói như vậy, đọc xong vẫn cònEcho trong tâm trí.",
+        "reply": null
+      },
+      {
+        "id": "c_ncn_02",
+        "name": "Lệ Thu",
+        "avatar_color": "#831843",
+        "date": "2 tuần trước",
+        "content": "Em đã lưu lại nhiều câu nói từ bài viết này và đọc lại mỗi sáng trước khi mở chart. Nó giúp định hướng tâm lý cho ngày giao dịch.",
+        "reply": null
+      },
+      {
+        "id": "c_ncn_03",
+        "name": "Trung Hải",
+        "avatar_color": "#7c2d12",
+        "date": "1 tuần trước",
+        "content": "Không phải tất cả câu nói hay đều áp dụng được vào trading, nhưng những câu trong bài này đều chạm thẳng vào thực tế.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "6 ngày trước",
+          "content": "Trung Hải, lọc chọn những giá trị phù hợp với bản thân mới là điều quan trọng."
+        }
+      }
+    ],
+    "20-quy-luat-bat-bien-trong-trading": [
+      {
+        "id": "c_20q_01",
+        "name": "Trí Thức",
+        "avatar_color": "#312e81",
+        "date": "1 tuần trước",
+        "content": "Những quy luật trong bài viết không phải là teoria, mà là kết quả của hàng nghìn lệnh giao dịch thực tế. Em đánh giá cao sự trung thực của tác giả.",
+        "reply": null
+      },
+      {
+        "id": "c_20q_02",
+        "name": "Mai Liên",
+        "avatar_color": "#1e3a8a",
+        "date": "2 tuần trước",
+        "content": "Quy luật số mười lẻ về quản trị vốn đã cứu lại tài khoản của em từ_SUY GIÁM_DẦN SUY GIẢM_. Cảm ơn tác giả đã chia sẻ công khai.",
+        "reply": null
+      },
+      {
+        "id": "c_20q_03",
+        "name": "Hoàng Nam",
+        "avatar_color": "#475569",
+        "date": "5 ngày trước",
+        "content": "Mỗi quy luật trong bài viết đều là một bài học đắt giá. Em đã in ra và dán trước màn hình để nhớ mỗi ngày.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Hoàng Nam, việc đặt quy luật trong tầm nhìn là cách tốt nhất để không quên."
+        }
+      }
+    ],
+    "giao-dich-nhu-quan-ly-quy-trieu-o": [
+      {
+        "id": "c_gdq_01",
+        "name": "Hưng Dũng",
+        "avatar_color": "#701a75",
+        "date": "3 ngày trước",
+        "content": "Giao dịch như quản lý quỹ tử tế giúp em nhìn thấy mình không chỉ là một trader, mà là một người quản trị tài sản. Thay đổi tư duy lớn.",
+        "reply": null
+      },
+      {
+        "id": "c_gdq_02",
+        "name": "Thị Trinh",
+        "avatar_color": "#0f766e",
+        "date": "1 tuần trước",
+        "content": "Bài viết làm em hiểu ra việc đối xử với tài khoản giao dịch như một doanh nghiệp nhỏ mới là con đường bền vững.",
+        "reply": null
+      },
+      {
+        "id": "c_gdq_03",
+        "name": "Quốc Cường",
+        "avatar_color": "#1e3a8a",
+        "date": "2 ngày trước",
+        "content": "Không đồng cảm ngay với mọi ý kiến trong bài, nhưng phần về quản trị rủi ro đã khiến em phải nghi ngờ lại cách mình đang làm.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "1 ngày trước",
+          "content": "Quốc Cường, việc nghi ngờ bản thân là dấu hiệu của sự trưởng thành."
+        }
+      }
+    ],
+    "tai-sao-lenh-co-kha-nang-lai-lam": [
+      {
+        "id": "c_tlk_01",
+        "name": "Phương Thảo",
+        "avatar_color": "#4338ca",
+        "date": "2 tuần trước",
+        "content": "Lệnh có khả năng lại làm không phải do nhà sàn, mà là do chính tâm lý trader không chịu chấp nhận lỗ. Bài viết phân tích rất sâu.",
+        "reply": null
+      },
+      {
+        "id": "c_tlk_02",
+        "name": "Văn Quân",
+        "avatar_color": "#1e293b",
+        "date": "1 tuần trước",
+        "content": "Em đã từng vào lệnh sửa lỗi mười lần trong một ngày và kết quả là tài khoản bị maar_hụt. Bài viết này là lời cảnh báo đáng giá.",
+        "reply": null
+      },
+      {
+        "id": "c_tlk_03",
+        "name": "Lưu Huy",
+        "avatar_color": "#831843",
+        "date": "5 ngày trước",
+        "content": "Chấp nhận lỗ là bước đầu tiên để dừng chक्र spiraling xuống lề. Tác giả viết đúng vào nỗi đau của hầu hết trader mới.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Lưu Huy, từ chối chấp nhận lỗ nhỏ hôm nay đồng nghĩa với việc chấp nhận lỗ lớn ngày mai."
+        }
+      }
+    ],
+    "su-nham-chan-la-ieu-can-thiet-trong": [
+      {
+        "id": "c_snc_01",
+        "name": "Bích Ngọc",
+        "avatar_color": "#475569",
+        "date": "1 tuần trước",
+        "content": "Sự nh nún chán là điều trader ít người dare nói ra. Bài viết đưa ra vấn đề này rất thẳng thắn và đồng cảm.",
+        "reply": null
+      },
+      {
+        "id": "c_snc_02",
+        "name": "Hữu Hoàng",
+        "avatar_color": "#065f46",
+        "date": "2 tuần trước",
+        "content": "Phải làm lại cùng một quy trình hàng ngày dù không thấy kết quả ngay lập tức, đó mới là bài học thực chiến về sự kỷ luật.",
+        "reply": null
+      },
+      {
+        "id": "c_snc_03",
+        "name": "Thanh Xuân",
+        "avatar_color": "#475569",
+        "date": "4 ngày trước",
+        "content": "Bài viết khiến em cảm thấy mình không đơn độc khi gặp phải thời kỳ chán nản trong hành trình trading của mình.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Thanh Xuân, tất cả trader đều trải qua giai đoạn này. Quan trọng là không bỏ chạy."
+        }
+      }
+    ],
+    "lich-trinh-giao-dich-hang-ngay-cua": [
+      {
+        "id": "c_ltg_01",
+        "name": "Trung Cường",
+        "avatar_color": "#0f766e",
+        "date": "2 ngày trước",
+        "content": "Lịch trình giao dịch hàng ngày giúp em có được cấu trúc trong ngày làm việc. Không còn vào lệnh theo cảm xúc hay ngẫu nhiên.",
+        "reply": null
+      },
+      {
+        "id": "c_ltg_02",
+        "name": "Lan Hương",
+        "avatar_color": "#312e81",
+        "date": "1 tuần trước",
+        "content": "Trước đây em mở chart lúc nào cũng có. Giờ em chỉ vào lệnh theo khung giờ đã lập sẵn, tâm lý đã nhẹ nhõm rất nhiều.",
+        "reply": null
+      },
+      {
+        "id": "c_ltg_03",
+        "name": "Đức Thịnh",
+        "avatar_color": "#701a75",
+        "date": "3 ngày trước",
+        "content": "Bài viết nhắc nhở rằng tự do trong trading đến từ kỷ luật, không phải từ việc làm theo ý thích của mình.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "2 ngày trước",
+          "content": "Đức Thịnh, tự do thực sự là tự do chọn disciplina."
+        }
+      }
+    ],
+    "nhung-ly-do-ay-hua-hen-e-tro-thanh": [
+      {
+        "id": "c_nly_01",
+        "name": "Nhân Hòa",
+        "avatar_color": "#4338ca",
+        "date": "1 tuần trước",
+        "content": "Cứ nghĩ sớm thì còn nhiều thời gian, nhưng tháng này là năm thứ ba em vẫn chưa có được kế hoạch giao dịch riêng. Bài viết chọc đau đúng chỗ.",
+        "reply": null
+      },
+      {
+        "id": "c_nly_02",
+        "name": "Thị Hoa",
+        "avatar_color": "#1e3a8a",
+        "date": "2 tuần trước",
+        "content": "Sự muộn màng không đến từ thiếu thời gian, mà đến từ việc không bắt đầu ngay hôm nay. Tác giả viết rất đúng về vấn đề này.",
+        "reply": null
+      },
+      {
+        "id": "c_nly_03",
+        "name": "Minh Tâm",
+        "avatar_color": "#0f766e",
+        "date": "5 ngày trước",
+        "content": "Danh sách lý do trong bài viết khiến em phải đối mặt với những điều mình đã lừa mình trong suốt năm nay.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Minh Tâm, đối mặt với sự thật mới là bước đi đầu tiên."
+        }
+      }
+    ],
+    "nhung-loi-khuyen-sau-sac-tu-cac-trader": [
+      {
+        "id": "c_nlk_01",
+        "name": "Hoàng Sơn",
+        "avatar_color": "#1e293b",
+        "date": "3 ngày trước",
+        "content": "Những lời khuyên trong bài viết đến từ những người đã trải qua thi gian trong thị trường, không phải lý thuyết từ sách vở. Điều đó làm giá trị của bài viết tăng lên nhiều.",
+        "reply": null
+      },
+      {
+        "id": "c_nlk_02",
+        "name": "Thanh Bình",
+        "avatar_color": "#831843",
+        "date": "1 tuần trước",
+        "content": "Em đã lưu lại từng câu khuyên và áp dụng vào từng lệnh của mình. Kết quả sau một tháng là tâm lý đã ổn định hơn rõ rệt.",
+        "reply": null
+      },
+      {
+        "id": "c_nlk_03",
+        "name": "Đức Vĩnh",
+        "avatar_color": "#7c2d12",
+        "date": "2 ngày trước",
+        "content": "Bài viết nhắc nhở rằng lời khuyên tốt nhất đôi khi là những câu ngắn, đơn giản nhưng khó thực hành nhất.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "1 ngày trước",
+          "content": "Đức Vĩnh, đơn giản không có nghĩa là dễ."
+        }
+      }
+    ],
+    "tinh-lang-hay-lien-tuc": [
+      {
+        "id": "c_tlh_01",
+        "name": "Kim Oanh",
+        "avatar_color": "#475569",
+        "date": "2 tuần trước",
+        "content": "Sự tĩnh lặng không phải là không làm gì, mà là chọn lọc những hành động đúng lúc. Bài viết này thay đổi cách em nhìn vào thị trường.",
+        "reply": null
+      },
+      {
+        "id": "c_tlh_02",
+        "name": "Văn Hải",
+        "avatar_color": "#1e3a8a",
+        "date": "1 tuần trước",
+        "content": "Em từng nghĩ vào lệnh nhiều là chuyên nghiệp, nhưng sau khi đọc bài này, em hiểu rằng ít vào lệnh mới là dấu hiệu của thành thục.",
+        "reply": null
+      },
+      {
+        "id": "c_tlh_03",
+        "name": "Linh Chi",
+        "avatar_color": "#4338ca",
+        "date": "4 ngày trước",
+        "content": "Tác giả viết rất tinh tế về sự khác biệt giữa kiên nhẫn và sự lười biếng trong trading. Đây là bài học quý báu.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Linh Chi, biết phân biệt hai khái niệm này là đã thắng hơn nửa cuộc chiến."
+        }
+      }
+    ],
+    "ngay-mai-thi-truong-van-o-o": [
+      {
+        "id": "c_ntm_01",
+        "name": "Hồng Sơn",
+        "avatar_color": "#065f46",
+        "date": "1 tuần trước",
+        "content": "Chưa biết ngày mai thị trường sẽ đi đâu, nhưng em đã sẵn sàng với mọi kịch bản. Đó là điều bài viết này dạy em.",
+        "reply": null
+      },
+      {
+        "id": "c_ntm_02",
+        "name": "Thị Trúc",
+        "avatar_color": "#7c2d12",
+        "date": "2 tuần trước",
+        "content": "Không cần đoán trước, chỉ cần chuẩn bị cho mọi tình huống. Tư duy này giúp em giảm Stress khi giao dịch rất nhiều.",
+        "reply": null
+      },
+      {
+        "id": "c_ntm_03",
+        "name": "Đức Luật",
+        "avatar_color": "#831843",
+        "date": "5 ngày trước",
+        "content": "Bài viết nhắc nhở trader rằng sự không chắc chắn là điều bình thường, và nhiệm vụ của chúng ta là quản lý rủi ro, không phải dự đoán tương lai.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Đức Luật, chuẩn bị tốt hơn là dự đoán trước."
+        }
+      }
+    ],
+    "nhung-thai-o-can-co-o-1-trader": [
+      {
+        "id": "c_nth_01",
+        "name": "Hưng Việt",
+        "avatar_color": "#0f766e",
+        "date": "3 tuần trước",
+        "content": "Thái chí không phải là kiến thức, mà là thứ được hình thành qua từng ngày làm việc. Bài viết liệt kê những thái chí mà mọi trader chuyên nghiệp đều cần có.",
+        "reply": null
+      },
+      {
+        "id": "c_nth_02",
+        "name": "Ngọc Yến",
+        "avatar_color": "#312e81",
+        "date": "2 tuần trước",
+        "content": "Em đã đánh giá lại mình theo từng thái chí trong bài và thấy mình còn thiếu rất nhiều về kh kh kh kiên nhẫn.",
+        "reply": null
+      },
+      {
+        "id": "c_nth_03",
+        "name": "Trường Sơn",
+        "avatar_color": "#701a75",
+        "date": "1 tuần trước",
+        "content": "Không phải ai cũng có thể trở thành trader chuyên nghiệp, nhưng ai cũng có thể phát triển những thái chí cần thiết nếu có ý chí.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "6 ngày trước",
+          "content": "Trường Sơn, ý chí là điểm khởi đầu của mọi thứ."
+        }
+      }
+    ],
+    "chia-khoa-e-giao-dich-thanh-cong": [
+      {
+        "id": "c_ckh_01",
+        "name": "Minh Quân",
+        "avatar_color": "#065f46",
+        "date": "2 ngày trước",
+        "content": "Khóa geheim của thành công không phải là một chiến thuật đặc biệt, mà là sự consistent trong việc áp dụng quy trình đã lập.",
+        "reply": null
+      },
+      {
+        "id": "c_ckh_02",
+        "name": "Lan Ngọc",
+        "avatar_color": "#1e3a8a",
+        "date": "1 tuần trước",
+        "content": "Em đã tìm thấy đáp án cho mình sau khi đọc bài viết này: thành công đến từ việc làm đúng việc đơn giản, hàng ngày.",
+        "reply": null
+      },
+      {
+        "id": "c_ckh_03",
+        "name": "Đức Anh",
+        "avatar_color": "#701a75",
+        "date": "5 ngày trước",
+        "content": "Bài viết nhắc nhở rằng không có đường lối ngắn trong trading, chỉ có đường lối đúng đắn.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Đức Anh, đường lối đúng đắn có thể chậm nhưng chắc chắn."
+        }
+      }
+    ],
+    "tai-sao-ban-nen-tranh-cac-loai-tin": [
+      {
+        "id": "c_tct_01",
+        "name": "Thanh Hải",
+        "avatar_color": "#1e293b",
+        "date": "2 tuần trước",
+        "content": "Tin tức gây ồn ào nhiều khi làm trader mất tập trung vào chart. Bài viết này xác nhận quyết định của em khi bỏ qua hầu hết tin tức ngắn hạn.",
+        "reply": null
+      },
+      {
+        "id": "c_tct_02",
+        "name": "Văn Thành",
+        "avatar_color": "#475569",
+        "date": "1 tuần trước",
+        "content": "Em từng vào lệnh chỉ vì đọc được một tin tức hấp dẫn và mất toàn bộ vốn trong đó. Bài viết này là bài học đắt giá.",
+        "reply": null
+      },
+      {
+        "id": "c_tct_03",
+        "name": "Hoàng Lan",
+        "avatar_color": "#831843",
+        "date": "5 ngày trước",
+        "content": "Chart không nói dối, còn tin tức có thể bị distortions. Bài viết giúp em tin tưởng vào quan sát của bản thân nhiều hơn.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Hoàng Lan, chart là nguồn tin cậy nhất mà trader có."
+        }
+      }
+    ],
+    "hay-giao-dich-nhu-ke-i-san-ung-nhu": [
+      {
+        "id": "c_hgd_01",
+        "name": "Thành Đạt",
+        "avatar_color": "#0f766e",
+        "date": "3 ngày trước",
+        "content": "Nhà keizer luôn có kế hoạch trước khi bước vào sàn giao dịch. Trader cũng vậy, cần có kế hoạch trước khi vào lệnh.",
+        "reply": null
+      },
+      {
+        "id": "c_hgd_02",
+        "name": "Thị Ngọc",
+        "avatar_color": "#4338ca",
+        "date": "1 tuần trước",
+        "content": "Bài viết so sánh rất hay giữa tư duy của nhà đánh bài và tư duy của trader chuyên nghiệp. Em đã rút ra bài học cho mình.",
+        "reply": null
+      },
+      {
+        "id": "c_hgd_03",
+        "name": "Quốc Bảo",
+        "avatar_color": "#7c2d12",
+        "date": "2 ngày trước",
+        "content": "Rủi ro được tính toán rõ ràng mới là sự khác biệt giữa trader và con cờ bạc. Tác giả viết rất rõ ràng về vấn đề này.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "1 ngày trước",
+          "content": "Quốc Bảo, sự khác biệt nằm ở việc kiểm soát, không phải tại vận may."
+        }
+      }
+    ],
+    "tai-khoan-cua-ban-co-nhieu-tien-hon": [
+      {
+        "id": "c_tkc_01",
+        "name": "Lan Anh",
+        "avatar_color": "#1e3a8a",
+        "date": "2 tuần trước",
+        "content": "Tài khoản giao dịch không chỉ là con số trên màn hình, mà là tiền thật mà em đã hy sinh thời gian và sức khỏe để kiếm được.",
+        "reply": null
+      },
+      {
+        "id": "c_tkc_02",
+        "name": "Đức Thọ",
+        "avatar_color": "#065f46",
+        "date": "1 tuần trước",
+        "content": "Bài viết nhắc nhở rằng mỗi đồng tiền trong tài khoản đều có giá trị, không nên bị lãng quên trong những lệnh vào sai.",
+        "reply": null
+      },
+      {
+        "id": "c_tkc_03",
+        "name": "Thùy Trang",
+        "avatar_color": "#475569",
+        "date": "4 ngày trước",
+        "content": "Khi nhìn mỗi đơn vị tiền như một giờ làm việc thực tế, em sẽ vào lệnh cẩn thận và suy nghĩ nhiều hơn.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Thùy Trang, sự trân trọng đối với vốn là nền tảng của sự bền vững."
+        }
+      }
+    ],
+    "nhung-niem-tin-se-ot-chay-tai-khoan": [
+      {
+        "id": "c_nnt_01",
+        "name": "Hùng Cường",
+        "avatar_color": "#701a75",
+        "date": "1 tuần trước",
+        "content": "Một số tin tưởng như 'thị trường sẽ quay lại' hoặc 'lệnh này chắc chắn thắng' đã khiến em mất gần một nửa tài khoản.",
+        "reply": null
+      },
+      {
+        "id": "c_nnt_02",
+        "name": "Thị Lan",
+        "avatar_color": "#1e3a8a",
+        "date": "2 tuần trước",
+        "content": "Bài viết liệt kê những tin tưởng nguy hiểm mà hầu hết trader mới đều mắc phải mà không hay biết.",
+        "reply": null
+      },
+      {
+        "id": "c_nnt_03",
+        "name": "Văn Đức",
+        "avatar_color": "#831843",
+        "date": "5 ngày trước",
+        "content": "Thay đổi tin tưởng là bước đầu tiên để thay đổi kết quả giao dịch. Bài viết này đã thúc đẩy em làm điều đó.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Văn Đức, tâm lý mới sẽ mang lại hành động mới."
+        }
+      }
+    ],
+    "tai-sao-ban-nen-chi-tap-trung-vao": [
+      {
+        "id": "c_tctf_01",
+        "name": "Thanh Hiền",
+        "avatar_color": "#312e81",
+        "date": "2 ngày trước",
+        "content": "Tập trung vào một vài thiết lập chất lượng tốt hơn là theo dõi mười chục chart cùng lúc. Em đã học được điều này theo cách khó khăn.",
+        "reply": null
+      },
+      {
+        "id": "c_tctf_02",
+        "name": "Đức Hòa",
+        "avatar_color": "#1e3a8a",
+        "date": "1 tuần trước",
+        "content": "Bài viết nhắc nhở trader rằng sự phân tán chỉ dẫn đến kết quả phân tán. Tập trung mới là chìa khóa.",
+        "reply": null
+      },
+      {
+        "id": "c_tctf_03",
+        "name": "Ngọc Diệp",
+        "avatar_color": "#701a75",
+        "date": "5 ngày trước",
+        "content": "Ít hơn là nhiều hơn. C这句话 trong bài viết đã trở thành motto giao dịch của em từ hôm nay.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Ngọc Diệp, giữ nguyên những nguyên tắc đơn giản này sẽ đưa em đi xa."
+        }
+      }
+    ],
+    "muc-tieu-that-su-cua-trader-la-gi": [
+      {
+        "id": "c_mtt_01",
+        "name": "Hồng Vân",
+        "avatar_color": "#0f766e",
+        "date": "2 tuần trước",
+        "content": "Mục tiêu thực sự của trader không phải là kiếm tiền nhanh, mà là giữ và phát triển vốn trên dài hạn. Bài viết viết rất đúng về điều này.",
+        "reply": null
+      },
+      {
+        "id": "c_mtt_02",
+        "name": "Trung Sơn",
+        "avatar_color": "#1e3a8a",
+        "date": "1 tuần trước",
+        "content": "Em từng đánh mất tài khoản vì chỉ nhắm vào lợi nhuận ngắn hạn, quên mất rằng bảo vệ vốn mới là ưu tiên hàng đầu.",
+        "reply": null
+      },
+      {
+        "id": "c_mtt_03",
+        "name": "Thị Hậu",
+        "avatar_color": "#475569",
+        "date": "3 ngày trước",
+        "content": "Bài viết giúp em định hướng lại mục tiêu của mình trong hành trình trader. Không còn chạy theo con số ảo nữa.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "2 ngày trước",
+          "content": "Thị Hậu, mục tiêu rõ ràng mới là bước đi đầu tiên."
+        }
+      }
+    ],
+    "4-yeu-to-chu-chot-e-thanh-cong-trong": [
+      {
+        "id": "c_4yc_01",
+        "name": "Minh Nhật",
+        "avatar_color": "#065f46",
+        "date": "3 ngày trước",
+        "content": "Bốn yếu tố trong bài viết đều là những điều cơ bản nhưng cực kỳ quan trọng. Bất kỳ trader nào bỏ qua một yếu tố nào đều sẽ gặp khó khăn.",
+        "reply": null
+      },
+      {
+        "id": "c_4yc_02",
+        "name": "Thị Trúc",
+        "avatar_color": "#475569",
+        "date": "1 tuần trước",
+        "content": "Em đã in bài viết này ra và đọc lại mỗi tuần để tự kiểm tra mình có đang tuân thủ bốn yếu tố này hay không.",
+        "reply": null
+      },
+      {
+        "id": "c_4yc_03",
+        "name": "Quốc Việt",
+        "avatar_color": "#7c2d12",
+        "date": "2 ngày trước",
+        "content": "Thành công trong trading không đến từ may mắn, mà từ sự kết hợp của những yếu tố đúng đắn mà bài viết đã nêu ra.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "1 ngày trước",
+          "content": "Quốc Việt, may mắn là khách đến một lần, nhưng kĩ thuật là người ở mãi."
+        }
+      }
+    ],
+    "co-the-thanh-cong-khong-neu-chi-coi": [
+      {
+        "id": "c_ctk_01",
+        "name": "Hữu Nhân",
+        "avatar_color": "#1e293b",
+        "date": "2 tuần trước",
+        "content": "Chỉ coi trading như một trò chơi mà không coi là một nghề nghiệp, kết quả chỉ có thể là thất bại. Bài viết viết rất thẳng thắn về điều này.",
+        "reply": null
+      },
+      {
+        "id": "c_ctk_02",
+        "name": "Linh Đan",
+        "avatar_color": "#4338ca",
+        "date": "1 tuần trước",
+        "content": "Em đã từng coi trading là cách kiếm tiền nhanh và trả giá đắt cho tư duy đó. Bài viết này là lời cảnh báo rất cần thiết.",
+        "reply": null
+      },
+      {
+        "id": "c_ctk_03",
+        "name": "Đức Trung",
+        "avatar_color": "#701a75",
+        "date": "5 ngày trước",
+        "content": "Bài viết nhắc nhở rằng sự chuyên nghiệp trong trading đến từ thái độ, không phải từ công cụ hay chiến thuật.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Đức Trung, thái thái độ chuyên nghiệp sẽ tạo ra kết quả chuyên nghiệp."
+        }
+      }
+    ],
+    "phan-lon-thoi-gian-chung-ta-khong": [
+      {
+        "id": "c_plt_01",
+        "name": "Bảo Lâm",
+        "avatar_color": "#0f766e",
+        "date": "3 ngày trước",
+        "content": "Thời gian là tài nguyên quý giá nhất của trader. Bài viết này giúp em nhìn lại mình đã bỏ phí bao nhiêu thời gian vào những điều không quan trọng.",
+        "reply": null
+      },
+      {
+        "id": "c_plt_02",
+        "name": "Mai Ngọc",
+        "avatar_color": "#1e3a8a",
+        "date": "1 tuần trước",
+        "content": "Phần lớn thời gian chúng ta không làm gì trong trading chính là khi chúng ta đang vào lệnh theo cảm xúc mà không có kế hoạch.",
+        "reply": null
+      },
+      {
+        "id": "c_plt_03",
+        "name": "Vĩnh Lộc",
+        "avatar_color": "#475569",
+        "date": "2 ngày trước",
+        "content": "Bài viết viết rất ngọt ngào về việc đánh giá đúng thời điểm hành động và thời điểm chờ đợi.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "1 ngày trước",
+          "content": "Vĩnh Lộc, biết khi nào hành động và khi nào chờ đợi là nghệ thuật của trader."
+        }
+      }
+    ],
+    "tai-sao-toi-ghet-giao-dich-nhieu": [
+      {
+        "id": "c_tsg_01",
+        "name": "Thanh Tâm",
+        "avatar_color": "#312e81",
+        "date": "1 tuần trước",
+        "content": "Giao dịch nhiều không đồng nghĩa với giao dịch giỏi. Em đã học được bài học đắt giá sau nhiều lần vào lệnh quá densité.",
+        "reply": null
+      },
+      {
+        "id": "c_tsg_02",
+        "name": "Đức Quang",
+        "avatar_color": "#831843",
+        "date": "2 tuần trước",
+        "content": "Bài viết viết đúng tâm trạng của em khi cảm thấy mệt mỏi và chán nản sau nhiều ngày vào liên tiếp mà không thấy kết quả.",
+        "reply": null
+      },
+      {
+        "id": "c_tsg_03",
+        "name": "Ngọc Ánh",
+        "avatar_color": "#701a75",
+        "date": "5 ngày trước",
+        "content": "Ít vào lệnh hơn, nhưng khi vào thì vào đúng. Đó là bài học mà em rút ra từ bài viết này.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Ngọc Ánh, chất lượng luôn quan trọng hơn số lượng."
+        }
+      }
+    ],
+    "nhung-loi-khuyen-ve-giao-dich-ngoai": [
+      {
+        "id": "c_nlg_01",
+        "name": "Trung Anh",
+        "avatar_color": "#065f46",
+        "date": "2 tuần trước",
+        "content": "Những lời khuyên trong bài viết đến từ những người đã trải qua thị trường, không phải từ những lý thuyết trên giấy.",
+        "reply": null
+      },
+      {
+        "id": "c_nlg_02",
+        "name": "Thị Hằng",
+        "avatar_color": "#312e81",
+        "date": "1 tuần trước",
+        "content": "Em đã áp dụng từng lời khuyên và thấy sự thay đổi rõ rệt trong cách tiếp cận giao dịch của mình.",
+        "reply": null
+      },
+      {
+        "id": "c_nlg_03",
+        "name": "Đức Long",
+        "avatar_color": "#7c2d12",
+        "date": "3 ngày trước",
+        "content": "Bài viết nhắc nhở rằng không có lời khuyên nào là hoàn hảo, quan trọng là phải phù hợp với bản thân mỗi người.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "2 ngày trước",
+          "content": "Đức Long, phù hợp với bản thân mới là quan trọng nhất."
+        }
+      }
+    ],
+    "dau-la-diem-yeu-nhat-cua-ban-trong": [
+      {
+        "id": "c_dly_01",
+        "name": "Minh Hiếu",
+        "avatar_color": "#1e3a8a",
+        "date": "2 ngày trước",
+        "content": "Điểm yếu nhất của mỗi trader là khác nhau. Bài viết này giúp em tìm ra điểm yếu của mình và có cách xử lý.",
+        "reply": null
+      },
+      {
+        "id": "c_dly_02",
+        "name": "Lan Phương",
+        "avatar_color": "#065f46",
+        "date": "1 tuần trước",
+        "content": "Việc nhận ra điểm yếu của mình không phải là điểm yếu, mà là sức mạnh nếu ta biết cách xử lý nó.",
+        "reply": null
+      },
+      {
+        "id": "c_dly_03",
+        "name": "Hoàng Anh",
+        "avatar_color": "#475569",
+        "date": "4 ngày trước",
+        "content": "Bài viết viết rất sâu sắc về việc tự nhận biết và tự cải thiện trong hành trình trader.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Hoàng Anh, tự nhận biết là bước đầu tiên của sự tiến bộ."
+        }
+      }
+    ],
+    "nang-cao-xac-suat-thang-trong-trading-nhu-nao": [
+      {
+        "id": "c_nxt_01",
+        "name": "Đức Nam",
+        "avatar_color": "#831843",
+        "date": "2 tuần trước",
+        "content": "Xác suất không phải là dự đoán tương lai, mà là quản lý rủi ro dựa trên số liệu. Bài viết viết rất rõ về điều này.",
+        "reply": null
+      },
+      {
+        "id": "c_nxt_02",
+        "name": "Thị Bảo",
+        "avatar_color": "#1e3a8a",
+        "date": "1 tuần trước",
+        "content": "Em đã bắt đầu ghi chép lại từng lệnh và tính toán xác suất thực tế thay vì đi theo cảm xúc. Kết quả đã biến tính.",
+        "reply": null
+      },
+      {
+        "id": "c_nxt_03",
+        "name": "Văn Tùng",
+        "avatar_color": "#7c2d12",
+        "date": "3 ngày trước",
+        "content": "Bài viết giúp em hiểu rằng winning rate cao không quan trọng nếu risk/reward không được kiểm soát chặt chẽ.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "2 ngày trước",
+          "content": "Văn Tùng, r:r là toán học, còn win rate là tâm lý."
+        }
+      }
+    ],
+    "lam-sao-de-tro-thanh-10-it-oi-thanh-cong": [
+      {
+        "id": "c_l10_01",
+        "name": "Trung Kiên",
+        "avatar_color": "#0f766e",
+        "date": "3 tuần trước",
+        "content": "Bốn phần trăm trader thành công không phải là may mắn, mà là kết quả của việc làm đúng những điều đơn giản hàng ngày.",
+        "reply": null
+      },
+      {
+        "id": "c_l10_02",
+        "name": "Ngọc Linh",
+        "avatar_color": "#312e81",
+        "date": "2 tuần trước",
+        "content": "Em đã bắt đầu thay đổi thói quen của mình sau khi đọc bài viết này. Đường dài nhưng em đã đi được bước đầu.",
+        "reply": null
+      },
+      {
+        "id": "c_l10_03",
+        "name": "Quốc Việt",
+        "avatar_color": "#701a75",
+        "date": "1 tuần trước",
+        "content": "Bài viết viết rất thực tế về những gì cần làm để trở thành một trong số ít người thắng trong trading.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "6 ngày trước",
+          "content": "Quốc Việt, ogni bước nhỏ đều dẫn đến mục tiêu lớn."
+        }
+      }
+    ],
+    "tai-sao-hau-het-cac-giao-dich-ngan": [
+      {
+        "id": "c_thg_01",
+        "name": "Hải Nam",
+        "avatar_color": "#065f46",
+        "date": "2 ngày trước",
+        "content": "Giao dịch ngắn hạn đòi hỏi kỷ luật cao hơn giao dịch dài hạn vì noise nhiều hơn. Bài viết này phân tích rất chuẩn.",
+        "reply": null
+      },
+      {
+        "id": "c_thg_02",
+        "name": "Thùy Dung",
+        "avatar_color": "#475569",
+        "date": "1 tuần trước",
+        "content": "Em từng mất tiền trong giao dịch ngắn hạn vì không hiểu rõ về cấu trúc thị trường. Bài viết này là bài học đắt giá.",
+        "reply": null
+      },
+      {
+        "id": "c_thg_03",
+        "name": "Minh Quân",
+        "avatar_color": "#831843",
+        "date": "5 ngày trước",
+        "content": "Bài viết nhắc nhở trader rằng không phải ai cũng phù hợp với giao dịch ngắn hạn, và đó là điều bình thường.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Minh Quân, tìm kiếm phong cách giao dịch phù hợp với bản thân mới là quan trọng."
+        }
+      }
+    ],
+    "lam-sao-e-trading-thanh-cong-voi": [
+      {
+        "id": "c_lst_01",
+        "name": "Lan Hương",
+        "avatar_color": "#1e3a8a",
+        "date": "2 tuần trước",
+        "content": "Thành công trong trading không đến từ một lệnh milagroso, mà là từ sự consistent trong việc tuân thủ quy trình.",
+        "reply": null
+      },
+      {
+        "id": "c_lst_02",
+        "name": "Đức Thắng",
+        "avatar_color": "#065f46",
+        "date": "1 tuần trước",
+        "content": "Em đã đọc nhiều sách về trading nhưng bài viết này lại động viên em nhất vì nó viết về thực tế, không phải lý thuyết.",
+        "reply": null
+      },
+      {
+        "id": "c_lst_03",
+        "name": "Thị Hảo",
+        "avatar_color": "#4338ca",
+        "date": "3 ngày trước",
+        "content": "Bài viết nhắc nhở rằng con đường đến với thành công trong trading là đường dài, không có đường tắt nào cả.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "2 ngày trước",
+          "content": "Thị Hảo, đường dài đi được thì mới có giá trị."
+        }
+      }
+    ],
+    "10-loi-khuyen-tot-nhat-danh-cho-trader": [
+      {
+        "id": "c_10t_01",
+        "name": "Hải Đăng",
+        "avatar_color": "#1e293b",
+        "date": "3 ngày trước",
+        "content": "Mười lời khuyên trong bài viết đều là những điều tôi đã từng học được qua cực nhiều lệnh thua. Cảm ơn tác giả đã tổng hợp lại.",
+        "reply": null
+      },
+      {
+        "id": "c_10t_02",
+        "name": "Mai Trang",
+        "avatar_color": "#4338ca",
+        "date": "1 tuần trước",
+        "content": "Em đã lưu lại bài viết này và đọc lại mỗi khi cảm thấy mình đang đi sai đường trong trading.",
+        "reply": null
+      },
+      {
+        "id": "c_10t_03",
+        "name": "Quốc Bảo",
+        "avatar_color": "#701a75",
+        "date": "2 ngày trước",
+        "content": "Lời khuyên số bảy về quản trị cảm xúc là phần em cần nhất. Cảm ơn tác giả đã nhắc nhở.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "1 ngày trước",
+          "content": "Quốc Bảo, cảm xúc là kẻ thù số một của trader."
+        }
+      }
+    ],
+    "lam-sao-e-khoi-phuc-tai-khoan-khi": [
+      {
+        "id": "c_lkt_01",
+        "name": "Hùng Vượng",
+        "avatar_color": "#065f46",
+        "date": "2 tuần trước",
+        "content": "Khôi phục tài khoản sau khi thua lỗ không chỉ là về kỹ thuật, mà là về tâm lý. Bài viết này viết rất đúng về vấn đề này.",
+        "reply": null
+      },
+      {
+        "id": "c_lkt_02",
+        "name": "Thị Nhung",
+        "avatar_color": "#1e3a8a",
+        "date": "1 tuần trước",
+        "content": "Em đã từng phải khôi phục tài khoản từ mức sardin và biết được đắng cay của những gì bài viết đang nói.",
+        "reply": null
+      },
+      {
+        "id": "c_lkt_03",
+        "name": "Văn Hậu",
+        "avatar_color": "#475569",
+        "date": "4 ngày trước",
+        "content": "Bài viết đưa ra những bước thực tế để trở lại sau thất bại, không chỉ là những lời ảo tưởng.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Văn Hậu, thất bại không phải là kết thúc, mà là điểm khởi đầu mới."
+        }
+      }
+    ],
+    "mat-bao-lau-e-tro-thanh-1-trader": [
+      {
+        "id": "c_mbl_01",
+        "name": "Thanh Vân",
+        "avatar_color": "#312e81",
+        "date": "3 tuần trước",
+        "content": "Bảo lâu không phải là chờ đợi thụ động, mà là chuẩn bị chủ động cho cơ hội tới. Bài viết viết rất hay về điều này.",
+        "reply": null
+      },
+      {
+        "id": "c_mbl_02",
+        "name": "Đức Bình",
+        "avatar_color": "#831843",
+        "date": "2 tuần trước",
+        "content": "Em đã học được rằng đôi khi không làm gì mới là hành động đúng nhất trong trading.",
+        "reply": null
+      },
+      {
+        "id": "c_mbl_03",
+        "name": "Hồng Ngân",
+        "avatar_color": "#1e3a8a",
+        "date": "5 ngày trước",
+        "content": "Bài viết viết rất đẹp về tâm thế của trader khi phải đợi chờ cơ hội.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Hồng Ngân, sự kiên trì trong chờ đợi là điều hiếm có và quý giá."
+        }
+      }
+    ],
+    "lam-gi-truoc-trong-va-sau-khi-vao": [
+      {
+        "id": "c_lvt_01",
+        "name": "Trung Hậu",
+        "avatar_color": "#0f766e",
+        "date": "2 ngày trước",
+        "content": "Những gì làm trước khi vào lệnh quan trọng hơn là những gì làm sau khi vào. Bài viết nhấn mạnh đúng vào điểm này.",
+        "reply": null
+      },
+      {
+        "id": "c_lvt_02",
+        "name": "Lan Chi",
+        "avatar_color": "#065f46",
+        "date": "1 tuần trước",
+        "content": "Em đã bắt đầu viết kế hoạch trước mỗi lệnh và thấy mình vào lệnh lạnh lùng và tự tin hơn nhiều.",
+        "reply": null
+      },
+      {
+        "id": "c_lvt_03",
+        "name": "Quốc Thịnh",
+        "avatar_color": "#701a75",
+        "date": "4 ngày trước",
+        "content": "Bài viết viết rất thực tế về quy trình chuẩn trước, trong và sau mỗi lệnh giao dịch.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Quốc Thịnh, quy trình chuẩn là chìa khóa của sự consistent."
+        }
+      }
+    ],
+    "nghe-thuat-cua-su-tinh-lang": [
+      {
+        "id": "c_ntl_01",
+        "name": "Hồng Đức",
+        "avatar_color": "#4338ca",
+        "date": "1 tuần trước",
+        "content": "Tĩnh lặng trong trading không phải là sự thiếu hụt hành động, mà là sự lựa chọn có chủ đích. Bài viết viết rất đẹp về điều này.",
+        "reply": null
+      },
+      {
+        "id": "c_ntl_02",
+        "name": "Văn Khang",
+        "avatar_color": "#1e3a8a",
+        "date": "2 tuần trước",
+        "content": "Em từng nhảy vào lệnh chỉ vì không chịu đựng được sự im lặng của thị trường. Bài viết này dạy em cách đối mặt với nó.",
+        "reply": null
+      },
+      {
+        "id": "c_ntl_03",
+        "name": "Thị Ngọc",
+        "avatar_color": "#475569",
+        "date": "5 ngày trước",
+        "content": "Bài viết giúp em hiểu rằng nghệ thuật của sự tĩnh lặng là một trong những kỹ năng quan trọng nhất của trader.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Thị Ngọc, im lặng đôi khi nghe được nhiều điều hơn cả tiếng động."
+        }
+      }
+    ],
+    "mot-so-cau-noi-kinh-dien-ve-trading": [
+      {
+        "id": "c_msk_01",
+        "name": "Đức Hiếu",
+        "avatar_color": "#1e293b",
+        "date": "3 ngày trước",
+        "content": "Những câu nói kinh điển trong bài viết không chỉ là lời nói hay, mà là những nguyên tắc đã được kiểm chứng qua thời gian.",
+        "reply": null
+      },
+      {
+        "id": "c_msk_02",
+        "name": "Lan Anh",
+        "avatar_color": "#065f46",
+        "date": "1 tuần trước",
+        "content": "Em đã lưu lại từng câu và dùng chúng như những nguyên tắc directs hành động trong mỗi lệnh của mình.",
+        "reply": null
+      },
+      {
+        "id": "c_msk_03",
+        "name": "Hoàng Hải",
+        "avatar_color": "#701a75",
+        "date": "2 ngày trước",
+        "content": "Bài viết sưu tầm những giá trị triết học đằng sau mỗi câu nói, không chỉ dừng lại ở bề mặt.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "1 ngày trước",
+          "content": "Hoàng Hải, hiểu sâu giá trị đằng sau lời nói mới là điều quan trọng."
+        }
+      }
+    ],
+    "4-goi-y-de-co-diem-vao-lenh-tot-nhat": [
+      {
+        "id": "c_4gd_01",
+        "name": "Trung Kiên",
+        "avatar_color": "#0f766e",
+        "date": "3 ngày trước",
+        "content": "Bốn gợi ý trong bài viết đều rất thực tế và có thể áp dụng ngay vào phiên giao dịch hôm nay.",
+        "reply": null
+      },
+      {
+        "id": "c_4gd_02",
+        "name": "Thị Hà",
+        "avatar_color": "#312e81",
+        "date": "1 tuần trước",
+        "content": "Em đã áp dụng gợi ý thứ hai và thấy điểm vào lệnh của mình chính xác hơn hẳn.",
+        "reply": null
+      },
+      {
+        "id": "c_4gd_03",
+        "name": "Văn Minh",
+        "avatar_color": "#831843",
+        "date": "5 ngày trước",
+        "content": "Bài viết nhắc nhở trader rằng điểm vào lệnh tốt không phải là điểm giá thấp nhất hay cao nhất, mà là điểm có r:R tốt nhất.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Văn Minh, r:R tốt hơn cả giá vào."
+        }
+      }
+    ],
+    "tai-sao-ban-nen-giao-dich-khi-het-ngay-giao-dich": [
+      {
+        "id": "c_tgd_01",
+        "name": "Hải Yến",
+        "avatar_color": "#475569",
+        "date": "2 tuần trước",
+        "content": "Giao dịch khi hết ngày giao dịch có những ưu và nhược điểm riêng. Bài viết phân tích rất đối“对了 đối" với hai phía.",
+        "reply": null
+      },
+      {
+        "id": "c_tgd_02",
+        "name": "Đức Tuấn",
+        "avatar_color": "#1e3a8a",
+        "date": "1 tuần trước",
+        "content": "Em từng vào lệnh vào giờ chót và bị lỗ vì không hiểu rõ về dòng tiền trong phiên đó. Bài viết này giải thích rõ ràng.",
+        "reply": null
+      },
+      {
+        "id": "c_tgd_03",
+        "name": "Ngọc Trinh",
+        "avatar_color": "#475569",
+        "date": "4 ngày trước",
+        "content": "Bài viết viết rất chi tiết về những gì trader cần biết trước khi quyết định vào lệnh vào cuối phiên.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Ngọc Trinh, hiểu rõ phiên giao dịch mới là điều đầu tiên."
+        }
+      }
+    ],
+    "poker-day-ban-dieu-gi-ve-trading": [
+      {
+        "id": "c_pkr_01",
+        "name": "Minh Tuấn",
+        "avatar_color": "#701a75",
+        "date": "2 tuần trước",
+        "content": "Bài viết so sánh giữa poker và trading rất thú vị. Cả hai đều là trò chơi về xác suất và quản trị rủi ro, không phải về vận may.",
+        "reply": null
+      },
+      {
+        "id": "c_pkr_02",
+        "name": "Thị Lan Anh",
+        "avatar_color": "#1e3a8a",
+        "date": "1 tuần trước",
+        "content": "Em đã bắt đầu nhìn trading như một trò chơi xác suất thay vì một trò chơi đoán giá. Tư duy đã thay đổi rõ rệt.",
+        "reply": null
+      },
+      {
+        "id": "c_pkr_03",
+        "name": "Quốc Anh",
+        "avatar_color": "#7c2d12",
+        "date": "3 ngày trước",
+        "content": "Bài viết viết rất hay về sự liên quan giữa tâm lý poker và tâm lý trading.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "2 ngày trước",
+          "content": "Quốc Anh, poker và trading đều là trò chơi về con người, không phải về bài hay chart."
+        }
+      }
+    ],
+    "hay-giao-dich-nhu-mot-linh-ban-tia": [
+      {
+        "id": "c_lbt_01",
+        "name": "Hùng Cường",
+        "avatar_color": "#065f46",
+        "date": "3 ngày trước",
+        "content": "Linh ban tia không bao giờ vào mục tiêu nếu không nhắm cẩn thận. Trader cũng vậy, cần có mục tiêu rõ ràng trước mỗi lệnh.",
+        "reply": null
+      },
+      {
+        "id": "c_lbt_02",
+        "name": "Thùy Vân",
+        "avatar_color": "#4338ca",
+        "date": "1 tuần trước",
+        "content": "Bài viết viết rất hay về sự kết hợp giữa bản năng và lý trí trong trading.",
+        "reply": null
+      },
+      {
+        "id": "c_lbt_03",
+        "name": "Đức Thành",
+        "avatar_color": "#701a75",
+        "date": "2 ngày trước",
+        "content": "Nhắm đúng mục tiêu mới là điều quan trọng, không phải là bắn nhiều mũi tên.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "1 ngày trước",
+          "content": "Đức Thành, chất lượng mũi tên quan trọng hơn số lượng."
+        }
+      }
+    ],
+    "tai-sao-ban-can-bao-ve-tai-khoan-cua-minh-va-bang-cach-nao": [
+      {
+        "id": "c_tbv_01",
+        "name": "Thanh Vũ",
+        "avatar_color": "#1e3a8a",
+        "date": "2 tuần trước",
+        "content": "Bảo vệ tài khoản không chỉ là cài stop loss, mà là quản lý toàn bộ quy trình giao dịch của mình.",
+        "reply": null
+      },
+      {
+        "id": "c_tbv_02",
+        "name": "Đức Thành",
+        "avatar_color": "#065f46",
+        "date": "1 tuần trước",
+        "content": "Em đã từng mất tài khoản vì không có kế hoạch bảo vệ vốn. Bài viết này là lời cảnh báo rất thực tế.",
+        "reply": null
+      },
+      {
+        "id": "c_tbv_03",
+        "name": "Lê Hương",
+        "avatar_color": "#475569",
+        "date": "4 ngày trước",
+        "content": "Bài viết viết rất chi tiết về các phương pháp bảo vệ vốn mà mọi trader đều nên áp dụng.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Lê Hương, vốn là nền tảng, không có vốn thì không có gì cả."
+        }
+      }
+    ],
+    "nhung-chuyen-hoang-duong-ve-trading-ma-ban-can-phai-loai-bo-khoi-tam-tri": [
+      {
+        "id": "c_chd_01",
+        "name": "Hùng Đức",
+        "avatar_color": "#0f766e",
+        "date": "2 tuần trước",
+        "content": "Những đường hầm hoki trong trading có vẻ hấp dẫn nhưng thực ra là cái bẫy. Bài viết này viết rất đúng về vấn đề này.",
+        "reply": null
+      },
+      {
+        "id": "c_chd_02",
+        "name": "Thị Mai",
+        "avatar_color": "#312e81",
+        "date": "1 tuần trước",
+        "content": "Em từng rơi vào nhiều đường hầm hoki này và mất tiền thật. Cảm ơn tác giả đã cảnh báo trước.",
+        "reply": null
+      },
+      {
+        "id": "c_chd_03",
+        "name": "Văn Nam",
+        "avatar_color": "#701a75",
+        "date": "4 ngày trước",
+        "content": "Bài viết giúp em nhận ra những suy nghĩ sai lầm mà mình đã cầm lấy trong nhiều năm giao dịch.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Văn Nam, nhận ra sai lầm mới là bước đi ra khỏi nó."
+        }
+      }
+    ],
+    "thoi-gian-dieu-thuong-bi-coi-nhe-trong-trading": [
+      {
+        "id": "c_tdt_01",
+        "name": "Minh Đức",
+        "avatar_color": "#1e293b",
+        "date": "3 ngày trước",
+        "content": "Thời gian đóng cửa phiên và thời gian mở cửa phiên là những thời điểm quan trọng nhất mà nhiều trader thường bỏ qua.",
+        "reply": null
+      },
+      {
+        "id": "c_tdt_02",
+        "name": "Lan Hương",
+        "avatar_color": "#065f46",
+        "date": "1 tuần trước",
+        "content": "Bài viết viết rất rõ ràng về những mốc thời gian trader cần theo dõi sát sao.",
+        "reply": null
+      },
+      {
+        "id": "c_tdt_03",
+        "name": "Quốc Trung",
+        "avatar_color": "#831843",
+        "date": "2 ngày trước",
+        "content": "Em đã bắt đầu ghi chép lại các mốc thời gian quan trọng và thấy mình vào lệnh đúng lúc hơn nhiều.",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "1 ngày trước",
+          "content": "Quốc Trung, thời gian là biến số không thể bỏ qua."
+        }
+      }
+    ],
+    "khoa-hoc-cua-su-may-man": [
+      {
+        "id": "c_kml_01",
+        "name": "Thanh Tùng",
+        "avatar_color": "#4338ca",
+        "content": "May mắn chỉ đến với những người đã chuẩn bị sẵn sàng để nhận nó. Bài viết viết rất đúng về nguyên tắc này trong trading.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_kml_02",
+        "name": "Đức Hải",
+        "avatar_color": "#1e3a8a",
+        "content": "Em từng crédito vào may mắn và trả giá đắt. Giờ em hiểu rằng chuẩn bị mới là chìa khóa.",
+        "date": "2 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_kml_03",
+        "name": "Ngọc Hoa",
+        "avatar_color": "#475569",
+        "content": "Bài viết viết rất hay về sự liên quan giữa chuẩn bị và may mắn trong hành trình trader.",
+        "date": "5 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Ngọc Hoa, may mắn là kết quả của chuẩn bị gặp gặp cơ hội."
+        }
+      }
+    ],
+    "doi-dieu-chia-se-ve-giao-dich-tren-thi-truong-ngoai-hoi": [
+      {
+        "id": "c_ddc_01",
+        "name": "Hải Âu",
+        "avatar_color": "#065f46",
+        "content": "Nhiều điều trader chia sẻ trên thị trường ngoài hoặc mạng xã hội chỉ là một phần của câu chuyện, không phải toàn bộ.",
+        "date": "2 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_ddc_02",
+        "name": "Thị Trinh",
+        "avatar_color": "#312e81",
+        "content": "Em đã từng tin vào những lời chia sẻ không có căn cứ và mất tiền. Bài viết này là bài học đắt giá.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_ddc_03",
+        "name": "Quốc Khánh",
+        "avatar_color": "#831843",
+        "content": "Bài viết nhắc nhở trader rằng cần tự nghiên cứu thay vì theo đuổi những lời khuyên không rõ nguồn gốc.",
+        "date": "4 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Quốc Khánh, tự nghiên cứu là cách an toàn nhất."
+        }
+      }
+    ],
+    "toi-len-ke-hoach-giao-dich-nhu-the-nao": [
+      {
+        "id": "c_tlkp_01",
+        "name": "Minh Tuấn",
+        "avatar_color": "#0f766e",
+        "content": "Kế hoạch giao dịch không phải là giấy tela, mà là công cụ sống giúp trader ra quyết định trong áp lực.",
+        "date": "2 ngày trước",
+        "reply": null
+      },
+      {
+        "id": "c_tlkp_02",
+        "name": "Thị Hằng",
+        "avatar_color": "#1e3a8a",
+        "content": "Em đã bắt đầu viết kế hoạch trước mỗi phiên và thấy mình vào lệnh lạnh lùng hơn rất nhiều.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_tlkp_03",
+        "name": "Đức Hậu",
+        "avatar_color": "#701a75",
+        "content": "Bài viết viết rất chi tiết về cách xây dựng kế hoạch giao dịch cá nhân.",
+        "date": "4 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Đức Hậu, kế hoạch tốt là nửa thành công."
+        }
+      }
+    ],
+    "nhung-dieu-cang-biet-som-cang-tot-khi-trading": [
+      {
+        "id": "c_ndb_01",
+        "name": "Hồng Phúc",
+        "avatar_color": "#065f46",
+        "content": "Nhiều điều trong bài viết em hy vọng được biết sớm hơn năm hay hai năm trước. Cảm ơn tác giả đã chia sẻ.",
+        "date": "3 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_ndb_02",
+        "name": "Lê Nam",
+        "avatar_color": "#4338ca",
+        "content": "Em đã bắt đầu thay đổi cách tiếp cận sau khi đọc bài viết này. Một vài điều đơn giản nhưng tạo ra sự khác biệt lớn.",
+        "date": "2 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_ndb_03",
+        "name": "Hoàng Sơn",
+        "avatar_color": "#701a75",
+        "content": "Bài viết viết rất thẳng thắn về những gì trader mới thường mắc phải và cách tránh chúng.",
+        "date": "1 tuần trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "6 ngày trước",
+          "content": "Hoàng Sơn, tránh được lỗi phổ biến mới là cách tiết kiệm tiền."
+        }
+      }
+    ],
+    "tai-sao-ban-nen-chi-chon-1-cap-tien-te-yeu-thich-de-giao-dich": [
+      {
+        "id": "c_tctt_01",
+        "name": "Minh Nhật",
+        "avatar_color": "#0f766e",
+        "content": "Tập trung vào một cặp tiền giúp em nắm bắt được tâm trạng của thị trường dễ dàng hơn nhiều.",
+        "date": "3 ngày trước",
+        "reply": null
+      },
+      {
+        "id": "c_tctt_02",
+        "name": "Lan Anh",
+        "avatar_color": "#1e3a8a",
+        "content": "Em từng theo dõi mười cặp tiền và kết quả là không nắm được bất kỳ cái nào. Bài viết viết đúng về vấn đề này.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_tctt_03",
+        "name": "Đức Trung",
+        "avatar_color": "#701a75",
+        "content": "Chọn một cặp và làm chủ nó tốt hơn là lúc nào cũng đổi dổi mà không nắm vững cái nào.",
+        "date": "5 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Đức Trung, chuyên sâu hơn là tốt hơn."
+        }
+      }
+    ],
+    "cam-xuc-la-thu-vat-di": [
+      {
+        "id": "c_cxl_01",
+        "name": "Thanh Tuyền",
+        "avatar_color": "#1e293b",
+        "content": "Cảm xúc là thứ trader không thể loại bỏ hoàn toàn, nhưng có thể quản lý. Bài viết viết rất hay về điều này.",
+        "date": "2 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_cxl_02",
+        "name": "Đức Trí",
+        "avatar_color": "#065f46",
+        "content": "Em đã từng vào lệnh chỉ vì cơn giận sau một lệnh thua và trả giá đắt. Bài viết này là lời cảnh báo.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_cxl_03",
+        "name": "Hồng Nhung",
+        "avatar_color": "#475569",
+        "content": "Bài viết giúp em hiểu rằng cần tách cảm xúc ra khỏi quy trình ra quyết định.",
+        "date": "4 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Hồng Nhung, tách cảm xúc là bước đi đầu tiên của trader chuyên nghiệp."
+        }
+      }
+    ],
+    "vao-lenh-hay-khong-vao-lenh": [
+      {
+        "id": "c_vlh_01",
+        "name": "Trung Kiên",
+        "avatar_color": "#065f46",
+        "content": "Không vào lệnh đôi khi là quyết định đúng đắn nhất của ngày. Bài viết này nhắc nhở điều đó một cách rõ ràng nhất.",
+        "date": "2 ngày trước",
+        "reply": null
+      },
+      {
+        "id": "c_vlh_02",
+        "name": "Thùy Dung",
+        "avatar_color": "#475569",
+        "content": "Em đã từng vào lệnh chỉ vì không chịu đựng được sự im lặng và mất tiền thật. Bài viết này dạy em cách đối mặt với nó.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_vlh_03",
+        "name": "Minh Hoàng",
+        "avatar_color": "#4338ca",
+        "content": "Bài viết viết rất hay về sự khác biệt giữa vào lệnh có kế hoạch và vào lệnh theo cảm xúc.",
+        "date": "3 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "2 ngày trước",
+          "content": "Minh Hoàng, có kế hoạch mới là khác biệt lớn nhất."
+        }
+      }
+    ],
+    "trading-la-1-hanh-trinh-khong-phai-la-dich-den": [
+      {
+        "id": "c_htt_01",
+        "name": "Hồng Sơn",
+        "avatar_color": "#0f766e",
+        "content": "Trading không phải là điểm đến, mà là hành trình đi về phía trước mỗi ngày. Bài viết viết rất đẹp về triết lý này.",
+        "date": "2 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_htt_02",
+        "name": "Lan Phương",
+        "avatar_color": "#1e3a8a",
+        "content": "Em đã học được cách tận hưởng quá trình thay vì chỉ tập trung vào kết quả cuối cùng.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_htt_03",
+        "name": "Quốc Anh",
+        "avatar_color": "#701a75",
+        "content": "Bài viết nhắc nhở rằng mỗi ngày trong trading đều là một bài học mới.",
+        "date": "4 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Quốc Anh, mỗi ngày đều là cơ hội để học hỏi."
+        }
+      }
+    ],
+    "nhung-con-quy-can-tranh-xa-bang-moi-gia-trong-trading": [
+      {
+        "id": "c_ncq_01",
+        "name": "Đức Tuấn",
+        "avatar_color": "#831843",
+        "content": "Những con quỹ trong bài viết đều là những sai lầm mà em đã từng mắc phải và mất tiền thật.",
+        "date": "3 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_ncq_02",
+        "name": "Thị Hương",
+        "avatar_color": "#1e3a8a",
+        "content": "Bài viết liệt kê rất rõ ràng những cái tên mà mọi trader mới nên tránh xa.",
+        "date": "2 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_ncq_03",
+        "name": "Văn Đức",
+        "avatar_color": "#475569",
+        "content": "Việc tránh xa những con quỹ này giúp em tiết kược được rất nhiều tiền và thời gian.",
+        "date": "1 tuần trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "6 ngày trước",
+          "content": "Văn Đức, tránh lỗi là cách tốt nhất để bảo vệ vốn."
+        }
+      }
+    ],
+    "nguoi-giao-dich-va-nguoi-co-bac-trong-trading": [
+      {
+        "id": "c_ngd_01",
+        "name": "Minh Quân",
+        "avatar_color": "#312e81",
+        "content": "Sự khác biệt giữa người giao dịch và người có کام là việc người giao dịch có quy trình, còn người có کام chỉ có hy vọng.",
+        "date": "2 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_ngd_02",
+        "name": "Lan Chi",
+        "avatar_color": "#1e3a8a",
+        "content": "Bài viết viết rất hay về sự khác biệt trong tư duy giữa hai loại người này.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_ngd_03",
+        "name": "Hoàng Nam",
+        "avatar_color": "#701a75",
+        "content": "Em muốn trở thành người giao dịch chuyên nghiệp, không chỉ là người đặt cược trên thị trường.",
+        "date": "4 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Hoàng Nam, ý chí của em đã đưa em đi đúng hướng."
+        }
+      }
+    ],
+    "ren-luyen-ky-luat-trong-trading-nhu-nao": [
+      {
+        "id": "c_rlk_01",
+        "name": "Trung Thành",
+        "avatar_color": "#0f766e",
+        "content": "Kỷ luật không sinh ra trong một ngày, mà là kết quả của việc lặp đi lặp lại mỗi ngày.",
+        "date": "2 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_rlk_02",
+        "name": "Thị Hoa",
+        "avatar_color": "#1e3a8a",
+        "content": "Em đã bắt đầu xây dựng thói quen kiểm tra kế hoạch trước mỗi lệnh sau khi đọc bài viết này.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_rlk_03",
+        "name": "Đức Hùng",
+        "avatar_color": "#475569",
+        "content": "Bài viết viết rất thực tế về cách rèn luyện kỷ luật trong trading.",
+        "date": "3 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "2 ngày trước",
+          "content": "Đức Hùng, kỷ luật là cầu nối giữa mục tiêu và kết quả."
+        }
+      }
+    ],
+    "vai-thoi-quen-it-biet-cua-cac-trader-thanh-cong": [
+      {
+        "id": "c_vtq_01",
+        "name": "Hải Nam",
+        "avatar_color": "#065f46",
+        "content": "Những thói quen trong bài viết đều là những điều đơn giản nhưng tạo ra sự khác biệt lớn trong kết quả giao dịch.",
+        "date": "3 ngày trước",
+        "reply": null
+      },
+      {
+        "id": "c_vtq_02",
+        "name": "Lan Hương",
+        "avatar_color": "#4338ca",
+        "content": "Em đã bắt đầu áp dụng một số thói quen trong bài viết và thấy sự thay đổi rõ rệt.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_vtq_03",
+        "name": "Quốc Bảo",
+        "avatar_color": "#7c2d12",
+        "content": "Bài viết viết rất hay về những điều mà trader thành công làm khác với trader thua lỗ.",
+        "date": "2 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "1 ngày trước",
+          "content": "Quốc Bảo, thói quen决定结果."
+        }
+      }
+    ],
+    "mot-lenh-kiem-du-hay-tai-khoan-boc-chay": [
+      {
+        "id": "c_mlk_01",
+        "name": "Đức Anh",
+        "avatar_color": "#1e293b",
+        "content": "Một lệnh kiểm duyệt có thể cứu lại toàn bộ tài khoản. Bài viết viết rất hay về sự quan trọng của kiểm duyệt.",
+        "date": "2 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_mlk_02",
+        "name": "Thùy Liên",
+        "avatar_color": "#065f46",
+        "content": "Em đã từng bó tay khi tài khoản sắp hết và biết được giá trị của những gì bài viết đang nói.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_mlk_03",
+        "name": "Hoàng Sơn",
+        "avatar_color": "#831843",
+        "content": "Bài viết nhắc nhở trader rằng kiểm duyệt vốn không phải là tùy chọn, mà là bắt buộc.",
+        "date": "4 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Hoàng Sơn, không có kiểm duyệt thì không có sự bền vững."
+        }
+      }
+    ],
+    "chia-se-meo-quan-ly-von-trong-giao-dich": [
+      {
+        "id": "c_csm_01",
+        "name": "Minh Tuấn",
+        "avatar_color": "#0f766e",
+        "content": "Quản trị vốn là căn bản nhất nhưng cũng là quan trọng nhất trong trading. Bài viết viết rất rõ ràng về điều này.",
+        "date": "3 ngày trước",
+        "reply": null
+      },
+      {
+        "id": "c_csm_02",
+        "name": "Thị Lan",
+        "avatar_color": "#1e3a8a",
+        "content": "Em đã áp dụng quy tắc 1% vào mỗi lệnh và thấy tâm lý của mình ổn định hơn rất nhiều.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_csm_03",
+        "name": "Văn Hưng",
+        "avatar_color": "#701a75",
+        "content": "Bài viết viết rất thực tế về các phương pháp quản trị vốn mà mọi trader nên biết.",
+        "date": "5 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Văn Hưng, vốn được quản trị tốt mới phát triển được."
+        }
+      }
+    ],
+    "ra-quyet-dinh-trong-trading": [
+      {
+        "id": "c_rqd_01",
+        "name": "Hải Âu",
+        "avatar_color": "#4338ca",
+        "content": "Quyết định trong trading phải dựa trên dữ liệu và quy trình, không phải dựa trên cảm giác. Bài viết viết rất đúng về điều này.",
+        "date": "2 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_rqd_02",
+        "name": "Đức Minh",
+        "avatar_color": "#1e3a8a",
+        "content": "Em đã từng ra quyết định theo cảm giác và trả giá đắt. Bài viết này là bài học đắt giá.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_rqd_03",
+        "name": "Ngọc Ánh",
+        "avatar_color": "#701a75",
+        "content": "Bài viết giúp em hiểu rằng quyết định tốt là quyết định đã được suy nghĩ kỹ trước.",
+        "date": "4 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Ngọc Ánh, quyết định đúng đến từ sự chuẩn bị tốt."
+        }
+      }
+    ],
+    "dac-diem-cua-mot-trader-chuyen-nghiep": [
+      {
+        "id": "c_ddt_01",
+        "name": "Trung Kiên",
+        "avatar_color": "#0f766e",
+        "content": "Trader chuyên nghiệp không phải là người thắng mỗi lệnh, mà là người biết quản lý rủi ro và duy trì sự consistent.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_ddt_02",
+        "name": "Lan Anh",
+        "avatar_color": "#1e3a8a",
+        "content": "Em đã đánh giá lại mình theo từng đặc điểm trong bài viết và thấy mình còn nhiều điều cần cải thiện.",
+        "date": "2 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_ddt_03",
+        "name": "Hoàng Hải",
+        "avatar_color": "#475569",
+        "content": "Bài viết viết rất đúng về sự khác biệt giữa trader chuyên nghiệp và trader amateur.",
+        "date": "4 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Hoàng Hải, nhận ra sự khác biệt mới là bước đi đầu tiên."
+        }
+      }
+    ],
+    "ban-gap-kho-khan-khi-ra-quyet-dinh-trong-trading": [
+      {
+        "id": "c_bgk_01",
+        "name": "Thanh Tùng",
+        "avatar_color": "#312e81",
+        "content": "Khó khăn khi ra quyết định là điều bình thường trong trading, quan trọng là phải có quy trình để vượt qua nó.",
+        "date": "2 ngày trước",
+        "reply": null
+      },
+      {
+        "id": "c_bgk_02",
+        "name": "Lê Hương",
+        "avatar_color": "#065f46",
+        "content": "Em đã từng đứng im trước chart trong mười phút không biết vào hay không vào. Bài viết này giúp em rất nhiều.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_bgk_03",
+        "name": "Minh Hiếu",
+        "avatar_color": "#475569",
+        "content": "Bài viết viết rất hay về cách ra quyết định dưới áp lực trong trading.",
+        "date": "5 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Minh Hiếu, quy trình sẽ giúp bạn ra quyết định ngay cả khi áp lực lớn."
+        }
+      }
+    ],
+    "nhung-loi-nguy-hiem-can-tranh-khi-trading": [
+      {
+        "id": "c_nln_01",
+        "name": "Đức Thắng",
+        "avatar_color": "#831843",
+        "content": "Những lỗi nguy hiểm trong bài viết đều là những điều mà em đã từng mắc phải và mất tiền thật.",
+        "date": "3 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_nln_02",
+        "name": "Thị Nga",
+        "avatar_color": "#1e3a8a",
+        "content": "Bài viết liệt kê rất rõ ràng những cái tên mà mọi trader mới nên tránh xa.",
+        "date": "2 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_nln_03",
+        "name": "Văn Tuấn",
+        "avatar_color": "#701a75",
+        "content": "Việc tránh xa những lỗi này giúp em tiết k� được rất nhiều tiền và thời gian.",
+        "date": "1 tuần trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "6 ngày trước",
+          "content": "Văn Tuấn, tránh lỗi là cách tốt nhất để bảo vệ vốn."
+        }
+      }
+    ],
+    "hay-coi-trading-la-1-nghe-nghiep-nghiem-tuc": [
+      {
+        "id": "c_hcn_01",
+        "name": "Hồng Sơn",
+        "avatar_color": "#065f46",
+        "content": "Khi coi trading là một nghề nghiệp nghiêm túc, tất cả thay đổi. Bài viết viết rất đúng về sự chuyển biến này.",
+        "date": "2 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_hcn_02",
+        "name": "Thị Hồng",
+        "avatar_color": "#475569",
+        "content": "Em đã bắt đầu đối xử với tài khoản giao dịch như một công việc thực sự sau khi đọc bài viết này.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_hcn_03",
+        "name": "Quốc Việt",
+        "avatar_color": "#7c2d12",
+        "content": "Bài viết nhắc nhở rằng sự chuyên nghiệp không đến từ công cụ, mà đến từ thái độ.",
+        "date": "3 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "2 ngày trước",
+          "content": "Quốc Việt, thái thái độ chuyên nghiệp tạo ra kết quả chuyên nghiệp."
+        }
+      }
+    ],
+    "ma-vang": [
+      {
+        "id": "c_mvg_01",
+        "name": "Minh Tuấn",
+        "avatar_color": "#831843",
+        "content": "Vàng luôn là tài sản mà trader cần theo dõi, không chỉ để giao dịch mà còn để hiểu tâm lý thị trường rộng lớn hơn.",
+        "date": "3 ngày trước",
+        "reply": null
+      },
+      {
+        "id": "c_mvg_02",
+        "name": "Lan Hương",
+        "avatar_color": "#1e3a8a",
+        "content": "Em đã bắt đầu xem chart vàng mỗi ngày sau khi đọc bài viết này và thấy mình hiểu hơn về thị trường tổng thể.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_mvg_03",
+        "name": "Đức Nam",
+        "avatar_color": "#701a75",
+        "content": "Bài viết viết rất hay về vai trò của vàng trong danh mục đầu tư của trader hiện đại.",
+        "date": "4 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Đức Nam, vàng là l랄 البصيرة về thị trường."
+        }
+      }
+    ],
+    "hay-chia-tay-cai-toi-cua-ban-trong-forex": [
+      {
+        "id": "c_hct_01",
+        "name": "Hải Yến",
+        "avatar_color": "#475569",
+        "content": "Chia tay cái tôi không phải là từ bỏ tự tin, mà là承认 rằng thị trường luôn lớn hơn chúng ta.",
+        "date": "2 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_hct_02",
+        "name": "Đức Tuấn",
+        "avatar_color": "#1e3a8a",
+        "content": "Em đã từng bị cái tôi làm hỏng nhiều lệnh và biết được giá trị của những gì bài viết đang nói.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_hct_03",
+        "name": "Ngọc Lan",
+        "avatar_color": "#475569",
+        "content": "Bài viết viết rất sâu sắc về sự liên quan giữa tự tin và sự kiêu ngạo trong trading.",
+        "date": "4 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "3 ngày trước",
+          "content": "Ngọc Lan, tự tin là điều cần có, kiêu ngạo là điều cần bỏ."
+        }
+      }
+    ],
+    "vuot-qua-noi-so-hai-trong-giao-dich-ngoai-hoi": [
+      {
+        "id": "c_vns_01",
+        "name": "Trung Kiên",
+        "avatar_color": "#065f46",
+        "content": "Nỗi sợ hãi là điều tất cả trader đều trải qua, quan trọng là phải không để nó khống chế quyết định của bạn.",
+        "date": "3 ngày trước",
+        "reply": null
+      },
+      {
+        "id": "c_vns_02",
+        "name": "Lan Phương",
+        "avatar_color": "#4338ca",
+        "content": "Em đã học cách đối mặt với nỗi sợ thay vì trốn tránh sau khi đọc bài viết này.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_vns_03",
+        "name": "Hoàng Anh",
+        "avatar_color": "#701a75",
+        "content": "Bài viết viết rất hay về sự chuyển hóa từ nỗi sợ hãi thành năng lực giao dịch.",
+        "date": "2 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "1 ngày trước",
+          "content": "Hoàng Anh, đối mặt với sợ hãi mới là bước đi đầu tiên."
+        }
+      }
+    ],
+    "hieu-ban-than": [
+      {
+        "id": "c_hbt_01",
+        "name": "Minh Châu",
+        "avatar_color": "#0f766e",
+        "content": "Hiểu bản thân là bước đầu tiên để trở thành trader giỏi. Bài viết viết rất hay về điều này.",
+        "date": "2 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_hbt_02",
+        "name": "Thị Trinh",
+        "avatar_color": "#1e3a8a",
+        "content": "Em đã bắt đầu ghi chép lại phản ứng cảm xúc của mình trong mỗi lệnh và thấy rõ mô hình của bản thân hơn.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_hbt_03",
+        "name": "Quốc Anh",
+        "avatar_color": "#831843",
+        "content": "Bài viết nhắc nhở rằng không có ai có thể giao dịch tốt nếu không hiểu rõ mình là ai.",
+        "date": "5 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "4 ngày trước",
+          "content": "Quốc Anh, tự hiểu là nền tảng của mọi thứ."
+        }
+      }
+    ],
+    "trading-thanh-thao-la-nhu-the-nao": [
+      {
+        "id": "c_ttt_01",
+        "name": "Hải Nam",
+        "avatar_color": "#065f46",
+        "content": "Thành thạo trong trading không phải là biết tất cả, mà là biết đủ để ra quyết định đúng đắn.",
+        "date": "1 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_ttt_02",
+        "name": "Lan Hương",
+        "avatar_color": "#312e81",
+        "content": "Em đã hiểu rằng thành thao đến từ việc làm lại cùng một việc đúng đắn hàng ngày.",
+        "date": "2 tuần trước",
+        "reply": null
+      },
+      {
+        "id": "c_ttt_03",
+        "name": "Đức Anh",
+        "avatar_color": "#475569",
+        "content": "Bài viết viết rất rõ ràng về con đường đến với sự thành thạo trong trading.",
+        "date": "3 ngày trước",
+        "reply": {
+          "author": "Nghề Trading",
+          "date": "2 ngày trước",
+          "content": "Đức Anh, con đường dài nhưng mỗi bước đều có giá trị."
+        }
+      }
+    ]
+  },
   "general_pool": [
     {
       "id": "c_gen_01",
@@ -22,23 +2333,11 @@
       "reply": null
     },
     {
-      "id": "c_gen_03",
-      "name": "Hoàng Minh Đức",
-      "avatar_color": "#831843",
-      "date": "5 ngày trước",
-      "content": "Hôm trước em có nhắn tin qua Telegram @longphibtc được anh Long phân tích điểm yếu trong việc gồng lỗ. Sau khi chỉnh lại cách đặt Stoploss thì tuần này tâm lý nhẹ nhõm hẳn. Cảm ơn anh rất nhiều!",
-      "reply": {
-        "author": "Nghề Trading",
-        "date": "4 ngày trước",
-        "content": "Chúc mừng em đã vượt qua rào cản tâm lý đầu tiên. Nhớ luôn tuân thủ đúng tỷ lệ rủi ro mỗi lệnh nhé."
-      }
-    },
-    {
       "id": "c_gen_04",
       "name": "Lê Văn Hùng",
       "avatar_color": "#7c2d12",
       "date": "1 tuần trước",
-      "content": "Bài học đắt giá nhất của em sau 2 năm bầm dập: Không phải thị trường lấy tiền của mình, mà chính sự thiếu kiên nhẫn và tham lam đã tự đốt tài khoản. Đọc bài của anh thấy bóng dáng mình trong đó.",
+      "content": "Bài học đắt giá nhất của em sau 2 năm bầm dập: Không phải thị trường lấy tiền của mình, mà chính sự thiếu kiên nhẫn và tham lam đã tự đốt tài khoản. Đọc bài của tác giả thấy bóng dáng mình trong đó.",
       "reply": null
     },
     {
@@ -54,7 +2353,7 @@
       "name": "Vũ Bảo Nam",
       "avatar_color": "#0f766e",
       "date": "2 tuần trước",
-      "content": "Em từng thử qua hàng chục indicator từ RSI, MACD đến Ichimoku nhưng đều thất bại. Sau khi quay về Price Action đơn giản và tập trung vào quản lý vốn thì tài khoản mới bắt đầu có chuyển biến tích cực.",
+      "content": "Em từng thử qua hàng chục chỉ số từ RSI, MACD đến Ichimoku nhưng đều thất bại. Sau khi quay về Price Action đơn giản và tập trung vào quản lý vốn thì tài khoản mới bắt đầu có chuyển biến tích cực.",
       "reply": null
     },
     {
@@ -74,7 +2373,7 @@
       "name": "Ngô Trọng Hiếu",
       "avatar_color": "#1e293b",
       "date": "3 tuần trước",
-      "content": "Theo dõi blog của anh từ những bài đầu tiên trên Substack. Các góc nhìn về tâm lý giao dịch của anh thật sự chạm tới nỗi đau của những anh em đang loay hoay tìm bờ.",
+      "content": "Theo dõi blog của tác giả từ những bài đầu tiên trên Substack. Các góc nhìn về tâm lý giao dịch của tác giả thật sự chạm tới nỗi đau của những anh em đang loay hoay tìm bờ.",
       "reply": null
     }
   ],
@@ -89,23 +2388,11 @@
         "reply": null
       },
       {
-        "id": "c_psy_02",
-        "name": "Trịnh Đình Dũng",
-        "avatar_color": "#991b1b",
-        "date": "3 ngày trước",
-        "content": "Em vừa đăng ký buổi cafe trao đổi 1-1 với anh Long qua form tư vấn. Hy vọng được anh chỉ ra những nút thắt tâm lý mà bản thân tự nhìn không thấy.",
-        "reply": {
-          "author": "Nghề Trading",
-          "date": "2 ngày trước",
-          "content": "Đã nhận được thông tin của Dũng. Hẹn gặp bạn trong buổi trò chuyện sắp tới để mổ xẻ cụ thể hành vi giao dịch nhé."
-        }
-      },
-      {
         "id": "c_psy_03",
         "name": "Nguyễn Minh Châu",
         "avatar_color": "#475569",
         "date": "4 ngày trước",
-        "content": "Đoạn nói về 'sự cô độc của trader' chuẩn không cần chỉnh. Bạn bè gia đình không ai hiểu được cảm giác ngồi một mình trước màn hình chịu áp lực biến động giá. Cảm ơn anh đã đồng cảm.",
+        "content": "Đoạn nói về 'sự cô độc của trader' chuẩn không cần chỉnh. Bạn bè gia đình không ai hiểu được cảm giác ngồi một mình trước màn hình chịu áp lực biến động giá. Cảm ơn tác giả đã đồng cảm.",
         "reply": null
       },
       {
@@ -155,18 +2442,6 @@
         "date": "2 ngày trước",
         "content": "Phương pháp đơn giản mà hiệu quả cao. Trước đây chart của em nhìn như mạng nhện, giờ chỉ để nến trần và key level H4/H1, điểm vào lệnh sắc bén hơn hẳn.",
         "reply": null
-      },
-      {
-        "id": "c_tech_02",
-        "name": "Vũ Đình Trọng",
-        "avatar_color": "#0369a1",
-        "date": "5 ngày trước",
-        "content": "Anh Long phân tích con sóng Vàng nhịp vừa rồi rất chuẩn. Chờ giá quét thanh khoản ở đáy xong mới canh Buy lên, lệnh chạy mượt mà không bị đau tim.",
-        "reply": {
-          "author": "Nghề Trading",
-          "date": "4 ngày trước",
-          "content": "Cảm ơn Trọng. Thị trường Vàng luôn tôn trọng các vùng thanh khoản lớn, cứ kiên nhẫn bám sát kế hoạch nhé."
-        }
       }
     ],
     "tu-duy-xac-suat": [
