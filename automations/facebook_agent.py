@@ -122,11 +122,10 @@ def post_photo_to_facebook(image_url, caption):
         logger.error(f"Lỗi kết nối Facebook: {e}")
         return None
 
-def add_first_comment_to_post(post_id, comment_text):
-    """Bình luận đầu tiên vào bài viết vừa đăng"""
-    url = f"https://graph.facebook.com/v21.0/{post_id}/comments"
+def like_facebook_post(post_id):
+    """Like bài đăng Facebook ngay sau khi đăng thành công"""
+    url = f"https://graph.facebook.com/v21.0/{post_id}/likes"
     params = {
-        "message": comment_text,
         "access_token": PAGE_ACCESS_TOKEN
     }
     data = urllib.parse.urlencode(params).encode("utf-8")
@@ -134,11 +133,45 @@ def add_first_comment_to_post(post_id, comment_text):
     try:
         with urllib.request.urlopen(req, timeout=15) as resp:
             res = json.loads(resp.read().decode("utf-8"))
-            logger.info(f"Tạo comment đầu tiên thành công! Comment ID: {res.get('id')}")
-            return True
+            if res.get("success"):
+                logger.info(f"Đã Like bài viết Facebook thành công! Post ID: {post_id}")
+                return True
     except Exception as e:
-        logger.error(f"Lỗi tạo comment đầu tiên: {e}")
-        return False
+        logger.error(f"Lỗi Like bài viết Facebook: {e}")
+    return False
+
+def add_comments_to_post(post_id, comments_list, delay_seconds=2):
+    """
+    Tạo danh sách các bình luận vào bài viết vừa đăng:
+    - Comment 1: Kéo vào Website
+    - Comment 2: Kéo vào Kênh Telegram phân tích & tin tức
+    - Comment 3: Kéo vào Telegram tư vấn / tâm sự 1-1 với ĐẠI KA
+    """
+    results = []
+    for idx, comment_text in enumerate(comments_list, 1):
+        url = f"https://graph.facebook.com/v21.0/{post_id}/comments"
+        params = {
+            "message": comment_text,
+            "access_token": PAGE_ACCESS_TOKEN
+        }
+        data = urllib.parse.urlencode(params).encode("utf-8")
+        req = urllib.request.Request(url, data=data)
+        try:
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                res = json.loads(resp.read().decode("utf-8"))
+                comment_id = res.get('id')
+                logger.info(f"Tạo comment #{idx} thành công! Comment ID: {comment_id}")
+                results.append(comment_id)
+        except Exception as e:
+            logger.error(f"Lỗi tạo comment #{idx}: {e}")
+            results.append(None)
+        if idx < len(comments_list):
+            time.sleep(delay_seconds)
+    return results
+
+def add_first_comment_to_post(post_id, comment_text):
+    """Hàm tương thích cũ - thêm 1 bình luận vào bài viết"""
+    return bool(add_comments_to_post(post_id, [comment_text]))
 
 # ================= 1. BÀI TỐI 20H30: MỤC TƯ DUY GỐC =================
 def run_evening_mindset_post():
@@ -200,9 +233,15 @@ YÊU CẦU BIÊN TẬP:
     post_id = post_photo_to_facebook(image_url, caption)
     if post_id:
         mark_as_posted(f"mindset_{slug}", "mindset", title, post_id)
-        # Tạo bình luận đầu tiên
-        comment_text = "👉 Anh em tham gia nhóm Telegram cập nhật phân tích thị trường & nhận định về Vàng (XAU/USD) hàng ngày tại đây nhé: https://t.me/nhatkytradingvn"
-        add_first_comment_to_post(post_id, comment_text)
+        # 1. Like bài đăng ngay khi đăng xong
+        like_facebook_post(post_id)
+        # 2. Tạo 3 bình luận điều hướng: Website, Kênh Telegram, Telegram tư vấn 1-1
+        comments = [
+            f"💡 Đọc trọn bộ các bài viết phân tích tư duy xác suất, tâm lý hành vi và kỷ luật quản trị vốn thực chiến tại website Nghề Trading:\n👉 {article_link}",
+            "📊 Tham gia Kênh Telegram cập nhật liên tục kế hoạch giao dịch Vàng (XAU/USD), tin tức vĩ mô và phân tích kỹ thuật mỗi ngày:\n👉 https://t.me/nhatkytradingvn",
+            "☕ Trading là hành trình cô độc. Nếu anh em đang bế tắc tâm lý, gồng lỗ hay cần tháo gỡ điểm mù trong hệ thống, cứ nhắn riêng mình tại đây (mình đọc và trao đổi trực tiếp, không qua bot):\n👉 https://t.me/longphibtc"
+        ]
+        add_comments_to_post(post_id, comments, delay_seconds=2)
         return True
     return False
 
@@ -309,9 +348,15 @@ def run_morning_gold_plan_post():
     post_id = post_photo_to_facebook(cover_image, caption)
     if post_id:
         mark_as_posted(f"gold_{entry_id}", "gold_plan", title, post_id)
-        # Tạo bình luận đầu tiên
-        comment_text = "👉 Anh em tham gia nhóm Telegram cập nhật phân tích thị trường & nhận định về Vàng (XAU/USD) hàng ngày tại đây nhé: https://t.me/nhatkytradingvn"
-        add_first_comment_to_post(post_id, comment_text)
+        # 1. Like bài đăng ngay khi đăng xong
+        like_facebook_post(post_id)
+        # 2. Tạo 3 bình luận điều hướng: Website, Kênh Telegram, Telegram tư vấn 1-1
+        comments = [
+            f"📌 Xem biểu đồ nến chi tiết, các kịch bản H4/H1 và vùng kích hoạt lệnh hôm nay tại website Nghề Trading:\n👉 {article_link}",
+            "📊 Tham gia Kênh Telegram cập nhật liên tục biến động thị trường & kế hoạch giao dịch Vàng (XAU/USD) hàng ngày:\n👉 https://t.me/nhatkytradingvn",
+            "☕ Anh em cần trao đổi thêm về các kịch bản vào lệnh hoặc chia sẻ về tâm lý giao dịch, nhắn riêng mình ở đây nhé (trao đổi trực tiếp người thật):\n👉 https://t.me/longphibtc"
+        ]
+        add_comments_to_post(post_id, comments, delay_seconds=2)
         return True
     return False
 

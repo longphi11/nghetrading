@@ -91,7 +91,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://graph.facebook.com/v21.0/__FB_PAGE_ID_2__/photos",
+        "url": "https://graph.facebook.com/v21.0/1524010384123604/photos",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpQueryAuth",
         "sendBody": true,
@@ -127,7 +127,7 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "https://graph.facebook.com/v21.0/__FB_PAGE_ID_2__/feed",
+        "url": "https://graph.facebook.com/v21.0/1524010384123604/feed",
         "authentication": "genericCredentialType",
         "genericAuthType": "httpQueryAuth",
         "sendBody": true,
@@ -171,40 +171,8 @@
     },
     {
       "parameters": {
-        "method": "POST",
-        "url": "=https://graph.facebook.com/v21.0/{{ $json.post_id }}/comments",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpQueryAuth",
-        "sendBody": true,
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "message",
-              "value": "👉 Anh em tham gia nhóm Telegram cập nhật phân tích thị trường & nhận định về Vàng (XAU/USD) hàng ngày tại đây nhé: https://t.me/nhatkytradingvn"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "facebook-comment",
-      "name": "Comment đầu tiên (tạo động lực)",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
-      "position": [
-        1450,
-        300
-      ],
-      "credentials": {
-        "httpQueryAuth": {
-          "id": "facebook-page-token",
-          "name": "Facebook Page Access Token"
-        }
-      }
-    },
-    {
-      "parameters": {
         "text": "=✅ Đã post quote lên Fanpage tamlygiaodich lúc {{ $now.format('yyyy-LL-dd HH:mm:ss') }}",
-        "chatId": "__ADMIN_CHAT_ID__",
+        "chatId": "-1004401199553",
         "additionalFields": {
           "message_thread_id": 22
         }
@@ -221,6 +189,126 @@
         "telegramApi": {
           "id": "telegram-bot",
           "name": "Telegram Bot (@NgheTradingSupport_Bot)"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{ $('Lấy Post ID').first().json.post_id }}/likes",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendBody": false,
+        "options": {}
+      },
+      "id": "facebook-like",
+      "name": "Like bài đăng",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1450,
+        300
+      ],
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "facebook-page-token",
+          "name": "Facebook Page Access Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{ $('Lấy Post ID').first().json.post_id }}/comments",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "message",
+              "value": "Bạn thua không phải vì thiếu mô hình nến, mà vì chưa có một hệ thống đủ rõ để tin vào nó.\nĐọc bài viết gốc, có ví dụ thực chiến từng lệnh, tại đây → https://nghetrading.com/bai-viet.html"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "facebook-comment-1",
+      "name": "Comment 1 - Website",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1650,
+        300
+      ],
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "facebook-page-token",
+          "name": "Facebook Page Access Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{ $('Lấy Post ID').first().json.post_id }}/comments",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "message",
+              "value": "Mỗi sáng mình đăng kế hoạch Vàng (XAU/USD) khung H4/H1 kèm 2 kịch bản Long - Short trước phiên.\nVào kênh xem trước khi vào lệnh: https://t.me/nhatkytradingvn"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "facebook-comment-2",
+      "name": "Comment 2 - Telegram kênh",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1850,
+        300
+      ],
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "facebook-page-token",
+          "name": "Facebook Page Access Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v21.0/{{ $('Lấy Post ID').first().json.post_id }}/comments",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "message",
+              "value": "Nếu bạn đang bế tắc mà không gọi được tên vấn đề của chính mình, nhắn riêng mình tại đây.\nMình đọc và trả lời từng người, không qua bot: https://t.me/longphibtc"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "facebook-comment-3",
+      "name": "Comment 3 - Telegram tâm sự",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2050,
+        300
+      ],
+      "credentials": {
+        "httpQueryAuth": {
+          "id": "facebook-page-token",
+          "name": "Facebook Page Access Token"
         }
       }
     }
@@ -317,24 +405,45 @@
       "main": [
         [
           {
-            "node": "Comment đầu tiên (tạo động lực)",
+            "node": "Like bài đăng",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Like bài đăng": {
+      "main": [
+        [
+          {
+            "node": "Comment 1 - Website",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comment 1 - Website": {
+      "main": [
+        [
+          {
+            "node": "Comment 2 - Telegram kênh",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comment 2 - Telegram kênh": {
+      "main": [
+        [
+          {
+            "node": "Comment 3 - Telegram tâm sự",
             "type": "main",
             "index": 0
           }
         ]
       ]
     }
-  },
-  "active": false,
-  "settings": {
-    "timezone": "Asia/Ho_Chi_Minh",
-    "executionOrder": "v1"
-  },
-  "versionId": "1",
-  "meta": {
-    "instanceId": 0,
-    "templateCredsSetupCompleted": false
-  },
-  "id": "quote-to-facebook-workflow",
-  "tags": []
+  }
 }

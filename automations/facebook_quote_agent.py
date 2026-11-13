@@ -269,6 +269,24 @@ class FacebookPoster:
             time.sleep(2)
         return None
 
+    def like_post(self, post_id, retries=2, timeout=15):
+        """Like bài viết Facebook ngay sau khi đăng thành công."""
+        url = self._url(f"{post_id}/likes")
+        params = {"access_token": self.page_token}
+        data = urllib.parse.urlencode(params).encode("utf-8")
+        req = urllib.request.Request(url, data=data)
+        for attempt in range(retries + 1):
+            try:
+                with urllib.request.urlopen(req, timeout=timeout) as resp:
+                    res = json.loads(resp.read().decode("utf-8"))
+                    if res.get("success"):
+                        logger.info(f"Đã Like bài viết Facebook thành công! Post ID: {post_id}")
+                        return True
+            except Exception as e:
+                logger.error(f"Lỗi Like bài viết Facebook (lần {attempt+1}): {e}")
+                time.sleep(1)
+        return False
+
     def add_first_comment(self, post_id, comment_text, retries=2, timeout=15):
         import urllib.error
         url = self._url(f"{post_id}/comments")
@@ -285,6 +303,16 @@ class FacebookPoster:
                 logger.error(f"Lỗi tạo comment đầu tiên (lần {attempt+1}): {e}")
                 time.sleep(1)
         return False
+
+    def add_comments(self, post_id, comments, delay=2.0):
+        """Thêm 3 comment điều hướng: Website, 2 kênh Telegram"""
+        results = []
+        for idx, text in enumerate(comments, 1):
+            ok = self.add_first_comment(post_id, text)
+            results.append(ok)
+            if idx < len(comments):
+                time.sleep(delay)
+        return results
 
 
 def run_quote_post():

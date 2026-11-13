@@ -28,9 +28,11 @@ Luồng hoạt động theo 2 kịch bản cố định trong ngày:
   - Copy toàn bộ nội dung phân tích kế hoạch vàng ngày trên web.
   - Đính kèm lời kêu gọi hành động (CTA) hướng độc giả vào link bài viết gốc trên website để xem đồ thị chi tiết: `https://nghetrading.com/phan-tich.html?id={id}`.
   - Hình ảnh đăng kèm: Chính là hình ảnh đồ thị chart TradingView HD của bài viết.
-- **Bình luận đầu tiên (First Comment):**
-  - Tự động ghim bình luận dẫn link vào nhóm Telegram:
-    `👉 Anh em tham gia nhóm Telegram cập nhật phân tích thị trường & nhận định về Vàng (XAU/USD) hàng ngày tại đây nhé: https://t.me/nhatkytradingvn`
+- **Tự động Like bài đăng:** Ngay khi bài viết đăng thành công, hệ thống tự động Like bài viết qua Facebook Graph API.
+- **Tự động bình luận 3 Comment điều hướng (Thay vì 1 comment):**
+  - **Comment 1 (Website):** Dẫn độc giả xem chi tiết kế hoạch nến H4/H1, vùng kích hoạt lệnh tại website `https://nghetrading.com`.
+  - **Comment 2 (Kênh Telegram):** Dẫn vào Kênh Telegram phân tích & tin tức vĩ mô `https://t.me/nhatkytradingvn`.
+  - **Comment 3 (Telegram 1-1):** Dẫn vào Telegram cá nhân ĐẠI KA `https://t.me/longphibtc` để trao đổi trực tiếp người thật hoặc hẹn tư vấn 1-1.
 
 ---
 
@@ -43,9 +45,11 @@ Luồng hoạt động theo 2 kịch bản cố định trong ngày:
   - Giọng văn điềm tĩnh, đanh thép, thấu cảm ("Nói chuyện cà phê nhưng tư duy viện nghiên cứu").
   - Kêu gọi độc giả đọc trọn vẹn bài viết trên web: `https://nghetrading.com/posts/{slug}.html`.
   - Hình ảnh đăng kèm: Ảnh minh họa bài viết chất lượng cao từ website.
-- **Bình luận đầu tiên (First Comment):**
-  - Tự động bình luận dẫn link nhóm Telegram:
-    `👉 Anh em tham gia nhóm Telegram cập nhật phân tích thị trường & nhận định về Vàng (XAU/USD) hàng ngày tại đây nhé: https://t.me/nhatkytradingvn`
+- **Tự động Like bài đăng:** Tự động Like bài viết ngay sau khi đăng thành công.
+- **Tự động bình luận 3 Comment điều hướng (Thay vì 1 comment):**
+  - **Comment 1 (Website):** Dẫn độc giả đọc trọn bộ bài viết tư duy xác suất và quản trị vốn tại `https://nghetrading.com/bai-viet.html`.
+  - **Comment 2 (Kênh Telegram):** Dẫn vào Kênh Telegram thảo luận & nhận định thị trường `https://t.me/nhatkytradingvn`.
+  - **Comment 3 (Telegram 1-1):** Dẫn vào Telegram cá nhân ĐẠI KA `https://t.me/longphibtc` dành cho anh em bế tắc tâm lý hoặc hẹn cafe 1-1.
 
 ---
 
