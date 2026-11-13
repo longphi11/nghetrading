@@ -1,18 +1,36 @@
 ================================================================================
-HƯỚNG DẪN UPDATE LUỒNG N8N QUOTE-TO-FACEBOOK (NGHÊ TRADING)
+HƯỚNG DẪN UPDATE LUỒNG N8N QUOTE-TO-FACEBOOK (NGHỀ TRADING)
+Cập nhật lần cuối: 13/11/2026 — đã áp dụng thực tế trên VPS
 ================================================================================
+
+0. ĐÍNH CHÍNH QUAN TRỌNG (so với bản hướng dẫn cũ)
+--------------------------------------------------------------------------------
+Bản cũ ghi sai workflow cần sửa:
+  - SAI:  nCdYu9TcfeITfJ7q  (đây là "Nghề Trading - Facebook Fanpage AutoPost
+          System" — đăng lên page Nghề Trading bằng executeCommand, hiện KHÔNG
+          chạy: 0 execution trong DB).
+  - ĐÚNG: pHwXwQDZi9GUe5EI  ("Quote Telegram → Fanpage FB (tamlygiaodich)")
+          — đây mới là luồng đọc kênh @quotetradingvn và đăng lên page
+          Tâm Lý Giao Dịch.
+
+Ngoài ra code cũ có 2 lỗi không chạy được:
+  - `$setWorkflowStaticData(...)` KHÔNG tồn tại trong Code node n8n
+    -> chỉ cần gán vào object của `$getWorkflowStaticData('global')`,
+       n8n tự persist khi workflow kết thúc.
+  - CTA bị mất dấu tiếng Việt ("Dung hoc them mot mo hien nen nua...").
 
 1. MÔ TẢ VẤN ĐỀ
 --------------------------------------------------------------------------------
-Luồng n8n `nCdYu9TcfeITfJ7q` (Nghê Trading - Facebook Fanpage AutoPost) đang
-đăng lặp lại bài quote cũ lên Fanpage `tamlygiaodich`.
-Nguyên nhân: Hàm simpleHash bị lỗi (`h = h & h`) và chỉ lưu 1 lastMessageId
-cuối -> khi static data reset hoăc HTML lấy bài cũ => đăng trùng.
+Luồng có thể đăng lặp lại bài quote cũ lên Fanpage `tamlygiaodich` khi:
+  - static data bị reset (mỗi lần import/publish lại workflow), hoặc
+  - bản HTML preview trả về bài cũ (quote-agent không đăng bài mới).
+
+Nguyên nhân: chỉ lưu DUY NHẤT 1 chuỗi `lastQuote` để so sánh.
 
 2. MỤC TIÊU
 --------------------------------------------------------------------------------
-Sửa Function node "Định dạng nội dung FB" của workflow CŨ nCdYu9TcfeITfJ7q.
-TUYẾT ĐỐI KHÔNG tạo workflow mới. Giữ nguyên Workflow ID.
+Nâng cấp chống trùng trong node Code "Định dạng nội dung FB" của workflow
+pHwXwQDZi9GUe5EI. EDIT TRỰC TIẾP, KHÔNG tạo workflow mới, GIỮ NGUYÊN ID.
 
 3. KẾT NỐI VPS (103.157.218.111:11985)
 --------------------------------------------------------------------------------
@@ -22,38 +40,43 @@ Bước 1: Port knock trước khi SSH
 
 Bước 2: SSH
   ssh root@103.157.218.111 -p 11985
-  (mật khẩu đã có trong .env hoặc hỏi ĐẠI KA)
+  (mật khẩu lưu ngoài repo — xem .env local, KHÔNG commit)
 
-4. CÁCH UPDATE N8N (2 LỰA CHỌN)
+4. CÁCH UPDATE
 --------------------------------------------------------------------------------
-LỰA CHỌN A: Qua n8n UI (khuyên dùng)
-  - Mở n8n trên VPS.
-  - Tìm workflow ID nCdYu9TcfeITfJ7q (tên: Nghê Trading - Facebook Fanpage AutoPost System).
-  - Mở Function node "Định dạng nội dung FB".
-  - Thay toàn bộ jsCode bằng code mới bên dưới.
-  - Lưu workflow, đảm bảo trạng thái ACTIVE.
+LỰA CHỌN A: n8n UI
+  - Mở workflow pHwXwQDZi9GUe5EI.
+  - Mở node Code "Định dạng nội dung FB", thay toàn bộ jsCode bằng mục 5.
+  - Save -> Publish (n8n 2.x bắt buộc publish) -> ACTIVE.
 
-LỰA CHỌN B: Qua n8n API (nếu có API Key)
-  - PATCH /api/v1/workflows/nCdYu9TcfeITfJ7q với body JSON chứa nodes[] đã update format-fb-content.
+LỰA CHỌN B: CLI trên VPS (cách đã dùng)
+  docker cp wf.json n8n:/tmp/wf.json
+  docker exec n8n n8n import:workflow --input=/tmp/wf.json   # file có "id" = pHwXwQDZi9GUe5EI
+  docker exec n8n n8n publish:workflow --id=pHwXwQDZi9GUe5EI
+  docker exec n8n n8n update:workflow --id=pHwXwQDZi9GUe5EI --active=true
+  docker restart n8n
 
-5. CODE FUNCTION NODE MỚI (PASTE TRỰC TIẾP)
+  Lưu ý: import sẽ RESET static data -> phải seed lại (mục 6).
+
+5. CODE NODE "Định dạng nội dung FB" (bản đang chạy)
 --------------------------------------------------------------------------------
 const raw = $input.first().json.data || '';
 const wraps = String(raw).split('class="tgme_widget_message_wrap');
 if (wraps.length < 2) return [];
 const block = wraps[wraps.length - 1];
 
-// 1. Lay message_id tu link bai trong kenh Telegram
+// --- 1. message_id cua bai dang trong kenh Telegram ---
 let message_id = 0;
 const mId = block.match(/t\.me\/[^"'\s]+\/(\d+)/);
 if (mId) message_id = parseInt(mId[1], 10);
 
-// 2. Lay noi dung text
+// --- 2. Noi dung text ---
 const parts = block.split('class="tgme_widget_message_text');
 if (parts.length < 2) return [];
 let seg = parts[1];
 seg = seg.slice(seg.indexOf('>') + 1);
 seg = seg.slice(0, seg.indexOf('</div>'));
+
 let text = seg
   .replace(/<br\s*\/?>/gi, '\n')
   .replace(/<[^>]+>/g, '')
@@ -65,68 +88,83 @@ let text = seg
   .replace(/&nbsp;/g, ' ')
   .replace(/\n{3,}/g, '\n\n')
   .trim();
+
 const cut = text.indexOf('======');
 if (cut > 0) text = text.slice(0, cut).trim();
 if (!text) return [];
 
-// 3. Lay anh
+// --- 3. Anh cua bai (photo hoac thumbnail video) ---
 let photo_url = '';
 const mPhoto = block.match(/background-image:url\('(https:\/\/cdn\d*\.telesco\.pe\/[^']+)'\)/);
 if (mPhoto) photo_url = mPhoto[1];
 
-// 4. Chong dang trung (nang cap): luu danh sach message_id da dang + hash noi dung FNV-1a
-const store = $getWorkflowStaticData('global') || {};
+// --- 4. Chong dang trung: 100 message_id gan nhat + hash noi dung (FNV-1a) ---
+const store = $getWorkflowStaticData('global');
 const postedIds = Array.isArray(store.postedIds) ? store.postedIds : [];
 
 function stableHash(str) {
   let h = 2166136261 >>> 0;
   for (let i = 0; i < str.length; i++) {
     h ^= str.charCodeAt(i);
-    h = (h * 16777619) >>> 0;
+    h = Math.imul(h, 16777619) >>> 0;
   }
   return h.toString(16);
 }
+
 const contentHash = stableHash(text + '|' + photo_url);
 
-// Neu message_id da tung dang -> bo qua
-if (message_id && postedIds.includes(message_id)) return [];
-
-// Neu noi dung trung (du id khac, vui repost bai cu) -> bo qua
+if (message_id > 0 && postedIds.includes(message_id)) return [];
 if (store.lastContentHash === contentHash) return [];
 
-// Luu trang thai moi
-postedIds.push(message_id);
-if (postedIds.length > 100) postedIds.shift();
-store.postedIds = postedIds;
+if (message_id > 0) {
+  postedIds.push(message_id);
+  while (postedIds.length > 100) postedIds.shift();
+  store.postedIds = postedIds;
+}
 store.lastContentHash = contentHash;
 store.lastMessageId = message_id;
-$setWorkflowStaticData('global', store);
+store.lastQuote = text;
 
 const cta = '\n\n' +
-  'Dung hoc them mot mo hien nen nua. Ban da hoc du roi. Van de nam o cho khac, va no o day -> nghetrading.com/bai-viet.html\n' +
-  'Da den luc coi trading la 1 nghiep nghiem that suc nghiem tuc.';
+  'Đừng học thêm một mô hình nến nữa. Bạn đã học đủ rồi. Vấn đề nằm ở chỗ khác, và nó ở đây → nghetrading.com/bai-viet.html\n' +
+  'Đã đến lúc coi trading là 1 nghề nghiệp thật sự nghiêm túc.';
+
 return [{ fb_content: text + cta, photo_url, message_id, content_hash: contentHash }];
 
-6. LƯU Ý QUAN TRỌNG
+6. SEED STATIC DATA SAU KHI IMPORT (bắt buộc)
 --------------------------------------------------------------------------------
-- EDIT TRỰC TIẾP luồng cũ nCdYu9TcfeITfJ7q, TUYẾT ĐỐI KHÔNG tạo workflow mới.
-- Không lưu FB_PAGE_ACCESS_TOKEN_2 vào code -> dùng n8n Credentials (facebook-page-token).
-- Sau khi lưu, kiểm tra workflow trạng thái ACTIVE.
-- Nếu cần restart: docker restart n8n trên VPS.
+Import workflow làm mất static data -> lần chạy kế tiếp có thể đăng lại bài cũ
+nếu quote-agent không có bài mới. Script: /root/n8n_import/seed_static.py
+  - đọc bài mới nhất của t.me/s/quotetradingvn
+  - tính message_id + hash FNV-1a (giống hệt code node)
+  - ghi vào workflow_entity.staticData -> global.{postedIds,lastContentHash,...}
 
-7. VERIFY
+7. VERIFY (đã test thật 13/11/2026)
 --------------------------------------------------------------------------------
-- Chạy thủ công 1 lần trên n8n UI.
-- Xem node "Định dạng nội dung FB" có trả về [] (bỏ qua) khi bài cũ,
-  và trả về fb_content khi bài mới.
-- Xem log n8n: docker logs n8n --tail 50
+Test bằng bản copy có manualTrigger, chạy 2 lần liên tiếp:
+  LẦN 1: post_id=...                 -> đăng bình thường (kèm ảnh)
+  LẦN 2: KHONG DANG, lastNode=Code   -> chặn đúng, không đăng trùng
+Sau test: xoá bài test trên Fanpage + xoá workflow test.
 
-8. FILE LIÊN QUAN TRONG REPO
+Kiểm tra nhanh trên VPS:
+  python3 /root/n8n_import/verify2.py     # trạng thái + node + version publish
+  python3 /root/n8n_import/final_check.py # static data + feed Fanpage
+  docker logs n8n --tail 50
+
+8. LƯU Ý
 --------------------------------------------------------------------------------
-- n8n-workflow-quote-to-facebook.json  (workflow JSON đã update)
-- n8n-quote-to-facebook.md            (huong dan chi tiet)
-- .env.example                        (mau cau hinh, khong co token thuc)
+- EDIT TRỰC TIẾP pHwXwQDZi9GUe5EI, TUYỆT ĐỐI KHÔNG tạo workflow mới.
+- KHÔNG hard-code token: dùng credential n8n `facebook-page-token` (Page Token).
+- n8n 2.x: workflow phải PUBLISH mới chạy; sau import phải restart container.
+- Lịch chạy: 5 9,15,21 * * * (09h05/15h05/21h05 VN), 7 ngày/tuần.
+- Bài có ảnh -> POST /photos; bài không ảnh -> nhánh IF -> POST /feed.
+
+9. FILE LIÊN QUAN TRONG REPO
+--------------------------------------------------------------------------------
+- n8n-workflow-quote-to-facebook.json  (workflow JSON đã update, không chứa token)
+- HƯỚNG DẪN UPDATE N8N QUOTE-TO-FACEBOOK.txt (file này)
+- AGENTS.md  (mục 1b mô tả luồng)
 
 ================================================================================
-KET THUC HUONG DAN
+KẾT THÚC HƯỚNG DẪN
 ================================================================================
