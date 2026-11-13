@@ -16,7 +16,10 @@
       "name": "Chạy quote 09h05, 15h05, 21h05 VN",
       "type": "n8n-nodes-base.scheduleTrigger",
       "typeVersion": 1.2,
-      "position": [250, 300]
+      "position": [
+        250,
+        300
+      ]
     },
     {
       "parameters": {
@@ -33,17 +36,23 @@
       "name": "Lấy bài quote mới nhất từ kênh",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [450, 300]
+      "position": [
+        450,
+        300
+      ]
     },
     {
       "parameters": {
-        "jsCode": "const raw = $input.first().json.data || '';\nconst wraps = String(raw).split('class=\"tgme_widget_message_wrap');\nif (wraps.length < 2) return [];\n\nconst block = wraps[wraps.length - 1];\n\n// --- 1. Lay noi dung text ---\nconst parts = block.split('class=\"tgme_widget_message_text');\nif (parts.length < 2) return [];\nlet seg = parts[1];\nseg = seg.slice(seg.indexOf('>') + 1);\nseg = seg.slice(0, seg.indexOf('</div>'));\n\nlet text = seg\n  .replace(/<br\\s*\\/?>/gi, '\\n')\n  .replace(/<[^>]+>/g, '')\n  .replace(/&quot;/g, '\"')\n  .replace(/&#39;/g, \"'\")\n  .replace(/&amp;/g, '&')\n  .replace(/&lt;/g, '<')\n  .replace(/&gt;/g, '>')\n  .replace(/&nbsp;/g, ' ')\n  .replace(/\\n{3,}/g, '\\n\\n')\n  .trim();\n\nconst cut = text.indexOf('======');\nif (cut > 0) text = text.slice(0, cut).trim();\nif (!text) return [];\n\n// --- 2. Lay anh cua bai (photo hoac thumbnail video) ---\nlet photo_url = '';\nconst mPhoto = block.match(/background-image:url\\('(https:\\/\\/cdn\\d*\\.telesco\\.pe\\/[^']+)'\\)/);\nif (mPhoto) photo_url = mPhoto[1];\n\n// --- 3. Chong dang trung ---\nconst store = $getWorkflowStaticData('global');\nif (store.lastQuote === text) return [];\nstore.lastQuote = text;\n\nconst cta = '\\n\\n' +\n  'Đừng học thêm một mô hình nến nữa. Bạn đã học đủ rồi. Vấn đề nằm ở chỗ khác, và nó ở đây → nghetrading.com/bai-viet.html\\n' +\n  'Đã đến lúc coi trading là 1 nghề nghiệp thật sự nghiêm túc.';\n\nreturn [{ fb_content: text + cta, photo_url }];"
+        "jsCode": "const raw = $input.first().json.data || '';\nconst wraps = String(raw).split('class=\"tgme_widget_message_wrap');\nif (wraps.length < 2) return [];\n\nconst block = wraps[wraps.length - 1];\n\n// 1. Lay message_id tu link bai trong kenh Telegram\nlet message_id = 0;\nconst mId = block.match(/t\\.me\\/[^\"''\\s]+\\/(\\d+)/);\nif (mId) message_id = parseInt(mId[1], 10);\n\n// 2. Lay noi dung text\nconst parts = block.split('class=\"tgme_widget_message_text');\nif (parts.length < 2) return [];\nlet seg = parts[1];\nseg = seg.slice(seg.indexOf('>') + 1);\nseg = seg.slice(0, seg.indexOf('</div>'));\nlet text = seg\n  .replace(/<br\\s*\\/?>/gi, '\\n')\n  .replace(/<[^>]+>/g, '')\n  .replace(/&quot;/g, '\"')\n  .replace(/&#39;/g, \"'\")\n  .replace(/&amp;/g, '&')\n  .replace(/&lt;/g, '<')\n  .replace(/&gt;/g, '>')\n  .replace(/&nbsp;/g, ' ')\n  .replace(/\\n{3,}/g, '\\n\\n')\n  .trim();\nconst cut = text.indexOf('======');\nif (cut > 0) text = text.slice(0, cut).trim();\nif (!text) return [];\n\n// 3. Lay anh\nlet photo_url = '';\nconst mPhoto = block.match(/background-image:url\\('(https:\\/\\/cdn\\d*\\.telesco\\.pe\\/[^']+)'\\)/);\nif (mPhoto) photo_url = mPhoto[1];\n\n// 4. Chong dang trung (nang cap): luu danh sach message_id da dang + hash noi dung\nconst store = $getWorkflowStaticData('global') || {};\nconst postedIds = Array.isArray(store.postedIds) ? store.postedIds : [];\n\nfunction stableHash(str) {\n  let h = 2166136261 >>> 0;\n  for (let i = 0; i < str.length; i++) {\n    h ^= str.charCodeAt(i);\n    h = (h * 16777619) >>> 0;\n  }\n  return h.toString(16);\n}\n\nconst contentHash = stableHash(text + '|' + photo_url);\n\n// Neu message_id da tung dang -> bo qua\nif (message_id && postedIds.includes(message_id)) return [];\n\n// Neu noi dung trung (du id khac, vui repost bai cu) -> bo qua\nif (store.lastContentHash === contentHash) return [];\n\n// Luu trang thai moi\npostedIds.push(message_id);\nif (postedIds.length > 100) postedIds.shift();\nstore.postedIds = postedIds;\nstore.lastContentHash = contentHash;\nstore.lastMessageId = message_id;\n$setWorkflowStaticData('global', store);\n\nconst cta = '\\n\\n' +\n  'Dung hoc them mot mo hien nen nua. Ban da hoc du roi. Van de nam o cho khac, va no o day -> nghetrading.com/bai-viet.html\\n' +\n  'Da den luc coi trading la 1 nghiep nghiem that suc nghiem tuc.';\nreturn [{ fb_content: text + cta, photo_url, message_id, content_hash: contentHash }];"
       },
       "id": "format-fb-content",
       "name": "Định dạng nội dung FB",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [650, 300]
+      "position": [
+        650,
+        300
+      ]
     },
     {
       "parameters": {
@@ -74,7 +83,10 @@
       "name": "Có ảnh?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
-      "position": [850, 300]
+      "position": [
+        850,
+        300
+      ]
     },
     {
       "parameters": {
@@ -101,7 +113,10 @@
       "name": "Đăng ảnh + nội dung",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1050, 200],
+      "position": [
+        1050,
+        200
+      ],
       "credentials": {
         "httpQueryAuth": {
           "id": "facebook-page-token",
@@ -130,7 +145,10 @@
       "name": "Đăng bài (không ảnh)",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1050, 400],
+      "position": [
+        1050,
+        400
+      ],
       "credentials": {
         "httpQueryAuth": {
           "id": "facebook-page-token",
@@ -146,7 +164,10 @@
       "name": "Lấy Post ID",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [1250, 300]
+      "position": [
+        1250,
+        300
+      ]
     },
     {
       "parameters": {
@@ -169,7 +190,10 @@
       "name": "Comment đầu tiên (tạo động lực)",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [1450, 300],
+      "position": [
+        1450,
+        300
+      ],
       "credentials": {
         "httpQueryAuth": {
           "id": "facebook-page-token",
@@ -189,7 +213,10 @@
       "name": "Thông báo về Topic 22",
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
-      "position": [1250, 500],
+      "position": [
+        1250,
+        500
+      ],
       "credentials": {
         "telegramApi": {
           "id": "telegram-bot",
