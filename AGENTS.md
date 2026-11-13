@@ -96,6 +96,7 @@ Hệ sinh thái Nghề Trading được vận hành tự động thông qua n8n,
 - **Nguồn nội dung:** đọc bài quote mới nhất từ kênh công khai `t.me/s/quotetradingvn` (KHÔNG dùng getUpdates — bot không nhận lại tin do chính nó đăng).
 - **Credentials (n8n UI):** `facebook-page-token` (httpQueryAuth — phải là **Page Access Token**, không dùng User Token), `telegram-bot`, `telegram-quote-bot`.
 - **Đích:** Fanpage `tamlygiaodich` (Page ID `1524010384123604`) + comment CTA Telegram + thông báo Topic 22.
+- **Ảnh:** lấy URL ảnh của bài gốc Telegram (`cdn*.telesco.pe`) và đăng qua `POST /{page-id}/photos` (`url` + `message`) → bài FB có ảnh. Nếu bài không có ảnh thì rẽ nhánh `IF` sang `POST /feed` (text-only).
 - **Chống trùng:** hash nội dung lưu trong workflow static data.
 - **Lưu ý:** 3 dòng cron `facebook_quote_agent.py` (9h/15h/21h) đã **comment** để tránh đăng trùng; backup tại `/root/crontab_backup_before_n8n.txt`.
 
